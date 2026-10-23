@@ -462,19 +462,46 @@ body.cart-open .cartbar { visibility: hidden; }
 /* ── review fixes: header, hero art, side cards, clock on phones, sheet close ── */
 .top { position: relative; }
 
-/* the empty top-right: a small collage of real food photos */
-@keyframes art-in { from { opacity: 0; scale: .9; } to { opacity: 1; scale: 1; } }
-.hero-art { display: none; }
-@media (min-width: 1180px) {
-  .hero-art { display: block; position: absolute; right: clamp(20px, 3vw, 40px); top: 20px; width: 400px; height: 200px; pointer-events: none; }
-  .ha { position: absolute; border-radius: 50%; object-fit: cover; border: 5px solid var(--paper); box-shadow: 0 0 0 1.5px var(--char), 5px 5px 0 var(--ember); animation: art-in 600ms var(--ease-out) both; }
-  .ha-main { width: 190px; height: 190px; right: 24px; top: 4px; transform: rotate(6deg); animation-delay: 120ms; }
-  .ha-b    { width: 112px; height: 112px; left: 78px; bottom: 0; transform: rotate(-8deg); animation-delay: 240ms; box-shadow: 0 0 0 1.5px var(--char), 4px 4px 0 var(--char); }
-  .ha-c    { width: 84px; height: 84px; left: 196px; top: 0; transform: rotate(10deg); animation-delay: 360ms; box-shadow: 0 0 0 1.5px var(--char), 3px 3px 0 var(--sun); }
-  .ha-sticker { position: absolute; right: 0; top: -8px; width: 84px; height: 84px; border-radius: 50%; display: grid; place-content: center; text-align: center; background: var(--sun); border: 2.5px solid var(--char); box-shadow: 3px 3px 0 var(--char); transform: rotate(10deg); z-index: 2; animation: art-in 600ms var(--ease-out) 480ms both; }
-  .ha-sticker i { font: 500 .62rem/1 var(--mono); font-style: normal; letter-spacing: .08em; text-transform: uppercase; }
-  .ha-sticker b { font: 800 1.5rem/1 var(--display); letter-spacing: -0.03em; }
+/* ── Hero: a big photo of the food on a brand-orange blob ── */
+@keyframes art-in { from { opacity: 0; scale: .92; } to { opacity: 1; scale: 1; } }
+.hero { position: relative; display: flex; flex-direction: column; }
+.hero-art { position: relative; order: 4; height: 270px; margin: 4px -16px 16px; pointer-events: none; }
+.ha-blob { position: absolute; right: -70px; top: 0; width: 330px; height: 270px; background: var(--ember); border-radius: 58% 42% 55% 45% / 46% 56% 44% 54%; transform: rotate(-9deg); }
+.ha-ring { position: absolute; left: 14px; bottom: 6px; width: 120px; height: 120px; border-radius: 50%; background: var(--sun); }
+.ha-dots { position: absolute; left: 6px; top: 24px; width: 64px; height: 52px; background: radial-gradient(var(--char) 1.6px, transparent 2.2px) 0 0 / 13px 13px; opacity: .55; }
+.ha { position: absolute; border-radius: 50%; object-fit: cover; border: 5px solid var(--paper); box-shadow: 0 0 0 2px var(--char), 6px 7px 0 var(--char); animation: art-in 600ms var(--ease-out) both; }
+.ha-main { width: 232px; height: 232px; right: 14px; top: 16px; transform: rotate(8deg); animation-delay: 100ms; }
+.ha-b { width: 112px; height: 112px; left: 30px; bottom: 4px; transform: rotate(-8deg); animation-delay: 240ms; box-shadow: 0 0 0 2px var(--char), 4px 5px 0 var(--ember); }
+.ha-c { width: 76px; height: 76px; left: 150px; top: 8px; transform: rotate(10deg); animation-delay: 360ms; box-shadow: 0 0 0 2px var(--char), 3px 4px 0 var(--sun); }
+.ha-sticker { position: absolute; left: 112px; top: 112px; width: 82px; height: 82px; border-radius: 50%; display: grid; place-content: center; text-align: center; background: var(--sun); border: 2.5px solid var(--char); box-shadow: 3px 3px 0 var(--char); transform: rotate(-10deg); z-index: 2; animation: art-in 600ms var(--ease-out) 480ms both; }
+.ha-sticker i { font: 500 .6rem/1 var(--mono); font-style: normal; letter-spacing: .08em; text-transform: uppercase; }
+.ha-sticker b { font: 800 1.5rem/1 var(--display); letter-spacing: -0.03em; }
+
+.hero-cta { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; margin-bottom: 26px; order: 5; }
+.cta-main { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 54px; padding: 0 28px; border-radius: 999px; border: 2px solid var(--char); background: var(--ember-deep); color: #fff; font: 800 1.05rem/1 var(--display); text-decoration: none; box-shadow: 3px 3px 0 var(--char); transition: transform 140ms var(--ease-out), box-shadow 140ms var(--ease-out); }
+.cta-main:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--char); }
+.cta-link { font: 700 .98rem/1 var(--display); text-decoration: underline; text-underline-offset: 4px; }
+.hero-rating { display: inline-flex; align-items: center; gap: 8px; font-size: .85rem; text-decoration: none; }
+.hero-rating .stars { color: #E8A100; letter-spacing: 1px; }
+.hero-rating b { font: 800 1rem/1 var(--display); }
+.hero-rating span:last-child { color: var(--ash); }
+@media (hover: hover) and (pointer: fine) { .cta-main:hover { background: var(--ember); } .cta-link:hover { color: var(--ember-deep); } }
+@media (max-width: 760px) { .cta-main { width: 100%; } .hero-rating { width: 100%; justify-content: center; } }
+
+@media (min-width: 1020px) {
+  .hero { min-height: 440px; padding-right: 48%; }
+  .hero-art { position: absolute; order: 0; right: 0; top: -6px; width: 46%; min-width: 440px; max-width: 580px; height: 450px; margin: 0; }
+  .ha-blob { right: -10px; top: 6px; width: 94%; height: 410px; transform: rotate(-8deg); }
+  .ha-ring { left: 4px; bottom: 6px; width: 170px; height: 170px; }
+  .ha-dots { left: 18px; top: 36px; width: 90px; height: 70px; }
+  .ha-main { width: min(400px, 76%); height: auto; aspect-ratio: 1; right: 4%; top: 18px; border-width: 7px; box-shadow: 0 0 0 2.5px var(--char), 9px 10px 0 var(--char); }
+  .ha-b { width: 150px; height: 150px; left: 6%; bottom: 20px; }
+  .ha-c { width: 104px; height: 104px; left: 36%; top: 2px; }
+  .ha-sticker { left: 25%; top: 96px; width: 104px; height: 104px; }
+  .ha-sticker b { font-size: 1.95rem; }
+  .hero-cta { margin-top: 8px; }
 }
+@media (min-width: 1020px) and (max-width: 1200px) { .hero { padding-right: 42%; } .hero-art { min-width: 400px; } }
 
 /* the empty bottom-right: two compact cards that finish the column */
 .side-card { display: flex; align-items: center; gap: 14px; padding: 14px 16px; border-radius: 16px; text-decoration: none; min-height: 78px; transition: transform 140ms var(--ease-out), border-color 160ms ease; }
@@ -547,3 +574,76 @@ body.cart-open .cartbar { visibility: hidden; }
 .sp-go:active { transform: scale(.97); }
 .sp-later { display: block; margin: 10px auto 0; min-height: 40px; padding: 0 16px; background: none; border: 0; font: 600 .88rem/1 var(--body); color: var(--ash); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
 @media (prefers-reduced-motion: reduce) { .spin-pop .sp-wheel { animation: none; } .spin-pop-card { scale: 1; } }
+
+/* ── Ticker strip ── */
+.ticker { overflow: hidden; background: var(--sun); border-block: 2px solid var(--char); }
+.ticker-track { display: flex; width: max-content; animation: tick 38s linear infinite; }
+.ticker ul { display: flex; flex: none; margin: 0; padding: 0; list-style: none; }
+.ticker li { flex: none; display: flex; align-items: center; padding: 11px 0; font: 800 .95rem/1 var(--display); letter-spacing: -0.01em; text-transform: uppercase; white-space: nowrap; }
+.ticker li::after { content: "✦"; margin: 0 22px; color: var(--ember-deep); }
+@keyframes tick { to { transform: translateX(-50%); } }
+@media (hover: hover) and (pointer: fine) { .ticker:hover .ticker-track { animation-play-state: paused; } }
+@media (prefers-reduced-motion: reduce) { .ticker-track { animation: none; } .ticker { overflow-x: auto; } }
+
+/* ── Four reasons ── */
+.perks { display: grid; grid-template-columns: repeat(4, 1fr); padding-top: 28px; padding-bottom: 8px; }
+.perk { display: flex; align-items: center; gap: 14px; padding: 4px 18px; border-left: 1.5px solid rgba(26,26,24,.14); }
+.perk:first-child { border-left: 0; padding-left: 0; }
+.perk .pi { flex: none; display: grid; place-items: center; width: 52px; height: 52px; border-radius: 50%; background: var(--sun); border: 2px solid var(--char); }
+.perk:nth-child(2) .pi { background: var(--ember); color: #fff; }
+.perk:nth-child(3) .pi { background: #fff; }
+.perk:nth-child(4) .pi { background: var(--char); color: var(--sun); }
+.perk svg { width: 24px; height: 24px; }
+.perk b { display: block; font: 700 .98rem/1.2 var(--display); letter-spacing: -0.02em; }
+.perk > div > span { display: block; font-size: .8rem; line-height: 1.35; color: var(--ash); margin-top: 2px; }
+@media (max-width: 900px) { .perks { grid-template-columns: 1fr 1fr; gap: 16px 12px; } .perk, .perk:first-child { border-left: 0; padding: 0; } .perk:nth-child(even) { padding-left: 4px; } }
+@media (max-width: 480px) { .perk .pi { width: 44px; height: 44px; } .perk svg { width: 21px; height: 21px; } .perk b { font-size: .9rem; } .perk > div > span { font-size: .74rem; } .perk { gap: 10px; } }
+
+/* ── Category chips with a round photo ── */
+.chip { display: inline-flex; align-items: center; gap: 9px; padding-left: 6px; }
+.chip img { width: 30px; height: 30px; border-radius: 50%; object-fit: cover; border: 1.5px solid var(--char); flex: none; }
+.chip.on img { border-color: var(--sun); }
+
+/* ── Phone: round-photo category row instead of twelve tiles ── */
+@media (max-width: 760px) {
+  .tiles { display: flex; gap: 12px; overflow-x: auto; margin-inline: -16px; padding: 4px 16px 10px; scrollbar-width: none; scroll-snap-type: x proximity; scroll-padding-inline: 16px; }
+  .tiles::-webkit-scrollbar { display: none; }
+  .tile { flex: none; flex-direction: column; gap: 7px; width: 74px; min-height: 0; padding: 0; background: none; border: 0; text-align: center; overflow: visible; scroll-snap-align: start; }
+  .tile .th, .tile img { width: 66px; height: 66px; }
+  .tile .th { border-radius: 50%; border: 2px solid var(--char); box-shadow: 3px 3px 0 var(--sun); }
+  .tile img { border-radius: 50%; }
+  .tile b { font-size: .8rem; line-height: 1.15; }
+  .tile > div > span { display: none; }
+}
+
+/* ── Phone: floating pill nav ── */
+.dock { display: none; }
+@media (max-width: 760px) {
+  .cartbar { display: none !important; }
+  body { padding-bottom: calc(86px + env(safe-area-inset-bottom)); }
+  .dock { position: fixed; left: 12px; right: 12px; bottom: calc(12px + env(safe-area-inset-bottom)); z-index: 45; max-width: 420px; margin-inline: auto; display: flex; align-items: center; justify-content: space-between; gap: 4px; padding: 6px; background: var(--char); border-radius: 999px; box-shadow: 0 8px 24px rgba(26,26,24,.35); }
+  body.cart-open .dock, body.locked .dock { display: none; }
+  .dock a, .dock button { flex: 1; min-height: 52px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; border: 0; border-radius: 999px; background: transparent; color: #CFC6BB; font: 600 .68rem/1 var(--body); text-decoration: none; cursor: pointer; transition: background-color 160ms ease, color 160ms ease, transform 140ms var(--ease-out); }
+  .dock a:active, .dock button:active { transform: scale(.95); }
+  .dock svg { width: 22px; height: 22px; }
+  .dock a.on { background: var(--sun); color: var(--char); }
+  .dock .dock-cart { position: relative; flex: 1.25; }
+  .dk-count { position: absolute; top: 4px; left: calc(50% + 6px); min-width: 18px; height: 18px; padding: 0 5px; display: none; align-items: center; justify-content: center; border-radius: 999px; background: var(--ember); color: #fff; font: 800 .66rem/1 var(--body); }
+  .dk-total { display: none; font: 800 .78rem/1 var(--display); }
+  body.has-cartbar .dock-cart { background: var(--ember-deep); color: #fff; }
+  body.has-cartbar .dk-count { display: inline-flex; background: var(--sun); color: var(--char); }
+  body.has-cartbar .dk-total { display: block; }
+  body.has-cartbar .dk-label { display: none; }
+  .toast { bottom: 96px; }
+}
+
+/* hero copy: bigger headline, centred against the photo (desktop) */
+@media (min-width: 1020px) {
+  .hero { justify-content: center; min-height: 452px; padding-right: 47%; }
+  .hero .eyebrow { margin-bottom: 4px; }
+  .top .hero h1 { font-size: clamp(3.4rem, 5.6vw, 5rem); line-height: .94; margin: 8px 0 14px; }
+  .top .hero .lede { font-size: 1.15rem; margin-bottom: 22px; }
+  .hero-cta { margin-bottom: 0; }
+  .top .live-grid { margin-top: 14px; }
+}
+@media (min-width: 761px) and (max-width: 1019px) { .hero-art { width: 460px; max-width: 100%; margin: 4px auto 18px; } .cta-main { min-width: 220px; } }

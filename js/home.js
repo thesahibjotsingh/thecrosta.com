@@ -51,6 +51,7 @@ function renderLive() {
   if (payWrap) payWrap.hidden = !st.open;
 
   $('clockLine').textContent = `${DAY_NAMES[now.day]} · ${fmtTime(now.hour, now.minute)} · Patiala`;
+  const heroCta = $('heroCta'); if (heroCta) heroCta.firstChild.textContent = st.open ? 'Order now ' : 'See the menu ';
   $('lede').textContent = st.open ? 'Oven’s hot — here’s what’s on right now.' : 'Oven’s resting — have a look, then order when we open.';
 
   // tickets: live first, then later today (soonest), then next on a later day

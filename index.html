@@ -34,9 +34,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/styles.css?v=3">
-<link rel="stylesheet" href="css/home.css?v=3">
-<link rel="stylesheet" href="css/sections.css?v=3">
+<link rel="stylesheet" href="css/styles.css?v=4">
+<link rel="stylesheet" href="css/home.css?v=4">
+<link rel="stylesheet" href="css/sections.css?v=4">
 </head>
 <body>
 
@@ -58,20 +58,24 @@
 <main id="top">
   <div class="live-band">
     <section class="wrap top" aria-labelledby="h1">
+      <div class="hero">
+      <p class="eyebrow" id="clockLine"></p>
+      <h1 id="h1">Pure veg <span class="u">pizza<svg viewBox="0 0 200 20" preserveAspectRatio="none" aria-hidden="true"><path d="M3 12 C 30 2, 50 20, 80 10 S 130 2, 160 11 S 190 14, 197 6"/></svg></span> in Patiala</h1>
+      <p class="lede" id="lede">Fresh dough daily, near Thapar University.</p>
       <div class="hero-art" aria-hidden="true">
-        <img class="ha ha-main" src="images/art-farm-house-pizza.webp" alt="" width="360" height="360" decoding="async">
+        <span class="ha-blob"></span>
+        <span class="ha-ring"></span>
+        <span class="ha-dots"></span>
+        <img class="ha ha-main" src="images/hero-farm-house-pizza.webp" alt="" width="720" height="720" decoding="async" fetchpriority="high">
         <img class="ha ha-b" src="images/art-the-crosta-burger.webp" alt="" width="360" height="360" decoding="async">
         <img class="ha ha-c" src="images/art-garlic-butter-pizza.webp" alt="" width="360" height="360" decoding="async">
         <span class="ha-sticker"><i>from</i><b>₹89</b></span>
       </div>
-      <p class="eyebrow" id="clockLine"></p>
-      <h1 id="h1">Pure veg <span class="u">pizza<svg viewBox="0 0 200 20" preserveAspectRatio="none" aria-hidden="true"><path d="M3 12 C 30 2, 50 20, 80 10 S 130 2, 160 11 S 190 14, 197 6"/></svg></span> in Patiala</h1>
-      <p class="lede" id="lede">Fresh dough daily, near Thapar University.</p>
-      <div class="stickers" aria-label="Highlights">
-        <span class="sticker"><span class="vegmark" aria-hidden="true"></span>100% pure veg</span>
-        <span class="sticker">Pizzas from ₹89</span>
-        <span class="sticker">Fresh dough daily</span>
-        <span class="sticker stu">🎓 Thapar ID: 10% off</span>
+      <div class="hero-cta">
+        <a class="cta-main" id="heroCta" href="#menu" data-cat="pizzas">Order now <span aria-hidden="true">→</span></a>
+        <a class="cta-link" href="#menu" data-cat="pizzas">Explore menu <span aria-hidden="true">→</span></a>
+        <a class="hero-rating" href="#reviews" aria-label="Rated 4.6 out of 5 by customers, see reviews"><span class="stars" aria-hidden="true">★★★★★</span><b>4.6</b><span>rated by customers</span></a>
+      </div>
       </div>
 
       <div class="live-grid">
@@ -137,6 +141,15 @@
   </div>
 
   <div class="shop">
+    <div class="ticker" aria-label="Highlights">
+      <div class="ticker-track"><ul><li>100% pure veg</li><li>Fresh dough daily</li><li>Pizzas from ₹89</li><li>Thapar ID: 10% off</li><li>Spin for a free drink</li><li>Open 11 AM – 10:30 PM</li></ul><ul aria-hidden="true"><li>100% pure veg</li><li>Fresh dough daily</li><li>Pizzas from ₹89</li><li>Thapar ID: 10% off</li><li>Spin for a free drink</li><li>Open 11 AM – 10:30 PM</li></ul></div>
+    </div>
+    <section class="wrap perks" aria-label="Why The Crosta">
+      <div class="perk"><span class="pi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19c0-9 5-14 14-14 0 9-5 14-14 14z"/><path d="M5 19c3-5 6-8 10-10"/></svg></span><div><b>100% pure veg</b><span>Every dish is vegetarian.</span></div></div>
+      <div class="perk"><span class="pi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8a14 14 0 0 1 16 0l-8 13z"/><circle cx="10" cy="10" r="1"/><circle cx="14" cy="11" r="1"/></svg></span><div><b>Fresh dough daily</b><span>Pizza bases made fresh.</span></div></div>
+      <div class="perk"><span class="pi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><div><b>Ready in ~30 min</b><span>Hot, for pickup or delivery.</span></div></div>
+      <div class="perk"><span class="pi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m2 9 10-5 10 5-10 5z"/><path d="M6 11v5c0 1.5 3 3 6 3s6-1.5 6-3v-5"/></svg></span><div><b>Thapar students</b><span>10% off with your ID card.</span></div></div>
+    </section>
     <div class="tools" id="tools">
       <div class="wrap tools-in">
         <label class="search"><span class="sr">Search the menu</span>
@@ -145,13 +158,13 @@
           <button class="search-clear" id="searchClear" type="button" aria-label="Clear search" hidden>×</button>
         </label>
         <div class="chips" id="chips" role="group" aria-label="Menu categories">
-          <button class="chip on" type="button" data-cat="pizzas" aria-pressed="true">Pizzas</button>
-          <button class="chip" type="button" data-cat="burgerswraps" aria-pressed="false">Burgers, wraps &amp; sandwiches</button>
-          <button class="chip" type="button" data-cat="pasta" aria-pressed="false">Pasta</button>
-          <button class="chip" type="button" data-cat="garlicbread" aria-pressed="false">Garlic bread</button>
-          <button class="chip" type="button" data-cat="quickbites" aria-pressed="false">Quick bites</button>
-          <button class="chip" type="button" data-cat="drinks" aria-pressed="false">Drinks &amp; shakes</button>
-          <button class="chip" type="button" data-cat="quickdrinks" aria-pressed="false">Quick drinks</button>
+          <button class="chip on" type="button" data-cat="pizzas" aria-pressed="true"><img src="images/menu-farm-house-pizza.webp" alt="" width="30" height="30" loading="lazy"><span>Pizzas</span></button>
+          <button class="chip" type="button" data-cat="burgerswraps" aria-pressed="false"><img src="images/menu-veg-grilled-burger.webp" alt="" width="30" height="30" loading="lazy"><span>Burgers, wraps &amp; sandwiches</span></button>
+          <button class="chip" type="button" data-cat="pasta" aria-pressed="false"><img src="images/menu-napoli-pasta.webp" alt="" width="30" height="30" loading="lazy"><span>Pasta</span></button>
+          <button class="chip" type="button" data-cat="garlicbread" aria-pressed="false"><img src="images/menu-cheesy-garlic-bread.webp" alt="" width="30" height="30" loading="lazy"><span>Garlic bread</span></button>
+          <button class="chip" type="button" data-cat="quickbites" aria-pressed="false"><img src="images/menu-salted-fries.webp" alt="" width="30" height="30" loading="lazy"><span>Quick bites</span></button>
+          <button class="chip" type="button" data-cat="drinks" aria-pressed="false"><img src="images/menu-strawberry-shake.webp" alt="" width="30" height="30" loading="lazy"><span>Drinks &amp; shakes</span></button>
+          <button class="chip" type="button" data-cat="quickdrinks" aria-pressed="false"><img src="images/menu-coke.webp" alt="" width="30" height="30" loading="lazy"><span>Quick drinks</span></button>
         </div>
         <span class="veg"><span class="vegmark" aria-hidden="true"></span>Pure veg kitchen</span>
       </div>
@@ -526,6 +539,13 @@
 </footer>
 
 <!-- PHONES: FLOATING CART BAR -->
+<div class="dock" id="dock" role="navigation" aria-label="Quick navigation">
+  <a href="#top" data-dock="home" class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 11 9-8 9 8"/><path d="M5 10v10h14V10"/></svg><span>Home</span></a>
+  <a href="#menu" data-dock="menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h10"/></svg><span>Menu</span></a>
+  <a href="#primary" data-dock="offers"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12v8H4v-8M2 7h20v5H2zM12 22V7M12 7H8a2.5 2.5 0 1 1 0-5c3 0 4 5 4 5zM12 7h4a2.5 2.5 0 1 0 0-5c-3 0-4 5-4 5z"/></svg><span>Offers</span></a>
+  <button type="button" data-dock="cart" class="dock-cart" onclick="openCart()" aria-label="Open cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2 3h3l2.6 12.4a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.5L21 7H6"/></svg><span class="dk-label">Cart</span><span class="dk-count cart-count">0</span><span class="dk-total cart-total"></span></button>
+</div>
+
 <div class="cartbar" id="cartbar">
   <button class="cartbar-btn" type="button" onclick="openCart()"><span class="cb-count cart-count">0</span><span class="cb-mid"><span><span class="cart-word">items</span> in your cart</span><small class="cb-save" id="cbSave"></small></span><span class="cb-total cart-total">₹0</span><span aria-hidden="true">→</span></button>
 </div>
@@ -763,28 +783,29 @@
   </div>
 </div>
 
-<script defer src="js/menu-data.js?v=3"></script>
-<script defer src="js/shop.js?v=3"></script>
-<script defer src="js/offers.js?v=3"></script>
-<script defer src="js/menu-render.js?v=3"></script>
-<script defer src="js/ui.js?v=3"></script>
-<script defer src="js/reviews.js?v=3"></script>
-<script defer src="js/menu-ui.js?v=3"></script>
-<script defer src="js/offers-carousel.js?v=3"></script>
-<script defer src="js/contact.js?v=3"></script>
-<script defer src="js/cart.js?v=3"></script>
-<script defer src="js/promos.js?v=3"></script>
-<script defer src="js/cart-render.js?v=3"></script>
-<script defer src="js/order.js?v=3"></script>
-<script defer src="js/payment.js?v=3"></script>
-<script defer src="js/menu-wiring.js?v=3"></script>
-<script defer src="js/persist.js?v=3"></script>
-<script defer src="js/spin.js?v=3"></script>
-<script defer src="js/home.js?v=3"></script>
-<script defer src="js/sheets.js?v=3"></script>
-<script defer src="js/student.js?v=3"></script>
-<script defer src="js/spin-pop.js?v=3"></script>
-<script defer src="js/page-ui.js?v=3"></script>
+<script defer src="js/menu-data.js?v=4"></script>
+<script defer src="js/shop.js?v=4"></script>
+<script defer src="js/offers.js?v=4"></script>
+<script defer src="js/menu-render.js?v=4"></script>
+<script defer src="js/ui.js?v=4"></script>
+<script defer src="js/reviews.js?v=4"></script>
+<script defer src="js/menu-ui.js?v=4"></script>
+<script defer src="js/offers-carousel.js?v=4"></script>
+<script defer src="js/contact.js?v=4"></script>
+<script defer src="js/cart.js?v=4"></script>
+<script defer src="js/promos.js?v=4"></script>
+<script defer src="js/cart-render.js?v=4"></script>
+<script defer src="js/order.js?v=4"></script>
+<script defer src="js/payment.js?v=4"></script>
+<script defer src="js/menu-wiring.js?v=4"></script>
+<script defer src="js/persist.js?v=4"></script>
+<script defer src="js/spin.js?v=4"></script>
+<script defer src="js/home.js?v=4"></script>
+<script defer src="js/sheets.js?v=4"></script>
+<script defer src="js/student.js?v=4"></script>
+<script defer src="js/spin-pop.js?v=4"></script>
+<script defer src="js/dock.js?v=4"></script>
+<script defer src="js/page-ui.js?v=4"></script>
 
 </body>
 </html>
