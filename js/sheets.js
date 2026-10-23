@@ -144,7 +144,10 @@ function openOffer(id, trigger) {
   openSheetEl(offerSheet, trigger);
 }
 // the cart changed (anywhere): keep an open offer sheet's progress current
-function onCartChanged() { if (offerSheet.classList.contains('open')) renderOffer(); }
+function onCartChanged() {
+  if (offerSheet.classList.contains('open')) renderOffer();
+  if (typeof syncStudentUi === 'function') syncStudentUi();
+}
 
 offerSheet.addEventListener('click', e => {
   const b = e.target.closest('.opill'); if (!b) return;

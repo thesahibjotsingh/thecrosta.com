@@ -3,7 +3,7 @@
 // offer windows (offers.js), the cart promos (promos.js) and the clock strip.
 // Hours are 24-hour numbers in shop time (Asia/Kolkata), not the visitor's.
 const SHOP_TIMEZONE = 'Asia/Kolkata';
-const SHOP_HOURS = { 0:[10,22], 1:[11,22], 2:[11,22], 3:[11,22], 4:[11,22], 5:[11,23], 6:[10,23] }; // Sun…Sat → [open, close]
+const SHOP_HOURS = { 0:[11,22.5], 1:[11,22.5], 2:[11,22.5], 3:[11,22.5], 4:[11,22.5], 5:[11,22.5], 6:[11,22.5] }; // Sun…Sat → [open, close], 22.5 = 10:30 PM
 const DAY_NAMES = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 const DAY_SHORT = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 

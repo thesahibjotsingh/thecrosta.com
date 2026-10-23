@@ -87,7 +87,7 @@ function renderCart() {
     </div>`;
   }).join('');
 
-  const { total, pizzaDiscount, boostDiscount, groupPerkActive, weekendSpecialActive } = computeCartTotals(cart);
+  const { total, pizzaDiscount, boostDiscount, studentDiscount, groupPerkActive, weekendSpecialActive } = computeCartTotals(cart);
 
   const weekendRow = document.getElementById('cartWeekendRow');
   if (weekendRow) {
@@ -113,6 +113,12 @@ function renderCart() {
   if (boostRow) {
     boostRow.style.display = boostDiscount > 0 ? 'flex' : 'none';
     document.getElementById('cartBoostAmount').textContent = boostDiscount;
+  }
+
+  const studentRow = document.getElementById('cartStudentRow');
+  if (studentRow) {
+    studentRow.style.display = studentDiscount > 0 ? 'flex' : 'none';
+    document.getElementById('cartStudentAmount').textContent = studentDiscount;
   }
 
   // Animation 7: flash the total price on change
@@ -150,13 +156,14 @@ function editAddons(pizzaId, pizzaName) {
 
 // ── UPDATE HEADER CART + PHONE CART BAR ──
 // What each promo is called in toasts and the cart bar.
-const PROMO_LABEL = { weekend: 'Weekend special', groupperk: 'Group perk', weekday: 'Weekday lunch', boost: 'The Crosta Boost' };
+const PROMO_LABEL = { weekend: 'Weekend special', groupperk: 'Group perk', weekday: 'Weekday lunch', boost: 'The Crosta Boost', student: 'Thapar student 10%' };
 function promoSummary(T) {
   switch (T.activePromo) {
     case 'weekend':   return 'Weekend special: free pizza added';
     case 'groupperk': return 'Group perk: free meal bundle';
     case 'weekday':   return `Weekday lunch: you save ${rupee(T.pizzaDiscount)}`;
     case 'boost':     return `The Crosta Boost: you save ${rupee(T.boostDiscount)}`;
+    case 'student':   return `Thapar student 10%: you save ${rupee(T.studentDiscount)} · show your ID`;
     default:          return '';
   }
 }

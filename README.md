@@ -28,7 +28,8 @@ Deployed from this repo by Cloudflare. Orders go out as WhatsApp messages; there
 | `js/persist.js` | Saved cart, last order (for Reorder), pre-filled details — device only |
 | `js/payment.js` | Delivery location pin and UPI payment |
 | `js/ui.js` | Toast, thumbnail-to-cart animation, count bump |
-| `js/spin.js`, `reviews.js`, `offers-carousel.js`, `contact.js`, `page-ui.js` | Spin wheel, reviews lightbox, poster carousel, contact form, small page behaviours |
+| `js/student.js` | Thapar student 10% switch (page card + cart checkbox); the rule itself is in `js/promos.js` (`STUDENT_PERCENT`) |
+| `js/spin.js`, `spin-pop.js`, `reviews.js`, `offers-carousel.js`, `contact.js`, `page-ui.js` | Spin wheel, reviews lightbox, poster carousel, contact form, small page behaviours |
 | `tools/prerender.js` | Bakes the menu + structured data into `index.html` |
 | `images/` | Optimised WebP photos; `og-share.jpg` is the link-preview card; `upi-qr.webp` is the shop's PhonePe QR |
 | `mockups/top-section.html` | The approved design mockup (not deployed logic; reference only) |
@@ -38,8 +39,10 @@ Scripts are plain `<script defer>` files loaded in the order listed at the botto
 ## Everyday edits
 
 - **Change the menu or prices** → edit `js/menu-data.js`, then run `node tools/prerender.js`.
-- **Change opening hours** → edit `SHOP_HOURS` in `js/shop.js`, update the *Hours* section text in `index.html`, then run `node tools/prerender.js`.
+- **Change opening hours** → edit `SHOP_HOURS` in `js/shop.js` (decimals work: 22.5 = 10:30 PM), update the *Hours* row(s) in `index.html`, then run `node tools/prerender.js`.
 - **Change an offer's time or wording** → `js/offers.js` (the header tickets, the clock strip *and* the cart discounts all read it).
+- **Thapar student discount** → `STUDENT_PERCENT` in `js/promos.js`. It is opt-in, applies only when it saves more than the other offer in the cart (one offer per order), and the WhatsApp message tells the shop to check the ID card.
+- **Spin popup** → `js/spin-pop.js` (`DELAY` = seconds before it shows; once a day, never after a spin).
 - **Change the UPI ID** → `UPI` in `js/shop.js`; replace `images/upi-qr.webp` if the QR changes.
 
 ## Pre-render
@@ -58,4 +61,4 @@ Outside opening hours the cart can still be built, but it cannot be sent: the ca
 
 ## Cache busting
 
-Cloudflare tells browsers to keep CSS/JS for 4 hours. The `?v=2` on each stylesheet and script link in `index.html` forces a fresh download after a deploy. When you change any file in `css/` or `js/`, bump that number (find/replace `?v=2` → `?v=3`) in the same commit.
+Cloudflare tells browsers to keep CSS/JS for 4 hours. The `?v=3` on each stylesheet and script link in `index.html` forces a fresh download after a deploy. When you change any file in `css/` or `js/`, bump that number (find/replace `?v=3` → `?v=4`) in the same commit.

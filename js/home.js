@@ -39,8 +39,7 @@ function renderLive() {
   if (ho) {
     ho.className = 'hours-open' + (st.open ? '' : ' closed');
     $('hoursOpenText').textContent = st.open ? `Open now · closes ${fmtTime(st.closesAt)}` : `Closed · opens ${st.today ? 'today' : DAY_NAMES[st.opensDay]} at ${fmtTime(st.opensAt)}`;
-    const rowFor = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 1, 6: 2, 0: 3 }[now.day];
-    document.querySelectorAll('.hours-row').forEach((r, i) => r.classList.toggle('today', i === rowFor));
+    document.querySelectorAll('.hours-row').forEach(r => r.classList.add('today'));   // one row: every day has the same hours
   }
   const orderBtn = $('orderBtn');
   if (orderBtn) {
@@ -83,7 +82,7 @@ function renderLive() {
 }
 
 /* ───────────── the interactive clock strip ───────────── */
-const VA = 10, VZ = 23, VSPAN = VZ - VA;       // the strip shows 10 AM → 11 PM
+const VA = 10.5, VZ = 23, VSPAN = VZ - VA;     // the strip shows 10:30 AM → 11 PM
 let clockView = null;                          // null = follow the real clock; else { day, t } the visitor picked
 const viewNow = () => clockView ? { day: clockView.day, hour: Math.floor(clockView.t), minute: Math.round((clockView.t % 1) * 60) } : shopNow();
 const pctOf = h => ((Math.min(Math.max(h, VA), VZ) - VA) / VSPAN * 100);

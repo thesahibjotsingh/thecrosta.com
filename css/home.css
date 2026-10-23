@@ -62,7 +62,7 @@ body.locked { overflow: hidden; }
 .btn:active, .tile:active, .add:active, .chip:active, .plus:active, .cartbar-btn:active, .opt:active { transform: scale(.97); }
 
 /* ── HEADER ── */
-.bar { position: sticky; top: 0; z-index: 30; background: var(--dough); border-bottom: 1px solid var(--crust); }
+.bar { position: sticky; top: 0; z-index: 30; background: var(--dough); }
 .bar-in { display: flex; align-items: center; gap: 16px; height: 64px; }
 .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; font: 800 1.3rem/1 var(--display); letter-spacing: -0.03em; }
 .brand img { width: 40px; height: 40px; border-radius: 50%; }
@@ -517,3 +517,33 @@ body.cart-open .cartbar { visibility: hidden; }
 }
 .tick[data-h="23"] { transform: translateX(-100%); }
 @media (max-width: 560px) { .side-pair { grid-template-columns: 1fr; } }
+
+/* ── Thapar student discount: sticker + page card ── */
+.sticker.stu { transform: rotate(1.4deg); background: var(--char); color: var(--sun); box-shadow: 2px 2px 0 var(--ember); }
+.student-card { display: flex; align-items: center; gap: 12px; padding: 12px 14px; background: var(--sun); border: 2px solid var(--char); border-radius: 16px; box-shadow: 3px 3px 0 var(--char); }
+.student-card .sc-ico { display: grid; place-items: center; width: 48px; height: 48px; flex: none; border-radius: 50%; background: #fff; border: 2px solid var(--char); font-size: 1.5rem; }
+.student-card b { display: block; font: 700 1.02rem/1.2 var(--display); letter-spacing: -0.02em; }
+.student-card > div > span { display: block; font-size: .8rem; line-height: 1.35; color: rgba(26,26,24,.8); margin-top: 2px; }
+.sc-btn { flex: none; margin-left: auto; min-height: 40px; padding: 0 16px; border-radius: 999px; border: 2px solid var(--char); background: var(--char); color: #fff; font: 700 .85rem/1 var(--display); cursor: pointer; transition: transform 140ms var(--ease-out), background-color 160ms ease; }
+.sc-btn:active { transform: scale(.97); }
+.student-card.on { background: #E4F6E8; }
+.student-card.on .sc-btn { background: #fff; color: var(--char); }
+@media (hover: hover) and (pointer: fine) { .sc-btn:hover { background: #2a2926; } .student-card.on .sc-btn:hover { background: var(--paper); } }
+@media (max-width: 1020px) { .student-card { order: 1; } }
+.student-card > div { flex: 1 1 0; min-width: 0; }
+@media (max-width: 560px) { .student-card { flex-wrap: wrap; } .sc-btn { margin-left: 0; width: 100%; } }
+
+/* ── Spin popup ── */
+.spin-pop { position: fixed; inset: 0; z-index: 70; display: grid; place-items: center; padding: 16px; background: rgba(26,26,24,.55); opacity: 0; transition: opacity 200ms var(--ease-out); }
+.spin-pop.open { opacity: 1; }
+.spin-pop-card { position: relative; width: min(100%, 400px); padding: 28px 24px 20px; text-align: center; background: var(--paper); border: 2px solid var(--char); border-radius: 22px; box-shadow: 6px 6px 0 var(--ember); opacity: 0; scale: .95; transition: opacity 220ms var(--ease-out), scale 220ms var(--ease-out); outline: none; }
+.spin-pop.open .spin-pop-card { opacity: 1; scale: 1; }
+.spin-pop .sp-wheel { width: 112px; height: 112px; margin: 0 auto 10px; border-radius: 50%; animation: sp-turn 9s linear infinite; }
+@keyframes sp-turn { to { transform: rotate(360deg); } }
+.spin-pop .eyebrow { margin-bottom: 6px; }
+.spin-pop h2 { font: 800 1.55rem/1.1 var(--display); letter-spacing: -0.03em; margin-bottom: 8px; }
+.sp-sub { font-size: .92rem; line-height: 1.45; color: var(--ash); margin-bottom: 16px; }
+.sp-go { width: 100%; min-height: 52px; justify-content: center; border-radius: 999px; border: 2px solid var(--char); background: var(--ember-deep); color: #fff; font: 800 1.05rem/1 var(--display); cursor: pointer; transition: transform 140ms var(--ease-out); }
+.sp-go:active { transform: scale(.97); }
+.sp-later { display: block; margin: 10px auto 0; min-height: 40px; padding: 0 16px; background: none; border: 0; font: 600 .88rem/1 var(--body); color: var(--ash); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+@media (prefers-reduced-motion: reduce) { .spin-pop .sp-wheel { animation: none; } .spin-pop-card { scale: 1; } }
