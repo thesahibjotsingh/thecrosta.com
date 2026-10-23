@@ -17,7 +17,7 @@ const root = path.join(__dirname, '..');
 const read = f => fs.readFileSync(path.join(root, f), 'utf8');
 
 // ── load the site's own data/renderer in a sandbox ──
-const sandbox = { window: {}, document: { getElementById: () => null } };
+const sandbox = { window: {}, document: { getElementById: () => null }, location: { hostname: '', search: '' } };
 sandbox.window = sandbox;
 vm.createContext(sandbox);
 vm.runInContext(read('js/menu-data.js'), sandbox);

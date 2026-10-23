@@ -1,7 +1,7 @@
 // Menu data. Edit this file to change items, prices, descriptions and photos.
 // Shape: panels -> categories -> items (one item per line). Rendered by js/menu-render.js.
 // prices: one number per size (matches priceNote). variant: drinks with a flavour picker;
-//   cartPrice is what the cart charges (see note in README).
+//   cartPrice is what the cart charges — keep it equal to prices[0], the price shown on the menu.
 window.MENU_DATA = {
   "panels": [
     {
@@ -151,10 +151,10 @@ window.MENU_DATA = {
         },
         {
           "title": "🧃 Chilled Classics", "items": [
-            {"name": "Mint Fresh Lime Soda", "prices": [49], "img": "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?w=160&q=75&fit=crop", "alt": "Mint Fresh Lime Soda", "variant": {"baseName": "Mint Fresh Lime Soda", "cartPrice": 50, "default": "Salted", "options": ["Salted", "Sweet", "Mix"]}},
+            {"name": "Mint Fresh Lime Soda", "prices": [49], "img": "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?w=160&q=75&fit=crop", "alt": "Mint Fresh Lime Soda", "variant": {"baseName": "Mint Fresh Lime Soda", "cartPrice": 49, "default": "Salted", "options": ["Salted", "Sweet", "Mix"]}},
             {"name": "Lemon Cola", "prices": [70], "img": "images/menu-lemon-cola.webp", "alt": "Lemon Cola", "variant": {"baseName": "Lemon Cola", "cartPrice": 70, "default": "Salted", "options": ["Salted", "Sweet", "Mix", "Plain"]}},
-            {"name": "Virgin Mojito", "prices": [89], "img": "https://images.unsplash.com/photo-1551538827-9c037cb4f32a?w=160&q=75&fit=crop", "alt": "Virgin Mojito", "variant": {"baseName": "Virgin Mojito", "cartPrice": 90, "default": "Salted", "options": ["Salted", "Sweet", "Mix"]}},
-            {"name": "Blue Lagoon", "prices": [89], "img": "images/menu-blue-lagoon.webp", "alt": "Blue Lagoon", "variant": {"baseName": "Blue Lagoon", "cartPrice": 90, "default": "Sweet", "options": ["Salted", "Sweet", "Mix"]}}
+            {"name": "Virgin Mojito", "prices": [89], "img": "https://images.unsplash.com/photo-1551538827-9c037cb4f32a?w=160&q=75&fit=crop", "alt": "Virgin Mojito", "variant": {"baseName": "Virgin Mojito", "cartPrice": 89, "default": "Salted", "options": ["Salted", "Sweet", "Mix"]}},
+            {"name": "Blue Lagoon", "prices": [89], "img": "images/menu-blue-lagoon.webp", "alt": "Blue Lagoon", "variant": {"baseName": "Blue Lagoon", "cartPrice": 89, "default": "Sweet", "options": ["Salted", "Sweet", "Mix"]}}
           ]
         },
         {

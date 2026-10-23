@@ -83,6 +83,15 @@ function filterNameInput(el) {
 function placeOrder() {
   if (cart.length === 0) return;
 
+  // Orders are only taken while the shop is open — the button is disabled then,
+  // but guard here too (e.g. the shop closes while the cart is open).
+  const st = shopStatus();
+  if (!st.open) {
+    showToast(`We’re closed — we open ${st.today ? 'today' : DAY_NAMES[st.opensDay]} at ${fmtTime(st.opensAt)}`);
+    if (typeof renderLive === 'function') renderLive();
+    return;
+  }
+
   const nameEl    = document.getElementById('custName');
   const phoneEl   = document.getElementById('custPhone');
   const addressEl = document.getElementById('custAddress');
@@ -166,7 +175,6 @@ function placeOrder() {
   if (!isPickup) msg += locationLine() || `📌 Also drop your location pin here (📎 → Location) so our rider finds you faster\n`;
   if (note) msg += `🍳 Cooking request: ${note}\n`;
   msg += paymentLine(total);
-  if (!shopStatus().open) msg += `\n⏰ Sent while closed — please confirm once you open\n`;
   msg += `⏱ Expecting delivery in ~25–35 min`;
 
   saveLastOrder(name, phone, address);

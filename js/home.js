@@ -27,11 +27,21 @@ function renderLive() {
   $('closedBtn').hidden = st.open;
   $('closedBtnLbl').textContent = st.open ? '' : `Opens ${fmtTime(st.opensAt)}`;
 
+  // closed: the cart can still be built, but it cannot be sent, and nothing can be paid
+  const opensText = `${st.today ? 'today' : DAY_NAMES[st.opensDay]} at ${fmtTime(st.opensAt)}`;
   const closedRow = $('cartClosedRow');
   if (closedRow) {
     closedRow.style.display = st.open ? 'none' : 'flex';
-    $('cartClosedText').textContent = `We’re closed right now — we open ${st.today ? 'today' : DAY_NAMES[st.opensDay]} at ${fmtTime(st.opensAt)}. You can still send your order and we’ll see it when we open.`;
+    $('cartClosedText').textContent = `We’re closed right now — we open ${opensText}. You can build your order now and send it once we open.`;
   }
+  const orderBtn = $('orderBtn');
+  if (orderBtn) {
+    orderBtn.disabled = !st.open;
+    orderBtn.classList.toggle('is-closed', !st.open);
+    $('orderBtnLabel').textContent = st.open ? 'Order via WhatsApp' : `Closed · opens ${st.today ? 'today' : DAY_NAMES[st.opensDay]} ${fmtTime(st.opensAt)}`;
+  }
+  const payWrap = $('payWrap');
+  if (payWrap) payWrap.hidden = !st.open;
 
   $('clockLine').textContent = `${DAY_NAMES[now.day]} · ${fmtTime(now.hour, now.minute)} · Patiala`;
   $('lede').textContent = st.open ? 'Oven’s hot — here’s what’s on right now.' : 'Oven’s resting — have a look, then order when we open.';

@@ -51,8 +51,6 @@ Everything time-based (open/closed, offers, the clock strip, cart discounts) fol
 
 **Preview a time of day:** on a local server, add `?at=Mon-12:30` to the URL (day-HH:MM, shop time) to see the site as it would look then — e.g. `http://localhost:8000/?at=Sat-20:00`. It is ignored on the live site.
 
-## Known issues
+## Closed shop
 
-Three drinks show one price on the menu but charge ₹1 more in the cart
-(Mint Fresh Lime Soda ₹49/₹50, Virgin Mojito ₹89/₹90, Blue Lagoon ₹89/₹90).
-Both values are kept as they were; set them equal in `menu-data.js` once the right price is confirmed.
+Outside opening hours the cart can still be built, but it cannot be sent: the cart's order button is disabled ("Closed · opens today 11 AM"), the payment options are hidden, and `placeOrder()` refuses. The header's WhatsApp button is replaced by the opening time.

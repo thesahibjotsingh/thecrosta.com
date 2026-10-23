@@ -446,3 +446,8 @@ body.cart-open .cartbar { visibility: hidden; }
 /* phones get the pay button; desktops get the QR to scan */
 @media (pointer: coarse) { .upi-pay-btn { display: flex; } .upi-qr { display: none; } }
 .loc-btn, .pay-opt, .upi-copy { color: var(--char); }
+
+/* closed: the cart's send button is switched off */
+.whatsapp-btn.is-closed, .whatsapp-btn[disabled] { background: #EDE3D4 !important; color: var(--ash) !important; box-shadow: none !important; cursor: not-allowed; animation: none !important; }
+.whatsapp-btn.is-closed svg { fill: var(--ash); }
+.whatsapp-btn.is-closed::after, .whatsapp-btn[disabled]::after { display: none; }
