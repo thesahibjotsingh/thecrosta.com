@@ -16,8 +16,8 @@
 }
 /* sticky needs a page that is not its own scroll container */
 body { overflow-x: clip; }
-:is(.bar, .top, .tools, .best, .sheet, .cartbar, .toast, .clock) :is(button, input) { font: inherit; color: inherit; }
-:is(.bar, .top, .tools, .best, .sheet) a { color: inherit; }
+:where(.bar, .top, .tools, .best, .sheet, .cartbar, .toast, .clock) :where(button, input) { font: inherit; color: inherit; }
+:where(.bar, .top, .tools, .best, .sheet) a { color: inherit; }
 .brand img, .tile img, .sheet-head img, .orow img, .card .ph img, .pie { display: block; max-width: 100%; }
 .mono { font-family: var(--mono); }
 html { scroll-padding-top: calc(var(--hdr) + 64px); }
@@ -100,7 +100,7 @@ body.locked { overflow: hidden; }
 .vegmark { width: 15px; height: 15px; border: 1.5px solid var(--basil); border-radius: 3px; display: grid; place-items: center; background: #fff; flex: none; }
 .vegmark::after { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--basil); }
 .live-grid { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); gap: 26px; align-items: start; }
-:is(.top, .best, .sheet, .clock, .quick) h2 { font: 700 1.15rem/1.2 var(--display); letter-spacing: -0.02em; }
+:where(.top, .best, .sheet, .clock, .quick) h2 { font: 700 1.15rem/1.2 var(--display); letter-spacing: -0.02em; }
 
 /* tickets */
 .offers { display: grid; gap: 16px; }
@@ -445,3 +445,4 @@ body.cart-open .cartbar { visibility: hidden; }
 .upi-copy { min-height: 36px; padding: 0 12px; border-radius: 999px; border: 1.5px solid var(--char); background: transparent; font: 600 .78rem var(--body); cursor: pointer; }
 /* phones get the pay button; desktops get the QR to scan */
 @media (pointer: coarse) { .upi-pay-btn { display: flex; } .upi-qr { display: none; } }
+.loc-btn, .pay-opt, .upi-copy { color: var(--char); }

@@ -49,6 +49,8 @@ Scripts are plain `<script defer>` files loaded in the order listed at the botto
 
 Everything time-based (open/closed, offers, the clock strip, cart discounts) follows **Asia/Kolkata**, not the visitor's device clock.
 
+**Preview a time of day:** on a local server, add `?at=Mon-12:30` to the URL (day-HH:MM, shop time) to see the site as it would look then — e.g. `http://localhost:8000/?at=Sat-20:00`. It is ignored on the live site.
+
 ## Known issues
 
 Three drinks show one price on the menu but charge ₹1 more in the cart

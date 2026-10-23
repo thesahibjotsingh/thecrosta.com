@@ -10,8 +10,18 @@ const DAY_SHORT = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 const shopClockFormat = new Intl.DateTimeFormat('en-US', {
   timeZone: SHOP_TIMEZONE, weekday: 'short', hour: '2-digit', minute: '2-digit', hourCycle: 'h23'
 });
+// Preview for reviewing states: on localhost only, ?at=Mon-12:30 shows the site at that shop time.
+// (Ignored on the live site, so it can never be used to claim an offer.)
+const PREVIEW_AT = (() => {
+  if (!/^(localhost|127\.0\.0\.1)$/.test(location.hostname)) return null;
+  const m = /[?&]at=([A-Za-z]{3})-(\d{1,2}):(\d{2})/.exec(location.search);
+  if (!m) return null;
+  const day = DAY_SHORT.findIndex(d => d.toLowerCase() === m[1].toLowerCase());
+  return day < 0 ? null : { day, hour: +m[2], minute: +m[3] };
+})();
 // → { day: Sun=0…Sat=6, hour: 0–23, minute: 0–59 } in shop time
 function shopNow() {
+  if (PREVIEW_AT) return { ...PREVIEW_AT };
   const parts = {};
   shopClockFormat.formatToParts(new Date()).forEach(p => { parts[p.type] = p.value; });
   return { day: DAY_SHORT.indexOf(parts.weekday), hour: parseInt(parts.hour, 10), minute: parseInt(parts.minute, 10) };
