@@ -55,3 +55,7 @@ Everything time-based (open/closed, offers, the clock strip, cart discounts) fol
 ## Closed shop
 
 Outside opening hours the cart can still be built, but it cannot be sent: the cart's order button is disabled ("Closed · opens today 11 AM"), the payment options are hidden, and `placeOrder()` refuses. The header's WhatsApp button is replaced by the opening time.
+
+## Cache busting
+
+Cloudflare tells browsers to keep CSS/JS for 4 hours. The `?v=2` on each stylesheet and script link in `index.html` forces a fresh download after a deploy. When you change any file in `css/` or `js/`, bump that number (find/replace `?v=2` → `?v=3`) in the same commit.
