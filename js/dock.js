@@ -32,6 +32,18 @@
     }
     links.forEach(a => a.classList.toggle('on', a.dataset.dock === on));
   }
-  addEventListener('scroll', () => { if (!queued) { queued = true; requestAnimationFrame(mark); } }, { passive: true });
+  // like Safari's bar: slides away while you scroll down, comes back as soon as you scroll up
+  let lastY = scrollY;
+  function autoHide() {
+    const y = scrollY, dy = y - lastY;
+    if (Math.abs(dy) < 6) return;
+    const atEnd = y + innerHeight >= document.documentElement.scrollHeight - 80;
+    dock.classList.toggle('hide', dy > 0 && y > 140 && !atEnd);
+    lastY = y;
+  }
+  addEventListener('scroll', () => { autoHide(); if (!queued) { queued = true; requestAnimationFrame(mark); } }, { passive: true });
+  // an item added to the cart brings it back so the new total is visible
+  const count = dock.querySelector('.dk-count');
+  if (count) new MutationObserver(() => dock.classList.remove('hide')).observe(count, { childList: true, characterData: true, subtree: true });
   mark();
 })();

@@ -34,9 +34,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/styles.css?v=5">
-<link rel="stylesheet" href="css/home.css?v=5">
-<link rel="stylesheet" href="css/sections.css?v=5">
+<link rel="stylesheet" href="css/styles.css?v=8">
+<link rel="stylesheet" href="css/home.css?v=8">
+<link rel="stylesheet" href="css/sections.css?v=8">
 </head>
 <body>
 
@@ -77,8 +77,11 @@
 
       <div class="live-grid">
         <div class="offers">
-          <div id="primary"></div>
-          <div class="more" id="more"></div>
+          <div class="deck" id="deck">
+            <div id="primary"></div>
+            <div class="more" id="more"></div>
+          </div>
+          <div class="deck-ui" id="deckUi" hidden><div class="deck-dots" id="deckDots"></div><span class="deck-hint" id="deckHint">Swipe to see all offers</span></div>
           <p class="rule-note">One offer per order — we apply the best one that fits your cart. <a href="#spin">Feeling lucky? Spin for a deal →</a></p>
           <div class="student-card" id="studentCard">
             <span class="sc-ico" aria-hidden="true">🎓</span>
@@ -780,29 +783,30 @@
   </div>
 </div>
 
-<script defer src="js/menu-data.js?v=5"></script>
-<script defer src="js/shop.js?v=5"></script>
-<script defer src="js/offers.js?v=5"></script>
-<script defer src="js/menu-render.js?v=5"></script>
-<script defer src="js/ui.js?v=5"></script>
-<script defer src="js/reviews.js?v=5"></script>
-<script defer src="js/menu-ui.js?v=5"></script>
-<script defer src="js/offers-carousel.js?v=5"></script>
-<script defer src="js/contact.js?v=5"></script>
-<script defer src="js/cart.js?v=5"></script>
-<script defer src="js/promos.js?v=5"></script>
-<script defer src="js/cart-render.js?v=5"></script>
-<script defer src="js/order.js?v=5"></script>
-<script defer src="js/payment.js?v=5"></script>
-<script defer src="js/menu-wiring.js?v=5"></script>
-<script defer src="js/persist.js?v=5"></script>
-<script defer src="js/spin.js?v=5"></script>
-<script defer src="js/home.js?v=5"></script>
-<script defer src="js/sheets.js?v=5"></script>
-<script defer src="js/student.js?v=5"></script>
-<script defer src="js/spin-pop.js?v=5"></script>
-<script defer src="js/dock.js?v=5"></script>
-<script defer src="js/page-ui.js?v=5"></script>
+<script defer src="js/menu-data.js?v=8"></script>
+<script defer src="js/shop.js?v=8"></script>
+<script defer src="js/offers.js?v=8"></script>
+<script defer src="js/menu-render.js?v=8"></script>
+<script defer src="js/ui.js?v=8"></script>
+<script defer src="js/reviews.js?v=8"></script>
+<script defer src="js/menu-ui.js?v=8"></script>
+<script defer src="js/offers-carousel.js?v=8"></script>
+<script defer src="js/contact.js?v=8"></script>
+<script defer src="js/cart.js?v=8"></script>
+<script defer src="js/promos.js?v=8"></script>
+<script defer src="js/cart-render.js?v=8"></script>
+<script defer src="js/order.js?v=8"></script>
+<script defer src="js/payment.js?v=8"></script>
+<script defer src="js/menu-wiring.js?v=8"></script>
+<script defer src="js/persist.js?v=8"></script>
+<script defer src="js/spin.js?v=8"></script>
+<script defer src="js/home.js?v=8"></script>
+<script defer src="js/sheets.js?v=8"></script>
+<script defer src="js/student.js?v=8"></script>
+<script defer src="js/spin-pop.js?v=8"></script>
+<script defer src="js/dock.js?v=8"></script>
+<script defer src="js/deck.js?v=8"></script>
+<script defer src="js/page-ui.js?v=8"></script>
 
 </body>
 </html>

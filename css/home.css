@@ -221,7 +221,7 @@ body.locked { overflow: hidden; }
 @media (hover: hover) and (pointer: fine) { .dchip:not([aria-pressed="true"]):hover { border-color: var(--char); } }
 
 /* ── TOOLS BAR ── */
-.tools { position: sticky; top: var(--hdr); z-index: 20; background: var(--dough); border-bottom: 1px solid var(--crust); }
+.tools { position: sticky; top: var(--hdr); z-index: 20; background: var(--dough); }
 .tools-in { display: flex; align-items: center; gap: 12px; padding-top: 10px; padding-bottom: 10px; }
 .search { position: relative; flex: 0 1 300px; min-width: 0; }
 .search svg { position: absolute; left: 13px; top: 50%; width: 18px; height: 18px; transform: translateY(-50%); color: var(--ash); }
@@ -647,3 +647,34 @@ body.cart-open .cartbar { visibility: hidden; }
 @media (max-width: 1020px) { .live-grid { grid-template-columns: minmax(0, 1fr); } }
 .live-grid > *, .quick, .quick > *, .offers > * { min-width: 0; }
 .quick { grid-template-columns: minmax(0, 1fr); }
+
+/* ── Offer cards as a swipeable stack (phones) ── */
+.deck { display: contents; }
+.deck-ui { display: none; }
+@media (max-width: 760px) {
+  .deck { display: grid; position: relative; padding-bottom: 26px; }
+  .deck #primary, .deck #more { display: contents; }
+  .deck .ticket { grid-area: 1 / 1; transform-origin: 50% 100%; transition: transform 420ms var(--ease-out), opacity 260ms ease; will-change: transform; touch-action: pan-y; user-select: none; -webkit-user-select: none; animation: none !important; background: var(--paper); }
+  .deck .ticket.closedcard { background: var(--char); }
+  .deck .ticket[data-d="0"] { z-index: 4; }
+  .deck .ticket[data-d="1"] { z-index: 3; transform: translateY(13px) scale(.95); }
+  .deck .ticket[data-d="2"] { z-index: 2; transform: translateY(26px) scale(.90); }
+  .deck .ticket[data-d="3"], .deck .ticket[data-d="4"] { z-index: 1; transform: translateY(26px) scale(.90); opacity: 0; pointer-events: none; }
+  .deck .ticket:not([data-d="0"]) { pointer-events: none; }
+  .deck .ticket.dragging { transition: none; cursor: grabbing; }
+  .deck-ui { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: -4px; }
+  .deck-ui[hidden] { display: none; }
+  .deck-dots { display: flex; gap: 6px; }
+  .deck-dots button { width: 10px; height: 10px; padding: 0; border-radius: 999px; border: 1.5px solid var(--char); background: transparent; cursor: pointer; transition: width 260ms var(--ease-out), background-color 200ms ease; }
+  .deck-dots button[aria-current="true"] { width: 26px; background: var(--char); }
+  .deck-hint { font: 500 .7rem/1 var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--ash); transition: opacity 300ms ease; }
+  .deck-hint.gone { opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) { .deck .ticket { transition-duration: 1ms; } }
+
+/* ── Phone pill nav: slides away while scrolling down, back on scroll up ── */
+@media (max-width: 760px) {
+  .dock { transition: transform 320ms var(--ease-drawer), opacity 220ms ease; }
+  .dock.hide { transform: translateY(calc(100% + 28px)); opacity: 0; pointer-events: none; }
+}
+@media (prefers-reduced-motion: reduce) { .dock { transition-duration: 1ms; } }

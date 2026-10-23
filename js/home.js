@@ -79,6 +79,7 @@ function renderLive() {
   }).join('');
 
   if (!clockView) buildClock(); else updateClockUI();
+  if (typeof setupDeck === 'function') setupDeck();
   firstPaint = false;
 }
 
