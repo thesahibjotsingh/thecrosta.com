@@ -3,19 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>The Crosta — new top section (mockup)</title>
+<title>The Crosta — new top section (mockup v2)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-/* MOCKUP of the new first screen. Nothing here is wired to the real cart yet.
-   Brand colours are the live site's; the type and layout are new. */
+/* MOCKUP v2 of the new first screen. Nothing here is wired to the real cart yet.
+   Brand colours are the live site's; type, layout and motion are new. */
 :root {
   --ember: #D35400;        /* brand orange — accents, big type */
   --ember-deep: #A84300;   /* brand dark orange — filled buttons (6:1 with white) */
   --char: #1A1A18;         /* brand charcoal */
   --dough: #FDF8F2;        /* brand cream — page */
   --paper: #FFFCF6;        /* ticket stock */
+  --sun: #FFC83D;          /* sunny yellow — stickers, stubs (tint of brand gold) */
+  --sun-soft: #FFF0C4;     /* wash behind the top section */
   --crust: #E8D5BD;        /* rules and quiet fills */
   --ash: #6B6460;          /* secondary text */
   --basil: #1B7F3B;        /* open / veg */
@@ -24,17 +26,36 @@
   --display: 'Bricolage Grotesque', 'DM Sans', system-ui, sans-serif;
   --body: 'DM Sans', system-ui, sans-serif;
   --mono: 'DM Mono', ui-monospace, monospace;
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
   --hdr: 64px;
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { -webkit-text-size-adjust: 100%; }
+html { -webkit-text-size-adjust: 100%; scrollbar-gutter: stable; }
 body { background: var(--dough); color: var(--char); font: 400 16px/1.5 var(--body); padding-bottom: 76px; }
+body.locked { overflow: hidden; }
 img { display: block; max-width: 100%; }
 button, input { font: inherit; color: inherit; }
 a { color: inherit; }
 :focus-visible { outline: 3px solid var(--char); outline-offset: 2px; border-radius: 6px; }
 .mono { font-family: var(--mono); }
 .wrap { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+.sr { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+/* ── motion ingredients ── */
+@keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+@keyframes grow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes spin-in { from { opacity: 0; transform: rotate(-24deg) scale(.92); } to { opacity: 1; transform: none; } }
+@keyframes ping { 0% { transform: scale(1); opacity: .45; } 80%, 100% { transform: scale(2.6); opacity: 0; } }
+@keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+.enter { animation: rise 320ms var(--ease-out) both; animation-delay: calc(var(--i, 0) * 55ms); }
+
+/* press feedback on everything pressable (hover is gated further down) */
+.btn, .tile, .add, .chip, .plus, .cartbar-btn, .opt {
+  transition: transform 140ms var(--ease-out), background-color 160ms ease, border-color 160ms ease, color 160ms ease;
+}
+.btn:active, .tile:active, .add:active, .chip:active, .plus:active, .cartbar-btn:active, .opt:active { transform: scale(.97); }
 
 /* ── HEADER ── */
 .bar { position: sticky; top: 0; z-index: 30; background: var(--dough); border-bottom: 1px solid var(--crust); }
@@ -42,34 +63,47 @@ a { color: inherit; }
 .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; font: 800 1.3rem/1 var(--display); letter-spacing: -0.03em; }
 .brand img { width: 40px; height: 40px; border-radius: 50%; }
 .brand b { color: var(--ember); font-weight: 800; }
-.status { display: flex; align-items: center; gap: 9px; margin: 0 auto; font-size: 0.86rem; font-weight: 500; }
-.status .dot, .status-row .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--basil); flex: none; box-shadow: 0 0 0 4px rgba(27,127,59,.16); }
-.is-closed .dot { background: var(--brick); box-shadow: 0 0 0 4px rgba(179,38,30,.16); }
-.status-row { display: none; align-items: center; gap: 9px; padding: 7px 20px; border-top: 1px solid var(--crust); font-size: 0.8rem; font-weight: 500; }
+.status { display: flex; align-items: center; gap: 12px; margin: 0 auto; font-size: 0.86rem; font-weight: 500; }
+.status-row { display: none; align-items: center; gap: 12px; padding: 7px 20px; border-top: 1px solid var(--crust); font-size: 0.8rem; font-weight: 500; }
+.dot { position: relative; width: 9px; height: 9px; border-radius: 50%; background: var(--basil); flex: none; }
+.dot::after { content: ""; position: absolute; inset: 0; border-radius: 50%; background: inherit; animation: ping 2.4s var(--ease-out) infinite; }
+.is-closed .dot { background: var(--brick); }
+.is-closed .dot::after { display: none; }
 .actions { display: flex; align-items: center; gap: 8px; }
-.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 42px; padding: 0 16px; border-radius: 999px; border: 1.5px solid var(--char); background: transparent; font-weight: 600; font-size: 0.88rem; text-decoration: none; cursor: pointer; white-space: nowrap; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 0 17px; border-radius: 999px; border: 1.5px solid var(--char); background: transparent; font-weight: 600; font-size: 0.9rem; text-decoration: none; cursor: pointer; white-space: nowrap; }
 .btn svg { width: 18px; height: 18px; flex: none; }
 .btn.wa { background: var(--wa); border-color: var(--wa); color: #06210f; }
 .btn.fill { background: var(--ember-deep); border-color: var(--ember-deep); color: #fff; }
-.btn[disabled], .btn.off { background: #EDE3D4; border-color: #EDE3D4; color: var(--ash); cursor: not-allowed; }
-.cart { position: relative; padding: 0 14px; }
-.cart i { font: 500 .78rem var(--mono); font-style: normal; }
+.btn.off { background: #EDE3D4; border-color: #EDE3D4; color: var(--ash); cursor: not-allowed; }
+.cart { padding: 0 14px; }
+.cart i { font: 500 .8rem var(--mono); font-style: normal; min-width: 1ch; display: inline-block; }
 
 /* ── LIVE SECTION ── */
-.live { padding-top: 30px; padding-bottom: 12px; }
+.live-band { background: var(--sun-soft); border-bottom: 2px solid var(--char); }
+.live { padding-top: 30px; padding-bottom: 34px; }
 .eyebrow { font: 500 .74rem/1.4 var(--mono); letter-spacing: .09em; text-transform: uppercase; color: var(--ash); }
-h1 { font: 800 clamp(2.1rem, 5.4vw, 3.6rem)/.98 var(--display); letter-spacing: -0.04em; margin: 10px 0 24px; }
-h1 em { font-style: normal; color: var(--ember); }
+h1 { font: 800 clamp(2.2rem, 5.6vw, 3.8rem)/.98 var(--display); letter-spacing: -0.04em; margin: 10px 0 10px; }
+h1 .u { position: relative; display: inline-block; color: var(--ember); }
+h1 .u svg { position: absolute; left: -2%; bottom: -.16em; width: 104%; height: .3em; overflow: visible; }
+h1 .u path { fill: none; stroke: var(--char); stroke-width: 5; stroke-linecap: round; stroke-dasharray: 220; stroke-dashoffset: 220; animation: draw 700ms var(--ease-out) 350ms forwards; }
+@keyframes draw { to { stroke-dashoffset: 0; } }
+.lede { font: 500 clamp(1.05rem, 2.2vw, 1.3rem)/1.3 var(--display); letter-spacing: -0.015em; margin-bottom: 14px; }
+.stickers { display: flex; flex-wrap: wrap; gap: 10px 12px; margin-bottom: 26px; }
+.sticker { display: inline-flex; align-items: center; gap: 7px; background: var(--sun); border: 2px solid var(--char); border-radius: 999px; padding: 5px 13px 5px 11px; font: 700 .8rem/1.2 var(--display); letter-spacing: -0.01em; box-shadow: 2px 2px 0 var(--char); transform: rotate(-2.5deg); }
+.sticker:nth-child(2) { transform: rotate(1.8deg); background: #fff; }
+.sticker:nth-child(3) { transform: rotate(-1deg); background: var(--ember); color: #fff; }
+.vegmark { width: 15px; height: 15px; border: 1.5px solid var(--basil); border-radius: 3px; display: grid; place-items: center; background: #fff; flex: none; }
+.vegmark::after { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--basil); }
 .live-grid { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); gap: 26px; align-items: start; }
 h2 { font: 700 1.15rem/1.2 var(--display); letter-spacing: -0.02em; }
 
 /* tickets */
 .offers { display: grid; gap: 16px; }
-.ticket { --stub: 92px; position: relative; display: grid; grid-template-columns: var(--stub) 1fr; background: var(--paper); border: 1.5px solid var(--char); border-radius: 16px; overflow: hidden; min-width: 0; }
-.ticket::before, .ticket::after { content: ""; position: absolute; left: calc(var(--stub) - 9px); width: 18px; height: 18px; border-radius: 50%; background: var(--dough); border: 1.5px solid var(--char); }
+.ticket { --stub: 92px; --notch: var(--sun-soft); position: relative; display: grid; grid-template-columns: var(--stub) 1fr; background: var(--paper); border: 1.5px solid var(--char); border-radius: 16px; overflow: hidden; min-width: 0; }
+.ticket::before, .ticket::after { content: ""; position: absolute; left: calc(var(--stub) - 9px); width: 18px; height: 18px; border-radius: 50%; background: var(--notch); border: 1.5px solid var(--char); }
 .ticket::before { top: -10px; }
 .ticket::after { bottom: -10px; }
-.stub { display: flex; flex-direction: column; justify-content: center; gap: 4px; padding: 14px 10px 14px 14px; border-right: 2px dashed var(--crust); font: 500 .68rem/1.3 var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--ash); }
+.stub { display: flex; flex-direction: column; justify-content: center; gap: 4px; padding: 14px 10px 14px 14px; border-right: 2px dashed rgba(26,26,24,.3); font: 500 .68rem/1.3 var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--ash); }
 .stub b { font: 500 1.05rem/1.1 var(--mono); letter-spacing: 0; color: var(--char); }
 .tbody { padding: 14px 16px 16px; min-width: 0; }
 .kicker { font: 500 .7rem/1.2 var(--mono); letter-spacing: .09em; text-transform: uppercase; color: var(--ember-deep); }
@@ -77,8 +111,9 @@ h2 { font: 700 1.15rem/1.2 var(--display); letter-spacing: -0.02em; }
 .tdesc { font-size: .84rem; color: var(--ash); }
 .tmeta { margin-top: 10px; font: 500 .7rem/1.3 var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--ash); }
 .tmeta.live { color: var(--basil); }
-.ticket.dim { background: transparent; border-color: var(--crust); }
-.ticket.dim::before, .ticket.dim::after { border-color: var(--crust); }
+.ticket.live .stub { background: var(--sun); color: var(--char); }
+.ticket.dim { background: transparent; border-color: rgba(26,26,24,.25); }
+.ticket.dim::before, .ticket.dim::after { border-color: rgba(26,26,24,.25); }
 .ticket.dim .stub b { color: var(--ash); }
 
 .ticket.primary { --stub: 128px; box-shadow: 7px 7px 0 var(--ember); }
@@ -88,15 +123,15 @@ h2 { font: 700 1.15rem/1.2 var(--display); letter-spacing: -0.02em; }
 .ticket.primary .thead { font-size: clamp(1.5rem, 3vw, 2.25rem); line-height: 1.02; letter-spacing: -0.035em; margin: 10px 0 8px; max-width: 14ch; }
 .ticket.primary .tdesc { font-size: .95rem; max-width: 34ch; }
 .stamp { position: absolute; top: 14px; right: 16px; transform: rotate(-5deg); border: 2px solid var(--basil); color: var(--basil); padding: 3px 9px 2px; border-radius: 4px; font: 500 .72rem/1.2 var(--mono); letter-spacing: .12em; text-transform: uppercase; background: var(--paper); z-index: 2; }
-.pie { position: absolute; right: -46px; bottom: -52px; width: 210px; height: 210px; border-radius: 50%; border: 6px solid var(--paper); box-shadow: 0 0 0 1.5px var(--char); object-fit: cover; }
+.pie { position: absolute; right: -46px; bottom: -52px; width: 210px; height: 210px; border-radius: 50%; border: 6px solid var(--paper); box-shadow: 0 0 0 1.5px var(--char); object-fit: cover; animation: spin-in 600ms var(--ease-out) 150ms both; }
 .prog { margin: 16px 0 4px; max-width: 280px; }
 .prog-bar { height: 8px; border-radius: 99px; background: var(--crust); overflow: hidden; }
-.prog-bar i { display: block; height: 100%; background: var(--ember); border-radius: 99px; }
+.prog-bar i { display: block; height: 100%; background: var(--ember); border-radius: 99px; transform-origin: left; animation: grow 700ms var(--ease-out) 250ms both; }
 .prog p { margin-top: 7px; font: 500 .72rem/1.3 var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--char); }
 .primary .btn { margin-top: 16px; }
 .ticket.closedcard { background: var(--char); color: #fff; border-color: var(--char); box-shadow: 7px 7px 0 var(--brick); }
 .ticket.closedcard::before, .ticket.closedcard::after { border-color: var(--char); }
-.ticket.closedcard .stub { border-right-color: #4a4640; color: #bdb4aa; }
+.ticket.closedcard .stub { border-right-color: #4a4640; color: #bdb4aa; background: transparent; }
 .ticket.closedcard .stub b { color: #fff; }
 .ticket.closedcard .kicker { color: #f0a27a; }
 .ticket.closedcard .tdesc { color: #cfc6bb; }
@@ -105,7 +140,7 @@ h2 { font: 700 1.15rem/1.2 var(--display); letter-spacing: -0.02em; }
 .more { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
 .more .ticket { --stub: 0px; grid-template-columns: 1fr; }
 .more .ticket::before, .more .ticket::after { display: none; }
-.more .stub { flex-direction: row; align-items: baseline; justify-content: space-between; border-right: 0; border-bottom: 2px dashed var(--crust); padding: 10px 14px; }
+.more .stub { flex-direction: row; align-items: baseline; justify-content: space-between; border-right: 0; border-bottom: 2px dashed rgba(26,26,24,.3); padding: 10px 14px; }
 .more .stub b { font-size: .9rem; }
 .rule-note { font: 500 .7rem/1.4 var(--mono); letter-spacing: .05em; text-transform: uppercase; color: var(--ash); }
 
@@ -115,20 +150,24 @@ h2 { font: 700 1.15rem/1.2 var(--display); letter-spacing: -0.02em; }
 .reorder .eyebrow { color: #bdb4aa; }
 .reorder strong { font: 700 1.05rem/1.25 var(--display); letter-spacing: -0.02em; }
 .reorder .row { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 10px; }
-.reorder .btn { background: var(--dough); border-color: var(--dough); color: var(--char); min-height: 40px; }
+.reorder .btn { background: var(--sun); border-color: var(--sun); color: var(--char); }
 .reorder small { color: #bdb4aa; font-size: .8rem; }
 .quick h2 { margin-bottom: 10px; }
 .tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-.tile { display: flex; align-items: center; gap: 12px; padding: 8px 12px 8px 8px; background: var(--paper); border: 1.5px solid var(--crust); border-radius: 14px; text-decoration: none; min-height: 68px; transition: border-color .15s, transform .15s; }
-.tile:hover { border-color: var(--char); }
-.tile:active { transform: scale(.98); }
-.tile img { width: 52px; height: 52px; border-radius: 10px; object-fit: cover; flex: none; }
+.tile { display: flex; align-items: center; gap: 12px; padding: 8px 12px 8px 8px; background: var(--paper); border: 1.5px solid rgba(26,26,24,.18); border-radius: 14px; text-decoration: none; min-height: 68px; overflow: hidden; }
+.tile .th { width: 52px; height: 52px; border-radius: 10px; overflow: hidden; flex: none; }
+.tile img { width: 52px; height: 52px; object-fit: cover; transition: transform 220ms var(--ease-out); }
 .tile b { display: block; font: 700 .95rem/1.15 var(--display); letter-spacing: -0.02em; }
 .tile span { font: 500 .72rem/1.2 var(--mono); color: var(--ember-deep); letter-spacing: .02em; }
 
-/* the clock */
-.clock { margin-top: 28px; background: var(--paper); border: 1.5px solid var(--crust); border-radius: 16px; padding: 18px 18px 14px; }
-.clock-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 12px; }
+/* the clock — collapsible */
+.clock { margin-top: 28px; background: var(--paper); border: 1.5px solid var(--char); border-radius: 16px; }
+.clock > summary { list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 16px 18px; min-height: 56px; }
+.clock > summary::-webkit-details-marker { display: none; }
+.clock .sum-r { display: flex; align-items: center; gap: 12px; }
+.chev { width: 18px; height: 18px; transition: transform 200ms var(--ease-out); flex: none; }
+.clock[open] .chev { transform: rotate(180deg); }
+.clock-body { padding: 0 18px 14px; }
 .lanes { --label: 168px; }
 .lane { display: grid; grid-template-columns: var(--label) 1fr; align-items: center; min-height: 46px; border-top: 1px solid var(--crust); }
 .lane.axis { border-top: 0; min-height: 30px; }
@@ -139,7 +178,7 @@ h2 { font: 700 1.15rem/1.2 var(--display); letter-spacing: -0.02em; }
 .axis .track { height: 30px; }
 .tick { position: absolute; top: 14px; transform: translateX(-50%); font: 500 .66rem/1 var(--mono); color: var(--ash); letter-spacing: .04em; }
 .shut { position: absolute; top: 0; bottom: 0; background: repeating-linear-gradient(135deg, transparent 0 5px, rgba(26,26,24,.07) 5px 6px); }
-.band { position: absolute; top: 9px; height: 28px; border-radius: 8px; display: flex; align-items: center; padding: 0 10px; font: 500 .68rem/1 var(--mono); letter-spacing: .05em; text-transform: uppercase; white-space: nowrap; overflow: hidden; }
+.band { position: absolute; top: 9px; height: 28px; border-radius: 8px; display: flex; align-items: center; padding: 0 10px; font: 500 .68rem/1 var(--mono); letter-spacing: .05em; text-transform: uppercase; white-space: nowrap; overflow: hidden; transform-origin: left; animation: grow 520ms var(--ease-out) both; animation-delay: calc(var(--i, 0) * 70ms + 120ms); }
 .band.live { background: var(--ember); color: #fff; }
 .band.later { background: #FBE3D1; color: var(--ember-deep); border: 1.5px solid var(--ember); }
 .band.done { background: var(--crust); color: var(--ash); }
@@ -148,39 +187,74 @@ h2 { font: 700 1.15rem/1.2 var(--display); letter-spacing: -0.02em; }
 .needle-tag { position: absolute; top: -2px; transform: translateX(-50%); background: var(--char); color: #fff; font: 500 .66rem/1 var(--mono); letter-spacing: .05em; padding: 5px 7px; border-radius: 5px; white-space: nowrap; z-index: 4; }
 
 /* ── TOOLS BAR ── */
-.tools { position: sticky; top: var(--hdr); z-index: 20; background: var(--dough); border-bottom: 1px solid var(--crust); margin-top: 26px; }
+.tools { position: sticky; top: var(--hdr); z-index: 20; background: var(--dough); border-bottom: 1px solid var(--crust); }
 .tools-in { display: flex; align-items: center; gap: 12px; padding-top: 10px; padding-bottom: 10px; }
 .search { position: relative; flex: 0 1 300px; min-width: 0; }
 .search svg { position: absolute; left: 13px; top: 50%; width: 18px; height: 18px; transform: translateY(-50%); color: var(--ash); }
 .search input { width: 100%; min-height: 44px; padding: 0 14px 0 40px; border: 1.5px solid var(--crust); border-radius: 999px; background: var(--paper); }
 .search input::placeholder { color: var(--ash); }
 .search input:focus { outline: none; border-color: var(--char); }
-.chips { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; flex: 1; min-width: 0; padding: 2px; }
+.chips { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; flex: 1; min-width: 0; padding: 2px; scroll-snap-type: x proximity; }
 .chips::-webkit-scrollbar { display: none; }
-.chip { flex: none; min-height: 40px; padding: 0 15px; border-radius: 999px; border: 1.5px solid var(--crust); background: transparent; font-weight: 500; font-size: .88rem; cursor: pointer; white-space: nowrap; }
+.chip { flex: none; min-height: 44px; padding: 0 16px; border-radius: 999px; border: 1.5px solid var(--crust); background: transparent; font-weight: 500; font-size: .9rem; cursor: pointer; white-space: nowrap; scroll-snap-align: center; }
 .chip.on { background: var(--char); border-color: var(--char); color: #fff; }
 .veg { display: inline-flex; align-items: center; gap: 8px; flex: none; font: 500 .72rem/1.2 var(--mono); letter-spacing: .05em; text-transform: uppercase; }
-.vegmark { width: 16px; height: 16px; border: 1.5px solid var(--basil); border-radius: 3px; display: grid; place-items: center; }
-.vegmark::after { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--basil); }
 
 /* ── BESTSELLERS ── */
 .best { padding-top: 26px; padding-bottom: 36px; }
 .best-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 14px; }
-.best-head a { font-size: .88rem; font-weight: 600; color: var(--ember-deep); }
-.best-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 14px; }
-.card { background: var(--paper); border: 1.5px solid var(--crust); border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; }
-.card .ph { position: relative; aspect-ratio: 1; background: var(--crust); }
-.card .ph img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.card .tag { position: absolute; left: 8px; top: 8px; background: var(--char); color: #fff; font: 500 .62rem/1 var(--mono); letter-spacing: .06em; text-transform: uppercase; padding: 5px 7px; border-radius: 5px; }
-.card .cb { padding: 11px 12px 12px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
-.card h3 { font: 700 .98rem/1.2 var(--display); letter-spacing: -0.02em; }
-.card .row { display: flex; align-items: center; justify-content: space-between; margin-top: auto; gap: 8px; }
-.price { font: 500 .82rem var(--mono); }
-.add { min-height: 36px; padding: 0 14px; border-radius: 999px; border: 1.5px solid var(--char); background: transparent; font-weight: 600; font-size: .84rem; cursor: pointer; }
-.add:hover { background: var(--char); color: #fff; }
+.best-head a { font-size: .9rem; font-weight: 600; color: var(--ember-deep); }
+.best-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-auto-rows: 224px; gap: 14px; }
+.card { position: relative; border-radius: 20px; overflow: hidden; background: var(--crust); isolation: isolate; }
+.card:first-child { grid-column: span 2; grid-row: span 2; }
+.card .ph { position: absolute; inset: 0; }
+.card .ph img { width: 100%; height: 100%; object-fit: cover; transition: transform 320ms var(--ease-out); }
+.card::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(26,26,24,.82) 0%, rgba(26,26,24,.35) 38%, transparent 62%); z-index: 1; pointer-events: none; }
+.card .tag { position: absolute; left: 12px; top: 14px; z-index: 2; background: var(--sun); color: var(--char); border: 2px solid var(--char); border-radius: 999px; font: 700 .72rem/1 var(--display); padding: 6px 11px; transform: rotate(-4deg); box-shadow: 2px 2px 0 var(--char); }
+.card:nth-child(even) .tag { transform: rotate(3deg); }
+.card .cb { position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; padding: 14px 14px 14px 16px; display: flex; align-items: flex-end; justify-content: space-between; gap: 10px; color: #fff; }
+.card h3 { font: 700 1.05rem/1.12 var(--display); letter-spacing: -0.02em; }
+.card:first-child h3 { font-size: clamp(1.4rem, 2.6vw, 2rem); letter-spacing: -0.03em; }
+.card .price { display: block; margin-top: 5px; font: 500 .78rem var(--mono); color: #FFE9B0; letter-spacing: .02em; }
+.plus { flex: none; width: 48px; height: 48px; border-radius: 50%; border: 2px solid var(--char); background: var(--sun); color: var(--char); display: grid; place-items: center; cursor: pointer; }
+.plus svg { width: 22px; height: 22px; }
+
+/* ── FLOATING CART BAR (phones) ── */
+.cartbar { position: fixed; left: 12px; right: 12px; bottom: 74px; z-index: 40; display: none; transform: translateY(calc(100% + 96px)); visibility: hidden; transition: transform 240ms var(--ease-out), visibility 0s linear 240ms; }
+.cartbar.show { transform: none; visibility: visible; transition: transform 340ms var(--ease-drawer), visibility 0s; }
+.cartbar-btn { width: 100%; min-height: 56px; display: flex; align-items: center; gap: 12px; padding: 0 18px 0 12px; border-radius: 18px; border: 2px solid var(--char); background: var(--ember-deep); color: #fff; font-weight: 600; cursor: pointer; box-shadow: 0 8px 24px rgba(26,26,24,.3); }
+.cb-count { display: grid; place-items: center; min-width: 32px; height: 32px; border-radius: 10px; background: var(--sun); color: var(--char); font: 700 .95rem var(--mono); }
+.cb-total { margin-left: auto; font: 500 1rem var(--mono); }
+
+/* ── SIZE SHEET ── */
+.scrim { position: fixed; inset: 0; background: rgba(26,26,24,.5); opacity: 0; visibility: hidden; z-index: 60; transition: opacity 200ms var(--ease-out), visibility 0s linear 200ms; }
+.scrim.open { opacity: 1; visibility: visible; transition-delay: 0s; }
+.sheet { position: fixed; z-index: 61; left: 0; right: 0; bottom: 0; background: var(--paper); border-radius: 22px 22px 0 0; padding: 12px 18px 22px; transform: translateY(100%); visibility: hidden; transition: transform 220ms var(--ease-out), visibility 0s linear 220ms; max-height: 90vh; overflow: auto; }
+.sheet.open { transform: none; visibility: visible; transition: transform 340ms var(--ease-drawer), visibility 0s; }
+.grab { width: 40px; height: 4px; border-radius: 99px; background: var(--crust); margin: 0 auto 14px; }
+.sheet-head { display: flex; gap: 14px; align-items: center; margin-bottom: 14px; }
+.sheet-head img { width: 64px; height: 64px; border-radius: 14px; object-fit: cover; }
+.sheet-head h2 { font-size: 1.25rem; }
+.sheet-head .vegmark { display: inline-grid; margin-right: 6px; vertical-align: -2px; }
+.opts { display: grid; gap: 8px; margin-bottom: 14px; }
+.opt { display: flex; align-items: center; justify-content: space-between; min-height: 52px; padding: 0 16px; border-radius: 14px; border: 1.5px solid var(--crust); background: transparent; cursor: pointer; text-align: left; font-weight: 500; }
+.opt .p { font: 500 .95rem var(--mono); }
+.opt[aria-checked="true"] { border-color: var(--char); background: var(--sun-soft); box-shadow: 2px 2px 0 var(--char); }
+.sheet .btn.fill { width: 100%; min-height: 52px; font-size: 1rem; }
+.sheet-note { margin-top: 10px; font-size: .8rem; color: var(--ash); text-align: center; }
+@media (min-width: 761px) {
+  .sheet { left: 50%; right: auto; bottom: auto; top: 50%; width: 420px; border-radius: 20px; padding-top: 22px; transform: translate(-50%, -48%) scale(.96); opacity: 0; transition: transform 200ms var(--ease-out), opacity 200ms var(--ease-out), visibility 0s linear 200ms; }
+  .sheet.open { transform: translate(-50%, -50%); opacity: 1; transition: transform 240ms var(--ease-out), opacity 200ms var(--ease-out), visibility 0s; }
+  .grab { display: none; }
+}
+
+/* flying thumbnail + toast */
+.fly { position: fixed; z-index: 80; border-radius: 14px; object-fit: cover; pointer-events: none; box-shadow: 0 6px 18px rgba(26,26,24,.35); }
+.toast { position: fixed; left: 50%; bottom: 88px; z-index: 70; transform: translate(-50%, 8px); opacity: 0; background: var(--char); color: #fff; padding: 11px 18px; border-radius: 999px; font-size: .88rem; font-weight: 500; white-space: nowrap; pointer-events: none; transition: opacity 200ms var(--ease-out), transform 200ms var(--ease-out); max-width: calc(100vw - 24px); overflow: hidden; text-overflow: ellipsis; }
+.toast.show { opacity: 1; transform: translate(-50%, 0); }
 
 /* ── MOCKUP CONTROLS ── */
-.mockbar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 50; background: var(--char); color: #fff; padding: 10px 16px; display: flex; align-items: center; gap: 12px; }
+.mockbar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 90; background: var(--char); color: #fff; padding: 10px 16px; display: flex; align-items: center; gap: 12px; }
 .mockbar .lab { font: 500 .68rem/1.2 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: #f0a27a; flex: none; }
 .mockbar .scen { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; }
 .mockbar .scen::-webkit-scrollbar { display: none; }
@@ -188,11 +262,23 @@ h2 { font: 700 1.15rem/1.2 var(--display); letter-spacing: -0.02em; }
 .mockbar button[aria-pressed="true"] { background: #fff; color: var(--char); border-color: #fff; }
 .mockbar :focus-visible { outline-color: #fff; }
 
+/* hover only where hover exists */
+@media (hover: hover) and (pointer: fine) {
+  .tile:hover { border-color: var(--char); }
+  .tile:hover img { transform: scale(1.07); }
+  .card:hover .ph img { transform: scale(1.045); }
+  .chip:not(.on):hover { border-color: var(--char); }
+  .btn.fill:hover { background: #8d3a00; }
+  .opt:hover { border-color: var(--char); }
+  .plus:hover { background: #fff; }
+}
+
 /* ── RESPONSIVE ── */
 @media (max-width: 1020px) {
   .live-grid { grid-template-columns: 1fr; }
-  .best-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .tiles { grid-template-columns: repeat(3, 1fr); }
+  .best-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: 200px; }
+  .card:first-child { grid-column: span 2; grid-row: span 2; }
 }
 @media (max-width: 760px) {
   :root { --hdr: 100px; }
@@ -204,14 +290,14 @@ h2 { font: 700 1.15rem/1.2 var(--display); letter-spacing: -0.02em; }
   .brand img { width: 34px; height: 34px; }
   .actions { margin-left: auto; }
   .btn .lbl { display: none; }
-  .btn.wa, .btn.call { width: 42px; padding: 0; }
+  .btn.wa, .btn.call { width: 44px; padding: 0; }
   .btn.off { display: none; }
-  .live { padding-top: 22px; }
-  h1 { margin-bottom: 18px; }
+  .live { padding-top: 22px; padding-bottom: 26px; }
+  .stickers { margin-bottom: 20px; }
   .ticket.primary { --stub: 0px; grid-template-columns: 1fr; box-shadow: 5px 5px 0 var(--ember); }
   .ticket.closedcard { box-shadow: 5px 5px 0 var(--brick); }
   .ticket.primary::before, .ticket.primary::after { display: none; }
-  .ticket.primary .stub { flex-direction: row; align-items: baseline; justify-content: space-between; border-right: 0; border-bottom: 2px dashed var(--crust); padding: 10px 18px; }
+  .ticket.primary .stub { flex-direction: row; align-items: baseline; justify-content: space-between; border-right: 0; border-bottom: 2px dashed rgba(26,26,24,.3); padding: 10px 18px; }
   .ticket.closedcard .stub { border-bottom-color: #4a4640; }
   .ticket.primary .stub b { font-size: 1.05rem; }
   .ticket.primary .tbody { padding: 18px 18px 20px; }
@@ -221,7 +307,9 @@ h2 { font: 700 1.15rem/1.2 var(--display); letter-spacing: -0.02em; }
   .more::-webkit-scrollbar { display: none; }
   .more .ticket { flex: 0 0 74%; scroll-snap-align: start; }
   .tiles { grid-template-columns: 1fr 1fr; }
-  .clock { padding: 16px 14px 10px; margin-top: 22px; }
+  .clock { margin-top: 22px; }
+  .clock > summary { padding: 14px; }
+  .clock-body { padding: 0 14px 10px; }
   .lanes { --label: 0px; }
   .lane { grid-template-columns: 1fr; padding-top: 8px; min-height: 0; }
   .lane.axis { display: none; }
@@ -233,12 +321,22 @@ h2 { font: 700 1.15rem/1.2 var(--display); letter-spacing: -0.02em; }
   .tools-in { flex-wrap: wrap; gap: 8px 10px; }
   .search { flex: 1 1 100%; }
   .veg { display: none; }
-  .best-grid { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; margin: 0 -16px; padding: 2px 16px 8px; scrollbar-width: none; }
+  .best-grid { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; margin: 0 -16px; padding: 2px 16px 8px; scrollbar-width: none; gap: 12px; }
   .best-grid::-webkit-scrollbar { display: none; }
-  .card { flex: 0 0 62%; scroll-snap-align: start; }
+  .card { flex: 0 0 72%; height: 320px; scroll-snap-align: start; }
+  .card:first-child { flex-basis: 82%; }
+  .cartbar { display: block; }
+  .toast { bottom: 140px; }
   .mockbar .lab { display: none; }
 }
-@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+@media (prefers-reduced-motion: reduce) {
+  .enter, .band, .prog-bar i, .pie { animation: fade 200ms ease both !important; animation-delay: 0ms !important; }
+  h1 .u path { animation: none; stroke-dashoffset: 0; }
+  .dot::after { display: none; }
+  .card:hover .ph img, .tile:hover img { transform: none; }
+  .chev, .cartbar, .cartbar.show, .sheet, .sheet.open { transition-duration: 1ms; }
+  .btn:active, .tile:active, .add:active, .chip:active, .plus:active, .cartbar-btn:active, .opt:active { transform: none; }
+}
 </style>
 </head>
 <body>
@@ -253,76 +351,96 @@ h2 { font: 700 1.15rem/1.2 var(--display); letter-spacing: -0.02em; }
 </header>
 
 <main id="top">
-  <section class="wrap live" aria-labelledby="h1">
-    <p class="eyebrow" id="clockLine"></p>
-    <h1 id="h1">What’s on at <em>The Crosta</em></h1>
-
-    <div class="live-grid">
-      <div class="offers">
-        <div id="primary"></div>
-        <div class="more" id="more"></div>
-        <p class="rule-note">One offer per order — we apply the best one that fits your cart.</p>
+  <div class="live-band">
+    <section class="wrap live" aria-labelledby="h1">
+      <p class="eyebrow" id="clockLine"></p>
+      <h1 id="h1">Pure veg <span class="u">pizza<svg viewBox="0 0 200 20" preserveAspectRatio="none" aria-hidden="true"><path d="M3 12 C 30 2, 50 20, 80 10 S 130 2, 160 11 S 190 14, 197 6"/></svg></span> in Patiala</h1>
+      <p class="lede" id="lede"></p>
+      <div class="stickers" aria-label="Highlights">
+        <span class="sticker"><span class="vegmark" aria-hidden="true"></span>100% pure veg</span>
+        <span class="sticker">Pizzas from ₹89</span>
+        <span class="sticker">Fresh dough daily</span>
       </div>
 
-      <aside class="quick" aria-label="Order quickly">
-        <div class="reorder">
-          <p class="eyebrow">Welcome back · last order</p>
-          <strong>Farm House 10″ + Coke 250 ml</strong>
-          <div class="row"><small>Same items, same address</small><button class="btn" type="button">Reorder · ₹249</button></div>
+      <div class="live-grid">
+        <div class="offers">
+          <div id="primary"></div>
+          <div class="more" id="more"></div>
+          <p class="rule-note">One offer per order — we apply the best one that fits your cart.</p>
         </div>
-        <div>
-          <h2>Order in one tap</h2>
-          <div class="tiles">
-            <a class="tile" href="#"><img src="../images/menu-farm-house-pizza.webp" alt=""><div><b>Pizzas</b><span>from ₹89</span></div></a>
-            <a class="tile" href="#"><img src="../images/menu-veg-grilled-burger.webp" alt=""><div><b>Burgers &amp; wraps</b><span>from ₹49</span></div></a>
-            <a class="tile" href="#"><img src="../images/menu-salted-fries.webp" alt=""><div><b>Fries</b><span>from ₹69</span></div></a>
-            <a class="tile" href="#"><img src="../images/menu-napoli-pasta.webp" alt=""><div><b>Pasta</b><span>from ₹129</span></div></a>
-            <a class="tile" href="#"><img src="../images/menu-strawberry-shake.webp" alt=""><div><b>Shakes</b><span>from ₹89</span></div></a>
-            <a class="tile" href="#"><img src="../images/menu-masala-chai.webp" alt=""><div><b>Chai</b><span>₹20</span></div></a>
+
+        <aside class="quick" aria-label="Order quickly">
+          <div class="reorder enter" style="--i:2">
+            <p class="eyebrow">Back for more? · your last order</p>
+            <strong>Farm House 10″ + Coke 250 ml</strong>
+            <div class="row"><small>Same items, same address</small><button class="btn" type="button" id="reorderBtn">Reorder · ₹249</button></div>
           </div>
-        </div>
-      </aside>
-    </div>
-
-    <section class="clock" aria-labelledby="clockH">
-      <div class="clock-head">
-        <h2 id="clockH">Today’s offers by the clock</h2>
-        <span class="rule-note" id="clockNote"></span>
+          <div>
+            <h2>Hungry? Start here</h2>
+            <div class="tiles">
+              <a class="tile enter" style="--i:3" href="#"><span class="th"><img src="../images/menu-farm-house-pizza.webp" alt=""></span><div><b>Pizzas</b><span>from ₹89</span></div></a>
+              <a class="tile enter" style="--i:4" href="#"><span class="th"><img src="../images/menu-veg-grilled-burger.webp" alt=""></span><div><b>Burgers &amp; wraps</b><span>from ₹49</span></div></a>
+              <a class="tile enter" style="--i:5" href="#"><span class="th"><img src="../images/menu-salted-fries.webp" alt=""></span><div><b>Fries</b><span>from ₹69</span></div></a>
+              <a class="tile enter" style="--i:6" href="#"><span class="th"><img src="../images/menu-napoli-pasta.webp" alt=""></span><div><b>Pasta</b><span>from ₹129</span></div></a>
+              <a class="tile enter" style="--i:7" href="#"><span class="th"><img src="../images/menu-strawberry-shake.webp" alt=""></span><div><b>Shakes</b><span>from ₹99</span></div></a>
+              <a class="tile enter" style="--i:8" href="#"><span class="th"><img src="../images/menu-masala-chai.webp" alt=""></span><div><b>Chai</b><span>₹20</span></div></a>
+            </div>
+          </div>
+        </aside>
       </div>
-      <div class="lanes" id="lanes"></div>
+
+      <details class="clock" id="clock">
+        <summary>
+          <h2>Offers by the clock</h2>
+          <span class="sum-r"><span class="rule-note" id="clockNote"></span>
+            <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span>
+        </summary>
+        <div class="clock-body"><div class="lanes" id="lanes"></div></div>
+      </details>
     </section>
-  </section>
+  </div>
 
   <div class="tools">
     <div class="wrap tools-in">
-      <label class="search"><span class="sr" style="position:absolute;left:-9999px">Search the menu</span>
+      <label class="search"><span class="sr">Search the menu</span>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-        <input type="search" placeholder="Search pizza, burger, shake…">
+        <input type="search" placeholder="Craving something? Try “paneer”">
       </label>
-      <div class="chips" role="tablist" aria-label="Menu categories">
-        <button class="chip on" type="button">All</button>
-        <button class="chip" type="button">Pizzas</button>
-        <button class="chip" type="button">Burgers, wraps &amp; sandwiches</button>
-        <button class="chip" type="button">Pasta</button>
-        <button class="chip" type="button">Garlic bread</button>
-        <button class="chip" type="button">Quick bites</button>
-        <button class="chip" type="button">Drinks</button>
+      <div class="chips" id="chips" role="group" aria-label="Menu categories">
+        <button class="chip on" type="button" aria-pressed="true">All</button>
+        <button class="chip" type="button" aria-pressed="false">Pizzas</button>
+        <button class="chip" type="button" aria-pressed="false">Burgers, wraps &amp; sandwiches</button>
+        <button class="chip" type="button" aria-pressed="false">Pasta</button>
+        <button class="chip" type="button" aria-pressed="false">Garlic bread</button>
+        <button class="chip" type="button" aria-pressed="false">Quick bites</button>
+        <button class="chip" type="button" aria-pressed="false">Drinks</button>
       </div>
-      <span class="veg"><span class="vegmark" aria-hidden="true"></span>Pure veg</span>
+      <span class="veg"><span class="vegmark" aria-hidden="true"></span>Pure veg kitchen</span>
     </div>
   </div>
 
   <section class="wrap best" aria-labelledby="bestH">
-    <div class="best-head"><h2 id="bestH">Bestsellers</h2><a href="#">Full menu →</a></div>
-    <div class="best-grid">
-      <article class="card"><div class="ph"><img src="../images/menu-farm-house-pizza.webp" alt="Farm House pizza" loading="lazy"><span class="tag">Most popular</span></div><div class="cb"><h3>Farm House Pizza</h3><div class="row"><span class="price">from ₹139</span><button class="add" type="button">Add</button></div></div></article>
-      <article class="card"><div class="ph"><img src="../images/menu-garlic-butter-pizza.webp" alt="Garlic butter pizza" loading="lazy"><span class="tag">Best seller</span></div><div class="cb"><h3>Crosta Garlic Butter Pizza</h3><div class="row"><span class="price">from ₹249</span><button class="add" type="button">Add</button></div></div></article>
-      <article class="card"><div class="ph"><img src="../images/menu-the-crosta-burger.webp" alt="The Crosta burger" loading="lazy"><span class="tag">Most popular</span></div><div class="cb"><h3>The Crosta Burger</h3><div class="row"><span class="price">from ₹139</span><button class="add" type="button">Add</button></div></div></article>
-      <article class="card"><div class="ph"><img src="../images/menu-pizza-burger.webp" alt="Pizza burger" loading="lazy"><span class="tag">Chef’s pick</span></div><div class="cb"><h3>Pizza Burger</h3><div class="row"><span class="price">from ₹129</span><button class="add" type="button">Add</button></div></div></article>
-      <article class="card"><div class="ph"><img src="../images/menu-oreo-shake.webp" alt="Oreo crumble shake" loading="lazy"><span class="tag">Fan favourite</span></div><div class="cb"><h3>Oreo Crumble Shake</h3><div class="row"><span class="price">₹119</span><button class="add" type="button">Add</button></div></div></article>
-    </div>
+    <div class="best-head"><h2 id="bestH">Everyone’s ordering these</h2><a href="#">Full menu →</a></div>
+    <div class="best-grid" id="bestGrid"></div>
   </section>
 </main>
+
+<!-- phones: floating cart bar -->
+<div class="cartbar" id="cartbar">
+  <button class="cartbar-btn" type="button" id="cartbarBtn"><span class="cb-count cart-count">0</span><span><span class="cart-word">items</span> in your cart</span><span class="cb-total cart-total">₹0</span><span aria-hidden="true">→</span></button>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<!-- size sheet (bottom sheet on phones, dialog on desktop) -->
+<div class="scrim" id="scrim"></div>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle" tabindex="-1">
+  <div class="grab" aria-hidden="true"></div>
+  <div class="sheet-head"><img id="sheetImg" src="" alt=""><div><h2 id="sheetTitle"></h2><span class="eyebrow"><span class="vegmark" aria-hidden="true"></span>Pure veg</span></div></div>
+  <div class="opts" id="sheetOpts" role="radiogroup" aria-label="Choose a size"></div>
+  <button class="btn fill" type="button" id="sheetAdd">Add to cart</button>
+  <p class="sheet-note" id="sheetNote">Want extra cheese or toppings? Add them in your cart.</p>
+</div>
 
 <div class="mockbar" role="group" aria-label="Mockup controls">
   <span class="lab">Mockup · preview as</span>
@@ -334,11 +452,12 @@ h2 { font: 700 1.15rem/1.2 var(--display); letter-spacing: -0.02em; }
 const HOURS = { 0:[10,22], 1:[11,22], 2:[11,22], 3:[11,22], 4:[11,22], 5:[11,23], 6:[10,23] };
 const DAYS = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
 const D3 = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const OFFERS = [
-  { id:'weekend', name:'Weekend special', head:'Buy 2 Large, get 1 Medium free', desc:'Same flavour. Or buy 2 Medium, get 1 Small free.', days:[0,6], from:null, to:null, stub:'Sat · Sun', time:'All day', lane:'Weekend special', laneSub:'Sat & Sun', band:'Buy 2 get 1 free', cta:'Order pizzas', pie:'../images/menu-garlic-butter-pizza.webp' },
-  { id:'lunch',   name:'Weekday lunch',   head:'20% off every pizza', desc:'Monday to Wednesday, 11 AM to 3 PM.', days:[1,2,3], from:11, to:15, stub:'Mon–Wed', time:'11A–3P', lane:'Weekday lunch', laneSub:'Mon–Wed', band:'20% off pizzas', cta:'Order pizzas', pie:'../images/menu-farm-house-pizza.webp' },
-  { id:'boost',   name:'The Crosta Boost', head:'Make it a meal for ₹30, not ₹60', desc:'Fries and a 250 ml cold drink with any burger, wrap or sandwich.', days:[0,1,2,3,4,5,6], from:16, to:18, stub:'Daily', time:'4–6P', lane:'The Crosta Boost', laneSub:'Daily', band:'Meal for ₹30', cta:'Order burgers', pie:'../images/menu-the-crosta-burger.webp' },
-  { id:'group',   name:'Group perk',      head:'4+ Medium or Large pizzas? Free meal bundle', desc:'Garlic bread, fries and a 2 L cold drink.', days:[0,1,2,3,4,5,6], always:true, stub:'Always', time:'On', lane:'Group perk', laneSub:'Every day', band:'Free meal bundle', cta:'Order pizzas', pie:'../images/menu-garlic-butter-pizza.webp' }
+  { id:'weekend', name:'Weekend special', head:'Buy 2 Large, get 1 Medium free', desc:'Same flavour. Or buy 2 Medium, get 1 Small free.', days:[0,6], from:null, to:null, stub:'Sat · Sun', time:'All day', lane:'Weekend special', laneSub:'Sat & Sun', band:'Buy 2 get 1 free', cta:'Order pizzas', pie:'../images/hero-garlic-butter-pizza.webp' },
+  { id:'lunch',   name:'Weekday lunch',   head:'20% off every pizza', desc:'Monday to Wednesday, 11 AM to 3 PM.', days:[1,2,3], from:11, to:15, stub:'Mon–Wed', time:'11A–3P', lane:'Weekday lunch', laneSub:'Mon–Wed', band:'20% off pizzas', cta:'Order pizzas', pie:'../images/hero-farm-house-pizza.webp' },
+  { id:'boost',   name:'The Crosta Boost', head:'Make it a meal for ₹30, not ₹60', desc:'Fries and a 250 ml cold drink with any burger, wrap or sandwich.', days:[0,1,2,3,4,5,6], from:16, to:18, stub:'Daily', time:'4–6P', lane:'The Crosta Boost', laneSub:'Daily', band:'Meal for ₹30', cta:'Order burgers', pie:'../images/hero-the-crosta-burger.webp' },
+  { id:'group',   name:'Group perk',      head:'4+ Medium or Large pizzas? Free meal bundle', desc:'Garlic bread, fries and a 2 L cold drink.', days:[0,1,2,3,4,5,6], always:true, stub:'Always', time:'On', lane:'Group perk', laneSub:'Every day', band:'Free meal bundle', cta:'Order pizzas', pie:'../images/hero-garlic-butter-pizza.webp' }
 ];
 const SCEN = [
   { label:'Right now', real:true },
@@ -349,9 +468,17 @@ const SCEN = [
   { label:'Tue 10:00 AM · closed', d:2, h:10, m:0 },
   { label:'Fri 11:30 PM · closed', d:5, h:23, m:30 }
 ];
+const BEST = [
+  { id:'farm',   name:'Farm House Pizza',           tag:'Most popular',  img:'../images/hero-farm-house-pizza.webp',   opts:[['Regular 8″',139],['Medium 10″',229],['Large 12″',369]], def:1 },
+  { id:'garlic', name:'Crosta Garlic Butter Pizza', tag:'Best seller',   img:'../images/hero-garlic-butter-pizza.webp', opts:[['Regular 8″',249],['Medium 10″',369],['Large 12″',519]], def:1 },
+  { id:'crosta', name:'The Crosta Burger',          tag:'Most popular',  img:'../images/hero-the-crosta-burger.webp',   opts:[['Single',139],['Meal',199]], def:0, note:'Meal adds crispy fries and a 250 ml cold drink.' },
+  { id:'pburger',name:'Pizza Burger',               tag:'Chef’s pick',   img:'../images/hero-pizza-burger.webp',        opts:[['Single',129],['Meal',189]], def:0, note:'Meal adds crispy fries and a 250 ml cold drink.' },
+  { id:'oreo',   name:'Oreo Crumble Shake',         tag:'Fan favourite', img:'../images/hero-oreo-shake.webp',          opts:[['',119]], def:0 }
+];
 
 const fmt = (h, m = 0) => { const hh = Math.floor(h) % 24; const mm = m || Math.round((h - Math.floor(h)) * 60); return ((hh + 11) % 12 + 1) + (mm ? ':' + String(mm).padStart(2, '0') : '') + ' ' + (hh >= 12 ? 'PM' : 'AM'); };
-const dur = h => { const mins = Math.round(h * 60); const hh = Math.floor(mins / 60), mm = mins % 60; return (hh ? hh + 'h ' : '') + (mm || !hh ? mm + 'm' : '').trim(); };
+const dur = h => { const mins = Math.round(h * 60); const hh = Math.floor(mins / 60), mm = mins % 60; return ((hh ? hh + 'h ' : '') + (mm || !hh ? mm + 'm' : '')).trim(); };
+const rupee = n => '₹' + n.toLocaleString('en-IN');
 const realNow = () => { const p = {}; new Intl.DateTimeFormat('en-US', { timeZone:'Asia/Kolkata', weekday:'short', hour:'2-digit', minute:'2-digit', hourCycle:'h23' }).formatToParts(new Date()).forEach(x => p[x.type] = x.value); return { d: D3.indexOf(p.weekday), h: +p.hour, m: +p.minute }; };
 
 function win(o, d) {
@@ -377,54 +504,149 @@ function nextOpen(now) {
 const ICON = {
   cart:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h2l2.4 10.2a1 1 0 0 0 1 .8h8.8a1 1 0 0 0 1-.76L20 8H6.2"/><circle cx="9.5" cy="19.5" r="1.3"/><circle cx="17" cy="19.5" r="1.3"/></svg>',
   wa:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.26-.46-2.4-1.48-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.62-.92-2.2-.24-.58-.49-.5-.67-.5h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.88 1.21 3.07.15.2 2.1 3.2 5.08 4.49.7.3 1.26.49 1.7.62.72.23 1.36.2 1.87.12.57-.08 1.76-.72 2-1.41.25-.7.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35M12 21.8A9.9 9.9 0 0 1 7 20.4l-.36-.21-3.74.98 1-3.65-.24-.37A9.86 9.86 0 0 1 2.1 12c0-5.45 4.44-9.9 9.9-9.9 2.64 0 5.12 1.03 6.99 2.9a9.83 9.83 0 0 1 2.9 7c0 5.45-4.45 9.9-9.9 9.9M20.5 3.5A11.8 11.8 0 0 0 12 0C5.4 0 .06 5.34.06 11.9c0 2.1.55 4.14 1.59 5.95L0 24l6.3-1.65A11.9 11.9 0 0 0 12 23.8c6.55 0 11.9-5.34 11.9-11.9 0-3.18-1.24-6.17-3.4-8.4"/></svg>',
-  call:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>'
+  call:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>',
+  plus:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>'
 };
 
+/* ───────────── cart (mockup state only) ───────────── */
+let cart = [];
+const cartCount = () => cart.reduce((s, i) => s + i.qty, 0);
+const cartTotal = () => cart.reduce((s, i) => s + i.qty * i.price, 0);
+function bump(el) { if (!el || reduce) return; el.animate([{ transform:'scale(1)' }, { transform:'scale(1.3)' }, { transform:'scale(1)' }], { duration:260, easing:'cubic-bezier(0.23, 1, 0.32, 1)' }); }
+function cartUI(doBump) {
+  const n = cartCount(), total = cartTotal();
+  document.querySelectorAll('.cart-count').forEach(e => { e.textContent = n; if (doBump) bump(e); });
+  document.querySelectorAll('.cart-total').forEach(e => e.textContent = rupee(total));
+  document.querySelectorAll('.cart-word').forEach(e => e.textContent = n === 1 ? 'item' : 'items');
+  document.querySelectorAll('.cart').forEach(e => e.setAttribute('aria-label', `Cart, ${n} item${n === 1 ? '' : 's'}, ${rupee(total)}`));
+  document.getElementById('cartbar').classList.toggle('show', n > 0);
+}
+let toastTimer;
+function toast(msg) {
+  const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show');
+  clearTimeout(toastTimer); toastTimer = setTimeout(() => t.classList.remove('show'), 2000);
+}
+function flyTo(fromEl, src) {
+  const target = document.querySelector('#actions .cart');
+  if (reduce || !fromEl || !target) return Promise.resolve();
+  const a = fromEl.getBoundingClientRect(), b = target.getBoundingClientRect();
+  const el = document.createElement('img'); el.src = src; el.className = 'fly'; el.alt = '';
+  Object.assign(el.style, { left:a.left + 'px', top:a.top + 'px', width:a.width + 'px', height:a.height + 'px' });
+  document.body.appendChild(el);
+  const dx = b.left + b.width / 2 - (a.left + a.width / 2), dy = b.top + b.height / 2 - (a.top + a.height / 2), s = 36 / Math.max(a.width, a.height);
+  return el.animate([{ transform:'translate(0,0) scale(1)', opacity:1 }, { transform:`translate(${dx}px, ${dy}px) scale(${s})`, opacity:.85 }],
+    { duration:460, easing:'cubic-bezier(0.77, 0, 0.175, 1)', fill:'forwards' }).finished.then(() => el.remove());
+}
+function addToCart(item, label, price, fromEl, img) {
+  const key = item + '|' + label, found = cart.find(i => i.key === key);
+  found ? found.qty++ : cart.push({ key, name: item + (label ? ' · ' + label : ''), price, qty: 1 });
+  toast(`Added ${item}${label ? ' · ' + label : ''} — ${rupee(price)}`);
+  // count lands when the thumbnail arrives; the timeout guarantees it even if the animation is skipped
+  Promise.race([flyTo(fromEl, img), new Promise(r => setTimeout(r, 700))]).then(() => cartUI(!reduce));
+}
+
+/* ───────────── size sheet ───────────── */
+const sheet = document.getElementById('sheet'), scrim = document.getElementById('scrim');
+let sheetItem = null, sheetPick = 0, sheetTrigger = null;
+function renderSheet() {
+  const it = sheetItem;
+  document.getElementById('sheetOpts').innerHTML = it.opts.map((o, i) => `<button class="opt" type="button" role="radio" aria-checked="${i === sheetPick}" data-i="${i}"><span>${o[0]}</span><span class="p">${rupee(o[1])}</span></button>`).join('');
+  document.getElementById('sheetAdd').textContent = `Add to cart · ${rupee(it.opts[sheetPick][1])}`;
+}
+function openSheet(item, trigger) {
+  sheetItem = item; sheetPick = item.def; sheetTrigger = trigger;
+  document.getElementById('sheetTitle').textContent = item.name;
+  document.getElementById('sheetImg').src = item.img;
+  document.getElementById('sheetNote').textContent = item.note || 'Want extra cheese or toppings? Add them in your cart.';
+  renderSheet();
+  scrim.classList.add('open'); sheet.classList.add('open'); document.body.classList.add('locked');
+  sheet.focus({ preventScroll: true });
+}
+function closeSheet() {
+  scrim.classList.remove('open'); sheet.classList.remove('open'); document.body.classList.remove('locked');
+  if (sheetTrigger) sheetTrigger.focus({ preventScroll: true });
+}
+document.getElementById('sheetOpts').addEventListener('click', e => { const b = e.target.closest('.opt'); if (!b) return; sheetPick = +b.dataset.i; renderSheet(); document.querySelector('.opt[aria-checked="true"]').focus(); });
+document.getElementById('sheetAdd').addEventListener('click', () => {
+  const [label, price] = sheetItem.opts[sheetPick], from = document.getElementById('sheetImg');
+  addToCart(sheetItem.name, label, price, from, sheetItem.img); closeSheet();
+});
+scrim.addEventListener('click', closeSheet);
+document.addEventListener('keydown', e => {
+  if (!sheet.classList.contains('open')) return;
+  if (e.key === 'Escape') closeSheet();
+  if (e.key === 'Tab') {
+    const f = [...sheet.querySelectorAll('button')]; const first = f[0], last = f[f.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  }
+});
+
+/* ───────────── bestsellers ───────────── */
+document.getElementById('bestGrid').innerHTML = BEST.map(b => {
+  const from = Math.min(...b.opts.map(o => o[1])), multi = b.opts.length > 1;
+  return `<article class="card"><div class="ph"><img src="${b.img}" alt="${b.name}" loading="lazy"></div><span class="tag">${b.tag}</span><div class="cb"><div><h3>${b.name}</h3><span class="price">${multi ? 'from ' : ''}${rupee(from)}</span></div><button class="plus" type="button" data-id="${b.id}" aria-label="${multi ? 'Choose size and add' : 'Add'} ${b.name}">${ICON.plus}</button></div></article>`;
+}).join('');
+document.getElementById('bestGrid').addEventListener('click', e => {
+  const btn = e.target.closest('.plus'); if (!btn) return;
+  const item = BEST.find(x => x.id === btn.dataset.id);
+  if (item.opts.length > 1) openSheet(item, btn);
+  else addToCart(item.name, item.opts[0][0], item.opts[0][1], btn.closest('.card').querySelector('img'), item.img);
+});
+document.getElementById('reorderBtn').addEventListener('click', e => {
+  addToCart('Farm House Pizza', 'Medium 10″', 229, e.currentTarget, '../images/hero-farm-house-pizza.webp');
+  setTimeout(() => addToCart('Coke', '250 ml', 20, document.getElementById('reorderBtn'), '../images/menu-coke.webp'), 180);
+});
+document.querySelectorAll('#actions, #cartbarBtn').forEach(el => el.addEventListener('click', e => { if (e.target.closest('.cart, #cartbarBtn')) toast('Cart drawer opens here (mockup)'); }));
+document.getElementById('chips').addEventListener('click', e => {
+  const c = e.target.closest('.chip'); if (!c) return;
+  document.querySelectorAll('.chip').forEach(x => { x.classList.toggle('on', x === c); x.setAttribute('aria-pressed', x === c); });
+  c.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', inline: 'center', block: 'nearest' });
+});
+
+/* ───────────── the page, driven by the day and time ───────────── */
 function render(now) {
   const t = now.h + now.m / 60, [open, close] = HOURS[now.d], isOpen = t >= open && t < close;
   const states = OFFERS.map(o => ({ o, s: stateOf(o, now) }));
   document.body.classList.toggle('is-closed', !isOpen);
 
-  // header status + actions
   const no = nextOpen(now);
   const statusHtml = isOpen
     ? `<span class="dot"></span><span>Open now · closes ${fmt(close)} · ready in about 30 min</span>`
     : `<span class="dot"></span><span>Closed · opens ${no.label === 'today' ? 'today' : DAYS[no.d]} at ${fmt(no.at)}</span>`;
-  document.getElementById('statusTop').innerHTML = statusHtml;
-  document.getElementById('statusTop').className = 'status' + (isOpen ? '' : ' is-closed');
+  const st = document.getElementById('statusTop'); st.innerHTML = statusHtml; st.className = 'status' + (isOpen ? '' : ' is-closed');
   const sr = document.getElementById('statusRow'); sr.innerHTML = statusHtml; sr.className = 'status-row' + (isOpen ? '' : ' is-closed');
   document.getElementById('actions').innerHTML =
     `<a class="btn call" href="#" aria-label="Call the shop">${ICON.call}<span class="lbl">Call</span></a>` +
-    (isOpen ? `<a class="btn wa" href="#">${ICON.wa}<span class="lbl">Order on WhatsApp</span></a>`
+    (isOpen ? `<a class="btn wa" href="#" aria-label="Order on WhatsApp">${ICON.wa}<span class="lbl">Order on WhatsApp</span></a>`
             : `<span class="btn off" aria-disabled="true"><span class="lbl">Opens ${fmt(no.at)}</span></span>`) +
-    `<button class="btn cart" type="button" aria-label="Cart, 0 items">${ICON.cart}<i>0</i></button>`;
+    `<button class="btn cart" type="button">${ICON.cart}<i class="cart-count">0</i></button>`;
   document.getElementById('clockLine').textContent = `${DAYS[now.d]} · ${fmt(now.h, now.m)} · Patiala`;
+  document.getElementById('lede').textContent = isOpen ? 'Oven’s hot — here’s what’s on right now.' : 'Oven’s resting — have a look, then order when we open.';
 
-  // order offers: live first (display priority), then later today, then next
   const rank = { live:0, later:1, next:2 };
   const sorted = states.slice().sort((a, b) => (rank[a.s.k] - rank[b.s.k]) || (a.s.k === 'later' ? a.s.start - b.s.start : 0) || (a.s.k === 'next' ? (a.s.i - b.s.i) : 0));
   const metaOf = ({ o, s }) => {
-    if (s.k === 'live') return o.always ? 'Always on' : (o.from == null ? `Live · all day` : `Live · ends ${fmt(s.end)} · ${dur(s.left)} left`);
+    if (s.k === 'live') return o.always ? 'Always on' : (o.from == null ? 'Live · all day' : `Live · ends ${fmt(s.end)} · ${dur(s.left)} left`);
     if (s.k === 'later') return `Starts ${fmt(s.start)} · in ${dur(s.inH)}`;
     return `Next · ${D3[s.day]} ${fmt(s.start)}`;
   };
 
-  // primary
   let primary = '', rest = sorted;
   const lead = sorted[0];
   if (isOpen && lead.s.k === 'live') {
     const { o, s } = lead; rest = sorted.slice(1);
     const timed = !o.always && o.from != null;
     const prog = timed ? `<div class="prog"><div class="prog-bar"><i style="width:${Math.round((t - s.start) / (s.end - s.start) * 100)}%"></i></div><p>Ends ${fmt(s.end)} · ${dur(s.left)} left</p></div>` : `<div class="prog"><p>${o.always ? 'Always on' : 'Live all day'}</p></div>`;
-    primary = `<article class="ticket primary"><div class="stub"><span>${o.stub}</span><b>${o.time}</b></div><div class="tbody"><span class="stamp">Live now</span><p class="kicker">${o.name}</p><h2 class="thead">${o.head}</h2><p class="tdesc">${o.desc}</p>${prog}<a class="btn fill" href="#">${o.cta} →</a><img class="pie" src="${o.pie}" alt=""></div></article>`;
+    primary = `<article class="ticket primary live enter" style="--i:0"><div class="stub"><span>${o.stub}</span><b>${o.time}</b></div><div class="tbody"><span class="stamp">Live now</span><p class="kicker">${o.name}</p><h2 class="thead">${o.head}</h2><p class="tdesc">${o.desc}</p>${prog}<a class="btn fill" href="#">${o.cta} →</a><img class="pie" src="${o.pie}" alt=""></div></article>`;
   } else {
     const nx = sorted.find(x => x.s.k !== 'live') || lead;
-    primary = `<article class="ticket primary closedcard"><div class="stub"><span>Closed</span><b>${fmt(no.at)}</b></div><div class="tbody"><span class="stamp">Closed</span><p class="kicker">Back soon</p><h2 class="thead">We open ${no.label === 'today' ? 'today' : DAYS[no.d]} at ${fmt(no.at)}</h2><p class="tdesc">Browse the menu now and order when we’re open. Next offer: ${nx.o.name.toLowerCase()} — ${metaOf(nx).toLowerCase()}.</p></div></article>`;
+    primary = `<article class="ticket primary closedcard enter" style="--i:0"><div class="stub"><span>Closed</span><b>${fmt(no.at)}</b></div><div class="tbody"><span class="stamp">Closed</span><p class="kicker">Back soon</p><h2 class="thead">Back ${no.label === 'today' ? 'today' : DAYS[no.d]} at ${fmt(no.at).replace(' ', ' ')}</h2><p class="tdesc">Browse the menu now and order when we open. Next offer: ${nx.o.name} (${metaOf(nx).replace(/^./, c => c.toLowerCase())}).</p></div></article>`;
   }
   document.getElementById('primary').innerHTML = primary;
-  document.getElementById('more').innerHTML = rest.slice(0, 3).map(x => {
-    const dim = x.s.k === 'next' ? ' dim' : '';
-    return `<article class="ticket${dim}"><div class="stub"><span>${x.o.stub}</span><b>${x.o.time}</b></div><div class="tbody"><p class="kicker">${x.o.name}</p><h3 class="thead">${x.o.head}</h3><p class="tmeta ${x.s.k === 'live' ? 'live' : ''}">${metaOf(x)}</p></div></article>`;
+  document.getElementById('more').innerHTML = rest.slice(0, 3).map((x, i) => {
+    const cls = x.s.k === 'next' ? ' dim' : (x.s.k === 'live' ? ' live' : '');
+    return `<article class="ticket${cls} enter" style="--i:${i + 1}"><div class="stub"><span>${x.o.stub}</span><b>${x.o.time}</b></div><div class="tbody"><p class="kicker">${x.o.name}</p><h3 class="thead">${x.o.head}</h3><p class="tmeta ${x.s.k === 'live' ? 'live' : ''}">${metaOf(x)}</p></div></article>`;
   }).join('');
 
   // the clock
@@ -433,27 +655,36 @@ function render(now) {
   const shut = `<i class="shut" style="left:0;width:${pct(open)}%"></i><i class="shut" style="left:${pct(close)}%;right:0"></i>`;
   const needle = `<i class="needle" style="left:${pct(Math.min(Math.max(t, A), Z))}%"></i>`;
   let html = `<div class="lane axis"><div class="lane-label"></div><div class="track">${ticks}<span class="needle-tag" style="left:${pct(Math.min(Math.max(t, A + 0.8), Z - 0.8))}%">Now ${fmt(now.h, now.m)}</span></div></div>`;
-  html += states.slice().sort((a, b) => OFFERS.indexOf(a.o) - OFFERS.indexOf(b.o)).map(({ o, s }) => {
-    const w = win(o, now.d);
+  html += OFFERS.map((o, i) => {
+    const s = states.find(x => x.o === o).s, w = win(o, now.d);
     let band;
     if (!w) band = `<i class="band off">Not today · ${s.k === 'next' ? D3[s.day] + ' ' + fmt(s.start) : ''}</i>`;
     else {
       const cls = (isOpen && s.k === 'live') ? 'live' : (t < w[0] ? 'later' : 'done');
-      band = `<i class="band ${cls}" style="left:${pct(w[0])}%;width:${pct(w[1]) - pct(w[0])}%">${o.band}</i>`;
+      band = `<i class="band ${cls}" style="--i:${i};left:${pct(w[0])}%;width:${pct(w[1]) - pct(w[0])}%">${o.band}</i>`;
     }
     const range = w ? ` · ${fmt(w[0])}–${fmt(w[1])}` : '';
     return `<div class="lane"><div class="lane-label"><b>${o.lane}</b><span>${o.laneSub}${range}</span></div><div class="track">${shut}${band}${needle}</div></div>`;
   }).join('');
   document.getElementById('lanes').innerHTML = html;
-  document.getElementById('clockNote').textContent = isOpen ? `Open ${fmt(open)}–${fmt(close)} today` : `Closed now · hatched = shop closed`;
+  document.getElementById('clockNote').textContent = matchMedia('(max-width:760px)').matches ? (document.getElementById('clock').open ? '' : 'See today’s schedule') : (isOpen ? `Open ${fmt(open)}–${fmt(close)} today` : 'Closed now · hatched = shop closed');
+  cartUI(false);
 }
 
+// the schedule is open on desktop, collapsed on phones so the menu starts higher
+const clockEl = document.getElementById('clock');
+clockEl.open = !matchMedia('(max-width:760px)').matches;
+clockEl.addEventListener('toggle', () => { if (matchMedia('(max-width:760px)').matches) document.getElementById('clockNote').textContent = clockEl.open ? '' : 'See today’s schedule'; });
+
 const scen = document.getElementById('scen');
-SCEN.forEach((s, i) => {
+let current = SCEN[1];
+SCEN.forEach(s => {
   const b = document.createElement('button'); b.type = 'button'; b.textContent = s.label; b.setAttribute('aria-pressed', 'false');
-  b.onclick = () => { [...scen.children].forEach(x => x.setAttribute('aria-pressed', 'false')); b.setAttribute('aria-pressed', 'true'); render(s.real ? realNow() : s); };
+  b.onclick = () => { [...scen.children].forEach(x => x.setAttribute('aria-pressed', x === b)); current = s; render(s.real ? realNow() : s); };
   scen.appendChild(b);
 });
+const clr = document.createElement('button'); clr.type = 'button'; clr.textContent = 'Clear cart'; clr.style.marginLeft = '8px';
+clr.onclick = () => { cart = []; cartUI(false); }; scen.appendChild(clr);
 scen.children[1].click();
 </script>
 </body>
