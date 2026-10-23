@@ -543,9 +543,29 @@
           <span class="pickup-icon">🏃</span> Pickup
         </button>
       </div>
+      <div class="loc-row" id="locRow">
+        <button class="loc-btn" id="locBtn" type="button" onclick="shareLocation()">📍 Add my location pin</button>
+        <span class="loc-note" id="locNote" role="status">Helps our rider find you faster. Shared only in your order message.</span>
+      </div>
       <div class="cart-note-wrap">
         <div class="cart-note-label">🍳 Cooking Requests <span>optional</span></div>
         <textarea class="cart-input cart-note-input" id="custNote" placeholder="e.g. extra spicy pasta, less cheese on burger, well done pizza…" rows="2"></textarea>
+      </div>
+      <div class="pay-wrap" id="payWrap">
+        <div class="cart-note-label">💳 How will you pay?</div>
+        <div class="pay-opts" role="radiogroup" aria-label="Payment method">
+          <button type="button" class="pay-opt on" role="radio" aria-checked="true" data-pay="cash">Cash on delivery / pickup</button>
+          <button type="button" class="pay-opt" role="radio" aria-checked="false" data-pay="upi">UPI — pay now</button>
+        </div>
+        <div class="upi-panel" id="upiPanel" hidden>
+          <a class="upi-pay-btn" id="upiPayBtn" href="#">Pay with UPI</a>
+          <div class="upi-qr">
+            <img src="images/upi-qr.webp" alt="The Crosta UPI QR code (PhonePe)" width="300" height="400" loading="lazy">
+            <div class="upi-id"><code id="upiId"></code><button type="button" class="upi-copy" id="upiCopy">Copy</button></div>
+            <p>Scan with any UPI app and pay ₹<span id="upiAmt">0</span>.</p>
+          </div>
+          <p class="upi-note">After paying, tap “Order via WhatsApp” and send us the payment screenshot. We confirm payment in our UPI app.</p>
+        </div>
       </div>
     </div>
   </div>
@@ -687,6 +707,7 @@
 <script defer src="js/promos.js"></script>
 <script defer src="js/cart-render.js"></script>
 <script defer src="js/order.js"></script>
+<script defer src="js/payment.js"></script>
 <script defer src="js/menu-wiring.js"></script>
 <script defer src="js/persist.js"></script>
 <script defer src="js/spin.js"></script>

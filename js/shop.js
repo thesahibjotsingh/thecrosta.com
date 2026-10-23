@@ -43,3 +43,7 @@ function shopStatusText(st = shopStatus()) {
     ? `Open now · closes ${fmtTime(st.closesAt)} · ready in about 30 min`
     : `Closed · opens ${st.today ? 'today' : DAY_NAMES[st.opensDay]} at ${fmtTime(st.opensAt)}`;
 }
+
+// ── PAYMENT ──
+// The UPI ID customers pay (PhonePe business). Change it here and nowhere else.
+const UPI = { id: 'Q226670399@ybl', name: 'The Crosta' };

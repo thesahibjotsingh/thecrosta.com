@@ -173,5 +173,6 @@ function updateFab() {
   const save = document.getElementById('cbSave');
   if (save) save.textContent = promoSummary(T);
   if (typeof persistCart === 'function') persistCart();
+  if (typeof updatePaymentUi === 'function') updatePaymentUi();
   if (typeof onCartChanged === 'function') onCartChanged();
 }

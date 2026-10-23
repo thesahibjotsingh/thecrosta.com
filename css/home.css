@@ -422,3 +422,26 @@ input[type="search"]::-webkit-search-cancel-button { display: none; }
 /* phones: keep the page bottom clear of the floating cart bar; hide it behind the cart drawer */
 @media (max-width: 760px) { body.has-cartbar { padding-bottom: 84px; } }
 body.cart-open .cartbar { visibility: hidden; }
+
+/* ── checkout: location pin + payment ── */
+.loc-row { display: flex; flex-direction: column; gap: .35rem; align-items: flex-start; margin: -.2rem 0 .9rem; }
+.loc-btn { min-height: 44px; padding: 0 16px; border-radius: 999px; border: 1.5px solid var(--char); background: var(--paper); font: 600 .84rem var(--body); cursor: pointer; transition: transform 140ms var(--ease-out), background-color 160ms ease; }
+.loc-btn:active { transform: scale(.97); }
+.loc-btn.done { background: var(--sun-soft); border-color: var(--basil); color: var(--basil); }
+.loc-btn[disabled] { opacity: .6; cursor: progress; }
+.loc-note { font-size: .76rem; color: var(--ash); line-height: 1.4; }
+.pay-wrap { margin: 1rem 0 .4rem; }
+.pay-opts { display: grid; gap: .5rem; margin-top: .45rem; }
+.pay-opt { min-height: 48px; padding: 0 14px; border-radius: 12px; border: 1.5px solid var(--crust); background: transparent; text-align: left; font: 500 .92rem var(--body); cursor: pointer; transition: transform 140ms var(--ease-out), border-color 160ms ease, background-color 160ms ease; }
+.pay-opt:active { transform: scale(.98); }
+.pay-opt.on { border-color: var(--char); background: var(--sun-soft); box-shadow: 2px 2px 0 var(--char); font-weight: 600; }
+.upi-panel { margin-top: .7rem; padding: .85rem; border-radius: 14px; background: var(--paper); border: 1.5px solid var(--crust); }
+.upi-pay-btn { display: none; align-items: center; justify-content: center; min-height: 50px; border-radius: 999px; background: var(--ember-deep); color: #fff; font: 700 1rem var(--body); text-decoration: none; }
+.upi-qr { text-align: center; }
+.upi-qr img { width: min(220px, 70%); height: auto; margin: 0 auto; border-radius: 12px; border: 1px solid var(--crust); background: #fff; }
+.upi-qr p, .upi-note { font-size: .78rem; color: var(--ash); line-height: 1.45; margin-top: .5rem; }
+.upi-id { display: flex; align-items: center; justify-content: center; gap: .5rem; margin-top: .6rem; }
+.upi-id code { font: 500 .85rem var(--mono); }
+.upi-copy { min-height: 36px; padding: 0 12px; border-radius: 999px; border: 1.5px solid var(--char); background: transparent; font: 600 .78rem var(--body); cursor: pointer; }
+/* phones get the pay button; desktops get the QR to scan */
+@media (pointer: coarse) { .upi-pay-btn { display: flex; } .upi-qr { display: none; } }

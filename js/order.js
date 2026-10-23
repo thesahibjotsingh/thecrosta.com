@@ -5,6 +5,7 @@ function togglePickup() {
   const btn     = document.getElementById('pickupBtn');
   const addrEl  = document.getElementById('custAddress');
   isPickup = !isPickup;
+  if (typeof updateLocationRow === 'function') updateLocationRow();
   if (isPickup) {
     btn.classList.add('active');
     btn.innerHTML = '<span class="pickup-icon">✓</span> Pickup';
@@ -162,12 +163,10 @@ function placeOrder() {
   msg += `👤 Name: ${name}\n`;
   msg += `📞 Phone: ${phone}\n`;
   msg += isPickup ? `📍 Pickup (customer will collect)\n` : (address ? `📍 Delivery to: ${address}\n` : `📍 Address: not provided\n`);
-  if (!isPickup) msg += `📌 Also drop your location pin here (📎 → Location) so our rider finds you faster\n`;
+  if (!isPickup) msg += locationLine() || `📌 Also drop your location pin here (📎 → Location) so our rider finds you faster\n`;
   if (note) msg += `🍳 Cooking request: ${note}\n`;
-  msg += `\n💳 Payment: Cash / UPI on delivery\n`;
-  if (!shopStatus().open) msg += `
-⏰ Sent while closed — please confirm once you open
-`;
+  msg += paymentLine(total);
+  if (!shopStatus().open) msg += `\n⏰ Sent while closed — please confirm once you open\n`;
   msg += `⏱ Expecting delivery in ~25–35 min`;
 
   saveLastOrder(name, phone, address);
