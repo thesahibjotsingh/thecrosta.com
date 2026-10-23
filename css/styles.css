@@ -2297,3 +2297,16 @@ footer a { color: #7A736C; text-decoration: none; }
   .addon-popup-skip,
   .addon-popup-done { padding: 0.7rem; font-size: 0.76rem; border-radius: 6px; }
 }
+
+/* ── REDUCED MOTION ── people who ask their device for less motion get none of the
+   looping/decorative animation (marquee, floating photos, shimmer, wheel jerk).
+   Durations are near-zero rather than "none" so animationend/transitionend
+   handlers that clean up classes still fire. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

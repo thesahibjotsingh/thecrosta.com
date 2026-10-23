@@ -1,8 +1,21 @@
-// ── WEEKDAY LUNCH OFFER: Mon–Wed, 11:00–15:00 local (Patiala) time, 20% off pizzas ──
+// ── SHOP CLOCK ──
+// Offers follow the shop's clock (Patiala, IST), not the visitor's device —
+// otherwise a wrong device clock or another timezone would show/apply the
+// wrong offer. shopNow() → { day: Sun=0…Sat=6, hour: 0–23, minute: 0–59 }.
+const SHOP_TIMEZONE = 'Asia/Kolkata';
+const SHOP_DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+const shopClockFormat = new Intl.DateTimeFormat('en-US', {
+  timeZone: SHOP_TIMEZONE, weekday: 'short', hour: '2-digit', minute: '2-digit', hourCycle: 'h23'
+});
+function shopNow() {
+  const parts = {};
+  shopClockFormat.formatToParts(new Date()).forEach(p => { parts[p.type] = p.value; });
+  return { day: SHOP_DAYS.indexOf(parts.weekday), hour: parseInt(parts.hour, 10), minute: parseInt(parts.minute, 10) };
+}
+
+// ── WEEKDAY LUNCH OFFER: Mon–Wed, 11:00–15:00 shop time, 20% off pizzas ──
 function isWeekdayLunchOfferActive() {
-  const now = new Date();
-  const day = now.getDay();   // Sun=0, Mon=1, Tue=2, Wed=3 ...
-  const hour = now.getHours();
+  const { day, hour } = shopNow();
   return day >= 1 && day <= 3 && hour >= 11 && hour < 15;
 }
 
@@ -42,7 +55,7 @@ function syncGroupPerkBundle() {
 // Medium get 1 Small free (same flavour only). One free pizza per order.
 const PIZZA_PRICE_TABLE = {}; // name → { '8″': price, '10″': price, '12″': price }, built at page load
 function isWeekendSpecialActive() {
-  const day = new Date().getDay(); // Sun=0 ... Sat=6
+  const { day } = shopNow(); // Sun=0 ... Sat=6
   return day === 0 || day === 6;
 }
 
@@ -104,7 +117,7 @@ function syncWeekendSpecialBundle() {
 // of that upcharge per qualifying unit while the window is active).
 const CROSTA_BOOST_SAVING_PER_UNIT = 30;
 function isCrostaBoostActive() {
-  const hour = new Date().getHours();
+  const { hour } = shopNow();
   return hour >= 16 && hour < 18;
 }
 

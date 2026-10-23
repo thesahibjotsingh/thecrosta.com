@@ -24,8 +24,12 @@
   const LOCK_KEY  = 'crosta_spin_ts';
   const LOCK_MS   = 86400 * 1000; // 24 hours
 
+  // localStorage can throw (private mode, blocked storage) — the spin must still work.
+  function readLock()  { try { return localStorage.getItem(LOCK_KEY); } catch (e) { return null; } }
+  function writeLock() { try { localStorage.setItem(LOCK_KEY, Date.now().toString()); } catch (e) { /* in-memory lock still applies */ } }
+
   function getLockRemaining() {
-    const ts = localStorage.getItem(LOCK_KEY);
+    const ts = readLock();
     if (!ts) return 0;
     const remaining = LOCK_MS - (Date.now() - parseInt(ts, 10));
     return remaining > 0 ? remaining : 0;
@@ -91,15 +95,6 @@
     const winIdx   = pool[Math.floor(Math.random() * pool.length)];
     const winner   = SEGMENTS[winIdx];
 
-    // Re-spin segment — give another go
-    if (winner.label === 'Lucky Spin Again') {
-      setTimeout(() => {
-        spinning = false;
-        btn.classList.remove('is-locked');
-        showResultCard({ label: '🔄 Spin Again!', emoji: '🔄', msg: '' }, true);
-      }, 3500);
-    }
-
     // Segment i is centred at (i * arcDeg) degrees clockwise from the top.
     // We need to rotate the wheel so that centre lands under the pointer (top, 0deg).
     const alpha         = winIdx * arcDeg;
@@ -124,11 +119,15 @@
       if (t < 1) {
         requestAnimationFrame(animate);
       } else {
+        // `spinning` is only cleared once the wheel has fully stopped, so a
+        // second click can never start an overlapping animation.
         spinning = false;
         if (winner.label === 'Lucky Spin Again') {
-          // re-spin allowed, no lock yet
+          // Free re-spin: no lock yet — unlock the button and show the card.
+          btn.classList.remove('is-locked');
+          showResultCard({ label: '🔄 Spin Again!', emoji: '🔄', msg: '' }, true);
         } else {
-          localStorage.setItem(LOCK_KEY, Date.now().toString());
+          writeLock();
           hasSpun = true;
           btn.classList.add('is-locked');
           startCountdown();
@@ -152,22 +151,18 @@
       waBtn.style.display = 'none';
       document.getElementById('spinAddCartBtn').style.display = 'none';
       document.querySelector('.spin-again-hint').textContent = '← Try your luck again!';
-      document.querySelector('.spin-again-hint').onclick = () => {
-        result.classList.remove('visible');
-        btn.classList.remove('is-locked');
-        hasSpun = false;
-      };
     } else if (winner.noWin) {
       prizeEl.textContent = 'Better Luck Next Time!';
       emojiEl.textContent = '😅';
       waBtn.style.display = 'none';
       document.getElementById('spinAddCartBtn').style.display = 'none';
       document.querySelector('.spin-again-hint').textContent = 'Come back tomorrow for another spin!';
-      document.querySelector('.spin-again-hint').onclick = null;
     } else {
       prizeEl.textContent = winner.label;
       emojiEl.textContent = winner.emoji;
       waBtn.style.display = '';
+      // A win can follow a free re-spin, which changed this text — put it back.
+      document.querySelector('.spin-again-hint').textContent = '← Spin again next visit';
       const msg = `${winner.msg}\n\nPlease apply this to my order. Thank you! 🍕`;
       waBtn.href = `https://wa.me/919888383010?text=${encodeURIComponent(msg)}`;
 

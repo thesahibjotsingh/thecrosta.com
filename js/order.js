@@ -121,8 +121,7 @@ function placeOrder() {
   const { subtotal, pizzaDiscount, boostDiscount, discount, total, groupPerkActive, weekendSpecialActive } = computeCartTotals(cart);
 
   // ── Rich itemised WhatsApp message ──
-  const now = new Date();
-  const timeStr = now.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' });
+  const timeStr = new Date().toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', timeZone: SHOP_TIMEZONE });
 
   let msg = `🍕 *New Order — The Crosta*\n`;
   msg += `🕐 ${timeStr}  ·  Patiala\n`;
