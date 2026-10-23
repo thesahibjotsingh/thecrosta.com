@@ -106,6 +106,8 @@ h2 { font: 700 1.15rem/1.2 var(--display); letter-spacing: -0.02em; }
 .ticket::after { bottom: -10px; }
 .stub { display: flex; flex-direction: column; justify-content: center; gap: 4px; padding: 14px 10px 14px 14px; border-right: 2px dashed rgba(26,26,24,.3); font: 500 .68rem/1.3 var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--ash); }
 .stub b { font: 500 1.05rem/1.1 var(--mono); letter-spacing: 0; color: var(--char); }
+.tm { display: flex; flex-direction: column; gap: 2px; }
+.stub b.to { font-size: .8rem; font-weight: 500; color: var(--ash); }
 .tbody { padding: 14px 16px 16px; min-width: 0; }
 .kicker { font: 500 .7rem/1.2 var(--mono); letter-spacing: .09em; text-transform: uppercase; color: var(--ember-deep); }
 .thead { font: 700 1.05rem/1.2 var(--display); letter-spacing: -0.02em; margin: 6px 0 4px; }
@@ -120,6 +122,9 @@ h2 { font: 700 1.15rem/1.2 var(--display); letter-spacing: -0.02em; }
 .ticket.primary { --stub: 128px; box-shadow: 7px 7px 0 var(--ember); }
 .ticket.primary .stub { padding: 18px 12px 18px 18px; }
 .ticket.primary .stub b { font-size: 1.5rem; }
+.ticket.primary .stub b.to { font-size: .95rem; }
+.ticket.primary .tm.long b { font-size: 1.2rem; }
+.ticket.closedcard .stub b.to { color: #bdb4aa; }
 .ticket.primary .tbody { padding: 22px 24px 24px; position: relative; overflow: hidden; }
 .ticket.primary .thead { font-size: clamp(1.5rem, 3vw, 2.25rem); line-height: 1.02; letter-spacing: -0.035em; margin: 10px 0 8px; max-width: 14ch; }
 .ticket.primary .tdesc { font-size: .95rem; max-width: 34ch; }
@@ -138,11 +143,18 @@ h2 { font: 700 1.15rem/1.2 var(--display); letter-spacing: -0.02em; }
 .ticket.closedcard .tdesc { color: #cfc6bb; }
 .ticket.closedcard .stamp { border-color: #f08a80; color: #f08a80; background: var(--char); }
 
+.ticket[data-offer] { cursor: pointer; }
+.tlink { margin-top: 6px; min-height: 44px; padding: 0; background: none; border: 0; font-weight: 600; font-size: .88rem; color: var(--ember-deep); cursor: pointer; text-align: left; }
+.lane-btn { padding: 0; background: none; border: 0; font: 600 .84rem/1.25 var(--body); text-align: left; cursor: pointer; color: var(--char); text-decoration: underline; text-decoration-color: var(--crust); text-underline-offset: 3px; }
+.lane-btn:hover { text-decoration-color: var(--char); }
 .more { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
 .more .ticket { --stub: 0px; grid-template-columns: 1fr; }
 .more .ticket::before, .more .ticket::after { display: none; }
 .more .stub { flex-direction: row; align-items: baseline; justify-content: space-between; border-right: 0; border-bottom: 2px dashed rgba(26,26,24,.3); padding: 10px 14px; }
 .more .stub b { font-size: .9rem; }
+.more .tm { flex-direction: row; gap: .4em; align-items: baseline; }
+.more .stub b.to { font-size: .9rem; color: var(--char); }
+.more .ticket.dim .stub b.to { color: var(--ash); }
 .rule-note { font: 500 .7rem/1.4 var(--mono); letter-spacing: .05em; text-transform: uppercase; color: var(--ash); }
 
 /* quick order column */
@@ -173,7 +185,7 @@ h2 { font: 700 1.15rem/1.2 var(--display); letter-spacing: -0.02em; }
 .lane { display: grid; grid-template-columns: var(--label) 1fr; align-items: center; min-height: 46px; border-top: 1px solid var(--crust); }
 .lane.axis { border-top: 0; min-height: 30px; }
 .lane-label { font-size: .84rem; line-height: 1.25; padding-right: 10px; }
-.lane-label b { display: block; font-weight: 600; }
+.lane-label b, .lane-label .lane-btn { display: block; font-weight: 600; }
 .lane-label span { font: 500 .68rem/1.2 var(--mono); letter-spacing: .05em; text-transform: uppercase; color: var(--ash); }
 .track { position: relative; height: 46px; }
 .axis .track { height: 30px; }
@@ -245,6 +257,9 @@ h2 { font: 700 1.15rem/1.2 var(--display); letter-spacing: -0.02em; }
 .cartbar.show { transform: none; visibility: visible; transition: transform 340ms var(--ease-drawer), visibility 0s; }
 .cartbar-btn { width: 100%; min-height: 56px; display: flex; align-items: center; gap: 12px; padding: 0 18px 0 12px; border-radius: 18px; border: 2px solid var(--char); background: var(--ember-deep); color: #fff; font-weight: 600; cursor: pointer; box-shadow: 0 8px 24px rgba(26,26,24,.3); }
 .cb-count { display: grid; place-items: center; min-width: 32px; height: 32px; border-radius: 10px; background: var(--sun); color: var(--char); font: 700 .95rem var(--mono); }
+.cb-mid { display: flex; flex-direction: column; line-height: 1.25; text-align: left; min-width: 0; }
+.cb-save { font: 500 .72rem/1.3 var(--mono); color: #FFE9B0; letter-spacing: .02em; }
+.cb-save:empty { display: none; }
 .cb-total { margin-left: auto; font: 500 1rem var(--mono); }
 
 /* ── SIZE SHEET ── */
@@ -269,13 +284,35 @@ h2 { font: 700 1.15rem/1.2 var(--display); letter-spacing: -0.02em; }
   .grab { display: none; }
 }
 
+/* offer sheet */
+.osh-head { margin-bottom: 12px; }
+.ostat { display: inline-block; font: 500 .72rem/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; padding: 6px 9px; border-radius: 6px; border: 1.5px solid var(--char); background: var(--sun); }
+.ostat.off { background: transparent; border-color: var(--crust); color: var(--ash); }
+.osh-head h2 { font-size: 1.5rem; line-height: 1.1; letter-spacing: -0.03em; margin: 10px 0 4px; }
+.osh-head p { color: var(--ash); font-size: .92rem; }
+.oprog { margin: 12px 0; padding: 12px 14px; border-radius: 14px; background: var(--sun-soft); border: 1.5px solid var(--sun); font-size: .92rem; line-height: 1.4; }
+.oprog[hidden] { display: none; }
+.meter { display: flex; gap: 6px; margin-top: 10px; }
+.meter i { flex: 1; height: 8px; border-radius: 99px; background: var(--crust); transition: background-color 200ms var(--ease-out); }
+.meter i.on { background: var(--ember); }
+.olist { display: grid; gap: 10px; margin-bottom: 14px; }
+.orow { display: grid; grid-template-columns: 56px 1fr; gap: 8px 12px; align-items: center; padding: 10px; border: 1.5px solid var(--crust); border-radius: 16px; background: var(--paper); }
+.orow img { width: 56px; height: 56px; border-radius: 12px; object-fit: cover; }
+.orow b { display: block; font: 700 .98rem/1.2 var(--display); letter-spacing: -0.02em; }
+.orow .mono { font-size: .72rem; color: var(--ash); letter-spacing: .02em; }
+.opills { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 8px; }
+.opill { min-height: 44px; padding: 0 14px; border-radius: 999px; border: 1.5px solid var(--char); background: transparent; font: 500 .82rem var(--mono); cursor: pointer; transition: transform 140ms var(--ease-out), background-color 160ms ease; }
+.opill:active { transform: scale(.97); }
+@media (hover: hover) and (pointer: fine) { .opill:hover { background: var(--sun); } }
+@media (min-width: 761px) { .offer-sheet { width: 480px; } }
+
 /* flying thumbnail + toast */
 .fly { position: fixed; z-index: 80; border-radius: 14px; object-fit: cover; pointer-events: none; box-shadow: 0 6px 18px rgba(26,26,24,.35); }
 .toast { position: fixed; left: 50%; bottom: 88px; z-index: 70; transform: translate(-50%, 8px); opacity: 0; background: var(--char); color: #fff; padding: 11px 18px; border-radius: 999px; font-size: .88rem; font-weight: 500; white-space: nowrap; pointer-events: none; transition: opacity 200ms var(--ease-out), transform 200ms var(--ease-out); max-width: calc(100vw - 24px); overflow: hidden; text-overflow: ellipsis; }
 .toast.show { opacity: 1; transform: translate(-50%, 0); }
 
 /* ── MOCKUP CONTROLS ── */
-.mockbar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 90; background: var(--char); color: #fff; padding: 10px 16px; display: flex; align-items: center; gap: 12px; }
+.mockbar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 50; background: var(--char); color: #fff; padding: 10px 16px; display: flex; align-items: center; gap: 12px; }
 .mockbar .lab { font: 500 .68rem/1.2 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: #f0a27a; flex: none; }
 .mockbar .scen { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; }
 .mockbar .scen::-webkit-scrollbar { display: none; }
@@ -321,6 +358,10 @@ h2 { font: 700 1.15rem/1.2 var(--display); letter-spacing: -0.02em; }
   .ticket.primary .stub { flex-direction: row; align-items: baseline; justify-content: space-between; border-right: 0; border-bottom: 2px dashed rgba(26,26,24,.3); padding: 10px 18px; }
   .ticket.closedcard .stub { border-bottom-color: #4a4640; }
   .ticket.primary .stub b { font-size: 1.05rem; }
+  .ticket.primary .tm { flex-direction: row; gap: .45em; align-items: baseline; }
+  .ticket.primary .stub b.to { font-size: 1.05rem; color: var(--char); }
+  .ticket.closedcard .stub b.to { color: #fff; }
+  .ticket.primary .tm.long b { font-size: 1.05rem; }
   .ticket.primary .tbody { padding: 18px 18px 20px; }
   .pie { width: 150px; height: 150px; right: -40px; bottom: -44px; }
   .ticket.primary .thead { max-width: 12ch; }
@@ -360,7 +401,7 @@ h2 { font: 700 1.15rem/1.2 var(--display); letter-spacing: -0.02em; }
   .dot::after { display: none; }
   .card:hover .ph img, .tile:hover img { transform: none; }
   .chev, .cartbar, .cartbar.show, .sheet, .sheet.open { transition-duration: 1ms; }
-  .btn:active, .tile:active, .add:active, .chip:active, .plus:active, .cartbar-btn:active, .opt:active { transform: none; }
+  .btn:active, .tile:active, .add:active, .chip:active, .plus:active, .cartbar-btn:active, .opt:active, .opill:active { transform: none; }
 }
 </style>
 </head>
@@ -460,7 +501,7 @@ h2 { font: 700 1.15rem/1.2 var(--display); letter-spacing: -0.02em; }
 
 <!-- phones: floating cart bar -->
 <div class="cartbar" id="cartbar">
-  <button class="cartbar-btn" type="button" id="cartbarBtn"><span class="cb-count cart-count">0</span><span><span class="cart-word">items</span> in your cart</span><span class="cb-total cart-total">₹0</span><span aria-hidden="true">→</span></button>
+  <button class="cartbar-btn" type="button" id="cartbarBtn"><span class="cb-count cart-count">0</span><span class="cb-mid"><span><span class="cart-word">items</span> in your cart</span><small class="cb-save" id="cbSave"></small></span><span class="cb-total cart-total">₹0</span><span aria-hidden="true">→</span></button>
 </div>
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
@@ -475,6 +516,15 @@ h2 { font: 700 1.15rem/1.2 var(--display); letter-spacing: -0.02em; }
   <p class="sheet-note" id="sheetNote">Want extra cheese or toppings? Add them in your cart.</p>
 </div>
 
+<div class="sheet offer-sheet" id="offerSheet" role="dialog" aria-modal="true" aria-labelledby="offerTitle" tabindex="-1">
+  <div class="grab" aria-hidden="true"></div>
+  <div class="osh-head"><span class="ostat" id="offerStat"></span><h2 id="offerTitle"></h2><p id="offerSub"></p></div>
+  <div class="oprog" id="offerProg" aria-live="polite" hidden></div>
+  <div class="olist" id="offerList"></div>
+  <button class="btn fill" type="button" id="offerDone">Keep browsing</button>
+  <p class="sheet-note" id="offerNote"></p>
+</div>
+
 <div class="mockbar" role="group" aria-label="Mockup controls">
   <span class="lab">Mockup · preview as</span>
   <div class="scen" id="scen"></div>
@@ -487,11 +537,23 @@ const DAYS = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Satur
 const D3 = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const OFFERS = [
-  { id:'weekend', name:'Weekend special', head:'Buy 2 Large, get 1 Medium free', desc:'Same flavour. Or buy 2 Medium, get 1 Small free.', days:[0,6], from:null, to:null, stub:'Sat · Sun', time:'All day', lane:'Weekend special', laneSub:'Sat & Sun', band:'Buy 2 get 1 free', cta:'Order pizzas', pie:'../images/hero-garlic-butter-pizza.webp' },
-  { id:'lunch',   name:'Weekday lunch',   head:'20% off every pizza', desc:'Monday to Wednesday, 11 AM to 3 PM.', days:[1,2,3], from:11, to:15, stub:'Mon–Wed', time:'11A–3P', lane:'Weekday lunch', laneSub:'Mon–Wed', band:'20% off pizzas', cta:'Order pizzas', pie:'../images/hero-farm-house-pizza.webp' },
-  { id:'boost',   name:'The Crosta Boost', head:'Make it a meal for ₹30, not ₹60', desc:'Fries and a 250 ml cold drink with any burger, wrap or sandwich.', days:[0,1,2,3,4,5,6], from:16, to:18, stub:'Daily', time:'4–6P', lane:'The Crosta Boost', laneSub:'Daily', band:'Meal for ₹30', cta:'Order burgers', pie:'../images/hero-the-crosta-burger.webp' },
-  { id:'group',   name:'Group perk',      head:'4+ Medium or Large pizzas? Free meal bundle', desc:'Garlic bread, fries and a 2 L cold drink.', days:[0,1,2,3,4,5,6], always:true, stub:'Always', time:'On', lane:'Group perk', laneSub:'Every day', band:'Free meal bundle', cta:'Order pizzas', pie:'../images/hero-garlic-butter-pizza.webp' }
+  { id:'weekend', name:'Weekend special', head:'Buy 2 Large, get 1 Medium free', desc:'Same flavour. Or buy 2 Medium, get 1 Small free.', days:[0,6], from:null, to:null, stub:'Sat · Sun', t1:'All day', lane:'Weekend special', laneSub:'Sat & Sun', band:'Buy 2 get 1 free', cta:'Order pizzas', pie:'../images/hero-garlic-butter-pizza.webp' },
+  { id:'lunch',   name:'Weekday lunch',   head:'20% off every pizza', desc:'Monday to Wednesday, 11 AM to 3 PM.', days:[1,2,3], from:11, to:15, stub:'Mon–Wed', t1:'11 AM', t2:'3 PM', lane:'Weekday lunch', laneSub:'Mon–Wed', band:'20% off pizzas', cta:'Order pizzas', pie:'../images/hero-farm-house-pizza.webp' },
+  { id:'boost',   name:'The Crosta Boost', head:'Make it a meal for ₹30, not ₹60', desc:'Fries and a 250 ml cold drink with any burger, wrap or sandwich.', days:[0,1,2,3,4,5,6], from:16, to:18, stub:'Daily', t1:'4 PM', t2:'6 PM', lane:'The Crosta Boost', laneSub:'Daily', band:'Meal for ₹30', cta:'Order burgers', pie:'../images/hero-the-crosta-burger.webp' },
+  { id:'group',   name:'Group perk',      head:'4+ Medium or Large pizzas? Free meal bundle', desc:'Garlic bread, fries and a 2 L cold drink.', days:[0,1,2,3,4,5,6], always:true, stub:'Every day', t1:'Always on', lane:'Group perk', laneSub:'Every day', band:'Free meal bundle', cta:'Order pizzas', pie:'../images/hero-garlic-butter-pizza.webp' }
 ];
+const tmHtml = o => `<span class="tm${o.t1.length > 6 ? ' long' : ''}"><b>${o.t1}</b>${o.t2 ? `<b class="to">to ${o.t2}</b>` : ''}</span>`;
+const PIZZAS = {
+  farm:   { name:'Farm House Pizza',           img:'../images/menu-farm-house-pizza.webp',    p:{ 8:139, 10:229, 12:369 } },
+  garlic: { name:'Crosta Garlic Butter Pizza', img:'../images/menu-garlic-butter-pizza.webp', p:{ 8:249, 10:369, 12:519 } },
+  corn:   { name:'Corn Cheese Pizza',          img:'../images/menu-corn-cheese-pizza.webp',   p:{ 8:99,  10:189, 12:319 } }
+};
+const MEALS = {
+  crosta:  { name:'The Crosta Burger', img:'../images/menu-the-crosta-burger.webp', single:139, meal:199 },
+  pburger: { name:'Pizza Burger',      img:'../images/menu-pizza-burger.webp',      single:129, meal:189 },
+  paneer:  { name:'Paneer Burger',     img:'../images/menu-paneer-burger.webp',     single:119, meal:179 }
+};
+const SZ = { 8:'Regular 8″', 10:'Medium 10″', 12:'Large 12″' };
 const SCEN = [
   { label:'Right now', real:true },
   { label:'Mon 12:30 PM', d:1, h:12, m:30 },
@@ -544,15 +606,40 @@ const ICON = {
 /* ───────────── cart (mockup state only) ───────────── */
 let cart = [];
 const cartCount = () => cart.reduce((s, i) => s + i.qty, 0);
-const cartTotal = () => cart.reduce((s, i) => s + i.qty * i.price, 0);
+/* One offer per order, same priority as the live site: weekend > group perk > weekday lunch > boost. */
+function pricing() {
+  const now = baseNow, t = now.h + now.m / 60, [open, close] = HOURS[now.d], isOpen = t >= open && t < close;
+  const live = new Set(isOpen ? OFFERS.filter(o => stateOf(o, now).k === 'live').map(o => o.id) : []);
+  const subtotal = cart.reduce((s, i) => s + i.qty * i.price, 0);
+  const pizzas = cart.filter(i => i.cat === 'pizza');
+  const ml = pizzas.filter(i => i.size >= 10).reduce((s, i) => s + i.qty, 0);
+  const meals = cart.filter(i => i.cat === 'meal').reduce((s, i) => s + i.qty, 0);
+  let promo = null, discount = 0, text = '';
+  if (live.has('weekend')) {
+    const by = {}; let best = null;
+    pizzas.forEach(i => { (by[i.flavour] = by[i.flavour] || { 8:0, 10:0, 12:0 })[i.size] += i.qty; });
+    for (const f in by) {
+      const P = PIZZAS[f].p;
+      if (by[f][12] >= 2 && (!best || P[10] > best.v)) best = { v:P[10], t:`Free Medium ${PIZZAS[f].name}` };
+      if (by[f][10] >= 2 && (!best || P[8] > best.v))  best = { v:P[8],  t:`Free Regular ${PIZZAS[f].name}` };
+    }
+    if (best) { promo = 'Weekend special'; discount = best.v; text = best.t; }
+  }
+  if (!promo && live.has('group') && ml >= 4) { promo = 'Group perk'; text = 'Free meal bundle'; }
+  if (!promo && live.has('lunch') && pizzas.length) { promo = 'Weekday lunch'; discount = Math.round(0.2 * pizzas.reduce((s, i) => s + i.qty * i.price, 0)); text = '20% off pizzas'; }
+  if (!promo && live.has('boost') && meals) { promo = 'The Crosta Boost'; discount = 30 * meals; text = 'Meal upgrade for ₹30'; }
+  return { subtotal, discount, total: subtotal - discount, promo, text, ml, meals, live };
+}
 function bump(el) { if (!el || reduce) return; el.animate([{ transform:'scale(1)' }, { transform:'scale(1.3)' }, { transform:'scale(1)' }], { duration:260, easing:'cubic-bezier(0.23, 1, 0.32, 1)' }); }
 function cartUI(doBump) {
-  const n = cartCount(), total = cartTotal();
+  const n = cartCount(), P = pricing(), total = P.total;
   document.querySelectorAll('.cart-count').forEach(e => { e.textContent = n; if (doBump) bump(e); });
   document.querySelectorAll('.cart-total').forEach(e => e.textContent = rupee(total));
   document.querySelectorAll('.cart-word').forEach(e => e.textContent = n === 1 ? 'item' : 'items');
   document.querySelectorAll('.cart').forEach(e => e.setAttribute('aria-label', `Cart, ${n} item${n === 1 ? '' : 's'}, ${rupee(total)}`));
   document.getElementById('cartbar').classList.toggle('show', n > 0);
+  document.getElementById('cbSave').textContent = P.promo ? (P.discount ? `${P.promo}: you save ${rupee(P.discount)}` : `${P.promo}: ${P.text.toLowerCase()}`) : '';
+  if (offerSheet.classList.contains('open')) renderOffer();
 }
 let toastTimer;
 function toast(msg) {
@@ -570,10 +657,11 @@ function flyTo(fromEl, src) {
   return el.animate([{ transform:'translate(0,0) scale(1)', opacity:1 }, { transform:`translate(${dx}px, ${dy}px) scale(${s})`, opacity:.85 }],
     { duration:460, easing:'cubic-bezier(0.77, 0, 0.175, 1)', fill:'forwards' }).finished.then(() => el.remove());
 }
-function addToCart(item, label, price, fromEl, img) {
+function addToCart(item, label, price, fromEl, img, meta = {}, qty = 1) {
   const key = item + '|' + label, found = cart.find(i => i.key === key);
-  found ? found.qty++ : cart.push({ key, name: item + (label ? ' · ' + label : ''), price, qty: 1 });
-  toast(`Added ${item}${label ? ' · ' + label : ''} — ${rupee(price)}`);
+  found ? found.qty += qty : cart.push({ key, name: item + (label ? ' · ' + label : ''), price, qty, ...meta });
+  const P = pricing();
+  toast(`Added ${qty > 1 ? qty + '× ' : ''}${item}${label ? ' · ' + label : ''}${P.promo ? ' · ' + P.promo + ' applied' : ''}`);
   // count lands when the thumbnail arrives; the timeout guarantees it even if the animation is skipped
   Promise.race([flyTo(fromEl, img), new Promise(r => setTimeout(r, 700))]).then(() => cartUI(!reduce));
 }
@@ -596,23 +684,82 @@ function openSheet(item, trigger) {
   sheet.focus({ preventScroll: true });
 }
 function closeSheet() {
-  scrim.classList.remove('open'); sheet.classList.remove('open'); document.body.classList.remove('locked');
+  scrim.classList.remove('open'); sheet.classList.remove('open'); offerSheet.classList.remove('open'); document.body.classList.remove('locked');
   if (sheetTrigger) sheetTrigger.focus({ preventScroll: true });
 }
 document.getElementById('sheetOpts').addEventListener('click', e => { const b = e.target.closest('.opt'); if (!b) return; sheetPick = +b.dataset.i; renderSheet(); document.querySelector('.opt[aria-checked="true"]').focus(); });
 document.getElementById('sheetAdd').addEventListener('click', () => {
   const [label, price] = sheetItem.opts[sheetPick], from = document.getElementById('sheetImg');
-  addToCart(sheetItem.name, label, price, from, sheetItem.img); closeSheet();
+  const meta = PIZZAS[sheetItem.id] ? { cat:'pizza', flavour:sheetItem.id, size:[8, 10, 12][sheetPick] } : (label === 'Meal' ? { cat:'meal' } : {});
+  addToCart(sheetItem.name, label, price, from, sheetItem.img, meta); closeSheet();
 });
 scrim.addEventListener('click', closeSheet);
 document.addEventListener('keydown', e => {
-  if (!sheet.classList.contains('open')) return;
+  const act = document.querySelector('.sheet.open'); if (!act) return;
   if (e.key === 'Escape') closeSheet();
   if (e.key === 'Tab') {
-    const f = [...sheet.querySelectorAll('button')]; const first = f[0], last = f[f.length - 1];
+    const f = [...act.querySelectorAll('button')]; const first = f[0], last = f[f.length - 1];
     if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
     else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
   }
+});
+
+/* ───────────── offer sheet: "use this offer" ───────────── */
+const offerSheet = document.getElementById('offerSheet');
+let offerId = null;
+function offerRows(id) {
+  if (id === 'weekend') return Object.entries(PIZZAS).map(([k, z]) => `<div class="orow"><img src="${z.img}" alt=""><div><b>${z.name}</b><span class="mono">Same flavour twice</span></div><div class="opills"><button class="opill" type="button" data-kind="pizza" data-id="${k}" data-size="12" data-qty="2">Buy 2 Large · ${rupee(2 * z.p[12])}</button><button class="opill" type="button" data-kind="pizza" data-id="${k}" data-size="10" data-qty="2">Buy 2 Medium · ${rupee(2 * z.p[10])}</button></div></div>`).join('');
+  if (id === 'boost') return Object.entries(MEALS).map(([k, m]) => `<div class="orow"><img src="${m.img}" alt=""><div><b>${m.name}</b><span class="mono">Meal adds fries + 250 ml drink</span></div><div class="opills"><button class="opill" type="button" data-kind="meal" data-id="${k}" data-qty="1">Add as meal · ${rupee(m.meal)}</button></div></div>`).join('');
+  const sizes = id === 'group' ? [10, 12] : [8, 10, 12];
+  return Object.entries(PIZZAS).map(([k, z]) => `<div class="orow"><img src="${z.img}" alt=""><div><b>${z.name}</b><span class="mono">from ${rupee(z.p[8])}</span></div><div class="opills">${sizes.map(sz => `<button class="opill" type="button" data-kind="pizza" data-id="${k}" data-size="${sz}" data-qty="1">${sz}″ · ${rupee(z.p[sz])}</button>`).join('')}</div></div>`).join('');
+}
+function offerProgress(o, P, st) {
+  const live = st.k === 'live';
+  if (o.id === 'group') {
+    const n = Math.min(P.ml, 4), on = P.ml >= 4;
+    const msg = on ? (P.promo === 'Group perk' ? '<b>Unlocked:</b> free meal bundle (garlic bread, fries, 2 L cold drink).' : `You’ve reached 4, but <b>${P.promo}</b> is already applied — one offer per order.`) : `<b>${P.ml} of 4</b> Medium or Large pizzas — ${4 - P.ml} to go.`;
+    return `${msg}<div class="meter" aria-hidden="true">${[0, 1, 2, 3].map(i => `<i class="${i < n ? 'on' : ''}"></i>`).join('')}</div>`;
+  }
+  if (o.id === 'lunch') return !live ? '' : (P.promo === 'Weekday lunch' ? `<b>You’re saving ${rupee(P.discount)}</b> on your pizzas.` : (P.promo ? `${P.promo} is already applied — one offer per order.` : 'Add any pizza and 20% comes off automatically.'));
+  if (o.id === 'weekend') return !live ? '' : (P.promo === 'Weekend special' ? `<b>${P.text}</b> — you save ${rupee(P.discount)}.` : 'Add 2 of the same pizza in Large (or Medium) and the free one is added for you.');
+  if (o.id === 'boost') return !live ? '' : (P.promo === 'The Crosta Boost' ? `<b>${P.meals} meal upgrade${P.meals > 1 ? 's' : ''}</b> — you save ${rupee(P.discount)}.` : (P.promo ? `${P.promo} is already applied — one offer per order.` : 'Pick “Add as meal” and the upgrade costs ₹30 instead of ₹60.'));
+  return '';
+}
+function renderOffer() {
+  const o = OFFERS.find(x => x.id === offerId), st = stateOf(o, baseNow), P = pricing();
+  const stat = document.getElementById('offerStat');
+  stat.className = 'ostat' + (st.k === 'live' ? '' : ' off');
+  stat.textContent = st.k === 'live' ? (o.always ? 'Always on' : (o.from == null ? 'Live · all day' : `Live now · ends ${fmt(st.end)}`)) : (st.k === 'later' ? `Starts ${fmt(st.start)} · in ${dur(st.inH)}` : `Next · ${D3[st.day]} ${fmt(st.start)}`);
+  document.getElementById('offerTitle').textContent = o.head;
+  document.getElementById('offerSub').textContent = o.name + ' — ' + o.desc;
+  const prog = offerProgress(o, P, st), pe = document.getElementById('offerProg');
+  pe.innerHTML = prog; pe.hidden = !prog;
+  const list = document.getElementById('offerList');
+  const have = list.dataset.for === o.id; // keep scroll when only the progress changes
+  if (!have) { list.innerHTML = offerRows(o.id); list.dataset.for = o.id; }
+  const n = cartCount();
+  document.getElementById('offerDone').textContent = n ? `View cart · ${rupee(P.total)}` : 'Keep browsing';
+  document.getElementById('offerNote').textContent = st.k === 'live' ? 'One offer per order — we apply the best one that fits your cart.' : 'Not live yet — add items now and it applies automatically when it starts.';
+}
+function openOffer(id, trigger) {
+  offerId = id; sheetTrigger = trigger || null; document.getElementById('offerList').dataset.for = '';
+  sheet.classList.remove('open'); renderOffer();
+  scrim.classList.add('open'); offerSheet.classList.add('open'); document.body.classList.add('locked');
+  offerSheet.focus({ preventScroll: true });
+}
+offerSheet.addEventListener('click', e => {
+  const b = e.target.closest('.opill'); if (!b) return;
+  const { kind, id, size, qty } = b.dataset, row = b.closest('.orow'), imgEl = row.querySelector('img');
+  if (kind === 'pizza') { const z = PIZZAS[id]; addToCart(z.name, SZ[size], z.p[size], imgEl, z.img, { cat:'pizza', flavour:id, size:+size }, +qty); }
+  else { const m = MEALS[id]; addToCart(m.name, 'Meal', m.meal, imgEl, m.img, { cat:'meal' }, +qty); }
+  const sel = `.opill[data-id="${id}"][data-kind="${kind}"]${size ? `[data-size="${size}"]` : ''}`;
+  renderOffer(); const again = offerSheet.querySelector(sel); if (again) again.focus({ preventScroll: true });
+});
+document.getElementById('offerDone').addEventListener('click', () => { const n = cartCount(); closeSheet(); if (n) toast('Cart drawer opens here (mockup)'); });
+// any offer — ticket, link, clock bar or clock label — opens it
+document.addEventListener('click', e => {
+  const t = e.target.closest('[data-offer]'); if (!t) return;
+  openOffer(t.dataset.offer, e.target.closest('button') || t);
 });
 
 /* ───────────── bestsellers ───────────── */
@@ -627,7 +774,7 @@ document.getElementById('bestGrid').addEventListener('click', e => {
   else addToCart(item.name, item.opts[0][0], item.opts[0][1], btn.closest('.card').querySelector('img'), item.img);
 });
 document.getElementById('reorderBtn').addEventListener('click', e => {
-  addToCart('Farm House Pizza', 'Medium 10″', 229, e.currentTarget, '../images/hero-farm-house-pizza.webp');
+  addToCart('Farm House Pizza', 'Medium 10″', 229, e.currentTarget, '../images/hero-farm-house-pizza.webp', { cat:'pizza', flavour:'farm', size:10 });
   setTimeout(() => addToCart('Coke', '250 ml', 20, document.getElementById('reorderBtn'), '../images/menu-coke.webp'), 180);
 });
 document.querySelectorAll('#actions, #cartbarBtn').forEach(el => el.addEventListener('click', e => { if (e.target.closest('.cart, #cartbarBtn')) toast('Cart drawer opens here (mockup)'); }));
@@ -682,10 +829,10 @@ function buildClock() {
   html += OFFERS.map((o, i) => {
     const w = win(o, v.d), cls = bandClass(o, v);
     let band;
-    if (!w) { const s = stateOf(o, { d: v.d, h: 0, m: 0 }); band = `<i class="band off">Not on ${DAYS[v.d]}${s && s.k === 'next' ? ' · next ' + D3[s.day] + ' ' + fmt(s.start) : ''}</i>`; }
+    if (!w) { const s = stateOf(o, { d: v.d, h: 0, m: 0 }); band = `<i class="band off" data-o="${i}">Not on ${DAYS[v.d]}${s && s.k === 'next' ? ' · next ' + D3[s.day] + ' ' + fmt(s.start) : ''}</i>`; }
     else band = `<i class="band ${cls}" data-o="${i}" style="--i:${i};left:${pctOf(w[0])}%;width:${pctOf(w[1]) - pctOf(w[0])}%">${o.band}</i>`;
     const range = w ? ` · ${fmt(w[0])}–${fmt(w[1])}` : '';
-    return `<div class="lane"><div class="lane-label"><b>${o.lane}</b><span>${o.laneSub}${range}</span></div><div class="track">${shut}${band}<i class="needle"></i></div></div>`;
+    return `<div class="lane"><div class="lane-label"><button class="lane-btn" type="button" data-offer="${o.id}">${o.lane}</button><span>${o.laneSub}${range}</span></div><div class="track">${shut}${band}<i class="needle"></i></div></div>`;
   }).join('');
   lanesEl().innerHTML = html;
   document.getElementById('days').innerHTML = D3.map((d3, d) => `<button class="day${d === baseNow.d ? ' today' : ''}" type="button" data-d="${d}" aria-pressed="${d === v.d}">${d3}</button>`).join('');
@@ -696,7 +843,7 @@ function buildClock() {
 }
 function setClockNote() {
   const mobile = matchMedia('(max-width:760px)').matches, el = document.getElementById('clockNote');
-  el.textContent = mobile ? (document.getElementById('clock').open ? '' : 'See today’s schedule') : 'Pick a day · drag the marker';
+  el.textContent = mobile ? (document.getElementById('clock').open ? '' : 'See today’s schedule') : 'Tap an offer · drag the marker';
 }
 function setView(t, d) {
   const day = d ?? (view ? view.d : baseNow.d);
@@ -710,10 +857,24 @@ function setView(t, d) {
 (function () {
   const root = document.getElementById('lanes'); let dragging = false;
   const at = e => { const tr = root.querySelector('.track'); if (!tr) return; const r = tr.getBoundingClientRect(); setView(VA + Math.min(Math.max((e.clientX - r.left) / r.width, 0), 1) * VSPAN); };
-  root.addEventListener('pointerdown', e => { if (!e.target.closest('.track')) return; dragging = true; try { root.setPointerCapture(e.pointerId); } catch (_) {} at(e); });
-  root.addEventListener('pointermove', e => { if (dragging) at(e); });
-  const end = e => { dragging = false; try { root.releasePointerCapture(e.pointerId); } catch (_) {} };
-  root.addEventListener('pointerup', end); root.addEventListener('pointercancel', end);
+  let pending = null;
+  const startDrag = e => { dragging = true; try { root.setPointerCapture(e.pointerId); } catch (_) {} };
+  root.addEventListener('pointerdown', e => {
+    if (!e.target.closest('.track')) return;
+    const band = e.target.closest('.band[data-o]');
+    if (band) { pending = { x: e.clientX, o: +band.dataset.o, band }; return; }   // a tap on a bar opens its offer; a drag still scrubs
+    startDrag(e); at(e);
+  });
+  root.addEventListener('pointermove', e => {
+    if (pending && Math.abs(e.clientX - pending.x) > 4) { pending = null; startDrag(e); }
+    if (dragging) at(e);
+  });
+  const end = e => {
+    if (pending) { const q = pending; pending = null; openOffer(OFFERS[q.o].id, q.band); }
+    dragging = false; try { root.releasePointerCapture(e.pointerId); } catch (_) {}
+  };
+  root.addEventListener('pointerup', end);
+  root.addEventListener('pointercancel', () => { pending = null; dragging = false; });
   root.addEventListener('keydown', e => {
     if (!e.target.classList.contains('needle-tag')) return;
     const t = tOf(viewNow()), step = { ArrowLeft: -0.25, ArrowDown: -0.25, ArrowRight: 0.25, ArrowUp: 0.25, PageDown: -1, PageUp: 1 }[e.key];
@@ -758,15 +919,15 @@ function render(now) {
     const { o, s } = lead; rest = sorted.slice(1);
     const timed = !o.always && o.from != null;
     const prog = timed ? `<div class="prog"><div class="prog-bar"><i style="width:${Math.round((t - s.start) / (s.end - s.start) * 100)}%"></i></div><p>Ends ${fmt(s.end)} · ${dur(s.left)} left</p></div>` : `<div class="prog"><p>${o.always ? 'Always on' : 'Live all day'}</p></div>`;
-    primary = `<article class="ticket primary live enter" style="--i:0"><div class="stub"><span>${o.stub}</span><b>${o.time}</b></div><div class="tbody"><span class="stamp">Live now</span><p class="kicker">${o.name}</p><h2 class="thead">${o.head}</h2><p class="tdesc">${o.desc}</p>${prog}<a class="btn fill" href="#">${o.cta} →</a><img class="pie" src="${o.pie}" alt=""></div></article>`;
+    primary = `<article class="ticket primary live enter" style="--i:0" data-offer="${o.id}"><div class="stub"><span class="d">${o.stub}</span>${tmHtml(o)}</div><div class="tbody"><span class="stamp">Live now</span><p class="kicker">${o.name}</p><h2 class="thead">${o.head}</h2><p class="tdesc">${o.desc}</p>${prog}<button class="btn fill" type="button" data-offer="${o.id}">Use this offer →</button><img class="pie" src="${o.pie}" alt=""></div></article>`;
   } else {
     const nx = sorted.find(x => x.s.k !== 'live') || lead;
-    primary = `<article class="ticket primary closedcard enter" style="--i:0"><div class="stub"><span>Closed</span><b>${fmt(no.at)}</b></div><div class="tbody"><span class="stamp">Closed</span><p class="kicker">Back soon</p><h2 class="thead">Back ${no.label === 'today' ? 'today' : DAYS[no.d]} at ${fmt(no.at).replace(' ', ' ')}</h2><p class="tdesc">Browse the menu now and order when we open. Next offer: ${nx.o.name} (${metaOf(nx).replace(/^./, c => c.toLowerCase())}).</p></div></article>`;
+    primary = `<article class="ticket primary closedcard enter" style="--i:0"><div class="stub"><span class="d">Closed</span><span class="tm"><b>${fmt(no.at)}</b></span></div><div class="tbody"><span class="stamp">Closed</span><p class="kicker">Back soon</p><h2 class="thead">Back ${no.label === 'today' ? 'today' : DAYS[no.d]} at ${fmt(no.at).replace(' ', ' ')}</h2><p class="tdesc">Browse the menu now and order when we open. Next offer: ${nx.o.name} (${metaOf(nx).replace(/^./, c => c.toLowerCase())}).</p></div></article>`;
   }
   document.getElementById('primary').innerHTML = primary;
   document.getElementById('more').innerHTML = rest.slice(0, 3).map((x, i) => {
     const cls = x.s.k === 'next' ? ' dim' : (x.s.k === 'live' ? ' live' : '');
-    return `<article class="ticket${cls} enter" style="--i:${i + 1}"><div class="stub"><span>${x.o.stub}</span><b>${x.o.time}</b></div><div class="tbody"><p class="kicker">${x.o.name}</p><h3 class="thead">${x.o.head}</h3><p class="tmeta ${x.s.k === 'live' ? 'live' : ''}">${metaOf(x)}</p></div></article>`;
+    return `<article class="ticket${cls} enter" style="--i:${i + 1}" data-offer="${x.o.id}"><div class="stub"><span class="d">${x.o.stub}</span>${tmHtml(x.o)}</div><div class="tbody"><p class="kicker">${x.o.name}</p><h3 class="thead">${x.o.head}</h3><p class="tmeta ${x.s.k === 'live' ? 'live' : ''}">${metaOf(x)}</p><button class="tlink" type="button" data-offer="${x.o.id}">${x.s.k === 'live' ? 'Use this offer →' : 'See how it works →'}</button></div></article>`;
   }).join('');
 
   baseNow = now; view = null;
