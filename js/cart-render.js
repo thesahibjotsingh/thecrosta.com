@@ -172,5 +172,6 @@ function updateFab() {
   document.body.classList.toggle('has-cartbar', count > 0);
   const save = document.getElementById('cbSave');
   if (save) save.textContent = promoSummary(T);
+  if (typeof persistCart === 'function') persistCart();
   if (typeof onCartChanged === 'function') onCartChanged();
 }

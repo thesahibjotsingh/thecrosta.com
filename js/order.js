@@ -165,8 +165,12 @@ function placeOrder() {
   if (!isPickup) msg += `📌 Also drop your location pin here (📎 → Location) so our rider finds you faster\n`;
   if (note) msg += `🍳 Cooking request: ${note}\n`;
   msg += `\n💳 Payment: Cash / UPI on delivery\n`;
+  if (!shopStatus().open) msg += `
+⏰ Sent while closed — please confirm once you open
+`;
   msg += `⏱ Expecting delivery in ~25–35 min`;
 
+  saveLastOrder(name, phone, address);
   const encoded = encodeURIComponent(msg);
   window.open(`https://wa.me/919888383010?text=${encoded}`, '_blank');
 }

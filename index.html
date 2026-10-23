@@ -557,6 +557,10 @@
   </div>
 
   <div class="cart-footer" id="cartFooter" style="display:none">
+    <div id="cartClosedRow" style="display:none;align-items:flex-start;gap:0.4rem;margin-bottom:0.6rem;padding:0.55rem 0.65rem;border-radius:8px;background:#FFF0C4;border:1px solid #FFC83D;font-size:0.76rem;line-height:1.4;font-weight:600;color:#1A1A18;">
+      <span style="font-size:1rem;">⏰</span>
+      <span id="cartClosedText"></span>
+    </div>
     <div id="cartWeekendRow" style="display:none;align-items:center;gap:0.4rem;margin-bottom:0.5rem;padding:0.5rem 0.6rem;border-radius:8px;background:rgba(26,173,75,0.1);font-size:0.76rem;font-weight:700;color:#1aad4b;">
       <span style="font-size:1rem;">🎉</span>
       <span id="cartWeekendText">Weekend Special unlocked — Free pizza!</span>
@@ -684,6 +688,7 @@
 <script defer src="js/cart-render.js"></script>
 <script defer src="js/order.js"></script>
 <script defer src="js/menu-wiring.js"></script>
+<script defer src="js/persist.js"></script>
 <script defer src="js/spin.js"></script>
 <script defer src="js/home.js"></script>
 <script defer src="js/sheets.js"></script>

@@ -27,6 +27,12 @@ function renderLive() {
   $('closedBtn').hidden = st.open;
   $('closedBtnLbl').textContent = st.open ? '' : `Opens ${fmtTime(st.opensAt)}`;
 
+  const closedRow = $('cartClosedRow');
+  if (closedRow) {
+    closedRow.style.display = st.open ? 'none' : 'flex';
+    $('cartClosedText').textContent = `We’re closed right now — we open ${st.today ? 'today' : DAY_NAMES[st.opensDay]} at ${fmtTime(st.opensAt)}. You can still send your order and we’ll see it when we open.`;
+  }
+
   $('clockLine').textContent = `${DAY_NAMES[now.day]} · ${fmtTime(now.hour, now.minute)} · Patiala`;
   $('lede').textContent = st.open ? 'Oven’s hot — here’s what’s on right now.' : 'Oven’s resting — have a look, then order when we open.';
 
