@@ -106,8 +106,8 @@ function updateClockUI() {
   if (!root.firstElementChild) return;
   root.querySelectorAll('.needle').forEach(n => { n.style.left = pctOf(t) + '%'; });
   const tag = root.querySelector('.needle-tag'), tg = Math.min(Math.max(t, VA + 0.9), VZ - 0.9);
-  tag.style.left = tagPct(t) + '%';
   tag.textContent = (clockView ? '' : 'Now ') + fmtTime(v.hour, v.minute);
+  placeTag(tag, t);
   tag.setAttribute('aria-valuenow', Math.round(t * 60));
   tag.setAttribute('aria-valuetext', `${fmtTime(v.hour, v.minute)} on ${DAY_NAMES[v.day]}`);
   root.querySelectorAll('.tick').forEach(k => { k.style.visibility = Math.abs(+k.dataset.h - tg) < 1.3 ? 'hidden' : ''; });
@@ -115,6 +115,13 @@ function updateClockUI() {
   const sum = $('clockSum'); sum.textContent = clockSummary(v); sum.classList.toggle('exploring', !!clockView);
   $('clockNow').hidden = !clockView;
 }
+// centre the marker's tag on the time, but never let it hang outside the bar
+function placeTag(tag, t) {
+  const track = tag.parentElement, W = track.clientWidth, tw = tag.offsetWidth;
+  if (!W || !tw) { tag.style.left = tagPct(t) + '%'; return; }
+  tag.style.left = Math.min(Math.max(pctOf(t) / 100 * W, tw / 2), W - tw / 2) + 'px';
+}
+window.addEventListener('resize', () => { const tag = document.querySelector('#lanes .needle-tag'); if (tag) placeTag(tag, hourOf(viewNow())); });
 function buildClock() {
   const v = viewNow(), [open, close] = SHOP_HOURS[v.day];
   const ticks = [11, 13, 15, 17, 19, 21, 23].map(h => `<span class="tick${[13, 17, 21].includes(h) ? ' minor' : ''}" data-h="${h}" style="left:${pctOf(h)}%">${fmtTime(h).replace(':00', '').replace(' ', '').toLowerCase()}</span>`).join('');

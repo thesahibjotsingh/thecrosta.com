@@ -372,8 +372,9 @@ body.locked { overflow: hidden; }
   .track { height: 40px; }
   .band { top: 6px; height: 28px; font-size: 0; padding: 0; }
   .band.off { font-size: .68rem; padding: 0 10px; }
-  .needle-tag { top: 6px; min-height: 30px; padding: 0 12px; font-size: .72rem; }
-  .axis .tick { top: 20px; }
+  .axis .track { height: 56px; }
+  .needle-tag { top: 0; min-height: 30px; padding: 0 12px; font-size: .72rem; }
+  .axis .tick { top: 38px; }
   .clock-tools { flex-wrap: wrap; }
   .tools-in { flex-wrap: wrap; gap: 8px 10px; }
   .search { flex: 1 1 100%; }
@@ -386,7 +387,7 @@ body.locked { overflow: hidden; }
   .toast { bottom: 88px; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .enter, .band, .prog-bar i, .pie { animation: fade 200ms ease both !important; animation-delay: 0ms !important; }
+  .enter, .band, .prog-bar i, .pie, .ha, .ha-sticker { animation: fade 200ms ease both !important; animation-delay: 0ms !important; }
   .top h1 .u path { animation: none; stroke-dashoffset: 0; }
   .dot::after { display: none; }
   .card:hover .ph img, .tile:hover img { transform: none; }
@@ -451,3 +452,60 @@ body.cart-open .cartbar { visibility: hidden; }
 .whatsapp-btn.is-closed, .whatsapp-btn[disabled] { background: #EDE3D4 !important; color: var(--ash) !important; box-shadow: none !important; cursor: not-allowed; animation: none !important; }
 .whatsapp-btn.is-closed svg { fill: var(--ash); }
 .whatsapp-btn.is-closed::after, .whatsapp-btn[disabled]::after { display: none; }
+
+/* ── review fixes: header, hero art, side cards, clock on phones, sheet close ── */
+.top { position: relative; }
+
+/* the empty top-right: a small collage of real food photos */
+@keyframes art-in { from { opacity: 0; scale: .9; } to { opacity: 1; scale: 1; } }
+.hero-art { display: none; }
+@media (min-width: 1180px) {
+  .hero-art { display: block; position: absolute; right: clamp(20px, 3vw, 40px); top: 20px; width: 400px; height: 200px; pointer-events: none; }
+  .ha { position: absolute; border-radius: 50%; object-fit: cover; border: 5px solid var(--paper); box-shadow: 0 0 0 1.5px var(--char), 5px 5px 0 var(--ember); animation: art-in 600ms var(--ease-out) both; }
+  .ha-main { width: 190px; height: 190px; right: 24px; top: 4px; transform: rotate(6deg); animation-delay: 120ms; }
+  .ha-b    { width: 112px; height: 112px; left: 78px; bottom: 0; transform: rotate(-8deg); animation-delay: 240ms; box-shadow: 0 0 0 1.5px var(--char), 4px 4px 0 var(--char); }
+  .ha-c    { width: 84px; height: 84px; left: 196px; top: 0; transform: rotate(10deg); animation-delay: 360ms; box-shadow: 0 0 0 1.5px var(--char), 3px 3px 0 var(--sun); }
+  .ha-sticker { position: absolute; right: 0; top: -8px; width: 84px; height: 84px; border-radius: 50%; display: grid; place-content: center; text-align: center; background: var(--sun); border: 2.5px solid var(--char); box-shadow: 3px 3px 0 var(--char); transform: rotate(10deg); z-index: 2; animation: art-in 600ms var(--ease-out) 480ms both; }
+  .ha-sticker i { font: 500 .62rem/1 var(--mono); font-style: normal; letter-spacing: .08em; text-transform: uppercase; }
+  .ha-sticker b { font: 800 1.5rem/1 var(--display); letter-spacing: -0.03em; }
+}
+
+/* the empty bottom-right: two compact cards that finish the column */
+.side-card { display: flex; align-items: center; gap: 14px; padding: 14px 16px; border-radius: 16px; text-decoration: none; min-height: 78px; transition: transform 140ms var(--ease-out), border-color 160ms ease; }
+.side-card:active { transform: scale(.98); }
+.side-card b { display: block; font: 700 1.02rem/1.2 var(--display); letter-spacing: -0.02em; }
+.side-card span { display: block; font-size: .8rem; line-height: 1.35; }
+.spin-card { background: var(--char); color: #fff; border: 1.5px solid var(--char); }
+.spin-card span { color: #FFE9B0; }
+.spin-card img { width: 52px; height: 52px; border-radius: 50%; flex: none; }
+.find-card { background: var(--paper); border: 1.5px solid rgba(26,26,24,.18); color: var(--char); }
+.find-card span { color: var(--ash); }
+.find-card .pin { display: grid; place-items: center; width: 52px; height: 52px; border-radius: 50%; background: var(--sun); border: 2px solid var(--char); font-size: 1.4rem; flex: none; }
+@media (hover: hover) and (pointer: fine) { .find-card:hover { border-color: var(--char); } .spin-card:hover { background: #2a2926; } }
+
+/* cart label only appears on phones while the shop is closed (nothing else is competing for room) */
+.btn.cart .lbl { display: none; }
+.clock-hint { display: none; }
+
+/* sheets: a visible close button; tall sheets respect phone browser bars */
+.sheet-close { position: absolute; top: 12px; right: 12px; z-index: 3; width: 44px; height: 44px; border-radius: 50%; border: 1.5px solid var(--char); background: var(--paper); color: var(--char); font-size: 1.05rem; line-height: 1; cursor: pointer; display: grid; place-items: center; transition: transform 140ms var(--ease-out), background-color 160ms ease; }
+.sheet-close:active { transform: scale(.94); }
+.sheet-head, .osh-head { padding-right: 52px; }
+.sheet { max-height: 88vh; max-height: 88dvh; }
+@media (hover: hover) and (pointer: fine) { .sheet-close:hover { background: var(--sun); } }
+
+@media (max-width: 760px) {
+  /* header: no second line; labels when there is room */
+  .status-row { border-top: 0; padding: 0 16px 10px; }
+  body.is-closed .btn.call .lbl, body.is-closed .btn.cart .lbl { display: inline; }
+  body.is-closed .btn.call { width: auto; padding: 0 14px; }
+  /* sideways scrollers: first card respects the page margin instead of snapping flush */
+  .more, .best-grid, .chips { scroll-padding-inline: 16px; }
+  /* clock: seven days fit without scrolling; a hint says what to do */
+  .dchips { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 4px; overflow: visible; padding: 0; }
+  .dchip { min-width: 0; padding: 0; font-size: .7rem; letter-spacing: 0; }
+  .clock-tools { flex-direction: column; align-items: stretch; }
+  .btn-mini { align-self: flex-start; }
+  .clock-hint { display: block; font: 500 .72rem/1.45 var(--mono); letter-spacing: .03em; color: var(--ash); margin: 0 0 6px; }
+}
+.tick[data-h="23"] { transform: translateX(-100%); }
