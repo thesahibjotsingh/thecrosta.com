@@ -13,6 +13,7 @@ function openCart() {
   document.getElementById('cartDrawer').classList.add('open');
   document.getElementById('cartOverlay').classList.add('open');
   document.body.style.overflow = 'hidden';
+  document.body.classList.add('cart-open');
 
   // Animation 5: stagger cart items on open
   setTimeout(() => {
@@ -29,38 +30,48 @@ function closeCart() {
   document.getElementById('cartDrawer').classList.remove('open');
   document.getElementById('cartOverlay').classList.remove('open');
   document.body.style.overflow = '';
+  document.body.classList.remove('cart-open');
   if (openPicker) { openPicker.classList.remove('open'); openPicker = null; }
   // Reset pickup toggle
   if (isPickup) togglePickup();
 }
 
 // ── ADD ITEM ──
-function addItem(name, size, price, isPizza, isMealEligible) {
+// opts (all optional): qty (default 1) · popup:false skips the add-on popup ·
+// fromEl/img: the picture that flies to the cart · quiet:true skips the toast.
+function addItem(name, size, price, isPizza, isMealEligible, opts = {}) {
   const key = name + '|' + size;
+  const qty = opts.qty || 1;
+  const sizeLabel = size && size !== 'std' ? ` · ${size}` : '';
+  const toastText = () => {
+    const T = computeCartTotals(cart);
+    const promo = T.activePromo ? ' · ' + PROMO_LABEL[T.activePromo] + ' applied' : '';
+    return `Added ${qty > 1 ? qty + '× ' : ''}${name}${sizeLabel}${promo}`;
+  };
 
   // If item already in cart (pizza or not) — just increment, no popup
   const existing = cart.find(i => i._key === key);
   if (existing) {
-    existing.qty++;
+    existing.qty += qty;
     renderCart();
     updateFab();
     refreshMenuSteppers();
-    triggerFabWobble();
+    if (!opts.quiet) cartAddedFeedback(toastText(), opts);
     return;
   }
 
   // First time adding — create new cart entry
   const id = name + '|' + size + '|' + Date.now();
-  cart.push({ id, _key: key, name, size, price, qty: 1, addons: [], isPizza: !!isPizza, isMealEligible: !!isMealEligible });
+  cart.push({ id, _key: key, name, size, price, qty, addons: [], isPizza: !!isPizza, isMealEligible: !!isMealEligible });
   renderCart();
   updateFab();
   refreshMenuSteppers();
   if (openPicker) { openPicker.classList.remove('open'); openPicker = null; }
 
-  triggerFabWobble();
+  if (!opts.quiet) cartAddedFeedback(toastText(), opts);
 
   // Only show addon popup on first add of a pizza
-  if (isPizza) {
+  if (isPizza && opts.popup !== false) {
     setTimeout(() => openAddonPopup(id, name), 320);
   }
 }

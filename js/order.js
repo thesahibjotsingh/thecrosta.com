@@ -171,11 +171,7 @@ function placeOrder() {
   window.open(`https://wa.me/919888383010?text=${encoded}`, '_blank');
 }
 
-// ── Animation 1: FAB wobble helper ──
+// ── Cart count "bump" (used by steppers and the spin prize; adds use cartAddedFeedback) ──
 function triggerFabWobble() {
-  const fab = document.getElementById('cartFab');
-  fab.classList.remove('wobble');
-  void fab.offsetWidth; // reflow to restart animation
-  fab.classList.add('wobble');
-  fab.addEventListener('animationend', () => fab.classList.remove('wobble'), { once: true });
+  document.querySelectorAll('.cart-count').forEach(bump);
 }

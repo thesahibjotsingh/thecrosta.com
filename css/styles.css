@@ -60,7 +60,7 @@ nav.scrolled {
 .nav-logo-wrap { display: flex; align-items: center; gap: 0.7rem; text-decoration: none; }
 .nav-logo-img { width: 42px; height: 42px; border-radius: 50%; object-fit: cover; }
 .nav-logo-text {
-  font-family: 'Playfair Display', serif;
+  font-family: var(--display);
   font-size: 1.25rem; font-weight: 700;
   color: var(--charcoal); letter-spacing: 0.01em;
 }
@@ -107,7 +107,7 @@ nav.scrolled {
   margin-bottom: 1.5rem;
 }
 .hero-title {
-  font-family: 'Playfair Display', serif;
+  font-family: var(--display);
   font-size: clamp(2.8rem, 5.5vw, 4.8rem);
   line-height: 1.05; margin-bottom: 1.4rem;
   font-weight: 700;
@@ -160,7 +160,7 @@ nav.scrolled {
 
 .hero-stats { display: flex; gap: 2.5rem; }
 .stat-num {
-  font-family: 'Playfair Display', serif;
+  font-family: var(--display);
   font-size: 2rem; font-weight: 700; color: var(--charcoal);
   line-height: 1;
 }
@@ -236,7 +236,7 @@ nav.scrolled {
   flex-shrink: 0;
 }
 .hero-collage-logo-wrap .logo-fallback {
-  font-family: 'Playfair Display', serif;
+  font-family: var(--display);
   font-size: 1.3rem; font-weight: 700;
   color: #fff; letter-spacing: 0.02em;
   text-align: center; line-height: 1.1;
@@ -415,7 +415,7 @@ section { padding: 5.5rem 3rem; }
   text-transform: uppercase; color: var(--red); margin-bottom: 0.6rem;
 }
 .section-title {
-  font-family: 'Playfair Display', serif;
+  font-family: var(--display);
   font-size: clamp(1.8rem, 3.5vw, 2.8rem);
   font-weight: 700; line-height: 1.15; margin-bottom: 0.5rem;
 }
@@ -461,7 +461,7 @@ section { padding: 5.5rem 3rem; }
   display: none;
 }
 .menu-sizes-label .sizes-sub {
-  font-family: 'Playfair Display', serif;
+  font-family: var(--display);
   font-size: 1.15rem; font-weight: 700; color: #fff;
   line-height: 1; white-space: nowrap;
 }
@@ -474,7 +474,7 @@ section { padding: 5.5rem 3rem; }
   cursor: default;
 }
 .size-badge:hover { background: var(--red-light); }
-.size-badge .size-in { font-size: 1.05rem; font-weight: 800; color: var(--red); line-height: 1; font-family: 'Playfair Display', serif; }
+.size-badge .size-in { font-size: 1.05rem; font-weight: 800; color: var(--red); line-height: 1; font-family: var(--display); }
 .size-badge .size-name { font-size: 0.58rem; color: var(--warm-gray); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 3px; font-weight: 600; }
 
 .menu-tabs {
@@ -545,7 +545,7 @@ section { padding: 5.5rem 3rem; }
   flex-shrink: 0;
 }
 .mobile-cat-sheet-title {
-  font-family: 'Playfair Display', serif;
+  font-family: var(--display);
   font-size: 1.05rem;
   font-weight: 700;
   color: #fff;
@@ -659,7 +659,7 @@ section { padding: 5.5rem 3rem; }
 .badge-veg { background: #E8F5E9; color: #2E7D32; }
 .badge-spicy { background: #FFF3E0; color: #E65100; }
 .badge-best { background: #FFF8E1; color: #F57F17; }
-.menu-item-price { font-family: 'Playfair Display', serif; font-size: 0.92rem; color: var(--red); white-space: nowrap; font-weight: 700; }
+.menu-item-price { font-family: var(--display); font-size: 0.92rem; color: var(--red); white-space: nowrap; font-weight: 700; }
 .menu-item-price .price-note { font-size: 0.65rem; color: var(--warm-gray); font-family: 'DM Sans', sans-serif; font-weight: 400; display: block; text-align: right; margin-top: 1px; }
 
 /* single column items */
@@ -684,7 +684,7 @@ section { padding: 5.5rem 3rem; }
 }
 .addons-panel-icon { font-size: 1.4rem; }
 .addons-panel-title {
-  font-family: 'Playfair Display', serif;
+  font-family: var(--display);
   font-size: 1rem; font-weight: 700; color: #fff; line-height: 1.2;
 }
 .addons-panel-sub {
@@ -734,7 +734,7 @@ section { padding: 5.5rem 3rem; }
   color: var(--charcoal); text-align: center; line-height: 1.2;
 }
 .addon-card-price {
-  font-family: 'Playfair Display', serif;
+  font-family: var(--display);
   font-size: 0.78rem; font-weight: 700; color: var(--red);
 }
 .addon-card-tag {
@@ -803,7 +803,7 @@ section { padding: 5.5rem 3rem; }
 .size-pill-stepper .sps-btn:hover { background: rgba(0,0,0,0.18); }
 .size-pill-stepper .sps-count {
   font-size: 0.78rem; font-weight: 900; color: #fff;
-  font-family: 'Playfair Display', serif;
+  font-family: var(--display);
   padding: 0 6px;
   border-left: 1px solid rgba(255,255,255,0.3);
   border-right: 1px solid rgba(255,255,255,0.3);
@@ -929,7 +929,7 @@ section { padding: 5.5rem 3rem; }
   min-width: 24px; text-align: center;
   font-size: 0.82rem; font-weight: 800;
   color: #fff;
-  font-family: 'Playfair Display', serif;
+  font-family: var(--display);
   padding: 0 6px;
   border-left: 1px solid rgba(255,255,255,0.3);
   border-right: 1px solid rgba(255,255,255,0.3);
@@ -989,7 +989,7 @@ section { padding: 5.5rem 3rem; }
 .reviews-section { background: var(--warm-white); }
 .reviews-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 1.6rem; flex-wrap: wrap; gap: 1rem; }
 .reviews-rating { text-align: right; }
-.reviews-rating-num { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 700; color: var(--red); display: block; line-height: 1; }
+.reviews-rating-num { font-family: var(--display); font-size: 1.6rem; font-weight: 700; color: var(--red); display: block; line-height: 1; }
 .reviews-rating-stars { font-size: 0.85rem; color: var(--red); }
 .review-card { display: flex; gap: 0.8rem; padding: 1rem 0; border-top: 1px solid var(--border); }
 .review-card:first-child { border-top: none; padding-top: 0; }
@@ -1019,7 +1019,7 @@ section { padding: 5.5rem 3rem; }
 .reviews-powered { font-size: 0.7rem; color: #a39c93; }
 .reviews-see-all { font-size: 0.78rem; font-weight: 600; color: var(--red); text-decoration: none; }
 .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; }
-.info-block h3 { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700; margin-bottom: 1.5rem; }
+.info-block h3 { font-family: var(--display); font-size: 1.4rem; font-weight: 700; margin-bottom: 1.5rem; }
 .hours-row {
   display: flex; justify-content: space-between;
   padding: 0.75rem 0; border-bottom: 1px solid var(--border);
@@ -1031,7 +1031,7 @@ section { padding: 5.5rem 3rem; }
 .location-phone {
   display: inline-flex; align-items: center; gap: 0.5rem;
   margin-top: 1.2rem;
-  font-family: 'Playfair Display', serif;
+  font-family: var(--display);
   font-size: 1.6rem; font-weight: 700; color: var(--red);
   text-decoration: none;
 }
@@ -1106,7 +1106,7 @@ footer a { color: #7A736C; text-decoration: none; }
 }
 .offers-header .section-label { justify-content: center; display: flex; }
 .offers-header h2 {
-  font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700;
+  font-family: var(--display); font-size: 2rem; font-weight: 700;
   color: var(--charcoal); margin-top: 0.5rem;
 }
 .offers-carousel {
@@ -1173,7 +1173,7 @@ footer a { color: #7A736C; text-decoration: none; }
 }
 .spin-left .section-label { color: var(--gold); }
 .spin-title {
-  font-family: 'Playfair Display', serif;
+  font-family: var(--display);
   font-size: clamp(2rem, 4vw, 3.2rem);
   font-weight: 700;
   color: #fff;
@@ -1309,7 +1309,7 @@ footer a { color: #7A736C; text-decoration: none; }
   margin-bottom: 0.4rem;
 }
 .spin-result-prize {
-  font-family: 'Playfair Display', serif;
+  font-family: var(--display);
   font-size: clamp(1.4rem, 3vw, 2rem);
   font-weight: 700;
   color: var(--red);
@@ -1645,7 +1645,7 @@ footer a { color: #7A736C; text-decoration: none; }
   display: flex; align-items: center; justify-content: center;
   font-size: 0.72rem; font-weight: 700;
 }
-.cart-fab-total { font-family: 'Playfair Display', serif; font-size: 0.95rem; }
+.cart-fab-total { font-family: var(--display); font-size: 0.95rem; }
 
 /* cart drawer */
 .cart-overlay {
@@ -1675,7 +1675,7 @@ footer a { color: #7A736C; text-decoration: none; }
   flex-shrink: 0;
 }
 .cart-header-title {
-  font-family: 'Playfair Display', serif;
+  font-family: var(--display);
   font-size: 1.2rem; font-weight: 700;
   display: flex; align-items: center; gap: 0.55rem;
 }
@@ -1776,7 +1776,7 @@ footer a { color: #7A736C; text-decoration: none; }
 .cart-addon-add:hover { border-color: var(--red); color: var(--red); }
 .cart-item-name { font-weight: 600; font-size: 0.88rem; margin-bottom: 0.15rem; }
 .cart-item-sub { font-size: 0.74rem; color: var(--warm-gray); }
-.cart-item-price { font-family: 'Playfair Display', serif; font-weight: 700; color: var(--red); font-size: 0.92rem; white-space: nowrap; }
+.cart-item-price { font-family: var(--display); font-weight: 700; color: var(--red); font-size: 0.92rem; white-space: nowrap; }
 .cart-item-qty {
   display: flex; align-items: center; gap: 0.5rem; margin-top: 0.4rem;
 }
@@ -1911,7 +1911,7 @@ footer a { color: #7A736C; text-decoration: none; }
   margin-bottom: 1rem;
 }
 .cart-total-label { font-size: 0.8rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--warm-gray); }
-.cart-total-amount { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700; color: var(--charcoal); }
+.cart-total-amount { font-family: var(--display); font-size: 1.4rem; font-weight: 700; color: var(--charcoal); }
 .cart-total-amount span { color: var(--red); }
 
 /* Address row with pickup toggle */
@@ -2073,7 +2073,7 @@ footer a { color: #7A736C; text-decoration: none; }
   text-transform: uppercase; color: var(--red); margin-bottom: 0.5rem;
 }
 .how-title {
-  font-family: 'Playfair Display', serif;
+  font-family: var(--display);
   font-size: clamp(1.4rem, 2.5vw, 1.9rem);
   font-weight: 700; margin-bottom: 2.5rem; color: var(--charcoal);
 }
@@ -2103,7 +2103,7 @@ footer a { color: #7A736C; text-decoration: none; }
 .how-step-num {
   width: 40px; height: 40px; border-radius: 50%;
   background: var(--red); color: #fff;
-  font-family: 'Playfair Display', serif;
+  font-family: var(--display);
   font-size: 1.1rem; font-weight: 700;
   display: flex; align-items: center; justify-content: center;
   flex-shrink: 0;
@@ -2183,7 +2183,7 @@ footer a { color: #7A736C; text-decoration: none; }
   text-transform: uppercase; color: var(--red); margin-bottom: 0.3rem;
 }
 .addon-popup-pizza {
-  font-family: 'Playfair Display', serif;
+  font-family: var(--display);
   font-size: 1.05rem; font-weight: 700; color: #fff;
 }
 .addon-popup-hint {
@@ -2229,7 +2229,7 @@ footer a { color: #7A736C; text-decoration: none; }
 .popup-card-icon { font-size: 1.3rem; line-height: 1; width: 26px; text-align: center; flex-shrink: 0; }
 .popup-card-icon svg { width: 24px; height: 24px; }
 .popup-card-name { font-size: 0.85rem; font-weight: 600; color: #fff; line-height: 1.2; flex: 1; }
-.popup-card-price { font-size: 1.05rem; color: #fff; font-weight: 800; font-family: 'Playfair Display', serif; flex-shrink: 0; }
+.popup-card-price { font-size: 1.05rem; color: #fff; font-weight: 800; font-family: var(--display); flex-shrink: 0; }
 .popup-card-check {
   width: 20px; height: 20px; border-radius: 50%;
   border: 1.5px solid rgba(255,255,255,0.25); background: transparent;

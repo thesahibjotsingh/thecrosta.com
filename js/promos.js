@@ -1,23 +1,7 @@
-// ── SHOP CLOCK ──
-// Offers follow the shop's clock (Patiala, IST), not the visitor's device —
-// otherwise a wrong device clock or another timezone would show/apply the
-// wrong offer. shopNow() → { day: Sun=0…Sat=6, hour: 0–23, minute: 0–59 }.
-const SHOP_TIMEZONE = 'Asia/Kolkata';
-const SHOP_DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-const shopClockFormat = new Intl.DateTimeFormat('en-US', {
-  timeZone: SHOP_TIMEZONE, weekday: 'short', hour: '2-digit', minute: '2-digit', hourCycle: 'h23'
-});
-function shopNow() {
-  const parts = {};
-  shopClockFormat.formatToParts(new Date()).forEach(p => { parts[p.type] = p.value; });
-  return { day: SHOP_DAYS.indexOf(parts.weekday), hour: parseInt(parts.hour, 10), minute: parseInt(parts.minute, 10) };
-}
-
+// Offer windows live in offers.js and the shop clock in shop.js, so the cart
+// discounts, the header tickets and the clock strip can never disagree.
 // ── WEEKDAY LUNCH OFFER: Mon–Wed, 11:00–15:00 shop time, 20% off pizzas ──
-function isWeekdayLunchOfferActive() {
-  const { day, hour } = shopNow();
-  return day >= 1 && day <= 3 && hour >= 11 && hour < 15;
-}
+function isWeekdayLunchOfferActive() { return isOfferLive('lunch'); }
 
 // ── GROUP PERK: order 4+ Medium/Large pizzas → free Complete Meal Bundle ──
 // Medium = 10″, Large = 12″ (see pizza size legend above the menu).
@@ -54,10 +38,7 @@ function syncGroupPerkBundle() {
 // ── WEEKEND SPECIAL: Sat & Sun only — Buy 2 Large get 1 Medium free, or Buy 2
 // Medium get 1 Small free (same flavour only). One free pizza per order.
 const PIZZA_PRICE_TABLE = {}; // name → { '8″': price, '10″': price, '12″': price }, built at page load
-function isWeekendSpecialActive() {
-  const { day } = shopNow(); // Sun=0 ... Sat=6
-  return day === 0 || day === 6;
-}
+function isWeekendSpecialActive() { return isOfferLive('weekend'); }
 
 // Looks at the real (non-promo) pizzas in the cart and returns the single
 // best qualifying free-pizza spec — { flavour, freeSize, freeSizeLabel, freePrice } —
@@ -116,10 +97,7 @@ function syncWeekendSpecialBundle() {
 // (the menu already prices Single vs Meal ₹60 apart — this offer refunds ₹30
 // of that upcharge per qualifying unit while the window is active).
 const CROSTA_BOOST_SAVING_PER_UNIT = 30;
-function isCrostaBoostActive() {
-  const { hour } = shopNow();
-  return hour >= 16 && hour < 18;
-}
+function isCrostaBoostActive() { return isOfferLive('boost'); }
 
 // ── MASTER PROMO RESOLVER ──
 // Per the site-wide Terms & Conditions: "Only one discount or promotional
@@ -159,72 +137,3 @@ function computeCartTotals(cartArr) {
   const discount = pizzaDiscount + boostDiscount;
   return { subtotal, pizzaDiscount, boostDiscount, discount, total: subtotal - discount, offerActive, boostActive, groupPerkActive, weekendSpecialActive, activePromo };
 }
-
-// ── LIVE OFFERS TICKER ──
-// Site-wide "what's running right now" strip, shown above the hero — separate
-// from the cart banners, which only ever show the ONE offer that actually
-// applies to a given order. This ticker is purely informational: it lists
-// every offer whose window is currently open, so a browsing customer (who
-// hasn't built a cart yet) knows what's worth ordering for. Group Perk has no
-// time window at all, so it's always considered "live" here.
-function getLiveOfferItems() {
-  const items = [];
-  if (isWeekdayLunchOfferActive()) items.push('🍕 Weekday Lunch Offer live now — 20% off all pizzas!');
-  if (isWeekendSpecialActive()) items.push('🎉 Weekend Special live now — Buy 2 Large get 1 Medium FREE (same flavour)!');
-  if (isCrostaBoostActive()) items.push('🍔 The Crosta Boost live now — Meal upgrade for just ₹30!');
-  items.push('🎁 Group Perk — Order 4+ Medium/Large pizzas, get a FREE Meal Bundle!');
-  return items;
-}
-
-// Measures the ACTUAL rendered height of the fixed nav (+ mobile sub-nav,
-// when it's visible) and sets that as the ticker's top padding, so the
-// ticker sits flush below the real header on any device/breakpoint instead
-// of relying on guessed pixel values that can drift out of sync.
-function positionOfferStrip() {
-  const stripEl = document.getElementById('offerStrip');
-  const navEl = document.querySelector('nav');
-  const subnavEl = document.getElementById('mobileSubnav');
-  if (!stripEl || !navEl) return;
-
-  const navHeight = navEl.offsetHeight;
-  const subnavHeight = (subnavEl && subnavEl.offsetHeight > 0) ? subnavEl.offsetHeight : 0;
-  stripEl.style.paddingTop = (navHeight + subnavHeight + 14) + 'px'; // +14px breathing room
-}
-
-// Rebuilds and shows/hides the ticker. Hidden completely when nothing is
-// live (in practice this only happens if Group Perk itself is ever removed
-// or time-gated, since it has no window of its own).
-function updateOfferStrip() {
-  const stripEl = document.getElementById('offerStrip');
-  const innerEl = document.getElementById('offerStripInner');
-  if (!stripEl || !innerEl) return;
-
-  positionOfferStrip();
-
-  const items = getLiveOfferItems();
-  if (items.length === 0) {
-    stripEl.style.display = 'none';
-    innerEl.innerHTML = '';
-    return;
-  }
-
-  // Repeat the list so the marquee always feels reasonably full, even with
-  // just one live offer, then duplicate once more for the seamless scroll loop.
-  let padded = items.slice();
-  while (padded.length < 4) padded = padded.concat(items);
-  const html = padded.map(t => `<div class="strip-item"><span class="strip-dot"></span>${t}</div>`).join('');
-  innerEl.innerHTML = html + html;
-  stripEl.style.display = 'flex';
-}
-
-document.addEventListener('DOMContentLoaded', () => {
-  updateOfferStrip();
-  // Offer windows flip at fixed clock times (11:00, 15:00, 16:00, 18:00, and
-  // the Sat/Sun boundary) — recheck periodically so the ticker updates for
-  // anyone sitting on the page across one of those boundaries.
-  setInterval(updateOfferStrip, 60000);
-  // Re-measure on resize/orientation change (nav/subnav height can change,
-  // e.g. rotating a phone or crossing the mobile-subnav breakpoint).
-  window.addEventListener('resize', positionOfferStrip);
-  window.addEventListener('orientationchange', positionOfferStrip);
-});

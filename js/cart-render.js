@@ -148,23 +148,29 @@ function editAddons(pizzaId, pizzaName) {
   openAddonPopup(pizzaId, pizzaName);
 }
 
-// ── UPDATE FAB ──
-function updateFab() {
-  const fab   = document.getElementById('cartFab');
-  const count = cart.reduce((s, i) => s + i.qty, 0);
-  const { total } = computeCartTotals(cart);
-  document.getElementById('fabCount').textContent = count;
-  document.getElementById('fabTotal').textContent = '₹' + total;
-  if (count > 0) fab.classList.add('visible');
-  else fab.classList.remove('visible');
-
-  // Mobile nav cart button (replaces the floating FAB on small screens) —
-  // toggling this on <nav> also shifts WhatsApp/Phone left to make room
-  const navCartBtn = document.getElementById('navCartBtn');
-  const mainNav = document.getElementById('mainNav');
-  if (navCartBtn) {
-    document.getElementById('navCartBtnCount').textContent = count;
-    document.getElementById('navCartBtnTotal').textContent = '₹' + total;
+// ── UPDATE HEADER CART + PHONE CART BAR ──
+// What each promo is called in toasts and the cart bar.
+const PROMO_LABEL = { weekend: 'Weekend special', groupperk: 'Group perk', weekday: 'Weekday lunch', boost: 'The Crosta Boost' };
+function promoSummary(T) {
+  switch (T.activePromo) {
+    case 'weekend':   return 'Weekend special: free pizza added';
+    case 'groupperk': return 'Group perk: free meal bundle';
+    case 'weekday':   return `Weekday lunch: you save ${rupee(T.pizzaDiscount)}`;
+    case 'boost':     return `The Crosta Boost: you save ${rupee(T.boostDiscount)}`;
+    default:          return '';
   }
-  if (mainNav) mainNav.classList.toggle('has-cart-items', count > 0);
+}
+function updateFab() {
+  const count = cart.reduce((s, i) => s + i.qty, 0);
+  const T = computeCartTotals(cart);
+  document.querySelectorAll('.cart-count').forEach(e => { e.textContent = count; });
+  document.querySelectorAll('.cart-total').forEach(e => { e.textContent = rupee(T.total); });
+  document.querySelectorAll('.cart-word').forEach(e => { e.textContent = count === 1 ? 'item' : 'items'; });
+  document.querySelectorAll('.cart').forEach(e => e.setAttribute('aria-label', `Cart, ${count} item${count === 1 ? '' : 's'}, ${rupee(T.total)}`));
+  const bar = document.getElementById('cartbar');
+  if (bar) bar.classList.toggle('show', count > 0);
+  document.body.classList.toggle('has-cartbar', count > 0);
+  const save = document.getElementById('cbSave');
+  if (save) save.textContent = promoSummary(T);
+  if (typeof onCartChanged === 'function') onCartChanged();
 }

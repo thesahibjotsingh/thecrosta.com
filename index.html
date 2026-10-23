@@ -10,173 +10,175 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
 <meta name="description" content="At THE CROSTA, we don't just make pizza—we craft it. Fresh dough, premium toppings, bold flavours. Near Thapar University, Bhadson Road, Patiala. Starting ₹89.">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/styles.css">
+<link rel="stylesheet" href="css/home.css">
 </head>
 <body>
 
-<!-- NAV -->
-<nav id="mainNav">
-  <a href="#home" class="nav-logo-wrap">
-    <img src="images/logo-nav.webp" alt="The Crosta Logo" class="nav-logo-img">
-    <span class="nav-logo-text">The <span>Crosta</span></span>
-  </a>
-  <ul class="nav-links">
-    <li><a href="#menu">Menu</a></li>
-    <li><a href="#offers">Offers</a></li>
-    <li><a href="#spin">Spin</a></li>
-    <li><a href="#reviews">Reviews</a></li>
-    <li><a href="#hours">Hours</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-  <div class="nav-right-group">
-    <div class="nav-cta-group" style="display:flex;gap:0.6rem;align-items:center;flex-shrink:0;">
-      <a href="https://wa.me/919888383010" target="_blank" rel="noopener noreferrer" class="nav-order nav-wa" style="background:#1aad4b;display:inline-flex;align-items:center;gap:0.45rem;position:relative;overflow:hidden;">
-        <svg viewBox="0 0 24 24" fill="currentColor" style="width:14px;height:14px;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        <span class="nav-btn-text">WhatsApp</span>
-      </a>
-      <a href="tel:9888383010" class="nav-order"><span class="nav-btn-icon">📞</span><span class="nav-btn-text"> Order Now</span></a>
+<!-- HEADER -->
+<header class="bar" id="bar">
+  <div class="wrap bar-in">
+    <a class="brand" href="#top"><img src="images/logo-nav.webp" alt="" width="40" height="40"><span>The <b>Crosta</b></span></a>
+    <div class="status" id="statusTop" role="status"></div>
+    <div class="actions" id="actions">
+      <a class="btn call" href="tel:9888383010" aria-label="Call the shop"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg><span class="lbl">Call</span></a>
+      <a class="btn wa" id="waBtn" href="https://wa.me/919888383010" target="_blank" rel="noopener noreferrer" aria-label="Order on WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.26-.46-2.4-1.48-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.62-.92-2.2-.24-.58-.49-.5-.67-.5h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.88 1.21 3.07.15.2 2.1 3.2 5.08 4.49.7.3 1.26.49 1.7.62.72.23 1.36.2 1.87.12.57-.08 1.76-.72 2-1.41.25-.7.25-1.29.17-1.41-.07-.13-.27-.2-.57-.35M12 21.8A9.9 9.9 0 0 1 7 20.4l-.36-.21-3.74.98 1-3.65-.24-.37A9.86 9.86 0 0 1 2.1 12c0-5.45 4.44-9.9 9.9-9.9 2.64 0 5.12 1.03 6.99 2.9a9.83 9.83 0 0 1 2.9 7c0 5.45-4.45 9.9-9.9 9.9M20.5 3.5A11.8 11.8 0 0 0 12 0C5.4 0 .06 5.34.06 11.9c0 2.1.55 4.14 1.59 5.95L0 24l6.3-1.65A11.9 11.9 0 0 0 12 23.8c6.55 0 11.9-5.34 11.9-11.9 0-3.18-1.24-6.17-3.4-8.4"/></svg><span class="lbl">Order on WhatsApp</span></a>
+      <span class="btn off" id="closedBtn" aria-disabled="true" hidden><span class="lbl" id="closedBtnLbl">Closed</span></span>
+      <button class="btn cart" type="button" onclick="openCart()" aria-label="Cart, 0 items"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h2l2.4 10.2a1 1 0 0 0 1 .8h8.8a1 1 0 0 0 1-.76L20 8H6.2"/><circle cx="9.5" cy="19.5" r="1.3"/><circle cx="17" cy="19.5" r="1.3"/></svg><i class="cart-count">0</i></button>
     </div>
-    <button type="button" class="nav-cart-btn" id="navCartBtn" onclick="openCart()" aria-label="View cart">
-      <span class="nav-cart-btn-icon">🛒</span>
-      <span class="nav-cart-btn-count" id="navCartBtnCount">0</span>
-      <span class="nav-cart-btn-total" id="navCartBtnTotal">₹0</span>
-    </button>
   </div>
-</nav>
+  <div class="status-row" id="statusRow"></div>
+</header>
 
-<!-- MOBILE SUB-NAV -->
-<nav class="mobile-subnav" id="mobileSubnav" aria-label="Mobile navigation">
-  <a href="#menu">Menu</a>
-  <a href="#offers">Offers</a>
-  <a href="#spin">Spin</a>
-  <div class="subnav-more">
-    <button type="button" class="subnav-more-btn" id="subnavMoreBtn" aria-haspopup="true" aria-expanded="false">More ▾</button>
-    <div class="subnav-more-menu" id="subnavMoreMenu">
-      <a href="#reviews">Reviews</a>
-      <a href="#hours">Hours</a>
-      <a href="#contact">Contact</a>
-    </div>
-  </div>
-</nav>
+<main id="top">
+  <div class="live-band">
+    <section class="wrap top" aria-labelledby="h1">
+      <p class="eyebrow" id="clockLine"></p>
+      <h1 id="h1">Pure veg <span class="u">pizza<svg viewBox="0 0 200 20" preserveAspectRatio="none" aria-hidden="true"><path d="M3 12 C 30 2, 50 20, 80 10 S 130 2, 160 11 S 190 14, 197 6"/></svg></span> in Patiala</h1>
+      <p class="lede" id="lede">Fresh dough daily, near Thapar University.</p>
+      <div class="stickers" aria-label="Highlights">
+        <span class="sticker"><span class="vegmark" aria-hidden="true"></span>100% pure veg</span>
+        <span class="sticker">Pizzas from ₹89</span>
+        <span class="sticker">Fresh dough daily</span>
+      </div>
 
-<!-- LIVE OFFERS TICKER — populated + shown/hidden by JS (see updateOfferStrip) -->
-<div class="offer-strip" id="offerStrip">
-  <div class="strip-inner" id="offerStripInner"></div>
-</div>
+      <div class="live-grid">
+        <div class="offers">
+          <div id="primary"></div>
+          <div class="more" id="more"></div>
+          <p class="rule-note">One offer per order — we apply the best one that fits your cart. <a href="#spin">Feeling lucky? Spin for a deal →</a></p>
+        </div>
 
-<section class="hero" id="home">
-  <div class="hero-left">
-    <div class="hero-eyebrow">✦ Hand-Crafted Artisan Pizza · Patiala</div>
-    <h1 class="hero-title">We don't just<br>make pizza —<br><em>we craft it.</em></h1>
-    <p class="hero-tagline">Every pizza starts with fresh dough, loaded with premium toppings, and finished with bold, addictive flavours — so every bite delivers.</p>
-    <p class="hero-slogan">Crafted Crust. Perfect Bite.</p>
-    <div class="hero-actions">
-      <a href="#menu" class="btn-primary">Explore Menu</a>
-      <a href="tel:9888383010" class="btn-ghost"><span>📞</span><span>Call to Order</span><span>→</span></a>
-      <a href="https://wa.me/919888383010" target="_blank" rel="noopener noreferrer" class="btn-whatsapp-hero">
-        <svg viewBox="0 0 24 24" fill="currentColor" style="width:16px;height:16px;flex-shrink:0;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        Order via WhatsApp
-      </a>
+        <aside class="quick" aria-label="Order quickly">
+          <div class="reorder" id="reorder" hidden>
+            <p class="eyebrow">Back for more? · your last order</p>
+            <strong id="reorderText"></strong>
+            <div class="row"><small>Same items, current prices</small><button class="btn" type="button" id="reorderBtn">Reorder</button></div>
+          </div>
+          <div>
+            <h2>Hungry? Start here</h2>
+            <div class="tiles">
+              <a class="tile" href="#menu" data-cat="pizzas"><span class="th"><img src="images/menu-farm-house-pizza.webp" alt=""></span><div><b>Pizzas</b><span>from ₹89</span></div></a>
+              <a class="tile" href="#menu" data-cat="burgerswraps"><span class="th"><img src="images/menu-veg-grilled-burger.webp" alt=""></span><div><b>Burgers &amp; wraps</b><span>from ₹49</span></div></a>
+              <a class="tile" href="#menu" data-cat="quickbites" data-anchor="qb-fries"><span class="th"><img src="images/menu-salted-fries.webp" alt=""></span><div><b>Fries</b><span>from ₹69</span></div></a>
+              <a class="tile" href="#menu" data-cat="pasta"><span class="th"><img src="images/menu-napoli-pasta.webp" alt=""></span><div><b>Pasta</b><span>from ₹129</span></div></a>
+              <a class="tile" href="#menu" data-cat="drinks"><span class="th"><img src="images/menu-strawberry-shake.webp" alt=""></span><div><b>Shakes</b><span>from ₹99</span></div></a>
+              <a class="tile" href="#menu" data-cat="drinks"><span class="th"><img src="images/menu-masala-chai.webp" alt=""></span><div><b>Chai</b><span>₹20</span></div></a>
+            </div>
+          </div>
+        </aside>
+      </div>
+
+      <details class="clock" id="clock">
+        <summary>
+          <h2>Offers by the clock</h2>
+          <span class="sum-r"><span class="rule-note" id="clockNote"></span>
+            <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span>
+        </summary>
+        <div class="clock-body">
+          <div class="clock-tools">
+            <div class="dchips" id="days" role="group" aria-label="Pick a day"></div>
+            <button class="btn-mini" id="clockNow" type="button" hidden>Back to now</button>
+          </div>
+          <div class="lanes" id="lanes"></div>
+          <p class="clock-sum" id="clockSum" aria-live="polite"></p>
+        </div>
+      </details>
+    </section>
+    <svg class="wave" viewBox="0 0 1440 48" preserveAspectRatio="none" aria-hidden="true"><path fill="#FDF8F2" d="M0 48V30C120 6 240 6 360 24S600 44 720 26 960 4 1080 22 1320 40 1440 18V48Z"/></svg>
+  </div>
+
+  <div class="shop">
+    <div class="tools" id="tools">
+      <div class="wrap tools-in">
+        <label class="search"><span class="sr">Search the menu</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          <input type="search" id="menuSearch" placeholder="Craving something? Try “paneer”" autocomplete="off" enterkeyhint="search">
+          <button class="search-clear" id="searchClear" type="button" aria-label="Clear search" hidden>×</button>
+        </label>
+        <div class="chips" id="chips" role="group" aria-label="Menu categories">
+          <button class="chip on" type="button" data-cat="pizzas" aria-pressed="true">Pizzas</button>
+          <button class="chip" type="button" data-cat="burgerswraps" aria-pressed="false">Burgers, wraps &amp; sandwiches</button>
+          <button class="chip" type="button" data-cat="pasta" aria-pressed="false">Pasta</button>
+          <button class="chip" type="button" data-cat="garlicbread" aria-pressed="false">Garlic bread</button>
+          <button class="chip" type="button" data-cat="quickbites" aria-pressed="false">Quick bites</button>
+          <button class="chip" type="button" data-cat="drinks" aria-pressed="false">Drinks &amp; shakes</button>
+          <button class="chip" type="button" data-cat="quickdrinks" aria-pressed="false">Quick drinks</button>
+        </div>
+        <span class="veg"><span class="vegmark" aria-hidden="true"></span>Pure veg kitchen</span>
+      </div>
     </div>
-    <div class="hero-stats">
-      <div>
-        <div class="stat-num"><span>₹89</span></div>
-        <div class="stat-label">Pizzas starting at</div>
+
+    <section class="wrap best" aria-labelledby="bestH">
+      <div class="best-head"><h2 id="bestH">Everyone’s ordering these</h2><a href="#menu">Full menu →</a></div>
+      <div class="best-grid" id="bestGrid"></div>
+    </section>
+
+<!-- MENU -->
+<section class="menu-section" id="menu">
+  <div class="menu-header">
+    <div>
+      <p class="section-label">What we serve</p>
+      <h2 class="section-title">Our Menu</h2>
+    </div>
+    <div class="menu-sizes" id="menuSizesBox">
+      <div class="menu-sizes-variant active" data-variant="pizzas">
+        <div class="menu-sizes-label">
+          <span class="sizes-sub">Pizza Sizes</span>
+        </div>
+        <div class="size-badge"><span class="size-in">8″</span><span class="size-name">Regular</span></div>
+        <div class="size-badge"><span class="size-in">10″</span><span class="size-name">Medium</span></div>
+        <div class="size-badge"><span class="size-in">12″</span><span class="size-name">Large</span></div>
       </div>
-      <div>
-        <div class="stat-num"><span>100%</span></div>
-        <div class="stat-label">Fresh dough daily</div>
+      <div class="menu-sizes-variant" data-variant="burgerswraps">
+        <div class="menu-sizes-label meal-label">
+          <span class="sizes-sub">Make It a Meal!</span>
+        </div>
+        <div class="menu-sizes-text menu-sizes-text-stacked">
+          <span class="meal-headline">Add just <span class="meal-price">₹60</span> for the full combo</span>
+          <span class="meal-subline">Crispy fries + 250ml cold drink included</span>
+        </div>
       </div>
-      <div>
-        <div class="stat-num"><span>3</span></div>
-        <div class="stat-label">Sizes: 8″ 10″ 12″</div>
+      <div class="menu-sizes-variant" data-variant="garlicbread">
+        <div class="menu-sizes-label">
+          <span class="sizes-sub">Garlic Bread</span>
+        </div>
+        <div class="menu-sizes-text menu-sizes-text-center">Made With 10″ Pizza Dough</div>
       </div>
     </div>
   </div>
-  <div class="hero-right">
-    <div class="hero-collage">
-      <!-- Main large pizza photo -->
-      <img class="hero-collage-main"
-           src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=600&q=80&fit=crop"
-           alt="Artisan pizza fresh out of the oven" loading="eager">
-      <!-- Bottom right — cheese pull -->
-      <img class="hero-collage-b"
-           src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400&q=80&fit=crop"
-           alt="Cheesy pizza slice" loading="eager">
-      <!-- Small float — garnished pizza -->
-      <img class="hero-collage-c"
-           src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=300&q=80&fit=crop"
-           alt="Pizza with fresh toppings" loading="eager">
-      <div class="hero-collage-logo-wrap">
-        <div class="logo-fallback">The<br><span>Crosta</span></div>
-        <img src="images/logo-hero.webp" alt="The Crosta Logo">
-      </div>
-      <div class="hero-collage-tag">🍕 Fresh daily · <span>₹89</span> onwards</div>
-    </div>
+
+  <!-- QUICK BITES SUB-NAV -->
+  <div class="qb-subnav" id="qbSubnav">
+    <span class="qb-sub-label">Jump to</span>
+    <button class="qb-sub-btn active" onclick="scrollToQbCategory('qb-fries', this)">🍟 Fries</button>
+    <button class="qb-sub-btn" onclick="scrollToQbCategory('qb-springrolls', this)">🌿 Spring Rolls</button>
   </div>
+
+  <!-- Menu panels are rendered from js/menu-data.js by js/menu-render.js -->
+  <div class="menu-panel active" id="tab-pizzas"></div>
+  <div class="menu-panel" id="tab-burgerswraps"></div>
+  <div class="menu-panel" id="tab-quickbites"></div>
+  <div class="menu-panel" id="tab-pasta"></div>
+  <div class="menu-panel" id="tab-garlicbread"></div>
+  <div class="menu-panel" id="tab-drinks"></div>
+  <div class="menu-panel" id="tab-quickdrinks"></div>
+  <noscript><p style="padding:2rem;text-align:center">Please enable JavaScript to view the menu, or call us on <a href="tel:9888383010">9888383010</a>.</p></noscript>
+
+  <div class="menu-empty" id="menuEmpty" hidden><b>Nothing matches yet</b>Try “paneer”, “fries” or “shake”.</div>
+
 </section>
-
-<!-- MARQUEE STRIP -->
-<div class="strip">
-  <div class="strip-inner">
-    <div class="strip-item"><span class="strip-dot"></span>Fresh dough daily</div>
-    <div class="strip-item"><span class="strip-dot"></span>Near Thapar University</div>
-    <div class="strip-item"><span class="strip-dot"></span>Dine-in & takeaway</div>
-    <div class="strip-item"><span class="strip-dot"></span>Fast delivery</div>
-    <div class="strip-item"><span class="strip-dot"></span>Pizzas from ₹89</div>
-    <div class="strip-item"><span class="strip-dot"></span>Crafted Crust. Perfect Bite.</div>
-    <div class="strip-item"><span class="strip-dot"></span>Call 9888383010</div>
-    <div class="strip-item"><span class="strip-dot"></span>thecrosta.com</div>
-    <!-- duplicate for infinite loop -->
-    <div class="strip-item"><span class="strip-dot"></span>Fresh dough daily</div>
-    <div class="strip-item"><span class="strip-dot"></span>Near Thapar University</div>
-    <div class="strip-item"><span class="strip-dot"></span>Dine-in & takeaway</div>
-    <div class="strip-item"><span class="strip-dot"></span>Fast delivery</div>
-    <div class="strip-item"><span class="strip-dot"></span>Pizzas from ₹89</div>
-    <div class="strip-item"><span class="strip-dot"></span>Crafted Crust. Perfect Bite.</div>
-    <div class="strip-item"><span class="strip-dot"></span>Call 9888383010</div>
-    <div class="strip-item"><span class="strip-dot"></span>thecrosta.com</div>
-  </div>
-</div>
-
-<!-- HOW TO ORDER -->
-<div class="how-section">
-  <div class="how-inner">
-    <p class="how-eyebrow">✦ New — Easy Online Ordering</p>
-    <h2 class="how-title">Order in 3 Simple Steps</h2>
-    <div class="how-steps">
-      <div class="how-step">
-        <div class="how-step-num">1</div>
-        <div class="how-step-icon">🍕</div>
-        <div class="how-step-title">Browse the Menu</div>
-        <div class="how-step-desc">Explore our pizzas, bites, pasta, shakes & more — pick whatever you're craving.</div>
-      </div>
-      <div class="how-step">
-        <div class="how-step-num">2</div>
-        <div class="how-step-icon">💬</div>
-        <div class="how-step-title">Message Us on WhatsApp</div>
-        <div class="how-step-desc">Tap <a href="https://wa.me/919888383010" target="_blank" rel="noopener noreferrer">WhatsApp</a> and send us your order — it takes less than a minute.</div>
-      </div>
-      <div class="how-step">
-        <div class="how-step-num">3</div>
-        <div class="how-step-icon">🛵</div>
-        <div class="how-step-title">Get Your Fresh Pizza</div>
-        <div class="how-step-desc">Sit back — your hand-crafted order is on its way, piping hot.</div>
-      </div>
-    </div>
-    <a href="https://wa.me/919888383010" target="_blank" rel="noopener noreferrer" class="how-cta">
-      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-      Start Your Order on WhatsApp
-    </a>
-  </div>
-</div>
+  </div><!-- /.shop -->
+</main>
 
 <!-- OFFERS -->
 <section class="offers-section" id="offers">
   <div class="offers-header">
-    <p class="section-label">🔥 Don't Miss Out</p>
-    <h2>Today's Offers</h2>
+    <p class="section-label">Offers at a glance</p>
+    <h2>Offers &amp; combos</h2>
   </div>
   <div class="offers-carousel">
     <button class="offers-arrow prev" onclick="offersMove(-1)" aria-label="Previous offer">‹</button>
@@ -265,86 +267,6 @@
       <button class="spin-again-hint" onclick="resetSpin()">← Spin again next visit</button>
     </div>
   </div>
-</section>
-
-<!-- MENU -->
-<section class="menu-section" id="menu">
-  <div class="menu-header">
-    <div>
-      <p class="section-label">What we serve</p>
-      <h2 class="section-title">Our Menu</h2>
-    </div>
-    <div class="menu-sizes" id="menuSizesBox">
-      <div class="menu-sizes-variant active" data-variant="pizzas">
-        <div class="menu-sizes-label">
-          <span class="sizes-sub">Pizza Sizes</span>
-        </div>
-        <div class="size-badge"><span class="size-in">8″</span><span class="size-name">Regular</span></div>
-        <div class="size-badge"><span class="size-in">10″</span><span class="size-name">Medium</span></div>
-        <div class="size-badge"><span class="size-in">12″</span><span class="size-name">Large</span></div>
-      </div>
-      <div class="menu-sizes-variant" data-variant="burgerswraps">
-        <div class="menu-sizes-label meal-label">
-          <span class="sizes-sub">Make It a Meal!</span>
-        </div>
-        <div class="menu-sizes-text menu-sizes-text-stacked">
-          <span class="meal-headline">Add just <span class="meal-price">₹60</span> for the full combo</span>
-          <span class="meal-subline">Crispy fries + 250ml cold drink included</span>
-        </div>
-      </div>
-      <div class="menu-sizes-variant" data-variant="garlicbread">
-        <div class="menu-sizes-label">
-          <span class="sizes-sub">Garlic Bread</span>
-        </div>
-        <div class="menu-sizes-text menu-sizes-text-center">Made With 10″ Pizza Dough</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="menu-tabs-wrap" id="menuTabsWrap">
-    <div class="menu-tabs" id="menuTabs">
-      <button class="tab active" data-cat="pizzas" onclick="showTab('pizzas',this)">Pizzas</button>
-      <button class="tab" data-cat="burgerswraps" onclick="showTab('burgerswraps',this)">Burgers, Wraps &amp; Sandwiches</button>
-      <button class="tab" data-cat="pasta" onclick="showTab('pasta',this)">Pasta</button>
-      <button class="tab" data-cat="garlicbread" onclick="showTab('garlicbread',this)">Stuffed Garlic Bread</button>
-      <button class="tab" data-cat="quickbites" onclick="showTab('quickbites',this)">Quick Bites</button>
-      <button class="tab" data-cat="drinks" onclick="showTab('drinks',this)">Drinks &amp; Shakes</button>
-      <button class="tab" data-cat="quickdrinks" onclick="showTab('quickdrinks',this)">Quick Drinks</button>
-    </div>
-    <div class="tabs-scroll-hint" id="tabsScrollHint" aria-hidden="true">
-      <svg viewBox="0 0 8 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1,1 7,7 1,13"/></svg>
-    </div>
-  </div>
-
-  <!-- MOBILE CATEGORY PICKER (replaces sliding tabs on small screens) -->
-  <button type="button" class="mobile-cat-trigger" id="mobileCatTrigger" aria-haspopup="true" aria-expanded="false" aria-label="Browse menu categories">
-    <span class="mobile-cat-trigger-icon">📋</span>
-    <span class="mobile-cat-trigger-label">Menu</span>
-  </button>
-  <div class="mobile-cat-sheet-overlay" id="mobileCatSheetOverlay"></div>
-  <div class="mobile-cat-sheet" id="mobileCatSheet" role="dialog" aria-label="Menu categories">
-    <div class="mobile-cat-sheet-handle"></div>
-    <div class="mobile-cat-sheet-title">Menu Categories</div>
-    <div class="mobile-cat-sheet-list" id="mobileCatSheetList"></div>
-  </div>
-
-  <!-- QUICK BITES SUB-NAV -->
-  <div class="qb-subnav" id="qbSubnav">
-    <span class="qb-sub-label">Jump to</span>
-    <button class="qb-sub-btn active" onclick="scrollToQbCategory('qb-fries', this)">🍟 Fries</button>
-    <button class="qb-sub-btn" onclick="scrollToQbCategory('qb-springrolls', this)">🌿 Spring Rolls</button>
-  </div>
-
-  <!-- Menu panels are rendered from js/menu-data.js by js/menu-render.js -->
-  <div class="menu-panel active" id="tab-pizzas"></div>
-  <div class="menu-panel" id="tab-burgerswraps"></div>
-  <div class="menu-panel" id="tab-quickbites"></div>
-  <div class="menu-panel" id="tab-pasta"></div>
-  <div class="menu-panel" id="tab-garlicbread"></div>
-  <div class="menu-panel" id="tab-drinks"></div>
-  <div class="menu-panel" id="tab-quickdrinks"></div>
-  <noscript><p style="padding:2rem;text-align:center">Please enable JavaScript to view the menu, or call us on <a href="tel:9888383010">9888383010</a>.</p></noscript>
-
 </section>
 
 <!-- REVIEWS -->
@@ -554,14 +476,35 @@
 
 <footer>
   <p>&copy; 2026 <span>The Crosta</span> · Shop No. 4, Bhadson Road, Patiala · <a href="tel:9888383010">9888383010</a> / <a href="tel:9417245100">9417245100</a> · <a href="https://thecrosta.com">thecrosta.com</a></p>
+  <div class="footer-links" role="navigation" aria-label="Page sections"><a href="#menu">Menu</a><a href="#spin">Daily spin</a><a href="#reviews">Reviews</a><a href="#hours">Hours &amp; location</a><a href="#contact">Contact</a></div>
 </footer>
 
-<!-- CART FAB -->
-<button class="cart-fab" id="cartFab" onclick="openCart()">
-  <span class="cart-fab-icon">🛒</span>
-  <span class="cart-fab-count" id="fabCount">0</span>
-  <span class="cart-fab-total" id="fabTotal">₹0</span>
-</button>
+<!-- PHONES: FLOATING CART BAR -->
+<div class="cartbar" id="cartbar">
+  <button class="cartbar-btn" type="button" onclick="openCart()"><span class="cb-count cart-count">0</span><span class="cb-mid"><span><span class="cart-word">items</span> in your cart</span><small class="cb-save" id="cbSave"></small></span><span class="cb-total cart-total">₹0</span><span aria-hidden="true">→</span></button>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<!-- SIZE SHEET (bottom sheet on phones, dialog on desktop) -->
+<div class="scrim" id="scrim"></div>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle" tabindex="-1">
+  <div class="grab" aria-hidden="true"></div>
+  <div class="sheet-head"><img id="sheetImg" src="" alt=""><div><h2 id="sheetTitle"></h2><span class="eyebrow"><span class="vegmark" aria-hidden="true"></span>Pure veg</span></div></div>
+  <div class="opts" id="sheetOpts" role="radiogroup" aria-label="Choose a size"></div>
+  <button class="btn fill" type="button" id="sheetAdd">Add to cart</button>
+  <p class="sheet-note" id="sheetNote"></p>
+</div>
+
+<!-- OFFER SHEET: "use this offer" -->
+<div class="sheet offer-sheet" id="offerSheet" role="dialog" aria-modal="true" aria-labelledby="offerTitle" tabindex="-1">
+  <div class="grab" aria-hidden="true"></div>
+  <div class="osh-head"><span class="ostat" id="offerStat"></span><h2 id="offerTitle"></h2><p id="offerSub"></p></div>
+  <div class="oprog" id="offerProg" aria-live="polite" hidden></div>
+  <div class="olist" id="offerList"></div>
+  <button class="btn fill" type="button" id="offerDone">Keep browsing</button>
+  <p class="sheet-note" id="offerNote"></p>
+</div>
 
 <!-- CART OVERLAY + DRAWER -->
 <div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
@@ -727,15 +670,11 @@
   </div>
 </div>
 
-<button class="order-nudge" id="orderNudge" onclick="openCart()">
-  <span class="nudge-pill" id="nudgeCount">0 items</span>
-  <span class="nudge-total" id="nudgeTotal">₹0</span>
-  <span class="nudge-cta">Review order</span>
-  <span class="nudge-arrow">→</span>
-</button>
-
 <script defer src="js/menu-data.js"></script>
+<script defer src="js/shop.js"></script>
+<script defer src="js/offers.js"></script>
 <script defer src="js/menu-render.js"></script>
+<script defer src="js/ui.js"></script>
 <script defer src="js/reviews.js"></script>
 <script defer src="js/menu-ui.js"></script>
 <script defer src="js/offers-carousel.js"></script>
@@ -746,6 +685,8 @@
 <script defer src="js/order.js"></script>
 <script defer src="js/menu-wiring.js"></script>
 <script defer src="js/spin.js"></script>
+<script defer src="js/home.js"></script>
+<script defer src="js/sheets.js"></script>
 <script defer src="js/page-ui.js"></script>
 
 </body>
