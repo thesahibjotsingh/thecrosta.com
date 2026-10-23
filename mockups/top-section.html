@@ -107,7 +107,7 @@ h2 { font: 700 1.15rem/1.2 var(--display); letter-spacing: -0.02em; }
 .stub { display: flex; flex-direction: column; justify-content: center; gap: 4px; padding: 14px 10px 14px 14px; border-right: 2px dashed rgba(26,26,24,.3); font: 500 .68rem/1.3 var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--ash); }
 .stub b { font: 500 1.05rem/1.1 var(--mono); letter-spacing: 0; color: var(--char); }
 .tm { display: flex; flex-direction: column; gap: 2px; }
-.stub b.to { font-size: .8rem; font-weight: 500; color: var(--ash); }
+.stub .tw { font: 500 .68rem/1 var(--mono); font-style: normal; letter-spacing: .08em; text-transform: uppercase; color: var(--ash); }
 .tbody { padding: 14px 16px 16px; min-width: 0; }
 .kicker { font: 500 .7rem/1.2 var(--mono); letter-spacing: .09em; text-transform: uppercase; color: var(--ember-deep); }
 .thead { font: 700 1.05rem/1.2 var(--display); letter-spacing: -0.02em; margin: 6px 0 4px; }
@@ -122,9 +122,8 @@ h2 { font: 700 1.15rem/1.2 var(--display); letter-spacing: -0.02em; }
 .ticket.primary { --stub: 128px; box-shadow: 7px 7px 0 var(--ember); }
 .ticket.primary .stub { padding: 18px 12px 18px 18px; }
 .ticket.primary .stub b { font-size: 1.5rem; }
-.ticket.primary .stub b.to { font-size: .95rem; }
 .ticket.primary .tm.long b { font-size: 1.2rem; }
-.ticket.closedcard .stub b.to { color: #bdb4aa; }
+.ticket.closedcard .stub .tw { color: #bdb4aa; }
 .ticket.primary .tbody { padding: 22px 24px 24px; position: relative; overflow: hidden; }
 .ticket.primary .thead { font-size: clamp(1.5rem, 3vw, 2.25rem); line-height: 1.02; letter-spacing: -0.035em; margin: 10px 0 8px; max-width: 14ch; }
 .ticket.primary .tdesc { font-size: .95rem; max-width: 34ch; }
@@ -153,8 +152,6 @@ h2 { font: 700 1.15rem/1.2 var(--display); letter-spacing: -0.02em; }
 .more .stub { flex-direction: row; align-items: baseline; justify-content: space-between; border-right: 0; border-bottom: 2px dashed rgba(26,26,24,.3); padding: 10px 14px; }
 .more .stub b { font-size: .9rem; }
 .more .tm { flex-direction: row; gap: .4em; align-items: baseline; }
-.more .stub b.to { font-size: .9rem; color: var(--char); }
-.more .ticket.dim .stub b.to { color: var(--ash); }
 .rule-note { font: 500 .7rem/1.4 var(--mono); letter-spacing: .05em; text-transform: uppercase; color: var(--ash); }
 
 /* quick order column */
@@ -359,8 +356,7 @@ h2 { font: 700 1.15rem/1.2 var(--display); letter-spacing: -0.02em; }
   .ticket.closedcard .stub { border-bottom-color: #4a4640; }
   .ticket.primary .stub b { font-size: 1.05rem; }
   .ticket.primary .tm { flex-direction: row; gap: .45em; align-items: baseline; }
-  .ticket.primary .stub b.to { font-size: 1.05rem; color: var(--char); }
-  .ticket.closedcard .stub b.to { color: #fff; }
+  .ticket.closedcard .stub .tw { color: #bdb4aa; }
   .ticket.primary .tm.long b { font-size: 1.05rem; }
   .ticket.primary .tbody { padding: 18px 18px 20px; }
   .pie { width: 150px; height: 150px; right: -40px; bottom: -44px; }
@@ -542,7 +538,7 @@ const OFFERS = [
   { id:'boost',   name:'The Crosta Boost', head:'Make it a meal for ₹30, not ₹60', desc:'Fries and a 250 ml cold drink with any burger, wrap or sandwich.', days:[0,1,2,3,4,5,6], from:16, to:18, stub:'Daily', t1:'4 PM', t2:'6 PM', lane:'The Crosta Boost', laneSub:'Daily', band:'Meal for ₹30', cta:'Order burgers', pie:'../images/hero-the-crosta-burger.webp' },
   { id:'group',   name:'Group perk',      head:'4+ Medium or Large pizzas? Free meal bundle', desc:'Garlic bread, fries and a 2 L cold drink.', days:[0,1,2,3,4,5,6], always:true, stub:'Every day', t1:'Always on', lane:'Group perk', laneSub:'Every day', band:'Free meal bundle', cta:'Order pizzas', pie:'../images/hero-garlic-butter-pizza.webp' }
 ];
-const tmHtml = o => `<span class="tm${o.t1.length > 6 ? ' long' : ''}"><b>${o.t1}</b>${o.t2 ? `<b class="to">to ${o.t2}</b>` : ''}</span>`;
+const tmHtml = o => `<span class="tm${o.t1.length > 6 ? ' long' : ''}"><b>${o.t1}</b>${o.t2 ? `<i class="tw">to</i><b>${o.t2}</b>` : ''}</span>`;
 const PIZZAS = {
   farm:   { name:'Farm House Pizza',           img:'../images/menu-farm-house-pizza.webp',    p:{ 8:139, 10:229, 12:369 } },
   garlic: { name:'Crosta Garlic Butter Pizza', img:'../images/menu-garlic-butter-pizza.webp', p:{ 8:249, 10:369, 12:519 } },
