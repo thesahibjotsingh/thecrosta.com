@@ -40,7 +40,7 @@ button, input { font: inherit; color: inherit; }
 a { color: inherit; }
 :focus-visible { outline: 3px solid var(--char); outline-offset: 2px; border-radius: 6px; }
 .mono { font-family: var(--mono); }
-.wrap { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+.wrap { max-width: 1360px; margin: 0 auto; padding: 0 clamp(20px, 3vw, 40px); }
 .sr { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 
 /* ── motion ingredients ── */
@@ -79,8 +79,9 @@ a { color: inherit; }
 .cart i { font: 500 .8rem var(--mono); font-style: normal; min-width: 1ch; display: inline-block; }
 
 /* ── LIVE SECTION ── */
-.live-band { background: var(--sun-soft); border-bottom: 2px solid var(--char); }
-.live { padding-top: 30px; padding-bottom: 34px; }
+.live-band { position: relative; background: var(--sun-soft); }
+.wave { position: absolute; left: 0; bottom: -1px; width: 100%; height: 38px; display: block; pointer-events: none; }
+.top { padding-top: 30px; padding-bottom: 60px; }
 .eyebrow { font: 500 .74rem/1.4 var(--mono); letter-spacing: .09em; text-transform: uppercase; color: var(--ash); }
 h1 { font: 800 clamp(2.2rem, 5.6vw, 3.8rem)/.98 var(--display); letter-spacing: -0.04em; margin: 10px 0 10px; }
 h1 .u { position: relative; display: inline-block; color: var(--ember); }
@@ -185,6 +186,26 @@ h2 { font: 700 1.15rem/1.2 var(--display); letter-spacing: -0.02em; }
 .band.off { border: 1.5px dashed var(--crust); color: var(--ash); left: 0; right: 0; width: auto !important; background: transparent; }
 .needle { position: absolute; top: 0; bottom: 0; width: 2px; background: var(--char); transform: translateX(-1px); z-index: 3; }
 .needle-tag { position: absolute; top: -2px; transform: translateX(-50%); background: var(--char); color: #fff; font: 500 .66rem/1 var(--mono); letter-spacing: .05em; padding: 5px 7px; border-radius: 5px; white-space: nowrap; z-index: 4; }
+
+/* interactive clock */
+.clock-tools { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 8px; }
+.days { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; padding: 2px; }
+.days::-webkit-scrollbar { display: none; }
+.day { position: relative; flex: none; min-width: 52px; min-height: 44px; padding: 0 10px; border-radius: 999px; border: 1.5px solid var(--crust); background: transparent; font: 500 .78rem var(--mono); letter-spacing: .04em; text-transform: uppercase; cursor: pointer; transition: transform 140ms var(--ease-out), background-color 160ms ease, border-color 160ms ease, color 160ms ease; }
+.day:active { transform: scale(.97); }
+.day[aria-pressed="true"] { background: var(--char); border-color: var(--char); color: #fff; }
+.day.today::after { content: ""; position: absolute; top: 6px; right: 7px; width: 6px; height: 6px; border-radius: 50%; background: var(--ember); }
+.btn-mini { flex: none; min-height: 44px; padding: 0 16px; border-radius: 999px; border: 1.5px solid var(--char); background: var(--sun); font-weight: 600; font-size: .84rem; cursor: pointer; transition: transform 140ms var(--ease-out); }
+.btn-mini:active { transform: scale(.97); }
+.btn-mini[hidden] { display: none; }
+.clock-sum { margin-top: 12px; padding: 11px 14px; border-radius: 12px; background: var(--sun-soft); font-size: .92rem; line-height: 1.4; border: 1.5px solid transparent; }
+.clock-sum.exploring { background: var(--sun); border-color: var(--char); }
+.track { cursor: ew-resize; touch-action: pan-y; }
+.needle-tag { border: 0; cursor: grab; touch-action: none; min-height: 26px; }
+.needle-tag:active { cursor: grabbing; }
+.band { cursor: pointer; }
+.band.off { cursor: default; }
+@media (hover: hover) and (pointer: fine) { .day:not([aria-pressed="true"]):hover { border-color: var(--char); } }
 
 /* ── TOOLS BAR ── */
 .tools { position: sticky; top: var(--hdr); z-index: 20; background: var(--dough); border-bottom: 1px solid var(--crust); }
@@ -292,7 +313,7 @@ h2 { font: 700 1.15rem/1.2 var(--display); letter-spacing: -0.02em; }
   .btn .lbl { display: none; }
   .btn.wa, .btn.call { width: 44px; padding: 0; }
   .btn.off { display: none; }
-  .live { padding-top: 22px; padding-bottom: 26px; }
+  .top { padding-top: 22px; padding-bottom: 52px; }
   .stickers { margin-bottom: 20px; }
   .ticket.primary { --stub: 0px; grid-template-columns: 1fr; box-shadow: 5px 5px 0 var(--ember); }
   .ticket.closedcard { box-shadow: 5px 5px 0 var(--brick); }
@@ -312,12 +333,16 @@ h2 { font: 700 1.15rem/1.2 var(--display); letter-spacing: -0.02em; }
   .clock-body { padding: 0 14px 10px; }
   .lanes { --label: 0px; }
   .lane { grid-template-columns: 1fr; padding-top: 8px; min-height: 0; }
-  .lane.axis { display: none; }
+  .lane.axis { display: grid; min-height: 40px; padding-top: 2px; }
+  .lane.axis .lane-label { display: none; }
+  .tick.minor { display: none; }
   .lane-label { padding: 0 0 4px; display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
   .track { height: 40px; }
   .band { top: 6px; height: 28px; font-size: 0; padding: 0; }
   .band.off { font-size: .68rem; padding: 0 10px; }
-  .needle-tag { display: none; }
+  .needle-tag { top: 6px; min-height: 30px; padding: 0 12px; font-size: .72rem; }
+  .axis .tick { top: 20px; }
+  .clock-tools { flex-wrap: wrap; }
   .tools-in { flex-wrap: wrap; gap: 8px 10px; }
   .search { flex: 1 1 100%; }
   .veg { display: none; }
@@ -352,7 +377,7 @@ h2 { font: 700 1.15rem/1.2 var(--display); letter-spacing: -0.02em; }
 
 <main id="top">
   <div class="live-band">
-    <section class="wrap live" aria-labelledby="h1">
+    <section class="wrap top" aria-labelledby="h1">
       <p class="eyebrow" id="clockLine"></p>
       <h1 id="h1">Pure veg <span class="u">pizza<svg viewBox="0 0 200 20" preserveAspectRatio="none" aria-hidden="true"><path d="M3 12 C 30 2, 50 20, 80 10 S 130 2, 160 11 S 190 14, 197 6"/></svg></span> in Patiala</h1>
       <p class="lede" id="lede"></p>
@@ -395,9 +420,17 @@ h2 { font: 700 1.15rem/1.2 var(--display); letter-spacing: -0.02em; }
           <span class="sum-r"><span class="rule-note" id="clockNote"></span>
             <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span>
         </summary>
-        <div class="clock-body"><div class="lanes" id="lanes"></div></div>
+        <div class="clock-body">
+          <div class="clock-tools">
+            <div class="days" id="days" role="group" aria-label="Pick a day"></div>
+            <button class="btn-mini" id="clockNow" type="button" hidden>Back to now</button>
+          </div>
+          <div class="lanes" id="lanes"></div>
+          <p class="clock-sum" id="clockSum" aria-live="polite"></p>
+        </div>
       </details>
     </section>
+    <svg class="wave" viewBox="0 0 1440 48" preserveAspectRatio="none" aria-hidden="true"><path fill="#FDF8F2" d="M0 48V30C120 6 240 6 360 24S600 44 720 26 960 4 1080 22 1320 40 1440 18V48Z"/></svg>
   </div>
 
   <div class="tools">
@@ -605,6 +638,93 @@ document.getElementById('chips').addEventListener('click', e => {
 });
 
 /* ───────────── the page, driven by the day and time ───────────── */
+
+/* ───────────── the interactive clock ───────────── */
+const VA = 10, VZ = 23, VSPAN = VZ - VA;
+let baseNow = null;          // the day/time the page itself is showing
+let view = null;             // null = follow the page; else { d, t } the visitor is exploring
+const lanesEl = () => document.getElementById('lanes');
+const tOf = v => v.h + v.m / 60;
+const viewNow = () => view ? { d: view.d, h: Math.floor(view.t), m: Math.round((view.t % 1) * 60) } : baseNow;
+const pctOf = h => ((Math.min(Math.max(h, VA), VZ) - VA) / VSPAN * 100);
+const tagPct = h => ((Math.min(Math.max(h, VA + 0.9), VZ - 0.9) - VA) / VSPAN * 100);
+function bandClass(o, v) {
+  const t = tOf(v), [open, close] = HOURS[v.d], w = win(o, v.d);
+  if (!w) return 'off';
+  return (t >= open && t < close && t >= w[0] && t < w[1]) ? 'live' : (t < w[0] ? 'later' : 'done');
+}
+function summaryFor(v) {
+  const t = tOf(v), [open, close] = HOURS[v.d], isOpen = t >= open && t < close;
+  const when = `${fmt(v.h, v.m)} on ${DAYS[v.d]}`;
+  const lead = view ? `At ${when}` : `Right now (${fmt(v.h, v.m)})`;
+  if (!isOpen) { const no = nextOpen(v); return `${lead}: we’re closed. We open ${no.label === 'today' ? 'today' : DAYS[no.d]} at ${fmt(no.at)}.`; }
+  const live = OFFERS.filter(o => stateOf(o, v).k === 'live').map(o => o.name);
+  if (live.length === 1) return `${lead}: only ${live[0]} is live.`;
+  return `${lead}: ${live.slice(0, -1).join(', ')} and ${live[live.length - 1]} are live.`;
+}
+function updateClock() {
+  const v = viewNow(), t = tOf(v), root = lanesEl();
+  root.querySelectorAll('.needle').forEach(n => n.style.left = pctOf(t) + '%');
+  const tag = root.querySelector('.needle-tag');
+  tag.style.left = tagPct(t) + '%'; tag.textContent = (view ? '' : 'Now ') + fmt(v.h, v.m);
+  const tg = Math.min(Math.max(t, VA + 0.9), VZ - 0.9);
+  root.querySelectorAll('.tick').forEach(k => { k.style.visibility = Math.abs(+k.dataset.h - tg) < 1.3 ? 'hidden' : ''; });
+  tag.setAttribute('aria-valuenow', Math.round(t * 60)); tag.setAttribute('aria-valuetext', `${fmt(v.h, v.m)} on ${DAYS[v.d]}`);
+  root.querySelectorAll('.band[data-o]').forEach(b => { b.className = 'band ' + bandClass(OFFERS[+b.dataset.o], v); });
+  const sum = document.getElementById('clockSum'); sum.textContent = summaryFor(v); sum.classList.toggle('exploring', !!view);
+  document.getElementById('clockNow').hidden = !view;
+}
+function buildClock() {
+  const v = viewNow(), [open, close] = HOURS[v.d];
+  const ticks = [11, 13, 15, 17, 19, 21, 23].map(h => `<span class="tick${[13, 17, 21].includes(h) ? ' minor' : ''}" data-h="${h}" style="left:${pctOf(h)}%">${fmt(h).replace(':00', '').replace(' ', '').toLowerCase()}</span>`).join('');
+  const shut = `<i class="shut" style="left:0;width:${pctOf(open)}%"></i><i class="shut" style="left:${pctOf(close)}%;right:0"></i>`;
+  let html = `<div class="lane axis"><div class="lane-label"></div><div class="track">${ticks}<button class="needle-tag" type="button" role="slider" aria-label="Time of day" aria-valuemin="${VA * 60}" aria-valuemax="${VZ * 60}"></button></div></div>`;
+  html += OFFERS.map((o, i) => {
+    const w = win(o, v.d), cls = bandClass(o, v);
+    let band;
+    if (!w) { const s = stateOf(o, { d: v.d, h: 0, m: 0 }); band = `<i class="band off">Not on ${DAYS[v.d]}${s && s.k === 'next' ? ' · next ' + D3[s.day] + ' ' + fmt(s.start) : ''}</i>`; }
+    else band = `<i class="band ${cls}" data-o="${i}" style="--i:${i};left:${pctOf(w[0])}%;width:${pctOf(w[1]) - pctOf(w[0])}%">${o.band}</i>`;
+    const range = w ? ` · ${fmt(w[0])}–${fmt(w[1])}` : '';
+    return `<div class="lane"><div class="lane-label"><b>${o.lane}</b><span>${o.laneSub}${range}</span></div><div class="track">${shut}${band}<i class="needle"></i></div></div>`;
+  }).join('');
+  lanesEl().innerHTML = html;
+  document.getElementById('days').innerHTML = D3.map((d3, d) => `<button class="day${d === baseNow.d ? ' today' : ''}" type="button" data-d="${d}" aria-pressed="${d === v.d}">${d3}</button>`).join('');
+  const dz = document.getElementById('days'), sel = dz.querySelector('[aria-pressed="true"]');
+  if (sel) dz.scrollLeft = sel.offsetLeft - dz.clientWidth / 2 + sel.offsetWidth / 2;
+  updateClock();
+  setClockNote();
+}
+function setClockNote() {
+  const mobile = matchMedia('(max-width:760px)').matches, el = document.getElementById('clockNote');
+  el.textContent = mobile ? (document.getElementById('clock').open ? '' : 'See today’s schedule') : 'Pick a day · drag the marker';
+}
+function setView(t, d) {
+  const day = d ?? (view ? view.d : baseNow.d);
+  t = Math.round(Math.min(Math.max(t, VA), VZ - 0.25) * 4) / 4;
+  const same = day === baseNow.d && Math.abs(t - tOf(baseNow)) < 0.13;
+  const dayChanged = !view ? day !== baseNow.d : day !== view.d;
+  view = same ? null : { d: day, t };
+  dayChanged ? buildClock() : updateClock();
+}
+// drag anywhere on the strip to move the marker; keyboard works on the marker itself
+(function () {
+  const root = document.getElementById('lanes'); let dragging = false;
+  const at = e => { const tr = root.querySelector('.track'); if (!tr) return; const r = tr.getBoundingClientRect(); setView(VA + Math.min(Math.max((e.clientX - r.left) / r.width, 0), 1) * VSPAN); };
+  root.addEventListener('pointerdown', e => { if (!e.target.closest('.track')) return; dragging = true; try { root.setPointerCapture(e.pointerId); } catch (_) {} at(e); });
+  root.addEventListener('pointermove', e => { if (dragging) at(e); });
+  const end = e => { dragging = false; try { root.releasePointerCapture(e.pointerId); } catch (_) {} };
+  root.addEventListener('pointerup', end); root.addEventListener('pointercancel', end);
+  root.addEventListener('keydown', e => {
+    if (!e.target.classList.contains('needle-tag')) return;
+    const t = tOf(viewNow()), step = { ArrowLeft: -0.25, ArrowDown: -0.25, ArrowRight: 0.25, ArrowUp: 0.25, PageDown: -1, PageUp: 1 }[e.key];
+    if (step !== undefined) { e.preventDefault(); setView(t + step); }
+    else if (e.key === 'Home') { e.preventDefault(); setView(VA); }
+    else if (e.key === 'End') { e.preventDefault(); setView(VZ); }
+  });
+  document.getElementById('days').addEventListener('click', e => { const b = e.target.closest('.day'); if (b) setView(tOf(viewNow()), +b.dataset.d); });
+  document.getElementById('clockNow').addEventListener('click', () => { view = null; buildClock(); });
+})();
+
 function render(now) {
   const t = now.h + now.m / 60, [open, close] = HOURS[now.d], isOpen = t >= open && t < close;
   const states = OFFERS.map(o => ({ o, s: stateOf(o, now) }));
@@ -649,32 +769,15 @@ function render(now) {
     return `<article class="ticket${cls} enter" style="--i:${i + 1}"><div class="stub"><span>${x.o.stub}</span><b>${x.o.time}</b></div><div class="tbody"><p class="kicker">${x.o.name}</p><h3 class="thead">${x.o.head}</h3><p class="tmeta ${x.s.k === 'live' ? 'live' : ''}">${metaOf(x)}</p></div></article>`;
   }).join('');
 
-  // the clock
-  const A = 10, Z = 23, span = Z - A, pct = h => ((h - A) / span * 100);
-  const ticks = [11, 13, 15, 17, 19, 21, 23].filter(h => Math.abs(h - t) > 1.1).map(h => `<span class="tick" style="left:${pct(h)}%">${fmt(h).replace(':00', '').replace(' ', '').toLowerCase()}</span>`).join('');
-  const shut = `<i class="shut" style="left:0;width:${pct(open)}%"></i><i class="shut" style="left:${pct(close)}%;right:0"></i>`;
-  const needle = `<i class="needle" style="left:${pct(Math.min(Math.max(t, A), Z))}%"></i>`;
-  let html = `<div class="lane axis"><div class="lane-label"></div><div class="track">${ticks}<span class="needle-tag" style="left:${pct(Math.min(Math.max(t, A + 0.8), Z - 0.8))}%">Now ${fmt(now.h, now.m)}</span></div></div>`;
-  html += OFFERS.map((o, i) => {
-    const s = states.find(x => x.o === o).s, w = win(o, now.d);
-    let band;
-    if (!w) band = `<i class="band off">Not today · ${s.k === 'next' ? D3[s.day] + ' ' + fmt(s.start) : ''}</i>`;
-    else {
-      const cls = (isOpen && s.k === 'live') ? 'live' : (t < w[0] ? 'later' : 'done');
-      band = `<i class="band ${cls}" style="--i:${i};left:${pct(w[0])}%;width:${pct(w[1]) - pct(w[0])}%">${o.band}</i>`;
-    }
-    const range = w ? ` · ${fmt(w[0])}–${fmt(w[1])}` : '';
-    return `<div class="lane"><div class="lane-label"><b>${o.lane}</b><span>${o.laneSub}${range}</span></div><div class="track">${shut}${band}${needle}</div></div>`;
-  }).join('');
-  document.getElementById('lanes').innerHTML = html;
-  document.getElementById('clockNote').textContent = matchMedia('(max-width:760px)').matches ? (document.getElementById('clock').open ? '' : 'See today’s schedule') : (isOpen ? `Open ${fmt(open)}–${fmt(close)} today` : 'Closed now · hatched = shop closed');
+  baseNow = now; view = null;
+  buildClock();
   cartUI(false);
 }
 
 // the schedule is open on desktop, collapsed on phones so the menu starts higher
 const clockEl = document.getElementById('clock');
 clockEl.open = !matchMedia('(max-width:760px)').matches;
-clockEl.addEventListener('toggle', () => { if (matchMedia('(max-width:760px)').matches) document.getElementById('clockNote').textContent = clockEl.open ? '' : 'See today’s schedule'; });
+clockEl.addEventListener('toggle', setClockNote);
 
 const scen = document.getElementById('scen');
 let current = SCEN[1];
