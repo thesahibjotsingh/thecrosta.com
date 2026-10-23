@@ -74,9 +74,8 @@ document.getElementById('chips').addEventListener('click', e => {
   clearSearch(false);
   showTab(c.dataset.cat);
   c.scrollIntoView({ behavior: reducedMotion() ? 'auto' : 'smooth', inline: 'center', block: 'nearest' });
-  // if the menu is below the fold, bring it up; if we are already in it, stay put
-  const menu = document.getElementById('menu');
-  if (menu.getBoundingClientRect().top > stickyOffset() + 40) scrollToMenu();
+  // always start the new section at the top of the menu: a shorter section would otherwise leave you at its bottom
+  requestAnimationFrame(() => scrollToMenu());
 });
 
 // ── search ──

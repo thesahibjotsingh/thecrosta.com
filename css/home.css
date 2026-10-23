@@ -466,9 +466,6 @@ body.cart-open .cartbar { visibility: hidden; }
 @keyframes art-in { from { opacity: 0; scale: .92; } to { opacity: 1; scale: 1; } }
 .hero { position: relative; display: flex; flex-direction: column; }
 .hero-art { position: relative; order: 4; height: 270px; margin: 4px -16px 16px; pointer-events: none; }
-.ha-blob { position: absolute; right: -70px; top: 0; width: 330px; height: 270px; background: var(--ember); border-radius: 58% 42% 55% 45% / 46% 56% 44% 54%; transform: rotate(-9deg); }
-.ha-ring { position: absolute; left: 14px; bottom: 6px; width: 120px; height: 120px; border-radius: 50%; background: var(--sun); }
-.ha-dots { position: absolute; left: 6px; top: 24px; width: 64px; height: 52px; background: radial-gradient(var(--char) 1.6px, transparent 2.2px) 0 0 / 13px 13px; opacity: .55; }
 .ha { position: absolute; border-radius: 50%; object-fit: cover; border: 5px solid var(--paper); box-shadow: 0 0 0 2px var(--char), 6px 7px 0 var(--char); animation: art-in 600ms var(--ease-out) both; }
 .ha-main { width: 232px; height: 232px; right: 14px; top: 16px; transform: rotate(8deg); animation-delay: 100ms; }
 .ha-b { width: 112px; height: 112px; left: 30px; bottom: 4px; transform: rotate(-8deg); animation-delay: 240ms; box-shadow: 0 0 0 2px var(--char), 4px 5px 0 var(--ember); }
@@ -491,9 +488,6 @@ body.cart-open .cartbar { visibility: hidden; }
 @media (min-width: 1020px) {
   .hero { min-height: 440px; padding-right: 48%; }
   .hero-art { position: absolute; order: 0; right: 0; top: -6px; width: 46%; min-width: 440px; max-width: 580px; height: 450px; margin: 0; }
-  .ha-blob { right: -10px; top: 6px; width: 94%; height: 410px; transform: rotate(-8deg); }
-  .ha-ring { left: 4px; bottom: 6px; width: 170px; height: 170px; }
-  .ha-dots { left: 18px; top: 36px; width: 90px; height: 70px; }
   .ha-main { width: min(400px, 76%); height: auto; aspect-ratio: 1; right: 4%; top: 18px; border-width: 7px; box-shadow: 0 0 0 2.5px var(--char), 9px 10px 0 var(--char); }
   .ha-b { width: 150px; height: 150px; left: 6%; bottom: 20px; }
   .ha-c { width: 104px; height: 104px; left: 36%; top: 2px; }
@@ -647,3 +641,9 @@ body.cart-open .cartbar { visibility: hidden; }
   .top .live-grid { margin-top: 14px; }
 }
 @media (min-width: 761px) and (max-width: 1019px) { .hero-art { width: 460px; max-width: 100%; margin: 4px auto 18px; } .cta-main { min-width: 220px; } }
+
+/* a grid column may shrink below its content: stops the round-photo row (and any long line) from widening the page */
+.live-grid { grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); }
+@media (max-width: 1020px) { .live-grid { grid-template-columns: minmax(0, 1fr); } }
+.live-grid > *, .quick, .quick > *, .offers > * { min-width: 0; }
+.quick { grid-template-columns: minmax(0, 1fr); }

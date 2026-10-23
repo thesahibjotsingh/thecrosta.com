@@ -351,3 +351,7 @@ footer a { color: #A39A92; }
   .spin-pointer { top: -14px; font-size: 1.7rem; }
 }
 @media (max-width: 900px) { .spin-rules { justify-content: center; } .spin-prizes { margin-inline: auto; } }
+
+/* menu title stays on the left even when the pizza-size box is hidden (every tab but Pizzas) */
+.menu-header { justify-content: flex-start; }
+.menu-header > :first-child { margin-right: auto; }
