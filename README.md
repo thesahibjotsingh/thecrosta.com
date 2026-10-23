@@ -13,7 +13,8 @@ Deployed from this repo by Cloudflare. Orders go out as WhatsApp messages; there
 | Path | What it is |
 |---|---|
 | `index.html` | Page markup (menu panels and structured data are baked in — see *Pre-render*) |
-| `css/styles.css` | Original section styles (menu, reviews, hours, cart drawer, spin…) |
+| `css/styles.css` | Original structural styles (grids, cart/popup layout, spin wheel mechanics); visual styling is overridden by `home.css` and `sections.css`. `node`-free audit: `python tools/css_audit.py css/styles.css` lists rules nothing uses |
+| `css/sections.css` | The rest of the page in the same design language: menu cards, bands with wavy edges, reviews, hours, contact, footer, spin, cart drawer, add-on popup |
 | `css/home.css` | New layer: header, "what's on" tickets, clock strip, tools bar, bestsellers, cart bar, sheets, checkout extras |
 | `js/menu-data.js` | **The menu** — every item, price, badge and photo. Edit this to change the menu. |
 | `js/shop.js` | **Opening hours**, the shop clock (Patiala time), time formatting, and the **UPI ID** |

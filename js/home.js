@@ -34,6 +34,14 @@ function renderLive() {
     closedRow.style.display = st.open ? 'none' : 'flex';
     $('cartClosedText').textContent = `We’re closed right now — we open ${opensText}. You can build your order now and send it once we open.`;
   }
+  // hours card: "Open now" line and today's row highlighted
+  const ho = $('hoursOpen');
+  if (ho) {
+    ho.className = 'hours-open' + (st.open ? '' : ' closed');
+    $('hoursOpenText').textContent = st.open ? `Open now · closes ${fmtTime(st.closesAt)}` : `Closed · opens ${st.today ? 'today' : DAY_NAMES[st.opensDay]} at ${fmtTime(st.opensAt)}`;
+    const rowFor = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 1, 6: 2, 0: 3 }[now.day];
+    document.querySelectorAll('.hours-row').forEach((r, i) => r.classList.toggle('today', i === rowFor));
+  }
   const orderBtn = $('orderBtn');
   if (orderBtn) {
     orderBtn.disabled = !st.open;

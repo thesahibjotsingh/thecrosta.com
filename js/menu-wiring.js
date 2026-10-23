@@ -119,54 +119,18 @@ document.addEventListener('DOMContentLoaded', function() {
         left.appendChild(flavorWrap);
       }
 
-      const pillsWrap = document.createElement('div');
-      pillsWrap.className = 'size-pills';
-
-      const lbl = document.createElement('span');
-      lbl.className = 'size-pills-label';
-      lbl.textContent = 'Size:';
-      pillsWrap.appendChild(lbl);
-
-      sizeLabels.forEach((size, i) => {
-        const pill = document.createElement('div');
-        pill.className = 'size-pill';
-        pill.dataset.sizeKey = name + '|' + size;
-        pill.dataset.sizeName = size;
-        pill.dataset.sizePrice = prices[i];
-        pill.dataset.itemName = name;
-        pill.dataset.isPizza = isPizza ? '1' : '';
-        pill.innerHTML = `<span class="pill-size">${size}</span><span class="pill-price">₹${prices[i]}</span>`;
-
-        pill.addEventListener('click', (e) => {
-          e.stopPropagation();
-          addItem(getItemName(), size, prices[i], isPizza, isMealEligible);
-          closeSizePills();
-          // refreshMenuSteppers will convert this pill to a stepper
-        });
-        pillsWrap.appendChild(pill);
-      });
-
-      // A separate "size stepper" area shown when ≥1 size has been added
+      // "+" opens the size sheet (same one the bestsellers use); the sheet adds through addItem()
       const sizeStepperWrap = document.createElement('div');
       sizeStepperWrap.className = 'size-stepper-wrap';
       sizeStepperWrap.style.cssText = 'display:flex;flex-direction:column;gap:0.4rem;margin-top:0.45rem;';
       row.appendChild(sizeStepperWrap);
-
-      row.appendChild(pillsWrap);
       row._sizeStepperWrap = sizeStepperWrap;
       row._sizeData = sizeLabels.map((size, i) => ({ size, price: prices[i], name: getItemName(), isPizza, isMealEligible }));
 
       btn.addEventListener('click', (e) => {
         e.stopPropagation();
-        if (activePills === pillsWrap) {
-          closeSizePills();
-        } else {
-          closeSizePills();
-          pillsWrap.classList.add('open');
-          btn.classList.add('active');
-          activePills = pillsWrap;
-          activeBtn = btn;
-        }
+        const imgEl = item.querySelector('.menu-item-img');
+        openSizeSheet(sizeEntryFor(getItemName(), menuLookup(name), imgEl ? imgEl.getAttribute('src') : ''), btn);
       });
 
     } else {
