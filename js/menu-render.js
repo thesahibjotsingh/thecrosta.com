@@ -52,10 +52,13 @@
       '<div class="menu-grid">' + c.items.map(itemHtml).join('') + '</div></div>';
   }
 
+  // markup for one panel — also used by tools/prerender.js to bake the menu into index.html
+  window.menuPanelHtml = function (panel) { return panel.categories.map(categoryHtml).join(''); };
+
   window.renderMenu = function (data) {
     data.panels.forEach(function (p) {
       var el = document.getElementById('tab-' + p.id);
-      if (el) el.innerHTML = p.categories.map(categoryHtml).join('');
+      if (el) el.innerHTML = window.menuPanelHtml(p);
     });
   };
 
