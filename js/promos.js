@@ -103,7 +103,7 @@ function isCrostaBoostActive() { return isOfferLive('boost'); }
 // Opt-in (the customer ticks it), and checked in person when the order is
 // collected or delivered. It is one offer like the others: it only applies
 // when it saves more than the other offer the cart qualifies for.
-const STUDENT_PERCENT = 10, STUDENT_KEY = 'crosta_student';
+const STUDENT_PERCENT = 10, STUDENT_MIN = 100, STUDENT_KEY = 'crosta_student';   // STUDENT_MIN: the order must come to at least this, before the discount
 let studentOn = (() => { try { return localStorage.getItem(STUDENT_KEY) === '1'; } catch (_) { return false; } })();
 const isStudentOn = () => studentOn;
 function setStudent(on) {
@@ -144,7 +144,7 @@ function resolveActivePromo(cartArr) {
   else if (qualifyingPizzaCount(cartArr) >= GROUP_PERK_MIN_PIZZAS) base = 'groupperk';
   else if (isWeekdayLunchOfferActive() && cartArr.some(i => i.isPizza)) base = 'weekday';
   else if (isCrostaBoostActive() && cartArr.some(i => i.isMealEligible && i.size === 'Meal')) base = 'boost';
-  if (!studentOn) return base;
+  if (!studentOn || paidTotal(cartArr) < STUDENT_MIN) return base;
   const student = Math.round(paidTotal(cartArr) * STUDENT_PERCENT / 100);
   return student > promoSaving(cartArr, base) ? 'student' : base;
 }
