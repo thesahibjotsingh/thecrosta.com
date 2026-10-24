@@ -59,4 +59,4 @@ function shopStatusText(st = shopStatus()) {
 
 // ── PAYMENT ──
 // The UPI ID customers pay (PhonePe business). Change it here and nowhere else.
-const UPI = { id: 'Q226670399@ybl', name: 'The Crosta' };
+const UPI = { id: '9417245100@ybl', name: 'The Crosta' };

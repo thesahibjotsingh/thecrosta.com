@@ -32,7 +32,7 @@ Deployed from this repo by Cloudflare. Orders go out as WhatsApp messages; there
 | `js/student.js` | Thapar student 10% switch (page card + cart checkbox); the rule itself is in `js/promos.js` (`STUDENT_PERCENT`) |
 | `js/spin.js`, `spin-pop.js`, `reviews.js`, `offers-carousel.js`, `contact.js`, `page-ui.js` | Spin wheel, reviews lightbox, poster carousel, contact form, small page behaviours |
 | `tools/prerender.js` | Bakes the menu + structured data into `index.html` |
-| `images/` | Optimised WebP photos; `og-share.jpg` is the link-preview card; `upi-qr.webp` is the shop's PhonePe QR |
+| `images/` | Optimised WebP photos; `og-share.jpg` is the link-preview card; there is no UPI QR at the moment (the old one paid the previous account) |
 | `mockups/top-section.html` | The approved design mockup (not deployed logic; reference only) |
 
 Scripts are plain `<script defer>` files loaded in the order listed at the bottom of `index.html`; keep that order.
@@ -45,7 +45,7 @@ Scripts are plain `<script defer>` files loaded in the order listed at the botto
 - **Thapar student discount** → `STUDENT_PERCENT` and `STUDENT_MIN` (minimum order, ₹100) in `js/promos.js`. It is opt-in, applies only when it saves more than the other offer in the cart (one offer per order), and the WhatsApp message tells the shop to check the ID card.
 - **Spin prize minimum** → `SPIN_MIN` in `js/promos.js` (₹100): a spin prize in the cart stays locked, and the order is blocked, until the paid items reach it.
 - **Spin popup** → `js/spin-pop.js` (`DELAY` = seconds before it shows; once a day, never after a spin).
-- **Change the UPI ID** → `UPI` in `js/shop.js`; replace `images/upi-qr.webp` if the QR changes.
+- **Change the UPI ID** → `UPI` in `js/shop.js`. If you add a QR picture, it must belong to that same ID (the page shows the ID and a Copy button; a QR is optional).
 
 ## Pre-render
 
@@ -63,7 +63,7 @@ Outside opening hours the cart can still be built, but it cannot be sent: the ca
 
 ## Cache busting
 
-Cloudflare tells browsers to keep CSS/JS for 4 hours. The `?v=50` on each stylesheet and script link in `index.html` forces a fresh download after a deploy. When you change any file in `css/` or `js/`, bump that number (find/replace `?v=50` → `?v=51`) in the same commit.
+Cloudflare tells browsers to keep CSS/JS for 4 hours. The `?v=51` on each stylesheet and script link in `index.html` forces a fresh download after a deploy. When you change any file in `css/` or `js/`, bump that number (find/replace `?v=51` → `?v=52`) in the same commit.
 
 ## For whoever delivers or hands over orders
 
