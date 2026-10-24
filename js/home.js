@@ -32,7 +32,7 @@ function offerMeta({ o, s }) {
 }
 
 function renderLive() {
-  const now = shopNow(), st = shopStatus(now), t = hourOf(now);
+  const now = shopNow(), st = shopStatus(), t = hourOf(now);
   document.body.classList.toggle('is-closed', !st.open);
 
   const statusHtml = `<span class="dot"></span><span>${shopStatusText(st)}</span>`;

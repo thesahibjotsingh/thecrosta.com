@@ -843,3 +843,6 @@ body.is-searching .best { display: none; }
 .spin-lock { display: flex; gap: 8px; margin-bottom: 10px; padding: 9px 12px; border-radius: 12px; background: #FFF0C4; border: 1.5px solid var(--sun); font-size: .78rem; font-weight: 600; line-height: 1.35; color: var(--char); }
 .spin-lock[hidden] { display: none; }
 
+/* test switch (?testopen=1): a tag next to the logo so it is never left on by accident */
+.test-open .brand::after { content: "TEST MODE"; margin-left: 6px; padding: 3px 7px; border-radius: 6px; background: #B3261E; color: #fff; font: 800 .6rem/1 var(--body); letter-spacing: .08em; }
+

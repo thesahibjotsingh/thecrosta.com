@@ -57,10 +57,14 @@ Everything time-based (open/closed, offers, the clock strip, cart discounts) fol
 
 **Preview a time of day:** on a local server, add `?at=Mon-12:30` to the URL (day-HH:MM, shop time) to see the site as it would look then — e.g. `http://localhost:8000/?at=Sat-20:00`. It is ignored on the live site.
 
+## Testing orders when the shop is closed
+
+Open the site once with `?testopen=1` (for example `https://thecrosta.com/?testopen=1`). On that browser only, ordering works at any hour, a red TEST MODE tag shows next to the logo, and WhatsApp orders start with "TEST ORDER — please ignore". Turn it off with `?testopen=0`. Other visitors are never affected.
+
 ## Closed shop
 
 Outside opening hours the cart can still be built, but it cannot be sent: the cart's order button is disabled ("Closed · opens today 11 AM"), the payment options are hidden, and `placeOrder()` refuses. The header's WhatsApp button is replaced by the opening time.
 
 ## Cache busting
 
-Cloudflare tells browsers to keep CSS/JS for 4 hours. The `?v=41` on each stylesheet and script link in `index.html` forces a fresh download after a deploy. When you change any file in `css/` or `js/`, bump that number (find/replace `?v=41` → `?v=42`) in the same commit.
+Cloudflare tells browsers to keep CSS/JS for 4 hours. The `?v=43` on each stylesheet and script link in `index.html` forces a fresh download after a deploy. When you change any file in `css/` or `js/`, bump that number (find/replace `?v=43` → `?v=44`) in the same commit.

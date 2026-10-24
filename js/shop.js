@@ -40,13 +40,30 @@ function fmtDuration(h) {
   return ((hh ? hh + 'h ' : '') + (mm || !hh ? mm + 'm' : '')).trim();
 }
 
-// { open, closesAt, opensAt, opensDay } for a shop-time moment
-function shopStatus(now = shopNow()) {
+// TEST SWITCH (this browser only): open the site with ?testopen=1 and ordering works at any hour;
+// ?testopen=0 turns it off. Stored in this browser's localStorage, so customers are never affected.
+// While it is on: a "TEST" tag shows in the header and WhatsApp orders are marked as test orders.
+const TEST_OPEN = (() => {
+  try {
+    const m = /[?&]testopen=(\w+)/.exec(location.search);
+    if (m) { if (m[1] === '1' || m[1] === 'on') localStorage.setItem('crosta_test_open', '1'); else localStorage.removeItem('crosta_test_open'); }
+    return localStorage.getItem('crosta_test_open') === '1';
+  } catch (_) { return false; }
+})();
+if (TEST_OPEN) document.documentElement.classList.add('test-open');
+
+// { open, closesAt, opensAt, opensDay } for a shop-time moment (the test switch only applies to "right now")
+function shopStatus(now) {
+  const real = now === undefined;
+  if (real) now = shopNow();
   const t = hourOf(now), [openAt, closeAt] = SHOP_HOURS[now.day];
-  if (t >= openAt && t < closeAt) return { open: true, closesAt: closeAt };
-  if (t < openAt) return { open: false, opensAt: openAt, opensDay: now.day, today: true };
-  const day = (now.day + 1) % 7;
-  return { open: false, opensAt: SHOP_HOURS[day][0], opensDay: day, today: false };
+  let r;
+  if (t >= openAt && t < closeAt) r = { open: true, closesAt: closeAt };
+  else if (t < openAt) r = { open: false, opensAt: openAt, opensDay: now.day, today: true };
+  else { const day = (now.day + 1) % 7; r = { open: false, opensAt: SHOP_HOURS[day][0], opensDay: day, today: false }; }
+  // test switch: ordering is open, but the opening times stay filled in so nothing shows "undefined"
+  if (real && TEST_OPEN && !r.open) return { ...r, open: true, closesAt: closeAt, test: true };
+  return r;
 }
 function shopStatusText(st = shopStatus()) {
   return st.open

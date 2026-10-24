@@ -138,7 +138,7 @@ function placeOrder() {
   // ── Rich itemised WhatsApp message ──
   const timeStr = new Date().toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', timeZone: SHOP_TIMEZONE });
 
-  let msg = `🍕 *New Order — The Crosta*\n`;
+  let msg = (typeof TEST_OPEN !== 'undefined' && TEST_OPEN ? `🧪 *TEST ORDER — please ignore*\n` : '') + `🍕 *New Order — The Crosta*\n`;
   msg += `🕐 ${timeStr}  ·  Patiala\n`;
   msg += `━━━━━━━━━━━━━━━━━━━━\n`;
   msg += `*ORDER ITEMS*\n`;
