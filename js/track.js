@@ -8,7 +8,7 @@
 // The owner's own phone can opt out with ?notrack=1 (and back in with ?notrack=0).
 (function () {
   const CONFIG = {
-    endpoint: '',          // e.g. 'https://crosta-analytics.YOURNAME.workers.dev/e'
+    endpoint: 'https://crosta-analytics.sahibjotsingh-social.workers.dev/e',          // e.g. 'https://crosta-analytics.YOURNAME.workers.dev/e'
     cfBeaconToken: ''      // Cloudflare Web Analytics token (optional: adds the visitor/source charts in Cloudflare)
   };
 
