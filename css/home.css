@@ -767,7 +767,7 @@ body.is-searching .best { display: none; }
 }
 
 /* ── Phones: slim stub with the day written sideways, hours in a dark chip above the title ── */
-.chip { display: none; }
+.tchip { display: none; }
 @media (max-width: 760px) {
   .deck .ticket { --stub: 52px; grid-template-columns: var(--stub) 1fr; }
   .deck .ticket.primary { box-shadow: 5px 5px 0 var(--ember); }
@@ -783,11 +783,11 @@ body.is-searching .best { display: none; }
   .deck .ticket .thead { max-width: none; font-size: 1.3rem; margin-top: 2px; }
   .deck .ticket .stamp { top: 10px; right: 10px; }
   .deck .ticket.primary .pie { width: 120px; height: 120px; right: -34px; bottom: -36px; }
-  .deck .chip { display: inline-flex; align-items: baseline; background: var(--char); color: var(--sun); border-radius: 10px; padding: 7px 11px 7px 10px; margin: 0 0 8px; }
-  .deck .chip .tm { display: inline-flex; flex-direction: row; align-items: baseline; font: 800 1.9rem/1 var(--display); letter-spacing: -0.06em; }
-  .deck .chip small { font: 800 .78rem/1 var(--body); letter-spacing: .02em; margin-left: 2px; }
-  .deck .chip.txt { font: 800 1.05rem/1.1 var(--display); letter-spacing: -0.01em; text-transform: uppercase; }
-  .deck .ticket.closedcard .chip { background: var(--brick); color: #fff; }
+  .deck .tchip { display: inline-flex; align-items: baseline; background: var(--char); color: var(--sun); border-radius: 10px; padding: 7px 11px 7px 10px; margin: 0 0 8px; }
+  .deck .tchip .tm { display: inline-flex; flex-direction: row; align-items: baseline; font: 800 1.9rem/1 var(--display); letter-spacing: -0.06em; }
+  .deck .tchip small { font: 800 .78rem/1 var(--body); letter-spacing: .02em; margin-left: 2px; }
+  .deck .tchip.txt { font: 800 1.05rem/1.1 var(--display); letter-spacing: -0.01em; text-transform: uppercase; }
+  .deck .ticket.closedcard .tchip { background: var(--brick); color: #fff; }
 }
 
 /* ── Desktop header: full width, nav centred between the logo and the buttons; status moves above the headline ── */

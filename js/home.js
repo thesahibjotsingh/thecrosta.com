@@ -19,9 +19,9 @@ const bigTm = (t1, t2) => {
 // phone tickets: the hours as a dark chip above the title ("11–3 PM", "All day", "11 AM")
 const chipHtml = (t1, t2) => {
   const a = splitT(t1), b = t2 ? splitT(t2) : null;
-  if (a && b) return `<span class="chip"><span class="tm">${a.n}–${b.n}<small>${b.u}</small></span></span>`;
-  if (a && !t2) return `<span class="chip"><span class="tm">${a.n}<small>${a.u}</small></span></span>`;
-  return `<span class="chip txt">${t1}${t2 ? ' to ' + t2 : ''}</span>`;
+  if (a && b) return `<span class="tchip"><span class="tm">${a.n}–${b.n}<small>${b.u}</small></span></span>`;
+  if (a && !t2) return `<span class="tchip"><span class="tm">${a.n}<small>${a.u}</small></span></span>`;
+  return `<span class="tchip txt">${t1}${t2 ? ' to ' + t2 : ''}</span>`;
 };
 const tmHtml = o => `<span class="tm${o.t1.length > 6 ? ' long' : ''}"><b>${o.t1}</b>${o.t2 ? `<i class="tw">to</i><b>${o.t2}</b>` : ''}</span>`;
 
