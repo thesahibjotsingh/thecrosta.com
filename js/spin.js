@@ -26,7 +26,7 @@
 
   // localStorage can throw (private mode, blocked storage) — the spin must still work.
   function readLock()  { try { return localStorage.getItem(LOCK_KEY); } catch (e) { return null; } }
-  function writeLock() { try { localStorage.setItem(LOCK_KEY, Date.now().toString()); } catch (e) { /* in-memory lock still applies */ } }
+  function writeLock() { try { localStorage.setItem(LOCK_KEY, Date.now().toString()); } catch (e) { /* in-memory lock still applies */ } window.dispatchEvent(new Event('crosta-spin')); }
 
   function getLockRemaining() {
     const ts = readLock();
