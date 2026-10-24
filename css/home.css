@@ -678,3 +678,6 @@ body.cart-open .cartbar { visibility: hidden; }
   .dock.hide { transform: translateY(calc(100% + 28px)); opacity: 0; pointer-events: none; }
 }
 @media (prefers-reduced-motion: reduce) { .dock { transition-duration: 1ms; } }
+
+/* phones: no photo cluster in the hero (desktop and tablet keep it) */
+@media (max-width: 760px) { .hero-art { display: none; } }
