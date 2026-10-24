@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ticket stub mockups</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/styles.css">
+<link rel="stylesheet" href="../css/home.css">
+<style>
+  body { background: var(--sun-soft); padding: 28px 24px 60px; margin: 0; }
+  h1 { font: 800 1.6rem var(--display); margin: 0 0 4px; }
+  .lead { color: var(--ash); margin: 0 0 28px; }
+  .grid { display: grid; grid-template-columns: 1fr; gap: 36px; max-width: 760px; }
+  .label { font: 700 .8rem var(--mono); letter-spacing: .08em; text-transform: uppercase; margin: 0 0 12px; }
+  .label b { background: var(--char); color: var(--sun); padding: 3px 8px; border-radius: 6px; margin-right: 8px; }
+  .note { font-size: .85rem; color: var(--ash); margin: 12px 0 0; max-width: 46ch; }
+  .ticket { margin-right: 8px; }
+
+  /* shared reset so each variant starts from a clean stub */
+  .mock .stub { font-family: var(--display); text-transform: none; letter-spacing: -0.02em; color: var(--char); align-items: flex-start; }
+  .mock .stub * { font-family: inherit; }
+
+  /* A — clean: big numerals, tiny AM/PM, hairline between the times */
+  .va .stub { gap: 0; padding: 18px 10px 18px 20px; }
+  .va .day { font: 700 .72rem/1 var(--body); letter-spacing: .12em; text-transform: uppercase; margin-bottom: 14px; }
+  .va .t { display: flex; align-items: baseline; gap: 3px; font-weight: 800; font-size: 2.1rem; line-height: 1; }
+  .va .t small { font: 700 .72rem/1 var(--body); letter-spacing: .06em; }
+  .va .rule { width: 26px; height: 2px; background: var(--char); margin: 9px 0 9px 2px; opacity: .55; }
+
+  /* B — BOLD: oversized "11–3", day as a dark tab on top, AM–PM underneath */
+  .vb .stub { padding: 0; gap: 0; background: var(--sun); justify-content: stretch; }
+  .vb .day { background: var(--char); color: var(--sun); font: 800 .72rem/1 var(--body); letter-spacing: .08em; text-transform: uppercase; padding: 11px 10px 11px 18px; align-self: stretch; white-space: nowrap; }
+  .vb .big { display: flex; flex-direction: column; justify-content: center; flex: 1; padding: 6px 12px 10px 18px; }
+  .vb .num { font-weight: 800; font-size: 3.7rem; line-height: .86; letter-spacing: -0.06em; }
+  .vb .dash { font-weight: 800; font-size: 1.6rem; line-height: .7; margin: 2px 0; }
+  .vb .ap { font: 800 .72rem/1 var(--body); letter-spacing: .08em; margin-top: 8px; white-space: nowrap; }
+
+  /* C — stamp: day as a rotated rubber stamp, times on one line each with an arrow */
+  .vc .stub { padding: 18px 10px 18px 16px; gap: 10px; }
+  .vc .day { border: 2px solid var(--char); border-radius: 6px; padding: 4px 7px; font: 800 .74rem/1 var(--body); letter-spacing: .1em; text-transform: uppercase; transform: rotate(-4deg); background: rgba(255,255,255,.35); }
+  .vc .row { display: flex; align-items: baseline; gap: 5px; font-weight: 800; font-size: 1.55rem; line-height: 1; white-space: nowrap; }
+  .vc .row small { font: 700 .7rem/1 var(--body); letter-spacing: .06em; }
+  .vc .arrow { font-size: 1.1rem; line-height: 1; margin-left: 2px; opacity: .7; }
+
+  /* D — timeline: the window drawn on a day bar so you see *when* at a glance */
+  .vd .stub { padding: 18px 12px 18px 18px; gap: 10px; }
+  .vd .day { font: 700 .72rem/1 var(--body); letter-spacing: .12em; text-transform: uppercase; }
+  .vd .rng { font-weight: 800; font-size: 1.7rem; line-height: 1; letter-spacing: -0.04em; white-space: nowrap; }
+  .vd .rng small { font: 700 .7rem/1 var(--body); letter-spacing: .06em; margin-left: 1px; }
+  .vd .bar { position: relative; width: 100%; height: 10px; border-radius: 99px; background: rgba(26,26,24,.18); overflow: hidden; }
+  .vd .bar i { position: absolute; top: 0; bottom: 0; left: 0; right: 0; }
+  .vd .bar i.on { left: 4%; width: 33%; background: var(--char); border-radius: 99px; }
+  .vd .ends { display: flex; justify-content: space-between; width: 100%; font: 600 .6rem/1 var(--body); letter-spacing: .06em; text-transform: uppercase; opacity: .7; }
+</style>
+</head>
+<body>
+<h1>Ticket stub: four takes</h1>
+<p class="lead">Same ticket, same notches. Only the yellow stub changes. B is the bold one.</p>
+
+<div class="grid">
+
+  <section class="mock va">
+    <p class="label"><b>A</b>Clean</p>
+    <article class="ticket primary live">
+      <div class="stub">
+        <span class="day">Mon–Wed</span>
+        <span class="t">11<small>AM</small></span>
+        <span class="rule"></span>
+        <span class="t">3<small>PM</small></span>
+      </div>
+      <div class="tbody">
+        <span class="stamp">Live now</span>
+        <p class="kicker">Weekday lunch</p>
+        <h3 class="thead">20% off every pizza</h3>
+        <p class="tdesc">Monday to Wednesday, 11 AM to 3 PM.</p>
+        <div class="prog"><div class="prog-bar"><i style="width:30%"></i></div><p>Ends 3 PM · 2h 30m left</p></div>
+        <button class="btn fill" type="button">Use this offer →</button>
+      </div>
+    </article>
+    <p class="note">Display font, big numerals, tiny AM/PM beside them, a short rule instead of the word "to".</p>
+  </section>
+
+  <section class="mock vb">
+    <p class="label"><b>B</b>Bold</p>
+    <article class="ticket primary live">
+      <div class="stub">
+        <span class="day">Mon–Wed</span>
+        <div class="big">
+          <span class="num">11</span>
+          <span class="dash">–</span>
+          <span class="num">3</span>
+          <span class="ap">AM – PM</span>
+        </div>
+      </div>
+      <div class="tbody">
+        <span class="stamp">Live now</span>
+        <p class="kicker">Weekday lunch</p>
+        <h3 class="thead">20% off every pizza</h3>
+        <p class="tdesc">Monday to Wednesday, 11 AM to 3 PM.</p>
+        <div class="prog"><div class="prog-bar"><i style="width:30%"></i></div><p>Ends 3 PM · 2h 30m left</p></div>
+        <button class="btn fill" type="button">Use this offer →</button>
+      </div>
+    </article>
+    <p class="note">Huge "11 – 3" you can read from across the room, day on a dark tab, AM–PM kept small underneath.</p>
+  </section>
+
+  <section class="mock vc">
+    <p class="label"><b>C</b>Stamp</p>
+    <article class="ticket primary live">
+      <div class="stub">
+        <span class="day">Mon–Wed</span>
+        <span class="row">11<small>AM</small><span class="arrow">↓</span></span>
+        <span class="row">3<small>PM</small></span>
+      </div>
+      <div class="tbody">
+        <span class="stamp">Live now</span>
+        <p class="kicker">Weekday lunch</p>
+        <h3 class="thead">20% off every pizza</h3>
+        <p class="tdesc">Monday to Wednesday, 11 AM to 3 PM.</p>
+        <div class="prog"><div class="prog-bar"><i style="width:30%"></i></div><p>Ends 3 PM · 2h 30m left</p></div>
+        <button class="btn fill" type="button">Use this offer →</button>
+      </div>
+    </article>
+    <p class="note">Day as a tilted rubber stamp, then start → end with a small arrow. Playful, matches the "Live now" stamp.</p>
+  </section>
+
+  <section class="mock vd">
+    <p class="label"><b>D</b>Timeline</p>
+    <article class="ticket primary live">
+      <div class="stub">
+        <span class="day">Mon–Wed</span>
+        <span class="rng">11–3<small>PM</small></span>
+        <span class="bar"><i class="on"></i></span>
+        <span class="ends"><span>11a</span><span>11p</span></span>
+      </div>
+      <div class="tbody">
+        <span class="stamp">Live now</span>
+        <p class="kicker">Weekday lunch</p>
+        <h3 class="thead">20% off every pizza</h3>
+        <p class="tdesc">Monday to Wednesday, 11 AM to 3 PM.</p>
+        <div class="prog"><div class="prog-bar"><i style="width:30%"></i></div><p>Ends 3 PM · 2h 30m left</p></div>
+        <button class="btn fill" type="button">Use this offer →</button>
+      </div>
+    </article>
+    <p class="note">A small bar shows where in the day the offer runs (11 AM to 10:30 PM), so timing reads at a glance.</p>
+  </section>
+
+</div>
+</body>
+</html>

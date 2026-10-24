@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mobile ticket mockups</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root { --ember:#D35400; --ember-deep:#A84300; --char:#1A1A18; --paper:#FFFCF6; --sun:#FFC83D; --sun-soft:#FFF0C4; --crust:#E8D5BD; --ash:#6B6460; --basil:#1B7F3B;
+          --display:'Bricolage Grotesque','DM Sans',system-ui,sans-serif; --body:'DM Sans',system-ui,sans-serif; --mono:'DM Mono',ui-monospace,monospace; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--sun-soft); font-family: var(--body); color: var(--char); padding: 20px 16px 60px; }
+  .wrap { max-width: 390px; margin: 0 auto; }
+  h1 { font: 800 1.4rem var(--display); margin: 0 0 4px; }
+  .lead { color: var(--ash); margin: 0 0 26px; font-size: .9rem; }
+  .label { font: 700 .75rem var(--mono); letter-spacing: .08em; text-transform: uppercase; margin: 30px 0 12px; }
+  .label b { background: var(--char); color: var(--sun); padding: 3px 8px; border-radius: 6px; margin-right: 8px; }
+  .note { font-size: .82rem; color: var(--ash); margin: 14px 0 0; }
+
+  /* shared ticket */
+  .mt { position: relative; display: grid; background: var(--paper); border: 1.5px solid var(--char); border-radius: 16px; box-shadow: 5px 5px 0 var(--ember); overflow: hidden; margin-right: 5px; }
+  .mt::before, .mt::after { content: ""; position: absolute; width: 18px; height: 18px; border-radius: 50%; background: var(--sun-soft); border: 1.5px solid var(--char); z-index: 3; }
+  .body { position: relative; padding: 16px 14px 18px; min-width: 0; overflow: hidden; }
+  .stamp { position: absolute; top: 12px; right: 10px; font: 700 .64rem/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--basil); border: 2px solid var(--basil); border-radius: 6px; padding: 5px 7px; transform: rotate(3deg); background: var(--paper); }
+  .kicker { font: 500 .68rem/1.2 var(--mono); letter-spacing: .09em; text-transform: uppercase; color: var(--ember-deep); margin: 0; }
+  .head { font: 800 1.35rem/1.05 var(--display); letter-spacing: -0.035em; margin: 8px 0 6px; max-width: 12ch; }
+  .desc { font-size: .88rem; color: var(--ash); margin: 0 0 12px; max-width: 24ch; }
+  .prog-bar { height: 7px; border-radius: 99px; background: var(--crust); overflow: hidden; max-width: 150px; }
+  .prog-bar i { display: block; height: 100%; width: 30%; background: var(--ember); }
+  .ends { font: 500 .64rem/1.3 var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--ash); margin: 6px 0 14px; }
+  .btn { display: inline-flex; align-items: center; min-height: 42px; padding: 0 18px; border-radius: 999px; border: 0; background: var(--ember-deep); color: #fff; font: 700 .9rem var(--display); }
+  .pie { position: absolute; right: -34px; bottom: -36px; width: 118px; height: 118px; border-radius: 50%; object-fit: cover; border: 2px solid var(--char); }
+
+  .day { font: 800 .68rem/1 var(--body); letter-spacing: .08em; text-transform: uppercase; white-space: nowrap; }
+  .tm { font-family: var(--display); font-weight: 800; letter-spacing: -0.06em; line-height: 1; display: inline-flex; align-items: baseline; }
+  .tm small { font: 800 .72rem/1 var(--body); letter-spacing: .02em; margin-left: 2px; }
+
+  /* A — side stub, bold (the desktop look, shrunk) */
+  .va { grid-template-columns: 104px 1fr; }
+  .va::before { left: 95px; top: -10px; } .va::after { left: 95px; bottom: -10px; }
+  .va .stub { background: var(--sun); border-right: 2px dashed rgba(26,26,24,.35); display: flex; flex-direction: column; }
+  .va .day { background: var(--char); color: var(--sun); padding: 11px 8px 11px 14px; }
+  .va .mid { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 6px 4px 12px; gap: 5px; }
+  .va .tm { font-size: 2.3rem; }
+  .va .ap { font: 800 .72rem/1 var(--body); letter-spacing: .1em; }
+
+  /* B — top band, yellow: day tab left, time right, notches on the tear line */
+  .vb { grid-template-columns: 1fr; }
+  .vb::before { left: -10px; top: 54px; } .vb::after { right: -10px; top: 54px; }
+  .vb .stub { background: var(--sun); display: flex; align-items: stretch; justify-content: space-between; height: 64px; border-bottom: 2px dashed rgba(26,26,24,.35); }
+  .vb .day { background: var(--char); color: var(--sun); display: flex; align-items: center; padding: 0 16px; font-size: .74rem; }
+  .vb .time { display: flex; align-items: center; padding: 0 18px; }
+  .vb .tm { font-size: 2.7rem; } .vb .tm small { font-size: .9rem; }
+
+  /* C — vertical day strip on the left, time becomes a bold chip in the body */
+  .vc { grid-template-columns: 52px 1fr; }
+  .vc::before { left: 43px; top: -10px; } .vc::after { left: 43px; bottom: -10px; }
+  .vc .stub { background: var(--sun); border-right: 2px dashed rgba(26,26,24,.35); display: flex; align-items: center; justify-content: center; }
+  .vc .day { writing-mode: vertical-rl; transform: rotate(180deg); font-size: .8rem; letter-spacing: .18em; }
+  .vc .chip { display: inline-flex; align-items: baseline; background: var(--char); color: var(--sun); border-radius: 10px; padding: 7px 11px 7px 10px; margin: 0 0 8px; }
+  .vc .chip .tm { font-size: 1.9rem; } .vc .chip .tm small { font-size: .78rem; }
+  .vc .head { margin-top: 2px; }
+
+  /* D — dark band: charcoal top, yellow day and giant yellow time */
+  .vd { grid-template-columns: 1fr; box-shadow: 5px 5px 0 var(--ember); }
+  .vd::before { left: -10px; top: 54px; border-color: var(--char); } .vd::after { right: -10px; top: 54px; }
+  .vd .stub { background: var(--char); color: var(--sun); display: flex; align-items: center; justify-content: space-between; height: 64px; padding: 0 18px; border-bottom: 2px dashed rgba(255,200,61,.45); }
+  .vd .day { color: var(--sun); font-size: .74rem; }
+  .vd .tm { font-size: 2.7rem; color: var(--sun); } .vd .tm small { font-size: .9rem; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>Mobile tickets: four takes</h1>
+<p class="lead">Phone width (358px). Same notched-ticket idea as desktop, now with the bold hours.</p>
+
+<p class="label"><b>A</b>Side stub, bold</p>
+<article class="mt va">
+  <div class="stub">
+    <span class="day">Mon–Wed</span>
+    <div class="mid"><span class="tm">11–3</span><span class="ap">PM</span></div>
+  </div>
+  <div class="body">
+    <span class="stamp">Live now</span>
+    <p class="kicker">Weekday lunch</p>
+    <h3 class="head">20% off every pizza</h3>
+    <p class="desc">Monday to Wednesday, 11 AM to 3 PM.</p>
+    <div class="prog-bar"><i></i></div>
+    <p class="ends">Ends 3 PM · 2h 30m left</p>
+    <button class="btn">Use this offer →</button>
+    <img class="pie" src="../images/hero-farm-house-pizza.webp" alt="">
+  </div>
+</article>
+<p class="note">Desktop look, shrunk. Dark day tab on top, "11–3" big and centred, PM under it.</p>
+
+<p class="label"><b>B</b>Top band, yellow</p>
+<article class="mt vb">
+  <div class="stub">
+    <span class="day">Mon–Wed</span>
+    <span class="time"><span class="tm">11–3<small>PM</small></span></span>
+  </div>
+  <div class="body">
+    <span class="stamp" style="top:76px">Live now</span>
+    <p class="kicker">Weekday lunch</p>
+    <h3 class="head">20% off every pizza</h3>
+    <p class="desc">Monday to Wednesday, 11 AM to 3 PM.</p>
+    <div class="prog-bar"><i></i></div>
+    <p class="ends">Ends 3 PM · 2h 30m left</p>
+    <button class="btn">Use this offer →</button>
+    <img class="pie" src="../images/hero-farm-house-pizza.webp" alt="">
+  </div>
+</article>
+<p class="note">Time gets the full width and the biggest size. The tear line runs across with notches at both edges.</p>
+
+<p class="label"><b>C</b>Vertical day + time chip</p>
+<article class="mt vc">
+  <div class="stub"><span class="day">Mon–Wed</span></div>
+  <div class="body">
+    <span class="stamp">Live now</span>
+    <span class="chip"><span class="tm">11–3<small>PM</small></span></span>
+    <p class="kicker">Weekday lunch</p>
+    <h3 class="head">20% off every pizza</h3>
+    <p class="desc">Monday to Wednesday, 11 AM to 3 PM.</p>
+    <div class="prog-bar"><i></i></div>
+    <p class="ends">Ends 3 PM · 2h 30m left</p>
+    <button class="btn">Use this offer →</button>
+    <img class="pie" src="../images/hero-farm-house-pizza.webp" alt="">
+  </div>
+</article>
+<p class="note">Slim stub with the day written sideways. Time sits in a dark chip above the title, so the body gets almost the whole width.</p>
+
+<p class="label"><b>D</b>Dark band</p>
+<article class="mt vd">
+  <div class="stub">
+    <span class="day">Mon–Wed</span>
+    <span class="tm">11–3<small>PM</small></span>
+  </div>
+  <div class="body">
+    <span class="stamp" style="top:76px">Live now</span>
+    <p class="kicker">Weekday lunch</p>
+    <h3 class="head">20% off every pizza</h3>
+    <p class="desc">Monday to Wednesday, 11 AM to 3 PM.</p>
+    <div class="prog-bar"><i></i></div>
+    <p class="ends">Ends 3 PM · 2h 30m left</p>
+    <button class="btn">Use this offer →</button>
+    <img class="pie" src="../images/hero-farm-house-pizza.webp" alt="">
+  </div>
+</article>
+<p class="note">Charcoal band with yellow type: the strongest contrast, and it matches the dark "Closed" ticket.</p>
+</div>
+</body>
+</html>

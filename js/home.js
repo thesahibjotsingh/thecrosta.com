@@ -16,6 +16,13 @@ const bigTm = (t1, t2) => {
   const ap = !b || a.u === b.u ? a.u : `${a.u} – ${b.u}`;
   return `<span class="tm bigtm${b && a.u !== b.u ? ' diff' : ''}"><b><span class="n">${a.n}</span>${unit(a)}</b>${b ? `<i class="tw">to</i><b><span class="n">${b.n}</span>${unit(b)}</b>` : ''}<span class="ap">${ap}</span></span>`;
 };
+// phone tickets: the hours as a dark chip above the title ("11–3 PM", "All day", "11 AM")
+const chipHtml = (t1, t2) => {
+  const a = splitT(t1), b = t2 ? splitT(t2) : null;
+  if (a && b) return `<span class="chip"><span class="tm">${a.n}–${b.n}<small>${b.u}</small></span></span>`;
+  if (a && !t2) return `<span class="chip"><span class="tm">${a.n}<small>${a.u}</small></span></span>`;
+  return `<span class="chip txt">${t1}${t2 ? ' to ' + t2 : ''}</span>`;
+};
 const tmHtml = o => `<span class="tm${o.t1.length > 6 ? ' long' : ''}"><b>${o.t1}</b>${o.t2 ? `<i class="tw">to</i><b>${o.t2}</b>` : ''}</span>`;
 
 function offerMeta({ o, s }) {
@@ -76,15 +83,15 @@ function renderLive() {
     const prog = timed
       ? `<div class="prog"><div class="prog-bar"><i style="width:${Math.round((t - s.start) / (s.end - s.start) * 100)}%"></i></div><p>Ends ${fmtTime(s.end)} · ${fmtDuration(s.left)} left</p></div>`
       : `<div class="prog"><p>${o.always ? 'Always on' : 'Live all day'}</p></div>`;
-    primary = `<article class="ticket primary live${enter(0)}" data-offer="${o.id}"><div class="stub"><span class="d">${o.stub}</span>${bigTm(o.t1, o.t2) || tmHtml(o)}</div><div class="tbody"><span class="stamp">Live now</span><p class="kicker">${o.name}</p><h2 class="thead">${o.head}</h2><p class="tdesc">${o.desc}</p>${prog}<button class="btn fill" type="button" data-offer="${o.id}">Use this offer →</button><img class="pie" src="${o.pie}" alt=""></div></article>`;
+    primary = `<article class="ticket primary live${enter(0)}" data-offer="${o.id}"><div class="stub"><span class="d">${o.stub}</span>${bigTm(o.t1, o.t2) || tmHtml(o)}</div><div class="tbody"><span class="stamp">Live now</span>${chipHtml(o.t1, o.t2)}<p class="kicker">${o.name}</p><h2 class="thead">${o.head}</h2><p class="tdesc">${o.desc}</p>${prog}<button class="btn fill" type="button" data-offer="${o.id}">Use this offer →</button><img class="pie" src="${o.pie}" alt=""></div></article>`;
   } else {
     const nx = sorted.find(x => x.s.k !== 'live') || lead;
-    primary = `<article class="ticket primary closedcard${enter(0)}"><div class="stub"><span class="d">Closed</span>${bigTm(fmtTime(st.opensAt)) || `<span class="tm"><b>${fmtTime(st.opensAt)}</b></span>`}</div><div class="tbody"><span class="stamp">Closed</span><p class="kicker">Back soon</p><h2 class="thead">Back ${st.today ? 'today' : DAY_NAMES[st.opensDay]} at ${fmtTime(st.opensAt).replace(' ', ' ')}</h2><p class="tdesc">Browse the menu now and order when we open. Next offer: ${nx.o.name} (${offerMeta(nx).replace(/^./, c => c.toLowerCase())}).</p></div></article>`;
+    primary = `<article class="ticket primary closedcard${enter(0)}"><div class="stub"><span class="d">Closed</span>${bigTm(fmtTime(st.opensAt)) || `<span class="tm"><b>${fmtTime(st.opensAt)}</b></span>`}</div><div class="tbody"><span class="stamp">Closed</span>${chipHtml(fmtTime(st.opensAt))}<p class="kicker">Back soon</p><h2 class="thead">Back ${st.today ? 'today' : DAY_NAMES[st.opensDay]} at ${fmtTime(st.opensAt).replace(' ', ' ')}</h2><p class="tdesc">Browse the menu now and order when we open. Next offer: ${nx.o.name} (${offerMeta(nx).replace(/^./, c => c.toLowerCase())}).</p></div></article>`;
   }
   $('primary').innerHTML = primary;
   $('more').innerHTML = rest.slice(0, 3).map((x, i) => {
     const cls = x.s.k === 'next' ? ' dim' : (x.s.k === 'live' ? ' live' : '');
-    return `<article class="ticket${cls}${enter(i + 1)}" data-offer="${x.o.id}"><div class="stub"><span class="d">${x.o.stub}</span>${tmHtml(x.o)}</div><div class="tbody"><p class="kicker">${x.o.name}</p><h3 class="thead">${x.o.head}</h3><p class="tmeta ${x.s.k === 'live' ? 'live' : ''}">${offerMeta(x)}</p><button class="tlink" type="button" data-offer="${x.o.id}">${x.s.k === 'live' ? 'Use this offer →' : 'See how it works →'}</button></div></article>`;
+    return `<article class="ticket${cls}${enter(i + 1)}" data-offer="${x.o.id}"><div class="stub"><span class="d">${x.o.stub}</span>${tmHtml(x.o)}</div><div class="tbody">${chipHtml(x.o.t1, x.o.t2)}<p class="kicker">${x.o.name}</p><h3 class="thead">${x.o.head}</h3><p class="tmeta ${x.s.k === 'live' ? 'live' : ''}">${offerMeta(x)}</p><button class="tlink" type="button" data-offer="${x.o.id}">${x.s.k === 'live' ? 'Use this offer →' : 'See how it works →'}</button></div></article>`;
   }).join('');
 
   if (!clockView) buildClock(); else updateClockUI();

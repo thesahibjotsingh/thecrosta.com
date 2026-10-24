@@ -747,22 +747,6 @@ body.is-searching .best { display: none; }
   .quick .side-pair { order: 3; }
 }
 
-/* ── Phones: the same ticket as desktop (yellow stub with the notched tear line on the left) ── */
-@media (max-width: 760px) {
-  .deck .ticket { --stub: 100px; grid-template-columns: var(--stub) 1fr; }
-  .deck .ticket.primary { box-shadow: 5px 5px 0 var(--ember); }
-  .deck .ticket.closedcard { box-shadow: 5px 5px 0 var(--brick); }
-  .deck .ticket::before, .deck .ticket::after { display: block; }
-  .deck .ticket .stub { flex-direction: column; align-items: flex-start; justify-content: center; gap: 5px; border-right: 2px dashed rgba(26,26,24,.3); border-bottom: 0; padding: 16px 8px 16px 14px; }
-  .deck .ticket.closedcard .stub { border-right-color: #4a4640; }
-  .deck .ticket .stub b { font-size: 1.3rem; line-height: 1.05; }
-  .deck .ticket .tm { flex-direction: column; align-items: flex-start; gap: 2px; }
-  .deck .ticket .tm.long b { font-size: 1rem; }
-  .deck .ticket .tbody { padding: 16px 14px 18px; }
-  .deck .ticket .thead { max-width: none; font-size: 1.3rem; }
-  .deck .ticket .stamp { top: 10px; right: 10px; }
-  .deck .ticket.primary .pie { width: 120px; height: 120px; right: -34px; bottom: -36px; }
-}
 @media (max-width: 760px) { .deck .ticket:not([data-d="0"])::before, .deck .ticket:not([data-d="0"])::after { display: none; } }
 
 /* ── Bold stub (desktop and tablet): day on a dark tab, the hours big on ONE line ("11–3" with a small PM) ── */
@@ -781,3 +765,28 @@ body.is-searching .best { display: none; }
   .ticket.primary .bigtm .tw::before { content: "–"; font: 800 2.2rem/1 var(--display); color: var(--char); }
   .ticket.primary.closedcard .bigtm .tw::before { color: #fff; }
 }
+
+/* ── Phones: slim stub with the day written sideways, hours in a dark chip above the title ── */
+.chip { display: none; }
+@media (max-width: 760px) {
+  .deck .ticket { --stub: 52px; grid-template-columns: var(--stub) 1fr; }
+  .deck .ticket.primary { box-shadow: 5px 5px 0 var(--ember); }
+  .deck .ticket.closedcard { box-shadow: 5px 5px 0 var(--brick); }
+  .deck .ticket::before, .deck .ticket::after { display: block; }
+  .deck .ticket .stub { flex-direction: row; align-items: center; justify-content: center; padding: 0; border-right: 2px dashed rgba(26,26,24,.35); border-bottom: 0; }
+  .deck .ticket.closedcard .stub { border-right-color: #4a4640; }
+  .deck .ticket .stub .tm { display: none; }
+  .deck .ticket .stub .d { writing-mode: vertical-rl; transform: rotate(180deg); background: none; color: inherit; padding: 0; font: 800 .8rem/1 var(--body); letter-spacing: .18em; text-transform: uppercase; white-space: nowrap; }
+  .deck .ticket.live .stub .d { color: var(--char); }
+  .deck .ticket.closedcard .stub .d { color: #f0a27a; }
+  .deck .ticket .tbody { padding: 16px 14px 18px; }
+  .deck .ticket .thead { max-width: none; font-size: 1.3rem; margin-top: 2px; }
+  .deck .ticket .stamp { top: 10px; right: 10px; }
+  .deck .ticket.primary .pie { width: 120px; height: 120px; right: -34px; bottom: -36px; }
+  .deck .chip { display: inline-flex; align-items: baseline; background: var(--char); color: var(--sun); border-radius: 10px; padding: 7px 11px 7px 10px; margin: 0 0 8px; }
+  .deck .chip .tm { display: inline-flex; flex-direction: row; align-items: baseline; font: 800 1.9rem/1 var(--display); letter-spacing: -0.06em; }
+  .deck .chip small { font: 800 .78rem/1 var(--body); letter-spacing: .02em; margin-left: 2px; }
+  .deck .chip.txt { font: 800 1.05rem/1.1 var(--display); letter-spacing: -0.01em; text-transform: uppercase; }
+  .deck .ticket.closedcard .chip { background: var(--brick); color: #fff; }
+}
+
