@@ -365,3 +365,12 @@ footer a { color: #A39A92; }
 .qb-sub-btn { flex: 1 1 0; display: inline-flex; align-items: center; justify-content: center; gap: .35rem; min-height: 46px; padding: .5rem .6rem; border: 0; border-left: 1.5px dashed var(--crust); border-radius: 0; background: transparent; color: var(--char); font: 700 .88rem/1.1 var(--display); white-space: nowrap; transition: background-color 160ms ease, color 160ms ease; }
 .qb-sub-btn:hover { background: var(--sun-soft); }
 .qb-sub-btn.active { background: var(--char); color: #fff; border-left-color: var(--char); }
+
+/* cart: notices, spin offer and the student box scroll with the form; the bottom panel is only the total and the order button */
+.cart-extras { margin-bottom: 14px; }
+.cart-extras > * { margin-bottom: 10px; }
+.cart-eta { font-size: .78rem; color: var(--ash); }
+.cart-eta strong { color: var(--char); }
+.cart-footer { padding-top: 10px; padding-bottom: calc(10px + env(safe-area-inset-bottom)); }
+.cart-footer .cart-total-row { margin-bottom: 8px; }
+
