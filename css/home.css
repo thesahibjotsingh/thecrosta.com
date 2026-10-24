@@ -738,7 +738,7 @@ body.is-searching .best { display: none; }
 
 /* ── Desktop: the headline sits above the offers on the left; "Hungry? Start here" and the three cards run down the right ── */
 @media (min-width: 1021px) {
-  .top { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); column-gap: 26px; align-items: start; }
+  .top { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); column-gap: 26px; align-items: start; grid-template-rows: auto 1fr auto; }
   .top .hero { grid-column: 1; grid-row: 1; }
   .top .live-grid { display: contents; }
   .top .offers { grid-column: 1; grid-row: 2; }
@@ -859,4 +859,8 @@ body.is-searching .best { display: none; }
 .upi-app { flex-direction: column; gap: 6px; padding: 10px 6px 9px; min-height: 76px; background: #fff; }
 .upi-app .ua-ico { width: 32px; height: 32px; flex: none; }
 .upi-app span { font: 800 .8rem/1.1 var(--display); }
+
+/* the find-us card sits under the offers on desktop (balances the two columns); on phones it still comes last */
+.offers > .find-card { margin-top: 2px; }
+@media (max-width: 1020px) { .offers > .find-card { order: 4; margin-top: 0; } }
 
