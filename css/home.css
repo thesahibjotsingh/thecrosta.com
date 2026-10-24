@@ -772,7 +772,7 @@ body.is-searching .best { display: none; }
   .ticket.primary .stub { padding: 0; gap: 0; justify-content: flex-start; align-items: stretch; }
   .ticket.primary .stub .d { background: var(--char); color: var(--sun); font: 800 .72rem/1 var(--body); letter-spacing: .08em; text-transform: uppercase; padding: 12px 10px 12px 18px; white-space: nowrap; }
   .ticket.primary.closedcard .stub .d { background: var(--brick); color: #fff; }
-  .ticket.primary .bigtm { flex: 1; flex-direction: row; flex-wrap: nowrap; align-items: baseline; justify-content: flex-start; align-content: center; gap: 0; padding: 0 8px 0 18px; }
+  .ticket.primary .bigtm { flex: 1; flex-direction: row; flex-wrap: nowrap; align-items: center; justify-content: center; gap: 0; padding: 0 8px 6px; }
   .ticket.primary .bigtm b { display: inline-flex; align-items: baseline; font: 800 2.6rem/1 var(--display); letter-spacing: -0.06em; color: var(--char); }
   .ticket.primary.closedcard .bigtm b { color: #fff; }
   .ticket.primary .bigtm .u { display: none; font: 800 .8rem/1 var(--body); letter-spacing: .02em; margin-left: 2px; }
