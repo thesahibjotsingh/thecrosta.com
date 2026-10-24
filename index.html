@@ -34,9 +34,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/styles.css?v=18">
-<link rel="stylesheet" href="css/home.css?v=18">
-<link rel="stylesheet" href="css/sections.css?v=18">
+<link rel="stylesheet" href="css/styles.css?v=20">
+<link rel="stylesheet" href="css/home.css?v=20">
+<link rel="stylesheet" href="css/sections.css?v=20">
 </head>
 <body>
 
@@ -71,7 +71,7 @@
       <div class="hero-cta">
         <a class="cta-main" id="heroCta" href="#menu" data-cat="pizzas">Order now <span aria-hidden="true">→</span></a>
         <a class="cta-link" href="#menu" data-cat="pizzas">Explore menu <span aria-hidden="true">→</span></a>
-        <a class="hero-rating" href="#reviews" aria-label="Rated 4.6 out of 5 by customers, see reviews"><span class="stars" aria-hidden="true">★★★★★</span><b>4.6</b><span>rated by customers</span></a>
+        <a class="hero-rating" href="#reviews" aria-label="Rated 4.6 out of 5 by customers, see reviews"><span class="stars" aria-hidden="true">★★★★★</span><b>4.6</b><span class="rt-long">rated by customers</span><span class="rt-short">reviews</span></a>
       </div>
       </div>
 
@@ -543,7 +543,7 @@
   <a href="#top" data-dock="home" class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 11 9-8 9 8"/><path d="M5 10v10h14V10"/></svg><span>Home</span></a>
   <a href="#menu" data-dock="menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h10"/></svg><span>Menu</span></a>
   <a href="#primary" data-dock="offers"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12v8H4v-8M2 7h20v5H2zM12 22V7M12 7H8a2.5 2.5 0 1 1 0-5c3 0 4 5 4 5zM12 7h4a2.5 2.5 0 1 0 0-5c-3 0-4 5-4 5z"/></svg><span>Offers</span></a>
-  <a href="#spin" data-dock="spin"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="2"/><path d="M12 3v7M12 14v7M3 12h7M14 12h7"/></svg><span>Spin</span></a>
+  <a href="#spin" data-dock="spin"><img class="dk-wheel" src="images/wheel.webp" alt="" width="28" height="28"><span>Spin</span></a>
   <button type="button" data-dock="cart" class="dock-cart" onclick="openCart()" aria-label="Open cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2 3h3l2.6 12.4a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.5L21 7H6"/></svg><span class="dk-label">Cart</span><span class="dk-count cart-count">0</span><span class="dk-total cart-total"></span></button>
 </div>
 
@@ -784,30 +784,30 @@
   </div>
 </div>
 
-<script defer src="js/menu-data.js?v=18"></script>
-<script defer src="js/shop.js?v=18"></script>
-<script defer src="js/offers.js?v=18"></script>
-<script defer src="js/menu-render.js?v=18"></script>
-<script defer src="js/ui.js?v=18"></script>
-<script defer src="js/reviews.js?v=18"></script>
-<script defer src="js/menu-ui.js?v=18"></script>
-<script defer src="js/offers-carousel.js?v=18"></script>
-<script defer src="js/contact.js?v=18"></script>
-<script defer src="js/cart.js?v=18"></script>
-<script defer src="js/promos.js?v=18"></script>
-<script defer src="js/cart-render.js?v=18"></script>
-<script defer src="js/order.js?v=18"></script>
-<script defer src="js/payment.js?v=18"></script>
-<script defer src="js/menu-wiring.js?v=18"></script>
-<script defer src="js/persist.js?v=18"></script>
-<script defer src="js/spin.js?v=18"></script>
-<script defer src="js/home.js?v=18"></script>
-<script defer src="js/sheets.js?v=18"></script>
-<script defer src="js/student.js?v=18"></script>
-<script defer src="js/spin-pop.js?v=18"></script>
-<script defer src="js/dock.js?v=18"></script>
-<script defer src="js/deck.js?v=18"></script>
-<script defer src="js/page-ui.js?v=18"></script>
+<script defer src="js/menu-data.js?v=20"></script>
+<script defer src="js/shop.js?v=20"></script>
+<script defer src="js/offers.js?v=20"></script>
+<script defer src="js/menu-render.js?v=20"></script>
+<script defer src="js/ui.js?v=20"></script>
+<script defer src="js/reviews.js?v=20"></script>
+<script defer src="js/menu-ui.js?v=20"></script>
+<script defer src="js/offers-carousel.js?v=20"></script>
+<script defer src="js/contact.js?v=20"></script>
+<script defer src="js/cart.js?v=20"></script>
+<script defer src="js/promos.js?v=20"></script>
+<script defer src="js/cart-render.js?v=20"></script>
+<script defer src="js/order.js?v=20"></script>
+<script defer src="js/payment.js?v=20"></script>
+<script defer src="js/menu-wiring.js?v=20"></script>
+<script defer src="js/persist.js?v=20"></script>
+<script defer src="js/spin.js?v=20"></script>
+<script defer src="js/home.js?v=20"></script>
+<script defer src="js/sheets.js?v=20"></script>
+<script defer src="js/student.js?v=20"></script>
+<script defer src="js/spin-pop.js?v=20"></script>
+<script defer src="js/dock.js?v=20"></script>
+<script defer src="js/deck.js?v=20"></script>
+<script defer src="js/page-ui.js?v=20"></script>
 
 </body>
 </html>

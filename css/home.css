@@ -698,3 +698,20 @@ body.cart-open .cartbar { visibility: hidden; }
 }
 @media (max-width: 760px) { .dock { box-shadow: 0 0 0 1.5px rgba(255,255,255,.2), 0 8px 24px rgba(26,26,24,.35); } }
 body.is-searching .best { display: none; }
+
+/* the Spin tab and the "Feeling lucky?" card show the real wheel, slowly turning */
+.dk-wheel { width: 28px; height: 28px; border-radius: 50%; animation: wheel-turn 7s linear infinite; filter: drop-shadow(0 0 4px rgba(255,200,61,.55)); }
+.spin-card img { animation: wheel-turn 12s linear infinite; }
+@keyframes wheel-turn { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .dk-wheel, .spin-card img { animation: none; } }
+
+/* hero links: on phones "Explore menu" and the rating share one row under the button */
+.hero-rating .rt-short { display: none; }
+@media (max-width: 760px) {
+  .hero-cta { gap: 14px 12px; margin-bottom: 22px; }
+  .cta-link { flex: none; }
+  .hero-rating { width: auto; margin-left: auto; justify-content: flex-end; font-size: .82rem; }
+  .hero-rating .rt-long { display: none; }
+  .hero-rating .rt-short { display: inline; color: var(--ash); }
+  .hero-rating span:last-child { color: var(--ash); }
+}
