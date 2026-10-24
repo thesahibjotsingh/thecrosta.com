@@ -28,6 +28,7 @@ Deployed from this repo by Cloudflare. Orders go out as WhatsApp messages; there
 | `js/persist.js` | Saved cart, last order (for Reorder), pre-filled details — device only |
 | `js/payment.js` | Delivery location pin and UPI payment |
 | `js/ui.js` | Toast, thumbnail-to-cart animation, count bump |
+| `js/track.js` | Anonymous analytics (off until the Worker address is set); the Worker itself is in `worker/` |
 | `js/dock.js` | Phone bottom pill nav (Home / Menu / Offers / Cart); the cart count comes from `.cart-count` / `.cart-total` |
 | `js/student.js` | Thapar student 10% switch (page card + cart checkbox); the rule itself is in `js/promos.js` (`STUDENT_PERCENT`) |
 | `js/spin.js`, `spin-pop.js`, `reviews.js`, `offers-carousel.js`, `contact.js`, `page-ui.js` | Spin wheel, reviews lightbox, poster carousel, contact form, small page behaviours |
@@ -57,13 +58,17 @@ Everything time-based (open/closed, offers, the clock strip, cart discounts) fol
 
 **Preview a time of day:** on a local server, add `?at=Mon-12:30` to the URL (day-HH:MM, shop time) to see the site as it would look then — e.g. `http://localhost:8000/?at=Sat-20:00`. It is ignored on the live site.
 
+## Analytics and order tracking
+
+`js/track.js` counts anonymous actions (visits, items added, cart opened, "Order" taps, orders handed to WhatsApp, UPI taps, offers, spin) and sends them to a small Cloudflare Worker in `worker/`. It is switched off until the Worker address is filled in: follow `worker/README.md` (about 20 minutes, free). Your results page is `https://YOUR-WORKER/stats?key=YOUR_KEY`. Never stored: names, phone numbers, addresses, location, typed text. Opt a browser out with `?notrack=1`; tag shared links with `?from=instagram`.
+
 ## Closed shop
 
 Outside opening hours the cart can still be built, but it cannot be sent: the cart's order button is disabled ("Closed · opens today 11 AM"), the payment options are hidden, and `placeOrder()` refuses. The header's WhatsApp button is replaced by the opening time.
 
 ## Cache busting
 
-Cloudflare tells browsers to keep CSS/JS for 4 hours. The `?v=51` on each stylesheet and script link in `index.html` forces a fresh download after a deploy. When you change any file in `css/` or `js/`, bump that number (find/replace `?v=51` → `?v=52`) in the same commit.
+Cloudflare tells browsers to keep CSS/JS for 4 hours. The `?v=52` on each stylesheet and script link in `index.html` forces a fresh download after a deploy. When you change any file in `css/` or `js/`, bump that number (find/replace `?v=52` → `?v=53`) in the same commit.
 
 ## For whoever delivers or hands over orders
 

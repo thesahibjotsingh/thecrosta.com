@@ -1,0 +1,9 @@
+# Only needed if you deploy with the `wrangler` command. The dashboard route in README.md needs no file.
+name = "crosta-analytics"
+main = "index.js"
+compatibility_date = "2026-01-01"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "crosta-analytics"
+database_id = "PUT-THE-D1-DATABASE-ID-HERE"
