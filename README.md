@@ -68,3 +68,9 @@ Outside opening hours the cart can still be built, but it cannot be sent: the ca
 ## Cache busting
 
 Cloudflare tells browsers to keep CSS/JS for 4 hours. The `?v=47` on each stylesheet and script link in `index.html` forces a fresh download after a deploy. When you change any file in `css/` or `js/`, bump that number (find/replace `?v=47` → `?v=48`) in the same commit.
+
+## For whoever delivers or hands over orders
+
+- **Thapar student discount:** an order message with "🎓 Thapar student discount (10%)" and "🪪 Student ID card to be checked" means the customer must show a student ID card. No card: collect the amount before the discount (the "Subtotal" line). It only applies to orders of ₹100 or more.
+- **Spin prizes** (free drink, fries, garlic bread, topping, % off) are also only valid on orders of ₹100 or more.
+- **"🧪 TEST ORDER — please ignore"** at the top of a message is a test; no food needed.
