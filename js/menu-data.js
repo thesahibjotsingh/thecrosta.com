@@ -142,7 +142,7 @@ window.MENU_DATA = {
       "id": "drinks", "label": "Drinks & Shakes",
       "categories": [
         {
-          "title": "☕ Hot Brews", "items": [
+          "id": "dr-hot", "title": "☕ Hot Brews", "items": [
             {"name": "Masala Chai", "prices": [20], "img": "images/menu-masala-chai.webp", "alt": "Masala Chai"},
             {"name": "Elaichi Chai", "prices": [20], "img": "images/menu-masala-chai.webp", "alt": "Elaichi Chai"},
             {"name": "Adrak Chai", "prices": [20], "img": "images/menu-masala-chai.webp", "alt": "Adrak Chai"},
@@ -150,7 +150,7 @@ window.MENU_DATA = {
           ]
         },
         {
-          "title": "🧃 Chilled Classics", "items": [
+          "id": "dr-chilled", "title": "🧃 Chilled Classics", "items": [
             {"name": "Mint Fresh Lime Soda", "prices": [49], "img": "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?w=160&q=75&fit=crop", "alt": "Mint Fresh Lime Soda", "variant": {"baseName": "Mint Fresh Lime Soda", "cartPrice": 49, "default": "Salted", "options": ["Salted", "Sweet", "Mix"]}},
             {"name": "Lemon Cola", "prices": [70], "img": "images/menu-lemon-cola.webp", "alt": "Lemon Cola", "variant": {"baseName": "Lemon Cola", "cartPrice": 70, "default": "Salted", "options": ["Salted", "Sweet", "Mix", "Plain"]}},
             {"name": "Virgin Mojito", "prices": [89], "img": "https://images.unsplash.com/photo-1551538827-9c037cb4f32a?w=160&q=75&fit=crop", "alt": "Virgin Mojito", "variant": {"baseName": "Virgin Mojito", "cartPrice": 89, "default": "Salted", "options": ["Salted", "Sweet", "Mix"]}},
@@ -158,7 +158,7 @@ window.MENU_DATA = {
           ]
         },
         {
-          "title": "🥤 Thick Shakes & Frappes", "items": [
+          "id": "dr-shakes", "title": "🥤 Thick Shakes & Frappes", "items": [
             {"name": "Cold Coffee", "prices": [89], "img": "https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=160&q=75&fit=crop", "alt": "Cold Coffee"},
             {"name": "Strawberry Bliss", "prices": [99], "img": "images/menu-strawberry-shake.webp", "alt": "Strawberry Shake"},
             {"name": "Vanilla Shake", "prices": [99], "img": "images/menu-vanilla-shake.webp", "alt": "Vanilla Shake"},
