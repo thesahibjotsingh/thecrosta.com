@@ -7,6 +7,15 @@ let firstPaint = true;                 // entrance animation only on the first p
 const isPhone = () => matchMedia('(max-width:760px)').matches;
 
 /* ───────────── header + tickets ───────────── */
+// "11 AM" -> { n: "11", u: "AM" }; the bold desktop stub shows the numbers huge and AM/PM small
+const splitT = t => { const m = /^(\d+(?::\d+)?)\s*(AM|PM)$/i.exec(String(t).trim()); return m ? { n: m[1], u: m[2].toUpperCase() } : null; };
+const bigTm = (t1, t2) => {
+  const a = splitT(t1), b = t2 ? splitT(t2) : null;
+  if (!a || (t2 && !b)) return null;
+  const unit = x => `<span class="u"> ${x.u}</span>`;
+  const ap = !b || a.u === b.u ? a.u : `${a.u} – ${b.u}`;
+  return `<span class="tm bigtm${b && a.u !== b.u ? ' diff' : ''}"><b><span class="n">${a.n}</span>${unit(a)}</b>${b ? `<i class="tw">to</i><b><span class="n">${b.n}</span>${unit(b)}</b>` : ''}<span class="ap">${ap}</span></span>`;
+};
 const tmHtml = o => `<span class="tm${o.t1.length > 6 ? ' long' : ''}"><b>${o.t1}</b>${o.t2 ? `<i class="tw">to</i><b>${o.t2}</b>` : ''}</span>`;
 
 function offerMeta({ o, s }) {
@@ -67,10 +76,10 @@ function renderLive() {
     const prog = timed
       ? `<div class="prog"><div class="prog-bar"><i style="width:${Math.round((t - s.start) / (s.end - s.start) * 100)}%"></i></div><p>Ends ${fmtTime(s.end)} · ${fmtDuration(s.left)} left</p></div>`
       : `<div class="prog"><p>${o.always ? 'Always on' : 'Live all day'}</p></div>`;
-    primary = `<article class="ticket primary live${enter(0)}" data-offer="${o.id}"><div class="stub"><span class="d">${o.stub}</span>${tmHtml(o)}</div><div class="tbody"><span class="stamp">Live now</span><p class="kicker">${o.name}</p><h2 class="thead">${o.head}</h2><p class="tdesc">${o.desc}</p>${prog}<button class="btn fill" type="button" data-offer="${o.id}">Use this offer →</button><img class="pie" src="${o.pie}" alt=""></div></article>`;
+    primary = `<article class="ticket primary live${enter(0)}" data-offer="${o.id}"><div class="stub"><span class="d">${o.stub}</span>${bigTm(o.t1, o.t2) || tmHtml(o)}</div><div class="tbody"><span class="stamp">Live now</span><p class="kicker">${o.name}</p><h2 class="thead">${o.head}</h2><p class="tdesc">${o.desc}</p>${prog}<button class="btn fill" type="button" data-offer="${o.id}">Use this offer →</button><img class="pie" src="${o.pie}" alt=""></div></article>`;
   } else {
     const nx = sorted.find(x => x.s.k !== 'live') || lead;
-    primary = `<article class="ticket primary closedcard${enter(0)}"><div class="stub"><span class="d">Closed</span><span class="tm"><b>${fmtTime(st.opensAt)}</b></span></div><div class="tbody"><span class="stamp">Closed</span><p class="kicker">Back soon</p><h2 class="thead">Back ${st.today ? 'today' : DAY_NAMES[st.opensDay]} at ${fmtTime(st.opensAt).replace(' ', ' ')}</h2><p class="tdesc">Browse the menu now and order when we open. Next offer: ${nx.o.name} (${offerMeta(nx).replace(/^./, c => c.toLowerCase())}).</p></div></article>`;
+    primary = `<article class="ticket primary closedcard${enter(0)}"><div class="stub"><span class="d">Closed</span>${bigTm(fmtTime(st.opensAt)) || `<span class="tm"><b>${fmtTime(st.opensAt)}</b></span>`}</div><div class="tbody"><span class="stamp">Closed</span><p class="kicker">Back soon</p><h2 class="thead">Back ${st.today ? 'today' : DAY_NAMES[st.opensDay]} at ${fmtTime(st.opensAt).replace(' ', ' ')}</h2><p class="tdesc">Browse the menu now and order when we open. Next offer: ${nx.o.name} (${offerMeta(nx).replace(/^./, c => c.toLowerCase())}).</p></div></article>`;
   }
   $('primary').innerHTML = primary;
   $('more').innerHTML = rest.slice(0, 3).map((x, i) => {
