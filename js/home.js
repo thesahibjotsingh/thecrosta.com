@@ -66,7 +66,8 @@ function renderLive() {
   const payWrap = $('payWrap');
   if (payWrap) payWrap.hidden = !st.open;
 
-  $('clockLine').textContent = `${DAY_NAMES[now.day]} · ${fmtTime(now.hour, now.minute)} · Patiala`;
+  // desktop shows the shop status above the headline; phones and tablets keep "Monday · 12:30 PM · Patiala" (their header has the status)
+  $('clockLine').innerHTML = `<span class="cl-day">${DAY_NAMES[now.day]} · ${fmtTime(now.hour, now.minute)} · Patiala</span><span class="cl-status${st.open ? '' : ' closed'}"><i class="dot" aria-hidden="true"></i>${shopStatusText(st)}</span>`;
   const heroCta = $('heroCta'); if (heroCta) heroCta.firstChild.textContent = st.open ? 'Order now ' : 'See the menu ';
   $('lede').textContent = st.open ? 'Oven’s hot — here’s what’s on right now.' : 'Oven’s resting — have a look, then order when we open.';
 

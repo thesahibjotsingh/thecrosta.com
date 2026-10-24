@@ -790,17 +790,37 @@ body.is-searching .best { display: none; }
   .deck .ticket.closedcard .chip { background: var(--brick); color: #fff; }
 }
 
-/* ── Desktop header navigation ── */
+/* ── Desktop header: full width, nav centred between the logo and the buttons; status moves above the headline ── */
 .mainnav { display: none; }
+.cl-status { display: none; }
 @media (min-width: 1021px) {
-  .mainnav { display: flex; align-items: center; gap: 22px; margin-left: 26px; }
-  .mainnav a { position: relative; padding: 22px 0 20px; font: 600 .95rem/1 var(--body); color: var(--char); text-decoration: none; white-space: nowrap; transition: color 160ms ease; }
-  .mainnav a::after { content: ""; position: absolute; left: 0; right: 0; bottom: 12px; height: 3px; border-radius: 3px; background: var(--sun); transform: scaleX(0); transform-origin: 0 50%; transition: transform 240ms var(--ease-out); }
+  .bar .bar-in { max-width: none; height: 74px; padding-inline: clamp(28px, 4.2vw, 80px); gap: 24px; }
+  .bar-in .status { display: none; }
+  .mainnav { display: flex; align-items: center; justify-content: center; gap: clamp(26px, 3vw, 46px); margin: 0 auto; }
+  .mainnav a { position: relative; padding: 26px 2px 24px; font: 600 1.02rem/1 var(--body); letter-spacing: -0.005em; color: var(--char); text-decoration: none; white-space: nowrap; transition: color 160ms ease; }
+  .mainnav a::after { content: ""; position: absolute; left: 0; right: 0; bottom: 14px; height: 3px; border-radius: 3px; background: var(--sun); transform: scaleX(0); transform-origin: 0 50%; transition: transform 240ms var(--ease-out); }
   .mainnav a.on::after { transform: scaleX(1); }
   .mainnav a:active { transform: translateY(1px); }
-  .bar-in .status { margin: 0 0 0 auto; font-size: .82rem; }
+  .brand { font-size: 1.4rem; }
+  .brand img { width: 44px; height: 44px; }
+  .actions { gap: 12px; }
+  .actions .btn { min-height: 48px; padding-inline: 20px; font-size: .95rem; }
+  .actions .btn.call, .actions .btn.cart { padding-inline: 18px; }
+  /* the status line above the headline */
+  .cl-day { display: none; }
+  .cl-status { display: inline-flex; align-items: center; gap: 9px; color: var(--basil); font-weight: 600; }
+  .cl-status.closed { color: var(--brick); }
+  .cl-status .dot { width: 9px; height: 9px; border-radius: 50%; background: currentColor; display: inline-block; flex: none; }
 }
 @media (hover: hover) and (pointer: fine) { .mainnav a:hover { color: var(--ember-deep); } }
-@media (min-width: 1021px) and (max-width: 1279px) { .bar-in .status > span:last-child { display: none; } }
 @media (prefers-reduced-motion: reduce) { .mainnav a::after { transition-duration: 1ms; } }
 
+@media (min-width: 1021px) { .bar .brand, .bar .actions { flex: none; } .mainnav { min-width: 0; } }
+@media (min-width: 1021px) and (max-width: 1180px) {
+  .bar .bar-in { padding-inline: 22px; gap: 12px; }
+  .mainnav { gap: 18px; }
+  .mainnav a { font-size: .93rem; }
+  .brand { font-size: 1.2rem; } .brand img { width: 36px; height: 36px; }
+  .actions { gap: 8px; }
+  .actions .btn { padding-inline: 13px; font-size: .88rem; min-height: 44px; }
+}
