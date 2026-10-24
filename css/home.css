@@ -855,3 +855,8 @@ body.is-searching .best { display: none; }
 /* test switch (?testopen=1): a tag next to the logo so it is never left on by accident */
 .test-open .brand::after { content: "TEST MODE"; margin-left: 6px; padding: 3px 7px; border-radius: 6px; background: #B3261E; color: #fff; font: 800 .6rem/1 var(--body); letter-spacing: .08em; }
 
+/* UPI app buttons: mark above the name */
+.upi-app { flex-direction: column; gap: 6px; padding: 10px 6px 9px; min-height: 76px; background: #fff; }
+.upi-app .ua-ico { width: 32px; height: 32px; flex: none; }
+.upi-app span { font: 800 .8rem/1.1 var(--display); }
+
