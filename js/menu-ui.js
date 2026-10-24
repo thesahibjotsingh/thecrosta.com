@@ -108,6 +108,7 @@ function applySearch() {
   const tokens = q.split(' ');
   searching = true;
   menu.classList.add('searching');
+  document.body.classList.add('is-searching');          // results only: the bestsellers strip steps aside
   document.querySelectorAll('#chips .chip').forEach(c => { c.classList.remove('on'); c.setAttribute('aria-pressed', 'false'); });
   updateMenuSizesBox('');
   let shown = 0;
@@ -136,6 +137,7 @@ function clearSearch(clearBox = true) {
   searchClearBtn.hidden = !searchInput.value;
   if (!searching) return;
   searching = false;
+  document.body.classList.remove('is-searching');
   document.getElementById('menu').classList.remove('searching');
   document.querySelectorAll('.menu-panel').forEach(p => p.classList.remove('is-searching', 'is-hidden'));
   document.querySelectorAll('.menu-category, .menu-item').forEach(el => el.classList.remove('is-hidden'));

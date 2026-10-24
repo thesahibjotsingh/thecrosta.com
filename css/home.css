@@ -697,3 +697,4 @@ body.cart-open .cartbar { visibility: hidden; }
   body.has-cartbar .actions .btn.cart { display: inline-flex; }
 }
 @media (max-width: 760px) { .dock { box-shadow: 0 0 0 1.5px rgba(255,255,255,.2), 0 8px 24px rgba(26,26,24,.35); } }
+body.is-searching .best { display: none; }
