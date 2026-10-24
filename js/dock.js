@@ -6,7 +6,7 @@
   const dock = document.getElementById('dock');
   if (!dock) return;
   const links = [...dock.querySelectorAll('a[data-dock]')];
-  const sec = { home: document.querySelector('.live-band'), menu: document.querySelector('.shop'), offers: document.querySelector('.offers-section') };
+  const sec = { home: document.querySelector('.live-band'), menu: document.querySelector('.shop'), offers: document.querySelector('.offers-section'), spin: document.getElementById('spin') };
 
   dock.addEventListener('click', e => {
     const a = e.target.closest('a[data-dock]'); if (!a) return;
@@ -14,7 +14,9 @@
     const smooth = matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
     if (a.dataset.dock === 'home') window.scrollTo({ top: 0, behavior: smooth });
     else if (a.dataset.dock === 'menu' && typeof scrollToMenu === 'function') scrollToMenu();
-    else {
+    else if (a.dataset.dock === 'spin') {
+      const w = document.getElementById('spin'); if (w) w.scrollIntoView({ behavior: smooth, block: 'center' });
+    } else {
       const el = a.dataset.dock === 'offers' ? document.getElementById('primary') : null;
       if (el) window.scrollTo({ top: el.getBoundingClientRect().top + scrollY - (typeof stickyOffset === 'function' ? stickyOffset() : 70) - 12, behavior: smooth });
     }
@@ -25,7 +27,7 @@
     queued = false;
     const mid = innerHeight * 0.45;
     let on = 'home';
-    for (const k of ['home', 'menu', 'offers']) {
+    for (const k of ['home', 'menu', 'offers', 'spin']) {
       const el = sec[k]; if (!el) continue;
       const r = el.getBoundingClientRect();
       if (r.top <= mid && r.bottom > mid) on = k;
