@@ -32,15 +32,24 @@ let payMethod = 'cash';                              // 'cash' | 'upi'
 
 // A UPI "pay" link opens the customer's UPI app with the amount filled in. It
 // cannot confirm payment — the shop checks its own UPI app against the screenshot.
-function upiLink(total) {
-  return `upi://pay?pa=${UPI.id}&pn=${encodeURIComponent(UPI.name)}&am=${Number(total).toFixed(2)}&cu=INR&tn=${encodeURIComponent('The Crosta order')}`;
-}
+const upiQuery = total => `pa=${UPI.id}&pn=${encodeURIComponent(UPI.name)}&am=${Number(total).toFixed(2)}&cu=INR&tn=${encodeURIComponent('The Crosta order')}`;
+function upiLink(total) { return `upi://pay?${upiQuery(total)}`; }
+// iPhones have no system handler for upi:// (Safari just ignores it), so each app gets its own link there.
+const isIOS = () => /iP(hone|ad|od)/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
 function updatePaymentUi() {
   const total = computeCartTotals(cart).total;
   const btn = document.getElementById('upiPayBtn');
   if (!btn) return;
   btn.href = upiLink(total);
   btn.textContent = `Pay ${rupee(total)} with UPI`;
+  const panel = document.getElementById('upiPanel'), apps = document.getElementById('upiApps');
+  const ios = isIOS();
+  panel.classList.toggle('ios', ios);
+  apps.hidden = !ios;
+  document.getElementById('upiAppsAmt').textContent = rupee(total);
+  document.getElementById('upiPhonePe').href = `phonepe://pay?${upiQuery(total)}`;
+  document.getElementById('upiGPay').href = `gpay://upi/pay?${upiQuery(total)}`;
+  document.getElementById('upiPaytm').href = `paytmmp://pay?${upiQuery(total)}`;
   document.getElementById('upiAmt').textContent = total;
   document.getElementById('upiId').textContent = UPI.id;
 }
@@ -66,5 +75,15 @@ document.addEventListener('DOMContentLoaded', () => {
     if (navigator.clipboard) navigator.clipboard.writeText(UPI.id).then(done, () => showToast(UPI.id));
     else showToast(UPI.id);
   });
+  // if tapping a pay link leaves the page on screen, no app took it: say so and open the UPI ID / QR
+  const fail = document.getElementById('upiFail'), more = document.getElementById('upiMore');
+  more.open = !matchMedia('(pointer: coarse)').matches;               // desktops see the QR straight away, phones tap to open it
+  document.querySelectorAll('#upiPayBtn, .upi-app').forEach(a => a.addEventListener('click', () => {
+    let left = false;
+    const mark = () => { left = true; };
+    document.addEventListener('visibilitychange', mark, { once: true });
+    addEventListener('pagehide', mark, { once: true });
+    setTimeout(() => { if (!left && !document.hidden) { fail.hidden = false; more.open = true; } }, 1800);
+  }));
   updatePaymentUi();
 });

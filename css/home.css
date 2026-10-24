@@ -450,8 +450,17 @@ body.cart-open .cartbar { visibility: hidden; }
 .upi-id { display: flex; align-items: center; justify-content: center; gap: .5rem; margin-top: .6rem; }
 .upi-id code { font: 500 .85rem var(--mono); }
 .upi-copy { min-height: 36px; padding: 0 12px; border-radius: 999px; border: 1.5px solid var(--char); background: transparent; font: 600 .78rem var(--body); cursor: pointer; }
-/* phones get the pay button; desktops get the QR to scan */
-@media (pointer: coarse) { .upi-pay-btn { display: flex; } .upi-qr { display: none; } }
+/* phones get the pay button(s); the UPI ID / QR sits under "Pay with the UPI ID or QR instead" */
+@media (pointer: coarse) { .upi-pay-btn { display: flex; } }
+.upi-panel.ios .upi-pay-btn { display: none; }
+.upi-apps-title { margin: 0 0 8px; font-size: .86rem; }
+.upi-app-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.upi-app { display: flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 6px; border-radius: 12px; border: 2px solid var(--char); background: var(--sun); color: var(--char); font: 800 .86rem/1.1 var(--display); text-align: center; text-decoration: none; transition: transform 140ms var(--ease-out); }
+.upi-app:active { transform: scale(.96); }
+.upi-fail { margin-top: .6rem; padding: .6rem .7rem; border-radius: 10px; background: #FFF0C4; border: 1.5px solid var(--sun); font-size: .78rem; line-height: 1.4; font-weight: 600; }
+.upi-fail[hidden], .upi-apps[hidden] { display: none; }
+.upi-more { margin-top: .7rem; }
+.upi-more summary { cursor: pointer; font: 600 .84rem var(--body); color: var(--ember-deep); padding: 6px 0; }
 .loc-btn, .pay-opt, .upi-copy { color: var(--char); }
 
 /* closed: the cart's send button is switched off */

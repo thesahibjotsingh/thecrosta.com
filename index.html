@@ -34,9 +34,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/styles.css?v=44">
-<link rel="stylesheet" href="css/home.css?v=44">
-<link rel="stylesheet" href="css/sections.css?v=44">
+<link rel="stylesheet" href="css/styles.css?v=45">
+<link rel="stylesheet" href="css/home.css?v=45">
+<link rel="stylesheet" href="css/sections.css?v=45">
 </head>
 <body>
 
@@ -666,11 +666,23 @@
         </div>
         <div class="upi-panel" id="upiPanel" hidden>
           <a class="upi-pay-btn" id="upiPayBtn" href="#">Pay with UPI</a>
-          <div class="upi-qr">
-            <img src="images/upi-qr.webp" alt="The Crosta UPI QR code (PhonePe)" width="300" height="400" loading="lazy">
-            <div class="upi-id"><code id="upiId"></code><button type="button" class="upi-copy" id="upiCopy">Copy</button></div>
-            <p>Scan with any UPI app and pay ₹<span id="upiAmt">0</span>.</p>
+          <div class="upi-apps" id="upiApps" hidden>
+            <p class="upi-apps-title">Pay <b id="upiAppsAmt">₹0</b> with</p>
+            <div class="upi-app-row">
+              <a class="upi-app" id="upiPhonePe" href="#">PhonePe</a>
+              <a class="upi-app" id="upiGPay" href="#">Google Pay</a>
+              <a class="upi-app" id="upiPaytm" href="#">Paytm</a>
+            </div>
           </div>
+          <p class="upi-fail" id="upiFail" hidden>The app didn’t open. Copy the UPI ID below and pay to it in any UPI app, or screenshot the QR and open it from the scan screen (upload from gallery).</p>
+          <details class="upi-more" id="upiMore">
+            <summary>Pay with the UPI ID or QR instead</summary>
+            <div class="upi-qr">
+              <img src="images/upi-qr.webp" alt="The Crosta UPI QR code (PhonePe)" width="300" height="400" loading="lazy">
+              <div class="upi-id"><code id="upiId"></code><button type="button" class="upi-copy" id="upiCopy">Copy</button></div>
+              <p>Scan with any UPI app and pay ₹<span id="upiAmt">0</span>.</p>
+            </div>
+          </details>
           <p class="upi-note">After paying, tap “Order via WhatsApp” and send us the payment screenshot. We confirm payment in our UPI app.</p>
         </div>
       </div>
@@ -796,32 +808,32 @@
   </div>
 </div>
 
-<script defer src="js/menu-data.js?v=44"></script>
-<script defer src="js/shop.js?v=44"></script>
-<script defer src="js/offers.js?v=44"></script>
-<script defer src="js/menu-render.js?v=44"></script>
-<script defer src="js/ui.js?v=44"></script>
-<script defer src="js/reviews.js?v=44"></script>
-<script defer src="js/menu-ui.js?v=44"></script>
-<script defer src="js/offers-carousel.js?v=44"></script>
-<script defer src="js/contact.js?v=44"></script>
-<script defer src="js/cart.js?v=44"></script>
-<script defer src="js/promos.js?v=44"></script>
-<script defer src="js/cart-render.js?v=44"></script>
-<script defer src="js/order.js?v=44"></script>
-<script defer src="js/payment.js?v=44"></script>
-<script defer src="js/menu-wiring.js?v=44"></script>
-<script defer src="js/persist.js?v=44"></script>
-<script defer src="js/spin.js?v=44"></script>
-<script defer src="js/home.js?v=44"></script>
-<script defer src="js/sheets.js?v=44"></script>
-<script defer src="js/student.js?v=44"></script>
-<script defer src="js/spin-pop.js?v=44"></script>
-<script defer src="js/spin-nudge.js?v=44"></script>
-<script defer src="js/dock.js?v=44"></script>
-<script defer src="js/deck.js?v=44"></script>
-<script defer src="js/tear.js?v=44"></script>
-<script defer src="js/page-ui.js?v=44"></script>
+<script defer src="js/menu-data.js?v=45"></script>
+<script defer src="js/shop.js?v=45"></script>
+<script defer src="js/offers.js?v=45"></script>
+<script defer src="js/menu-render.js?v=45"></script>
+<script defer src="js/ui.js?v=45"></script>
+<script defer src="js/reviews.js?v=45"></script>
+<script defer src="js/menu-ui.js?v=45"></script>
+<script defer src="js/offers-carousel.js?v=45"></script>
+<script defer src="js/contact.js?v=45"></script>
+<script defer src="js/cart.js?v=45"></script>
+<script defer src="js/promos.js?v=45"></script>
+<script defer src="js/cart-render.js?v=45"></script>
+<script defer src="js/order.js?v=45"></script>
+<script defer src="js/payment.js?v=45"></script>
+<script defer src="js/menu-wiring.js?v=45"></script>
+<script defer src="js/persist.js?v=45"></script>
+<script defer src="js/spin.js?v=45"></script>
+<script defer src="js/home.js?v=45"></script>
+<script defer src="js/sheets.js?v=45"></script>
+<script defer src="js/student.js?v=45"></script>
+<script defer src="js/spin-pop.js?v=45"></script>
+<script defer src="js/spin-nudge.js?v=45"></script>
+<script defer src="js/dock.js?v=45"></script>
+<script defer src="js/deck.js?v=45"></script>
+<script defer src="js/tear.js?v=45"></script>
+<script defer src="js/page-ui.js?v=45"></script>
 
 </body>
 </html>
