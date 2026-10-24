@@ -90,5 +90,33 @@
   }
   deck.addEventListener('pointerup', end);
   deck.addEventListener('pointercancel', end);
+  // ── swipe hint: until they have swiped once, the top card nudges right then left every few seconds ──
+  // (only while the stack is on screen; skipped for people who ask for less motion)
+  let seen = false, timer = null;
+  function wiggle() {
+    const card = cards().find(c => c.dataset.d === '0');
+    if (!card || drag || hint.classList.contains('gone') || calm() || !phone.matches || !card.animate) return;
+    card.animate([
+      { transform: 'translateX(0) rotate(0deg)' },
+      { transform: 'translateX(26px) rotate(1.6deg)', offset: .22 },
+      { transform: 'translateX(-20px) rotate(-1.2deg)', offset: .5 },
+      { transform: 'translateX(11px) rotate(.7deg)', offset: .74 },
+      { transform: 'translateX(0) rotate(0deg)' }
+    ], { duration: 1000, easing: 'cubic-bezier(0.37, 0, 0.63, 1)' });
+  }
+  function loop() {
+    clearTimeout(timer);
+    if (!seen || hint.classList.contains('gone')) return;
+    wiggle();
+    timer = setTimeout(loop, 7000);
+  }
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(([e]) => {
+      seen = e.isIntersecting;
+      clearTimeout(timer);
+      if (seen) timer = setTimeout(loop, 1200);
+    }, { threshold: 0.6 }).observe(deck);
+  }
+
   window.setupDeck();    // home.js drew the first cards before this file loaded
 })();
