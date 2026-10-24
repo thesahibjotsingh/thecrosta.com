@@ -689,3 +689,10 @@ body.cart-open .cartbar { visibility: hidden; }
 }
 @media (max-width: 760px) { .chips { scroll-padding-inline: 2px; } }
 .chip { scroll-snap-align: start; }
+
+/* phones: Call is a filled orange button; the header Cart only appears once something is in the cart (the bottom pill always has Cart) */
+@media (max-width: 760px) {
+  .actions .btn.call { background: var(--ember-deep); border-color: var(--char); color: #fff; }
+  .actions .btn.cart { display: none; }
+  body.has-cartbar .actions .btn.cart { display: inline-flex; }
+}

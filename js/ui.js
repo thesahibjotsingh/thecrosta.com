@@ -22,7 +22,8 @@ function bump(el) {
 
 // A copy of `fromEl`'s picture travels to the header cart. Resolves when it lands.
 function flyToCart(fromEl, src) {
-  const target = document.querySelector('#actions .cart');
+  const dockCart = document.querySelector('.dock-cart');
+  const target = (dockCart && dockCart.offsetParent) ? dockCart : document.querySelector('#actions .cart');   // phones fly to the bottom pill
   if (reducedMotion() || !fromEl || !target || !src) return Promise.resolve();
   const a = fromEl.getBoundingClientRect(), b = target.getBoundingClientRect();
   if (!a.width || !a.height) return Promise.resolve();
