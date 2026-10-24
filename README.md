@@ -62,4 +62,4 @@ Outside opening hours the cart can still be built, but it cannot be sent: the ca
 
 ## Cache busting
 
-Cloudflare tells browsers to keep CSS/JS for 4 hours. The `?v=30` on each stylesheet and script link in `index.html` forces a fresh download after a deploy. When you change any file in `css/` or `js/`, bump that number (find/replace `?v=30` → `?v=31`) in the same commit.
+Cloudflare tells browsers to keep CSS/JS for 4 hours. The `?v=32` on each stylesheet and script link in `index.html` forces a fresh download after a deploy. When you change any file in `css/` or `js/`, bump that number (find/replace `?v=32` → `?v=33`) in the same commit.
