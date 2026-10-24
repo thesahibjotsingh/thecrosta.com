@@ -34,9 +34,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/styles.css?v=21">
-<link rel="stylesheet" href="css/home.css?v=21">
-<link rel="stylesheet" href="css/sections.css?v=21">
+<link rel="stylesheet" href="css/styles.css?v=23">
+<link rel="stylesheet" href="css/home.css?v=23">
+<link rel="stylesheet" href="css/sections.css?v=23">
 </head>
 <body>
 
@@ -62,12 +62,6 @@
       <p class="eyebrow" id="clockLine"></p>
       <h1 id="h1">Pure veg <span class="u">pizza<svg viewBox="0 0 200 20" preserveAspectRatio="none" aria-hidden="true"><path d="M3 12 C 30 2, 50 20, 80 10 S 130 2, 160 11 S 190 14, 197 6"/></svg></span> in Patiala</h1>
       <p class="lede" id="lede">Fresh dough daily, near Thapar University.</p>
-      <div class="hero-art" aria-hidden="true">
-        <img class="ha ha-main" src="images/art-farm-house-pizza.webp" alt="" width="360" height="360" decoding="async">
-        <img class="ha ha-b" src="images/art-the-crosta-burger.webp" alt="" width="360" height="360" decoding="async">
-        <img class="ha ha-c" src="images/art-garlic-butter-pizza.webp" alt="" width="360" height="360" decoding="async">
-        <span class="ha-sticker"><i>from</i><b>₹89</b></span>
-      </div>
       <div class="stickers" aria-label="Highlights">
         <span class="sticker"><span class="vegmark" aria-hidden="true"></span>100% pure veg</span>
         <span class="sticker">Pizzas from ₹89</span>
@@ -89,15 +83,6 @@
           </div>
           <div class="deck-ui" id="deckUi" hidden><div class="deck-dots" id="deckDots"></div><span class="deck-hint" id="deckHint">Swipe to see all offers</span></div>
           <p class="rule-note">One offer per order — we apply the best one that fits your cart. <a href="#spin">Feeling lucky? Spin for a deal →</a></p>
-          <div class="student-card" id="studentCard">
-            <span class="sc-ico" aria-hidden="true">🎓</span>
-            <div><b>Thapar student? Get 10% off</b><span id="studentCardText">Bring your student ID card. We check it when you collect or we deliver.</span></div>
-            <button class="sc-btn" id="studentBtn" type="button" aria-pressed="false">Count me in</button>
-          </div>
-          <div class="side-pair">
-            <a class="side-card spin-card" href="#spin"><img src="images/wheel.webp" alt="" width="72" height="72" loading="lazy"><div><b>Feeling lucky?</b><span>Spin for a free drink or a discount →</span></div></a>
-            <a class="side-card find-card" href="https://www.google.com/maps/dir/?api=1&amp;destination=Shop+No+4+Bhadson+Road+Near+Thapar+University+Patiala+Punjab+147001&amp;travelmode=driving" target="_blank" rel="noopener noreferrer"><span class="pin" aria-hidden="true">📍</span><div><b>Find us near Thapar</b><span>Shop 4, Bhadson Road, Patiala · directions in Google Maps →</span></div></a>
-          </div>
         </div>
 
         <aside class="quick" aria-label="Order quickly">
@@ -106,7 +91,7 @@
             <strong id="reorderText"></strong>
             <div class="row"><small>Same items, current prices</small><button class="btn" type="button" id="reorderBtn">Reorder</button></div>
           </div>
-          <div>
+          <div class="quick-tiles">
             <h2>Hungry? Start here</h2>
             <div class="tiles">
               <a class="tile" href="#menu" data-cat="pizzas"><span class="th"><img src="images/menu-farm-house-pizza.webp" alt=""></span><div><b>Pizzas</b><span>from ₹89</span></div></a>
@@ -122,6 +107,15 @@
               <a class="tile" href="#menu" data-cat="drinks" data-anchor="dr-hot"><span class="th"><img src="images/menu-masala-chai.webp" alt=""></span><div><b>Chai &amp; coffee</b><span>from ₹20</span></div></a>
               <a class="tile" href="#menu" data-cat="quickdrinks"><span class="th"><img src="images/menu-coke.webp" alt=""></span><div><b>Cold drinks</b><span>from ₹20</span></div></a>
             </div>
+          </div>
+          <div class="student-card" id="studentCard">
+            <span class="sc-ico" aria-hidden="true">🎓</span>
+            <div><b>Thapar student? Get 10% off</b><span id="studentCardText">Bring your student ID card. We check it when you collect or we deliver.</span></div>
+            <button class="sc-btn" id="studentBtn" type="button" aria-pressed="false">Count me in</button>
+          </div>
+          <div class="side-pair">
+            <a class="side-card spin-card" href="#spin"><img src="images/wheel.webp" alt="" width="72" height="72" loading="lazy"><div><b>Feeling lucky?</b><span>Spin for a free drink or a discount →</span></div></a>
+            <a class="side-card find-card" href="https://www.google.com/maps/dir/?api=1&amp;destination=Shop+No+4+Bhadson+Road+Near+Thapar+University+Patiala+Punjab+147001&amp;travelmode=driving" target="_blank" rel="noopener noreferrer"><span class="pin" aria-hidden="true">📍</span><div><b>Find us near Thapar</b><span>Shop 4, Bhadson Road, Patiala · directions in Google Maps →</span></div></a>
           </div>
         </aside>
       </div>
@@ -790,30 +784,30 @@
   </div>
 </div>
 
-<script defer src="js/menu-data.js?v=21"></script>
-<script defer src="js/shop.js?v=21"></script>
-<script defer src="js/offers.js?v=21"></script>
-<script defer src="js/menu-render.js?v=21"></script>
-<script defer src="js/ui.js?v=21"></script>
-<script defer src="js/reviews.js?v=21"></script>
-<script defer src="js/menu-ui.js?v=21"></script>
-<script defer src="js/offers-carousel.js?v=21"></script>
-<script defer src="js/contact.js?v=21"></script>
-<script defer src="js/cart.js?v=21"></script>
-<script defer src="js/promos.js?v=21"></script>
-<script defer src="js/cart-render.js?v=21"></script>
-<script defer src="js/order.js?v=21"></script>
-<script defer src="js/payment.js?v=21"></script>
-<script defer src="js/menu-wiring.js?v=21"></script>
-<script defer src="js/persist.js?v=21"></script>
-<script defer src="js/spin.js?v=21"></script>
-<script defer src="js/home.js?v=21"></script>
-<script defer src="js/sheets.js?v=21"></script>
-<script defer src="js/student.js?v=21"></script>
-<script defer src="js/spin-pop.js?v=21"></script>
-<script defer src="js/dock.js?v=21"></script>
-<script defer src="js/deck.js?v=21"></script>
-<script defer src="js/page-ui.js?v=21"></script>
+<script defer src="js/menu-data.js?v=23"></script>
+<script defer src="js/shop.js?v=23"></script>
+<script defer src="js/offers.js?v=23"></script>
+<script defer src="js/menu-render.js?v=23"></script>
+<script defer src="js/ui.js?v=23"></script>
+<script defer src="js/reviews.js?v=23"></script>
+<script defer src="js/menu-ui.js?v=23"></script>
+<script defer src="js/offers-carousel.js?v=23"></script>
+<script defer src="js/contact.js?v=23"></script>
+<script defer src="js/cart.js?v=23"></script>
+<script defer src="js/promos.js?v=23"></script>
+<script defer src="js/cart-render.js?v=23"></script>
+<script defer src="js/order.js?v=23"></script>
+<script defer src="js/payment.js?v=23"></script>
+<script defer src="js/menu-wiring.js?v=23"></script>
+<script defer src="js/persist.js?v=23"></script>
+<script defer src="js/spin.js?v=23"></script>
+<script defer src="js/home.js?v=23"></script>
+<script defer src="js/sheets.js?v=23"></script>
+<script defer src="js/student.js?v=23"></script>
+<script defer src="js/spin-pop.js?v=23"></script>
+<script defer src="js/dock.js?v=23"></script>
+<script defer src="js/deck.js?v=23"></script>
+<script defer src="js/page-ui.js?v=23"></script>
 
 </body>
 </html>

@@ -726,12 +726,41 @@ body.is-searching .best { display: none; }
   .stickers { display: flex; flex-wrap: wrap; gap: 10px 12px; margin-bottom: 26px; }
   .hero-art { display: none; }
 }
-@media (min-width: 1180px) {
-  .hero-art { display: block; position: absolute; order: 0; right: clamp(20px, 3vw, 40px); top: -10px; width: 400px; min-width: 0; max-width: none; height: 200px; margin: 0; pointer-events: none; }
-  .ha { border-width: 5px; box-shadow: 0 0 0 1.5px var(--char), 5px 5px 0 var(--ember); }
-  .ha-main { width: 190px; height: 190px; aspect-ratio: auto; right: 24px; left: auto; top: 4px; transform: rotate(6deg); }
-  .ha-b { width: 112px; height: 112px; left: 78px; right: auto; bottom: 0; top: auto; transform: rotate(-8deg); box-shadow: 0 0 0 1.5px var(--char), 4px 4px 0 var(--char); }
-  .ha-c { width: 84px; height: 84px; left: 196px; right: auto; top: 0; transform: rotate(10deg); box-shadow: 0 0 0 1.5px var(--char), 3px 3px 0 var(--sun); }
-  .ha-sticker { left: auto; right: 0; top: -8px; width: 84px; height: 84px; transform: rotate(10deg); }
-  .ha-sticker b { font-size: 1.5rem; }
+
+/* ── Desktop: the headline sits above the offers on the left; "Hungry? Start here" and the three cards run down the right ── */
+@media (min-width: 1021px) {
+  .top { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); column-gap: 26px; align-items: start; }
+  .top .hero { grid-column: 1; grid-row: 1; }
+  .top .live-grid { display: contents; }
+  .top .offers { grid-column: 1; grid-row: 2; }
+  .top .quick { grid-column: 2; grid-row: 1 / span 2; margin-top: 10px; }
+  .top .clock { grid-column: 1 / -1; grid-row: 3; margin-top: 26px; }
+  .quick .side-pair { grid-template-columns: 1fr; }
+  .top .live-grid { margin-top: 0; }
 }
+
+/* ── Up to tablet width: one column; the quick area dissolves so its cards can sit between the offers and the tiles ── */
+@media (max-width: 1020px) {
+  .quick { display: contents; }
+  .quick .reorder, .quick .quick-tiles { order: 2; }
+  .quick .student-card { order: 1; }
+  .quick .side-pair { order: 3; }
+}
+
+/* ── Phones: the same ticket as desktop (yellow stub with the notched tear line on the left) ── */
+@media (max-width: 760px) {
+  .deck .ticket { --stub: 100px; grid-template-columns: var(--stub) 1fr; }
+  .deck .ticket.primary { box-shadow: 5px 5px 0 var(--ember); }
+  .deck .ticket.closedcard { box-shadow: 5px 5px 0 var(--brick); }
+  .deck .ticket::before, .deck .ticket::after { display: block; }
+  .deck .ticket .stub { flex-direction: column; align-items: flex-start; justify-content: center; gap: 5px; border-right: 2px dashed rgba(26,26,24,.3); border-bottom: 0; padding: 16px 8px 16px 14px; }
+  .deck .ticket.closedcard .stub { border-right-color: #4a4640; }
+  .deck .ticket .stub b { font-size: 1.3rem; line-height: 1.05; }
+  .deck .ticket .tm { flex-direction: column; align-items: flex-start; gap: 2px; }
+  .deck .ticket .tm.long b { font-size: 1rem; }
+  .deck .ticket .tbody { padding: 16px 14px 18px; }
+  .deck .ticket .thead { max-width: none; font-size: 1.3rem; }
+  .deck .ticket .stamp { top: 10px; right: 10px; }
+  .deck .ticket.primary .pie { width: 120px; height: 120px; right: -34px; bottom: -36px; }
+}
+@media (max-width: 760px) { .deck .ticket:not([data-d="0"])::before, .deck .ticket:not([data-d="0"])::after { display: none; } }
