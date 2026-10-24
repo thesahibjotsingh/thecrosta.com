@@ -118,5 +118,6 @@
     }, { threshold: 0.6 }).observe(deck);
   }
 
+  window.deckMoved = () => moved;         // tear.js: a swipe must not count as a tap
   window.setupDeck();    // home.js drew the first cards before this file loaded
 })();
