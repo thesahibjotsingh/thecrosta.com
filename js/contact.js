@@ -12,7 +12,7 @@ function handleSubmit(e) {
   if (val('contactEmail')) lines.push(`Email: ${val('contactEmail')}`);
   lines.push('', val('contactMessage'));
 
-  window.open('https://wa.me/919877636100?text=' + encodeURIComponent(lines.join('\n')), '_blank', 'noopener');
+  window.open('https://wa.me/919888383010?text=' + encodeURIComponent(lines.join('\n')), '_blank', 'noopener');
 
   const btn = form.querySelector('button[type="submit"]');
   btn.textContent = '✓ Opening WhatsApp…';

@@ -185,7 +185,7 @@ function placeOrder() {
 
   saveLastOrder(name, phone, address);
   const encoded = encodeURIComponent(msg);
-  window.open(`https://wa.me/919877636100?text=${encoded}`, '_blank');
+  window.open(`https://wa.me/919888383010?text=${encoded}`, '_blank');
 }
 
 // ── Cart count "bump" (used by steppers and the spin prize; adds use cartAddedFeedback) ──

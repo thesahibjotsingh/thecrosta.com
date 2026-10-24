@@ -164,7 +164,7 @@
       // A win can follow a free re-spin, which changed this text — put it back.
       document.querySelector('.spin-again-hint').textContent = '← Spin again next visit';
       const msg = `${winner.msg}\n\nPlease apply this to my order (orders of ₹100 or more). Thank you! 🍕`;
-      waBtn.href = `https://wa.me/919877636100?text=${encodeURIComponent(msg)}`;
+      waBtn.href = `https://wa.me/919888383010?text=${encodeURIComponent(msg)}`;
 
       // Show "Add to Cart" only if the prize maps to a cartable free item
       const cartBtn = document.getElementById('spinAddCartBtn');
