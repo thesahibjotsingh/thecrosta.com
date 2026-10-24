@@ -37,7 +37,7 @@ function renderLive() {
 
   const statusHtml = `<span class="dot"></span><span>${shopStatusText(st)}</span>`;
   const top = $('statusTop'), row = $('statusRow');
-  top.innerHTML = statusHtml; top.className = 'status' + (st.open ? '' : ' is-closed');
+  top.innerHTML = `<span class="dot"></span><span>${shopStatusText(st).replace(/ · ready in about \d+ min$/, '')}</span>`; top.className = 'status' + (st.open ? '' : ' is-closed');
   row.innerHTML = statusHtml; row.className = 'status-row' + (st.open ? '' : ' is-closed');
   $('waBtn').hidden = !st.open;
   $('closedBtn').hidden = st.open;
