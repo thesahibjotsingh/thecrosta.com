@@ -83,7 +83,7 @@ function renderCart() {
         ${addonLines}
         ${qtyRow}
       </div>
-      <div class="cart-item-price">${(item.isFreeSpinPrize || item.isGroupPerk || item.isWeekendSpecial) ? '<span style="color:#1aad4b;font-size:0.8rem;font-weight:700;">FREE 🎁</span>' : '₹' + itemTotal}</div>
+      <div class="cart-item-price">${(item.isFreeSpinPrize && spinPrizeLocked(cart)) ? '<span style="color:#A84300;font-size:0.76rem;font-weight:700;">🔒 FREE at ₹100</span>' : (item.isFreeSpinPrize || item.isGroupPerk || item.isWeekendSpecial) ? '<span style="color:#1aad4b;font-size:0.8rem;font-weight:700;">FREE 🎁</span>' : '₹' + itemTotal}</div>
     </div>`;
   }).join('');
 
@@ -113,6 +113,13 @@ function renderCart() {
   if (boostRow) {
     boostRow.style.display = boostDiscount > 0 ? 'flex' : 'none';
     document.getElementById('cartBoostAmount').textContent = boostDiscount;
+  }
+
+  const lockRow = document.getElementById('cartSpinLock');
+  if (lockRow) {
+    const locked = spinPrizeLocked(cart);
+    lockRow.hidden = !locked;
+    if (locked) document.getElementById('cartSpinLockText').textContent = `Your spin prize unlocks on orders of ${rupee(SPIN_MIN)} or more. Add ${rupee(SPIN_MIN - paidTotal(cart))} more.`;
   }
 
   const studentRow = document.getElementById('cartStudentRow');

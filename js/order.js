@@ -92,6 +92,11 @@ function placeOrder() {
     return;
   }
 
+  if (spinPrizeLocked(cart)) {                                 // a spin prize is in the cart but the order is under the minimum
+    showToast(`Add ${rupee(SPIN_MIN - paidTotal(cart))} more to claim your spin prize, or remove it`);
+    return;
+  }
+
   const nameEl    = document.getElementById('custName');
   const phoneEl   = document.getElementById('custPhone');
   const addressEl = document.getElementById('custAddress');

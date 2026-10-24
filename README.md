@@ -43,6 +43,7 @@ Scripts are plain `<script defer>` files loaded in the order listed at the botto
 - **Change opening hours** → edit `SHOP_HOURS` in `js/shop.js` (decimals work: 22.5 = 10:30 PM), update the *Hours* row(s) in `index.html`, then run `node tools/prerender.js`.
 - **Change an offer's time or wording** → `js/offers.js` (the header tickets, the clock strip *and* the cart discounts all read it).
 - **Thapar student discount** → `STUDENT_PERCENT` and `STUDENT_MIN` (minimum order, ₹100) in `js/promos.js`. It is opt-in, applies only when it saves more than the other offer in the cart (one offer per order), and the WhatsApp message tells the shop to check the ID card.
+- **Spin prize minimum** → `SPIN_MIN` in `js/promos.js` (₹100): a spin prize in the cart stays locked, and the order is blocked, until the paid items reach it.
 - **Spin popup** → `js/spin-pop.js` (`DELAY` = seconds before it shows; once a day, never after a spin).
 - **Change the UPI ID** → `UPI` in `js/shop.js`; replace `images/upi-qr.webp` if the QR changes.
 
@@ -62,4 +63,4 @@ Outside opening hours the cart can still be built, but it cannot be sent: the ca
 
 ## Cache busting
 
-Cloudflare tells browsers to keep CSS/JS for 4 hours. The `?v=38` on each stylesheet and script link in `index.html` forces a fresh download after a deploy. When you change any file in `css/` or `js/`, bump that number (find/replace `?v=38` → `?v=39`) in the same commit.
+Cloudflare tells browsers to keep CSS/JS for 4 hours. The `?v=39` on each stylesheet and script link in `index.html` forces a fresh download after a deploy. When you change any file in `css/` or `js/`, bump that number (find/replace `?v=39` → `?v=40`) in the same commit.

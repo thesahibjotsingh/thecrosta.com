@@ -112,6 +112,9 @@ function setStudent(on) {
   if (typeof renderCart === 'function') { renderCart(); updateFab(); }
   if (typeof syncStudentUi === 'function') syncStudentUi();
 }
+// Spin prizes (free items and the % off wins) can only be claimed on an order of at least SPIN_MIN rupees.
+const SPIN_MIN = 100;
+const spinPrizeLocked = cartArr => cartArr.some(i => i.isFreeSpinPrize) && paidTotal(cartArr) < SPIN_MIN;
 const paidTotal = cartArr => cartArr.reduce((s, i) => s + (i.price + (i.addons || []).reduce((a, b) => a + b.price, 0)) * i.qty, 0);
 
 // the list price of the group-perk bundle (garlic bread + fries + 2 L drink), from the menu
