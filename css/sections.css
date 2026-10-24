@@ -355,3 +355,13 @@ footer a { color: #A39A92; }
 /* menu title stays on the left even when the pizza-size box is hidden (every tab but Pizzas) */
 .menu-header { justify-content: flex-start; }
 .menu-header > :first-child { margin-right: auto; }
+
+/* size label ("Regular", "Single", "Large") grows to its text instead of sliding under the stepper */
+.sps-size-label { width: auto; min-width: 2.2rem; margin-right: .3rem; white-space: nowrap; }
+
+/* "Jump to" row: same family as the Pizza Sizes / Make it a Meal / Garlic Bread boxes */
+.qb-subnav { gap: 0; padding: 0; background: var(--paper); border: 1.5px solid var(--char); border-radius: 16px; box-shadow: 4px 4px 0 var(--char); overflow: hidden; align-items: stretch; flex-wrap: nowrap; }
+.qb-sub-label { display: flex; align-items: center; padding: .7rem 1rem; background: var(--sun); color: var(--char); font: 700 .78rem/1.2 var(--mono); letter-spacing: .06em; text-transform: uppercase; flex: none; }
+.qb-sub-btn { flex: 1 1 0; display: inline-flex; align-items: center; justify-content: center; gap: .35rem; min-height: 46px; padding: .5rem .6rem; border: 0; border-left: 1.5px dashed var(--crust); border-radius: 0; background: transparent; color: var(--char); font: 700 .88rem/1.1 var(--display); white-space: nowrap; transition: background-color 160ms ease, color 160ms ease; }
+.qb-sub-btn:hover { background: var(--sun-soft); }
+.qb-sub-btn.active { background: var(--char); color: #fff; border-left-color: var(--char); }
