@@ -681,3 +681,11 @@ body.cart-open .cartbar { visibility: hidden; }
 
 /* phones: no photo cluster in the hero (desktop and tablet keep it) */
 @media (max-width: 760px) { .hero-art { display: none; } }
+
+/* phones: room between the category chips and the "Everyone's ordering these" heading */
+@media (max-width: 760px) {
+  .tools-in { padding-bottom: 14px; }
+  .best { padding-top: 38px; }
+}
+@media (max-width: 760px) { .chips { scroll-padding-inline: 2px; } }
+.chip { scroll-snap-align: start; }

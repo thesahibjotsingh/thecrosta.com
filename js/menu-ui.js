@@ -73,7 +73,7 @@ document.getElementById('chips').addEventListener('click', e => {
   if (!c) return;
   clearSearch(false);
   showTab(c.dataset.cat);
-  c.scrollIntoView({ behavior: reducedMotion() ? 'auto' : 'smooth', inline: 'center', block: 'nearest' });
+  c.scrollIntoView({ behavior: reducedMotion() ? 'auto' : 'smooth', inline: 'start', block: 'nearest' });   // selected chip sits at the left edge: no half-hidden chip on that side
   // always start the new section at the top of the menu: a shorter section would otherwise leave you at its bottom
   requestAnimationFrame(() => scrollToMenu());
 });
