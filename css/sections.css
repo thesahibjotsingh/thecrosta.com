@@ -442,3 +442,11 @@ footer a { color: #A39A92; }
   .size-chips { max-width: none; }
   .menu-from, .menu-item-price { top: 18px; }
 }
+
+/* sized dishes: once a size is in the cart, its stepper sits beside the size buttons so the row keeps its height
+   (it wraps underneath when the column is too narrow, and always on phones) */
+@media (min-width: 601px) {
+  .add-row:has(.size-chips) { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; }
+  .add-row:has(.size-chips) .size-chips { flex: 0 1 276px; min-width: 0; }
+  .add-row:has(.size-chips) .size-stepper-wrap { margin-top: 0 !important; justify-content: center; }
+}
