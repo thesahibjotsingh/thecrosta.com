@@ -133,6 +133,31 @@ document.addEventListener('DOMContentLoaded', function() {
         openSizeSheet(sizeEntryFor(getItemName(), menuLookup(name), imgEl ? imgEl.getAttribute('src') : ''), btn);
       });
 
+      // each size is a button with its price: one tap adds it (pizzas then offer add-ons, as the size sheet does)
+      const chips = document.createElement('div');
+      chips.className = 'size-chips';
+      chips.style.setProperty('--n', sizeLabels.length);
+      chips.setAttribute('role', 'group');
+      chips.setAttribute('aria-label', 'Add ' + name + ' by size');
+      sizeLabels.forEach((size, i) => {
+        const chip = document.createElement('button');
+        chip.type = 'button';
+        chip.className = 'size-chip';
+        chip.innerHTML = '<small>' + size + '</small><b>₹' + prices[i] + '</b>';
+        chip.setAttribute('aria-label', 'Add ' + name + ', ' + size + ', ₹' + prices[i]);
+        chip.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const imgEl = item.querySelector('.menu-item-img');
+          addItem(getItemName(), size, prices[i], isPizza, isMealEligible, imgEl ? { fromEl: imgEl, img: imgEl.getAttribute('src') } : {});
+        });
+        chips.appendChild(chip);
+      });
+      row.insertBefore(chips, sizeStepperWrap);
+      const from = document.createElement('span');
+      from.className = 'menu-from';
+      from.innerHTML = '<small>from</small> ₹' + Math.min.apply(null, prices);
+      item.appendChild(from);
+
     } else {
       const price = parseInt(priceText.replace(/[₹,\s]/g, ''));
       if (isNaN(price) || price <= 0) return;

@@ -31,6 +31,9 @@ function offerMeta({ o, s }) {
   return `Next · ${DAY_SHORT[s.day]} ${fmtTime(s.start)}`;
 }
 
+// the small status tag on a desktop mini ticket: can I use it now, soon, or later?
+const spillText = ({ s }) => s.k === 'live' ? 'Live now' : (s.k === 'later' ? `In ${fmtDuration(s.inH)}` : `Next ${DAY_SHORT[s.day]} ${fmtTime(s.start)}`);
+
 function renderLive() {
   const now = shopNow(), st = shopStatus(), t = hourOf(now);
   document.body.classList.toggle('is-closed', !st.open);
@@ -73,6 +76,12 @@ function renderLive() {
 
   // tickets: live first, then later today (soonest), then next on a later day
   const states = OFFERS.map(o => ({ o, s: offerState(o, now) }));
+  // the Offers link and phone tab show a badge while a timed offer is on (the always-on group perk doesn't count)
+  const liveNow = st.open ? states.filter(x => x.s.k === 'live' && !x.o.always).map(x => x.o.name) : [];
+  document.querySelectorAll('#mainnav a[data-nav="offers"], #dock a[data-dock="offers"]').forEach(a => {
+    a.classList.toggle('live', liveNow.length > 0);
+    a.title = liveNow.length ? `Live now: ${liveNow.join(', ')}` : '';
+  });
   const rank = { live: 0, later: 1, next: 2 };
   const sorted = states.slice().sort((a, b) => (rank[a.s.k] - rank[b.s.k]) || (a.s.k === 'later' ? a.s.start - b.s.start : 0) || (a.s.k === 'next' ? a.s.i - b.s.i : 0));
   const enter = (i) => firstPaint ? ` enter" style="--i:${i}` : '" style="';
@@ -92,7 +101,7 @@ function renderLive() {
   $('primary').innerHTML = primary;
   $('more').innerHTML = rest.slice(0, 3).map((x, i) => {
     const cls = x.s.k === 'next' ? ' dim' : (x.s.k === 'live' ? ' live' : '');
-    return `<article class="ticket${cls}${enter(i + 1)}" data-offer="${x.o.id}"><div class="stub"><span class="d">${x.o.stub}</span>${tmHtml(x.o)}</div><div class="tbody">${chipHtml(x.o.t1, x.o.t2)}<p class="kicker">${x.o.name}</p><h3 class="thead">${x.o.head}</h3><p class="tmeta ${x.s.k === 'live' ? 'live' : ''}">${offerMeta(x)}</p><button class="tlink" type="button" data-offer="${x.o.id}">${x.s.k === 'live' ? 'Use this offer →' : 'See how it works →'}</button></div></article>`;
+    return `<article class="ticket${cls}${enter(i + 1)}" data-offer="${x.o.id}"><div class="stub"><span class="d">${x.o.stub}</span>${tmHtml(x.o)}</div><div class="tbody"><div class="mtop"><span class="spill ${x.s.k}">${spillText(x)}</span><span class="swhen">${x.o.always || x.o.from == null ? x.o.stub : `${x.o.t1} – ${x.o.t2}`}</span></div>${chipHtml(x.o.t1, x.o.t2)}<p class="kicker">${x.o.name}</p><h3 class="thead">${x.o.head}</h3><p class="tmeta ${x.s.k === 'live' ? 'live' : ''}">${offerMeta(x)}</p><button class="tlink" type="button" data-offer="${x.o.id}">${x.s.k === 'live' ? 'Use this offer →' : 'See how it works →'}</button></div></article>`;
   }).join('');
 
   if (!clockView) buildClock(); else updateClockUI();
@@ -166,7 +175,7 @@ function buildClock() {
   setClockNote();
 }
 function setClockNote() {
-  $('clockNote').textContent = isPhone() ? ($('clock').open ? '' : 'See today’s schedule') : 'Tap an offer · drag the marker';
+  $('clockNote').textContent = $('clock').open ? (isPhone() ? '' : 'Tap an offer · drag the marker') : (isPhone() ? 'See today’s schedule' : 'See the full week');
 }
 function setClockView(t, day) {
   const base = shopNow(), cur = clockView ? clockView.day : base.day, d = day ?? cur;
@@ -205,7 +214,7 @@ function setClockView(t, day) {
   });
   $('days').addEventListener('click', e => { const b = e.target.closest('.dchip'); if (b) setClockView(hourOf(viewNow()), +b.dataset.d); });
   $('clockNow').addEventListener('click', () => { clockView = null; buildClock(); });
-  $('clock').open = !isPhone();               // open on desktop, collapsed on phones so the menu starts higher
+  $('clock').open = false;                    // collapsed everywhere: the tickets already say what is live, the week is one tap away
   $('clock').addEventListener('toggle', setClockNote);
 })();
 

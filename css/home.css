@@ -861,3 +861,99 @@ body.is-searching .best { display: none; }
 .offers > .find-card { margin-top: 2px; }
 @media (max-width: 1020px) { .offers > .find-card { order: 4; margin-top: 0; } }
 
+
+/* ── Hero, offer-first refresh ──
+   Same structure and scripts; quieter surfaces. Tickets lose the heavy outline and offset
+   shadow, the small tickets say whether they are usable now, and "Start your order" is one
+   dark panel with six categories instead of twelve tiles. */
+.ticket { border-color: rgba(26,26,24,.14); border-radius: 20px; }
+.ticket::before, .ticket::after { border-color: rgba(26,26,24,.14); }
+.ticket.primary, .deck .ticket.primary { box-shadow: 0 26px 40px -26px rgba(168,67,0,.55); }
+.ticket.closedcard, .deck .ticket.closedcard { box-shadow: 0 26px 40px -26px rgba(26,26,24,.6); }
+.ticket.closedcard::before, .ticket.closedcard::after { border-color: rgba(26,26,24,.14); }
+.stamp { transform: none; border-width: 1.5px; border-radius: 4px; }
+.pie { box-shadow: 0 16px 28px -14px rgba(120,53,15,.55); }
+.clock { border-color: rgba(26,26,24,.14); border-radius: 20px; }
+.student-card { border: 0; box-shadow: none; border-radius: 16px; }
+.find-card { background: none; border: 0; padding: 4px 0; min-height: 0; }
+.find-card .pin { width: 36px; height: 36px; font-size: 1rem; border-width: 1.5px; }
+.find-card b { font-size: .95rem; }
+.quick-tiles .eyebrow { display: none; }
+.quick-all { display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; margin-top: 12px; border-radius: 999px; box-shadow: inset 0 0 0 1.5px var(--crust); font-weight: 600; text-decoration: none; transition: transform 140ms var(--ease-out), box-shadow 160ms ease, background-color 160ms ease; }
+.quick-all:active { transform: scale(.98); }
+@media (hover: hover) and (pointer: fine) { .quick-all:hover { box-shadow: inset 0 0 0 1.5px var(--char); } }
+.mtop { display: none; }
+
+/* desktop and tablet: the three smaller tickets are compact cards with a status tag */
+@media (min-width: 761px) {
+  .more .ticket { background: var(--paper); box-shadow: none; transition: transform 220ms var(--ease-out), box-shadow 220ms var(--ease-out); }
+  .more .ticket.dim { background: transparent; }
+  .more .stub, .more .tchip, .more .tmeta { display: none; }
+  .more .tbody { padding: 14px 16px 10px; display: flex; flex-direction: column; gap: 2px; }
+  .more .mtop { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 6px; }
+  .more .thead { order: 1; margin: 0; font-size: 1.05rem; }
+  .more .kicker { order: 2; color: var(--ash); letter-spacing: .04em; }
+  .more .tlink { order: 3; min-height: 36px; margin-top: 4px; }
+  .spill { font: 500 .66rem/1 var(--mono); letter-spacing: .07em; text-transform: uppercase; padding: 4px 7px; border-radius: 4px; background: #EDE3D4; color: var(--ash); white-space: nowrap; }
+  .spill.live { background: #D8EEDC; color: var(--basil); }
+  .spill.later { background: #FDE7BD; color: #8A4B00; }
+  .swhen { font: 500 .66rem/1 var(--mono); letter-spacing: .07em; text-transform: uppercase; color: var(--ash); text-align: right; }
+}
+@media (min-width: 761px) and (hover: hover) and (pointer: fine) {
+  .more .ticket:hover { transform: translateY(-3px); box-shadow: 0 16px 26px -18px rgba(120,53,15,.5); }
+}
+
+/* the big ticket's stub: "All day" / "Always on" set like the hours on the other tickets */
+@media (min-width: 761px) {
+  .ticket.primary .stub .tm.long { flex: 1; justify-content: center; padding: 0 12px 6px; }
+  .ticket.primary .tm.long b { font: 800 1.7rem/1 var(--display); letter-spacing: -0.04em; text-transform: none; }
+}
+
+/* desktop: "Start your order" is a single dark panel */
+@media (min-width: 1021px) {
+  .top .quick { background: var(--char); color: #F6E9D5; border-radius: 24px; padding: 24px; align-content: start; align-self: start; margin-top: 0; }
+  .top .quick h2 { font: 800 1.7rem/1.05 var(--display); letter-spacing: -0.035em; color: #fff; margin-bottom: 14px; }
+  .top .quick .quick-tiles .eyebrow { display: block; color: #C9B79F; margin-bottom: 2px; }
+  .top .quick .tile { background: #33261B; border-color: transparent; color: #fff; }
+  .top .quick .tile span { color: var(--sun); }
+  .top .quick .quick-all { color: #fff; box-shadow: inset 0 0 0 1.5px #6B5642; }
+  .top .quick .quick-all:hover { box-shadow: inset 0 0 0 1.5px var(--sun); }
+  .top .quick .reorder { background: #33261B; }
+  .top .quick .spin-card { background: #33261B; border-color: transparent; }
+  .top .quick .side-card b { color: #fff; }
+}
+@media (min-width: 1021px) and (hover: hover) and (pointer: fine) {
+  .top .quick .tile:hover { background: #43331F; }
+  .top .quick .spin-card:hover { background: #43331F; }
+}
+/* the sticker row repeated the ticker and the four reasons below */
+.top .stickers { display: none; }
+@media (min-width: 761px) { .top .hero .lede { margin-bottom: 20px; } }
+.top .quick .student-card { color: var(--char); }
+.top .quick .student-card b { color: var(--char); }
+
+/* phones: the ticket's button is the one filled action; "Order now" steps back to an outline while we are open */
+@media (max-width: 760px) {
+  body:not(.is-closed) .cta-main { background: transparent; color: var(--char); border: 0; box-shadow: inset 0 0 0 1.5px var(--char); }
+  body:not(.is-closed) .cta-main:active { transform: scale(.98); box-shadow: inset 0 0 0 1.5px var(--char); }
+  .cta-main { min-height: 50px; }
+}
+@media (max-width: 760px) and (hover: hover) and (pointer: fine) { body:not(.is-closed) .cta-main:hover { background: var(--sun); } }
+
+/* ── Offers link: a green LIVE badge (desktop) / pulsing dot (phone dock) while a timed offer is on, like Spin's FREE ── */
+.dock a[data-dock="offers"], .mainnav a[data-nav="offers"] { position: relative; }
+.mainnav a[data-nav="offers"].live::before { content: "LIVE"; position: absolute; top: 9px; right: -24px; padding: 3px 5px; border-radius: 6px; background: var(--basil); color: #fff; font: 800 .54rem/1 var(--body); letter-spacing: .06em; animation: live-pulse 1.8s ease-out infinite; }
+.dock a[data-dock="offers"].live::after { content: ""; position: absolute; top: 5px; left: calc(50% + 8px); width: 11px; height: 11px; border-radius: 50%; background: #3DDC84; border: 2px solid var(--char); animation: live-pulse 1.8s ease-out infinite; }
+@keyframes live-pulse { 0% { box-shadow: 0 0 0 0 rgba(27,127,59,.55); } 70%, 100% { box-shadow: 0 0 0 9px rgba(27,127,59,0); } }
+@media (prefers-reduced-motion: reduce) { .mainnav a[data-nav="offers"].live::before, .dock a[data-dock="offers"].live::after { animation: none; } }
+
+/* ── Header buttons: each has its own colour (Call orange, WhatsApp green, Cart charcoal with a yellow count) ── */
+.actions .btn.call { background: var(--ember-deep); border-color: var(--ember-deep); color: #fff; }
+.actions .btn.wa { background: var(--wa); border-color: var(--wa); color: #fff; }
+.actions .btn.cart { background: var(--char); border-color: var(--char); color: #fff; }
+.actions .btn.cart i { background: var(--sun); color: var(--char); border-radius: 999px; padding: 3px 7px; min-width: 22px; text-align: center; font-weight: 700; line-height: 1; }
+@media (hover: hover) and (pointer: fine) {
+  .actions .btn.call:hover { background: #8D3A00; border-color: #8D3A00; }
+  .actions .btn.wa:hover { background: #158A3B; border-color: #158A3B; }
+  .actions .btn.cart:hover { background: #2A2926; }
+}

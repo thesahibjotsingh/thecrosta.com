@@ -374,3 +374,71 @@ footer a { color: #A39A92; }
 .cart-footer { padding-top: 10px; padding-bottom: calc(10px + env(safe-area-inset-bottom)); }
 .cart-footer .cart-total-row { margin-bottom: 8px; }
 
+
+/* ───────────── MENU ROWS (menu-board list) ─────────────
+   Each dish is a row: photo on the left, name and starting price on one line, then the
+   description, the tag and the size buttons. Two columns on desktop with hairlines between
+   rows, one column on phones. The markup and the cart wiring are unchanged; menu-wiring.js
+   adds the .size-chips and .menu-from. */
+.menu-category { margin-bottom: 2.2rem; }
+.menu-category-title { font-size: 1.35rem; margin-bottom: .2rem; padding-bottom: .8rem; border-bottom: 1.5px solid var(--char); }
+.menu-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 48px; }
+
+.menu-item {
+  display: grid; grid-template-columns: 116px minmax(0, 1fr); grid-template-areas: "img body"; gap: 0 18px; align-items: start;
+  min-height: 0; padding: 18px 0; background: none; border: 0; border-bottom: 1px solid var(--crust); border-radius: 0;
+}
+.menu-item:hover { background: none; border-color: var(--crust); }
+.menu-item:not(:has(.menu-item-img)) { grid-template-columns: minmax(0, 1fr); grid-template-areas: "body"; }
+.menu-item-left { grid-area: body; }
+.menu-item-img, .menu-item:hover .menu-item-img { grid-area: img; width: 116px; height: 116px; border-radius: 14px; }
+.menu-item-name { font-size: 1.1rem; margin-bottom: .3rem; }
+.menu-item:has(.menu-from) .menu-item-name, .menu-item-left:has(+ .menu-item-price) .menu-item-name { padding-right: 5.5rem; }
+
+/* the starting price, top right of the row (single-price dishes show their price; sized dishes show the chips instead) */
+.menu-from, .menu-item-price { position: absolute; right: 0; top: 20px; grid-area: unset; align-self: auto; font: 700 1rem/1.2 var(--display); letter-spacing: -0.01em; color: var(--char); white-space: nowrap; }
+.menu-from small { font: 500 .66rem var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--ash); margin-right: 2px; }
+.menu-item:has(.size-chips) .menu-item-price { display: none; }
+
+.badge { border: 0; border-radius: 4px; padding: 4px 7px; font: 600 .66rem/1 var(--mono); letter-spacing: .06em; text-transform: uppercase; box-shadow: none; }
+.badge-best { background: var(--sun); color: var(--char); box-shadow: none; }
+.badge-spicy { background: var(--brick); color: #fff; border: 0; }
+
+/* sizes as buttons, each with its price */
+.add-row { margin-top: 10px; display: block; }
+.size-chips { display: grid; grid-template-columns: repeat(var(--n, 3), minmax(0, 1fr)); gap: 6px; max-width: 340px; }
+.size-chip {
+  min-height: 46px; padding: 6px 4px; border: 1.5px solid var(--crust); border-radius: 10px; background: var(--paper); color: var(--char);
+  text-align: center; line-height: 1.15; cursor: pointer; font: inherit;
+  transition: transform 140ms var(--ease-out), background-color 160ms ease, border-color 160ms ease, color 160ms ease;
+}
+.size-chip small { display: block; font: 500 .66rem var(--mono); letter-spacing: .03em; color: var(--ash); }
+.size-chip b { font: 600 .95rem var(--body); font-variant-numeric: tabular-nums; }
+.size-chip:active { transform: scale(.96); }
+@media (hover: hover) and (pointer: fine) {
+  .size-chip:hover { background: var(--ember-deep); border-color: var(--ember-deep); color: #fff; }
+  .size-chip:hover small { color: #FFD9C2; }
+}
+
+/* single-price dishes keep one Add button, now inline instead of floating on the photo */
+.add-btn {
+  position: static; width: auto; height: 40px; padding: 0 16px; gap: 6px; display: inline-flex; align-items: center; justify-content: center;
+  border-radius: 10px; border: 1.5px solid var(--char); background: var(--paper); color: var(--char); box-shadow: none; font: 600 .86rem var(--body);
+}
+.add-btn svg { width: 14px; height: 14px; stroke-width: 2.4; }
+.add-row:has(.size-chips) .add-btn { display: none; }
+@media (hover: hover) and (pointer: fine) { .add-btn:hover { background: var(--ember-deep); border-color: var(--ember-deep); color: #fff; box-shadow: none; } }
+.add-btn:active { transform: scale(.96); box-shadow: none; }
+.menu-stepper { position: static; display: inline-flex; align-items: center; height: 40px; border: 1.5px solid var(--char); border-radius: 10px; background: var(--sun); box-shadow: none; }
+.stepper-btn { height: 37px; }
+.stepper-count { font: 700 .9rem/37px var(--mono); }
+.menu-item:not(:has(.menu-item-img)) .add-btn, .menu-item:not(:has(.menu-item-img)) .menu-stepper { top: auto; bottom: auto; }
+.size-stepper-wrap { margin-top: .5rem !important; }
+
+@media (max-width: 900px) { .menu-grid { grid-template-columns: minmax(0, 1fr); gap: 0; } }
+@media (max-width: 480px) {
+  .menu-item { grid-template-columns: 92px minmax(0, 1fr); gap: 0 14px; padding: 16px 0; }
+  .menu-item-img, .menu-item:hover .menu-item-img { width: 92px; height: 92px; }
+  .size-chips { max-width: none; }
+  .menu-from, .menu-item-price { top: 18px; }
+}
