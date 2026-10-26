@@ -56,7 +56,7 @@ function showTab(name) {
 function updateMenuSizesBox(name) {
   const box = document.getElementById('menuSizesBox');
   if (!box) return;
-  const variants = ['pizzas', 'burgerswraps', 'garlicbread'];
+  const variants = ['pizzas', 'burgerswraps', 'garlicbread', 'quickbites'];
   if (variants.includes(name) && !searching) {
     box.classList.remove('menu-sizes-hidden');
     box.querySelectorAll('.menu-sizes-variant').forEach(v => v.classList.toggle('active', v.dataset.variant === name));
