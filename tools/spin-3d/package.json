@@ -1,0 +1,7 @@
+{
+  "name": "crosta-spin-3d-build",
+  "private": true,
+  "description": "Build tooling for the 3D daily spin machine. The site itself has no build step; this only produces js/spin-3d.js and css/slot-machine.css.",
+  "scripts": { "build": "node build.mjs" },
+  "devDependencies": { "esbuild": "^0.28.2", "three": "0.186.0" }
+}

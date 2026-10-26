@@ -16,7 +16,7 @@ function togglePickup() {
     addrEl.style.color = 'var(--warm-gray)';
   } else {
     btn.classList.remove('active');
-    btn.innerHTML = '<span class="pickup-icon">🏃</span> Pickup';
+    btn.innerHTML = '<span class="pickup-icon"></span> Pickup';
     addrEl.disabled = false;
     addrEl.placeholder = 'Delivery address';
     addrEl.style.background = '';
@@ -154,7 +154,7 @@ function placeOrder() {
       msg += `   Qty: ${item.qty}  ·  ₹${item.price}${item.size !== 'std' ? ' each' : ''}\n`;
     }
     if ((item.addons || []).length > 0) {
-      item.addons.forEach(a => { msg += `   ＋ ${a.name} (+₹${a.price})\n`; });
+      item.addons.forEach(a => { msg += a.free ? `   ＋ ${a.name} (FREE 🎁 spin prize)\n` : `   ＋ ${a.name} (+₹${a.price})\n`; });
     }
     if (!item.isGroupPerk && !item.isFreeSpinPrize && !item.isWeekendSpecial) msg += `   *Subtotal: ₹${lineTotal}*\n`;
   });
@@ -185,6 +185,7 @@ function placeOrder() {
 
   saveLastOrder(name, phone, address);
   const encoded = encodeURIComponent(msg);
+  if (typeof markSpinPrizeUsed === 'function') markSpinPrizeUsed();   // a spin prize that is on this order is now spent
   window.open(`https://wa.me/919888383010?text=${encoded}`, '_blank');
 }
 

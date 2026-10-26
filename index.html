@@ -34,9 +34,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/styles.css?v=61">
-<link rel="stylesheet" href="css/home.css?v=61">
-<link rel="stylesheet" href="css/sections.css?v=61">
+<link rel="stylesheet" href="css/styles.css?v=137">
+<link rel="stylesheet" href="css/home.css?v=137">
+<link rel="stylesheet" href="css/sections.css?v=137">
+<link rel="stylesheet" href="css/slot-machine.css?v=137">
 </head>
 <body>
 
@@ -70,15 +71,8 @@
       <p class="eyebrow" id="clockLine"></p>
       <h1 id="h1">Pure veg <span class="u">pizza<svg viewBox="0 0 200 20" preserveAspectRatio="none" aria-hidden="true"><path d="M3 12 C 30 2, 50 20, 80 10 S 130 2, 160 11 S 190 14, 197 6"/></svg></span> in Patiala</h1>
       <p class="lede" id="lede">Fresh dough daily, near Thapar University.</p>
-      <div class="stickers" aria-label="Highlights">
-        <span class="sticker"><span class="vegmark" aria-hidden="true"></span>100% pure veg</span>
-        <span class="sticker">Pizzas from ₹89</span>
-        <span class="sticker">Fresh dough daily</span>
-        <span class="sticker stu">🎓 Thapar ID: 10% off</span>
-      </div>
       <div class="hero-cta">
         <a class="cta-main" id="heroCta" href="#menu" data-cat="pizzas">Order now <span aria-hidden="true">→</span></a>
-        <a class="cta-link" href="#menu" data-cat="pizzas">Explore menu <span aria-hidden="true">→</span></a>
         <a class="hero-rating" href="#reviews" aria-label="Rated 4.6 out of 5 by customers, see reviews"><span class="stars" aria-hidden="true">★★★★★</span><b>4.6</b><span class="rt-long">rated by customers</span><span class="rt-short">reviews</span></a>
       </div>
       </div>
@@ -91,8 +85,8 @@
           </div>
           <div class="deck-ui" id="deckUi" hidden><div class="deck-dots" id="deckDots"></div><span class="deck-hint" id="deckHint">Swipe to see all offers</span></div>
           <p class="rule-note">One offer per order — we apply the best one that fits your cart. <a href="#spin">Feeling lucky? Spin for a deal →</a></p>
-          <a class="side-card find-card" href="https://www.google.com/maps/dir/?api=1&amp;destination=Shop+No+4+Bhadson+Road+Near+Thapar+University+Patiala+Punjab+147001&amp;travelmode=driving" target="_blank" rel="noopener noreferrer"><span class="pin" aria-hidden="true">📍</span><div><b>Find us near Thapar</b><span>Shop 4, Bhadson Road, Patiala · directions in Google Maps →</span></div></a>
         </div>
+
 
         <aside class="quick" aria-label="Order quickly">
           <div class="reorder" id="reorder" hidden>
@@ -101,7 +95,6 @@
             <div class="row"><small>Same items, current prices</small><button class="btn" type="button" id="reorderBtn">Reorder</button></div>
           </div>
           <div class="quick-tiles">
-            <p class="eyebrow">Hungry?</p>
             <h2>Start your order</h2>
             <div class="tiles">
               <a class="tile" href="#menu" data-cat="pizzas"><span class="th"><img src="images/menu-farm-house-pizza.webp" alt=""></span><div><b>Pizzas</b><span>from ₹89</span></div></a>
@@ -111,54 +104,24 @@
               <a class="tile" href="#menu" data-cat="quickbites" data-anchor="qb-fries"><span class="th"><img src="images/menu-salted-fries.webp" alt=""></span><div><b>Sides</b><span>from ₹69</span></div></a>
               <a class="tile" href="#menu" data-cat="drinks" data-anchor="dr-shakes"><span class="th"><img src="images/menu-strawberry-shake.webp" alt=""></span><div><b>Shakes</b><span>from ₹99</span></div></a>
             </div>
-            <a class="quick-all" href="#menu" data-cat="pizzas">Browse the full menu <span aria-hidden="true">→</span></a>
           </div>
           <div class="student-card" id="studentCard">
-            <span class="sc-ico" aria-hidden="true">🎓</span>
+            <span class="sc-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m2 9 10-5 10 5-10 5z"/><path d="M6 11v5c0 1.5 3 3 6 3s6-1.5 6-3v-5"/></svg></span>
             <div><b>Thapar student? Get 10% off</b><span id="studentCardText">On orders of ₹100 or more. Bring your student ID card; we check it when you collect or we deliver.</span></div>
             <button class="sc-btn" id="studentBtn" type="button" aria-pressed="false">Count me in</button>
           </div>
-          <div class="side-pair">
-            <a class="side-card spin-card" href="#spin"><img src="images/wheel.webp" alt="" width="72" height="72" loading="lazy"><div><b>Feeling lucky?</b><span>Spin for a free drink or a discount →</span></div></a>
-          </div>
         </aside>
       </div>
-
-      <details class="clock" id="clock">
-        <summary>
-          <h2>Offers by the clock</h2>
-          <span class="sum-r"><span class="rule-note" id="clockNote"></span>
-            <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span>
-        </summary>
-        <div class="clock-body">
-          <div class="clock-tools">
-            <div class="dchips" id="days" role="group" aria-label="Pick a day"></div>
-            <button class="btn-mini" id="clockNow" type="button" hidden>Back to now</button>
-          </div>
-          <p class="clock-hint">Drag the marker along the bar to check any time, or tap a bar to use that offer.</p>
-          <div class="lanes" id="lanes"></div>
-          <p class="clock-sum" id="clockSum" aria-live="polite"></p>
-        </div>
-      </details>
     </section>
     <svg class="wave" viewBox="0 0 1440 48" preserveAspectRatio="none" aria-hidden="true"><path fill="#FDF8F2" d="M0 48V30C120 6 240 6 360 24S600 44 720 26 960 4 1080 22 1320 40 1440 18V48Z"/></svg>
   </div>
 
   <div class="shop">
-    <div class="ticker" aria-label="Highlights">
-      <div class="ticker-track"><ul><li>100% pure veg</li><li>Fresh dough daily</li><li>Pizzas from ₹89</li><li>Thapar ID: 10% off</li><li>Spin for a free drink</li><li>Open 11 AM – 10:30 PM</li></ul><ul aria-hidden="true"><li>100% pure veg</li><li>Fresh dough daily</li><li>Pizzas from ₹89</li><li>Thapar ID: 10% off</li><li>Spin for a free drink</li><li>Open 11 AM – 10:30 PM</li></ul></div>
-    </div>
-    <section class="wrap perks" aria-label="Why The Crosta">
-      <div class="perk"><span class="pi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19c0-9 5-14 14-14 0 9-5 14-14 14z"/><path d="M5 19c3-5 6-8 10-10"/></svg></span><div><b>100% pure veg</b><span>Every dish is vegetarian.</span></div></div>
-      <div class="perk"><span class="pi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8a14 14 0 0 1 16 0l-8 13z"/><circle cx="10" cy="10" r="1"/><circle cx="14" cy="11" r="1"/></svg></span><div><b>Fresh dough daily</b><span>Pizza bases made fresh.</span></div></div>
-      <div class="perk"><span class="pi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><div><b>Ready in ~30 min</b><span>Hot, for pickup or delivery.</span></div></div>
-      <div class="perk"><span class="pi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m2 9 10-5 10 5-10 5z"/><path d="M6 11v5c0 1.5 3 3 6 3s6-1.5 6-3v-5"/></svg></span><div><b>Thapar students</b><span>10% off orders of ₹100+ with your ID.</span></div></div>
-    </section>
     <div class="tools" id="tools">
       <div class="wrap tools-in">
         <label class="search"><span class="sr">Search the menu</span>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-          <input type="search" id="menuSearch" placeholder="Craving something? Try “paneer”" autocomplete="off" enterkeyhint="search">
+          <input type="search" id="menuSearch" placeholder="Search the menu, e.g. paneer" autocomplete="off" enterkeyhint="search">
           <button class="search-clear" id="searchClear" type="button" aria-label="Clear search" hidden>×</button>
         </label>
         <div class="chips" id="chips" role="group" aria-label="Menu categories">
@@ -216,17 +179,17 @@
   <!-- QUICK BITES SUB-NAV -->
   <div class="qb-subnav" id="qbSubnav">
     <span class="qb-sub-label">Jump to</span>
-    <button class="qb-sub-btn active" onclick="scrollToQbCategory('qb-fries', this)">🍟 Fries</button>
-    <button class="qb-sub-btn" onclick="scrollToQbCategory('qb-springrolls', this)">🌿 Spring Rolls</button>
+    <button class="qb-sub-btn active" onclick="scrollToQbCategory('qb-fries', this)">Fries</button>
+    <button class="qb-sub-btn" onclick="scrollToQbCategory('qb-springrolls', this)">Spring rolls</button>
   </div>
 
   <!-- Menu panels: baked in by tools/prerender.js from js/menu-data.js; js/menu-render.js renders the same markup at load -->
   <!-- PRERENDER:MENU:START -->
-  <div class="menu-panel active" id="tab-pizzas"><div class="menu-category"><div class="menu-category-title">The Crosta – Signature</div><div class="menu-grid"><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Crosta Garlic Butter Pizza</div><div class="menu-item-desc">Garlic butter base, herbs, mozzarella, light veggies</div><div class="badge-row"><span class="badge badge-veg">Veg</span><span class="badge badge-best">Best Seller</span></div></div><div class="menu-item-price">₹249 / 369 / 519<span class="price-note">8″ / 10″ / 12″</span></div><img class="menu-item-img" src="images/menu-garlic-butter-pizza.webp" alt="Garlic Butter Pizza" loading="lazy"></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Crosta Peri Peri Blast</div><div class="menu-item-desc">Paneer, onion, capsicum, peri peri sauce, mozzarella</div><div class="badge-row"><span class="badge badge-spicy">🌶 Spicy</span></div></div><div class="menu-item-price">₹249 / 369 / 519<span class="price-note">8″ / 10″ / 12″</span></div><img class="menu-item-img" src="images/menu-peri-peri-pizza.webp" alt="Peri Peri Pizza" loading="lazy"></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Crosta Special Pizza</div><div class="menu-item-desc">Paneer, onion, capsicum, corn, olives, special sauce, mozzarella</div><div class="badge-row"><span class="badge badge-veg">Veg</span><span class="badge badge-best">Most Popular</span></div></div><div class="menu-item-price">₹249 / 379 / 539<span class="price-note">8″ / 10″ / 12″</span></div><img class="menu-item-img" src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=160&amp;q=75&amp;fit=crop" alt="Crosta Special Pizza" loading="lazy"></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Crosta Fire Ring Pizza</div><div class="menu-item-desc">Spicy paneer, jalapeño, chilli flakes, lava spicy sauce, mozzarella</div><div class="badge-row"><span class="badge badge-spicy">🌶🌶 Very Spicy</span></div></div><div class="menu-item-price">₹259 / 389 / 559<span class="price-note">8″ / 10″ / 12″</span></div><img class="menu-item-img" src="images/menu-fire-ring-pizza.webp" alt="Fire Ring Pizza" loading="lazy"></div></div></div><div class="menu-category"><div class="menu-category-title">Basic Range Pizzas</div><div class="menu-grid"><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Margherita Pizza</div><div class="menu-item-desc">Classic tomato sauce, mozzarella cheese, herbs</div><div class="badge-row"><span class="badge badge-veg">Veg</span></div></div><div class="menu-item-price">₹89 / 179 / 299<span class="price-note">8″ / 10″ / 12″</span></div><img class="menu-item-img" src="https://images.unsplash.com/photo-1604068549290-dea0e4a305ca?w=160&amp;q=75&amp;fit=crop" alt="Margherita Pizza" loading="lazy"></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Corn Cheese Pizza</div><div class="menu-item-desc">Sweet corn, mozzarella cheese, herbs</div><div class="badge-row"><span class="badge badge-veg">Veg</span></div></div><div class="menu-item-price">₹99 / 189 / 319<span class="price-note">8″ / 10″ / 12″</span></div><img class="menu-item-img" src="images/menu-corn-cheese-pizza.webp" alt="Corn Cheese Pizza" loading="lazy"></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Veg Delight Lite</div><div class="menu-item-desc">Capsicum, mushroom, jalapeño, mozzarella, herbs</div><div class="badge-row"><span class="badge badge-veg">Veg</span></div></div><div class="menu-item-price">₹129 / 219 / 349<span class="price-note">8″ / 10″ / 12″</span></div><img class="menu-item-img" src="images/menu-veg-delight-pizza.webp" alt="Veg Delight Pizza" loading="lazy"></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Farm House Pizza</div><div class="menu-item-desc">Onion, capsicum, tomato, mushroom, mozzarella</div><div class="badge-row"><span class="badge badge-veg">Veg</span><span class="badge badge-best">Most Popular</span></div></div><div class="menu-item-price">₹139 / 229 / 369<span class="price-note">8″ / 10″ / 12″</span></div><img class="menu-item-img" src="images/menu-farm-house-pizza.webp" alt="Farm House Pizza" loading="lazy"></div></div></div><div class="menu-category"><div class="menu-category-title">Single Topping Pizzas</div><div class="menu-grid"><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Standard Single Topping</div><div class="menu-item-desc">Choice of any one classic topping: Onion, Capsicum, Sweet Corn, Tomato, Mushroom, or Jalapeños</div><div class="badge-row"><span class="badge badge-veg">Veg</span></div></div><div class="menu-item-price">₹99 / 179 / 309<span class="price-note">8″ / 10″ / 12″</span></div></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Premium Single Topping</div><div class="menu-item-desc">Choice of any one premium topping: Paneer</div><div class="badge-row"><span class="badge badge-veg">Veg</span></div></div><div class="menu-item-price">₹129 / 219 / 359<span class="price-note">8″ / 10″ / 12″</span></div></div></div></div><div class="menu-category"><div class="menu-category-title">Indian Flavour Pizzas</div><div class="menu-grid"><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Makhani Paneer Pizza</div><div class="menu-item-desc">Paneer, capsicum, creamy makhani sauce, mozzarella</div><div class="badge-row"><span class="badge badge-veg">Veg</span></div></div><div class="menu-item-price">₹189 / 289 / 419<span class="price-note">8″ / 10″ / 12″</span></div><img class="menu-item-img" src="images/menu-makhani-paneer-pizza.webp" alt="Makhani Paneer Pizza" loading="lazy"></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Tandoori Paneer Pizza</div><div class="menu-item-desc">Paneer, onion, red pepper, tandoori sauce, mozzarella</div><div class="badge-row"><span class="badge badge-veg">Veg</span><span class="badge badge-spicy">Spicy</span><span class="badge badge-best">Chef's Recommendation</span></div></div><div class="menu-item-price">₹199 / 299 / 439<span class="price-note">8″ / 10″ / 12″</span></div><img class="menu-item-img" src="images/menu-tandoori-paneer-pizza.webp" alt="Tandoori Paneer Pizza" loading="lazy"></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Paneer Tikka Pizza</div><div class="menu-item-desc">Smoky paneer tikka, onion, capsicum, mozzarella</div><div class="badge-row"><span class="badge badge-veg">Veg</span><span class="badge badge-best">Chef's Special</span></div></div><div class="menu-item-price">₹199 / 299 / 439<span class="price-note">8″ / 10″ / 12″</span></div><img class="menu-item-img" src="images/menu-paneer-tikka-pizza.webp" alt="Paneer Tikka Pizza" loading="lazy"></div></div></div><div class="menu-category"><div class="menu-category-title">Spicy Range</div><div class="menu-grid"><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Chilli Heat Pizza</div><div class="menu-item-desc">Capsicum, onion, jalapeño, chilli sauce, mozzarella</div><div class="badge-row"><span class="badge badge-spicy">🌶 Spicy</span><span class="badge badge-best">Most Popular</span></div></div><div class="menu-item-price">₹189 / 289 / 419<span class="price-note">8″ / 10″ / 12″</span></div><img class="menu-item-img" src="images/menu-chilli-heat-pizza.webp" alt="Chilli Heat Pizza" loading="lazy"></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Spicy Paneer Pizza</div><div class="menu-item-desc">Paneer, capsicum, spicy sauce, mozzarella</div><div class="badge-row"><span class="badge badge-spicy">🌶 Spicy</span></div></div><div class="menu-item-price">₹199 / 299 / 439<span class="price-note">8″ / 10″ / 12″</span></div><img class="menu-item-img" src="images/menu-spicy-paneer-pizza.webp" alt="Spicy Paneer Pizza" loading="lazy"></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Peri Peri Veg Pizza</div><div class="menu-item-desc">Capsicum, onion, corn, peri peri sauce, mozzarella</div><div class="badge-row"><span class="badge badge-veg">Veg</span><span class="badge badge-spicy">Spicy</span></div></div><div class="menu-item-price">₹199 / 299 / 439<span class="price-note">8″ / 10″ / 12″</span></div><img class="menu-item-img" src="images/menu-peri-peri-veg-pizza.webp" alt="Peri Peri Veg Pizza" loading="lazy"></div></div></div><div class="menu-category"><div class="menu-category-title">Premium / Loaded Pizzas – Top Pick</div><div class="menu-grid"><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Cheese Overload Pizza</div><div class="menu-item-desc">Double mozzarella cheese, cheese sauce</div><div class="badge-row"><span class="badge badge-veg">Veg</span><span class="badge badge-best">Top Pick</span></div></div><div class="menu-item-price">₹199 / 299 / 449<span class="price-note">8″ / 10″ / 12″</span></div><img class="menu-item-img" src="images/menu-cheese-overload-pizza.webp" alt="Cheese Overload Pizza" loading="lazy"></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Black &amp; White Pizza</div><div class="menu-item-desc">Black olives, corn, jalapeño, extra mozzarella</div></div><div class="menu-item-price">₹209 / 319 / 469<span class="price-note">8″ / 10″ / 12″</span></div><img class="menu-item-img" src="images/menu-black-and-white-pizza.webp" alt="Black and White Pizza" loading="lazy"></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Veggie Delight</div><div class="menu-item-desc">Onion, capsicum, mushroom, corn, paneer, mozzarella</div><div class="badge-row"><span class="badge badge-veg">Veg</span></div></div><div class="menu-item-price">₹219 / 329 / 479<span class="price-note">8″ / 10″ / 12″</span></div><img class="menu-item-img" src="images/menu-classic-veg-loaded-pizza.webp" alt="Classic Veg Loaded Pizza" loading="lazy"></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Veggie Supreme Pizza</div><div class="menu-item-desc">Onion, capsicum, mushroom, corn, paneer, olives, mozzarella</div><div class="badge-row"><span class="badge badge-veg">Veg</span><span class="badge badge-best">Chef's Recommendation</span></div></div><div class="menu-item-price">₹229 / 339 / 499<span class="price-note">8″ / 10″ / 12″</span></div><img class="menu-item-img" src="images/menu-classic-veg-loaded-pizza.webp" alt="Veggie Supreme Pizza" loading="lazy"></div></div></div></div>
-  <div class="menu-panel" id="tab-burgerswraps"><div class="menu-category" id="qb-burgers"><div class="menu-category-title">Burgers</div><div class="menu-grid"><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Veg Grilled Burger</div><div class="menu-item-desc">Classic veg patty, signature house spreads, fresh salad veggies.</div><div class="badge-row"><span class="badge badge-veg">Veg</span></div></div><div class="menu-item-price">₹49 / 109<span class="price-note">Single / Meal</span></div><img class="menu-item-img" src="images/menu-veg-grilled-burger.webp" alt="Veg Grilled Burger" loading="lazy"></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Chips Burger</div><div class="menu-item-desc">Classic veg burger with a crunchy layer of potato chips.</div><div class="badge-row"><span class="badge badge-veg">Veg</span></div></div><div class="menu-item-price">₹69 / 129<span class="price-note">Single / Meal</span></div><img class="menu-item-img" src="images/menu-chips-burger.webp" alt="Chips Burger" loading="lazy"></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Mint Burger</div><div class="menu-item-desc">Classic veg burger loaded with refreshing house mint sauce.</div><div class="badge-row"><span class="badge badge-veg">Veg</span></div></div><div class="menu-item-price">₹79 / 139<span class="price-note">Single / Meal</span></div><img class="menu-item-img" src="images/menu-mint-burger.webp" alt="Mint Burger" loading="lazy"></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Sweet Corn Burger</div><div class="menu-item-desc">Classic veg burger with sweet corn and creamy mayo.</div><div class="badge-row"><span class="badge badge-veg">Veg</span></div></div><div class="menu-item-price">₹89 / 149<span class="price-note">Single / Meal</span></div><img class="menu-item-img" src="images/menu-sweet-corn-burger.webp" alt="Sweet Corn Burger" loading="lazy"></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Cheeseburger</div><div class="menu-item-desc">Grilled veg burger topped with a melted cheese slice.</div><div class="badge-row"><span class="badge badge-veg">Veg</span></div></div><div class="menu-item-price">₹99 / 159<span class="price-note">Single / Meal</span></div><img class="menu-item-img" src="images/menu-cheese-burger.webp" alt="Cheese Burger" loading="lazy"></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Spicy Jalapeño Burger</div><div class="menu-item-desc">Grilled veg burger with extra spicy jalapeños and house sauce.</div><div class="badge-row"><span class="badge badge-veg">Veg</span><span class="badge badge-spicy">Spicy</span></div></div><div class="menu-item-price">₹109 / 169<span class="price-note">Single / Meal</span></div><img class="menu-item-img" src="images/menu-spicy-jalape-o-burger.webp" alt="Spicy Jalapeño Burger" loading="lazy"></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Paneer Burger</div><div class="menu-item-desc">Thick, golden-fried paneer block, signature sauces.</div><div class="badge-row"><span class="badge badge-veg">Veg</span></div></div><div class="menu-item-price">₹119 / 179<span class="price-note">Single / Meal</span></div><img class="menu-item-img" src="images/menu-paneer-burger.webp" alt="Paneer Burger" loading="lazy"></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Pizza Burger</div><div class="menu-item-desc">2 Veg Patties, 3 Layers of Cheese, wrapped in pizza dough.</div><div class="badge-row"><span class="badge badge-veg">Veg</span><span class="badge badge-best">Chef's Recommendation</span></div></div><div class="menu-item-price">₹129 / 189<span class="price-note">Single / Meal</span></div><img class="menu-item-img" src="images/menu-pizza-burger.webp" alt="Pizza Burger" loading="lazy"></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">The Crosta Burger</div><div class="menu-item-desc">Triple stack: 2 Veg Patties, 1 Grilled Paneer Patty, 3 Layers of Cheese.</div><div class="badge-row"><span class="badge badge-best">Most Popular</span></div></div><div class="menu-item-price">₹139 / 199<span class="price-note">Single / Meal</span></div><img class="menu-item-img" src="images/menu-the-crosta-burger.webp" alt="The Crosta Burger" loading="lazy"></div></div></div><div class="menu-category" id="qb-wraps"><div class="menu-category-title">Wraps</div><div class="menu-grid"><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Veg Wrap</div><div class="menu-item-desc">Grilled tortilla, chopped veggies, lettuce, house spreads.</div><div class="badge-row"><span class="badge badge-veg">Veg</span></div></div><div class="menu-item-price">₹69 / 129<span class="price-note">Single / Meal</span></div><img class="menu-item-img" src="images/menu-veg-wrap.webp" alt="Veg Wrap" loading="lazy"></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Aloo Tikki Wrap</div><div class="menu-item-desc">Classic veg wrap, hot spicy potato patty core.</div><div class="badge-row"><span class="badge badge-veg">Veg</span></div></div><div class="menu-item-price">₹79 / 139<span class="price-note">Single / Meal</span></div><img class="menu-item-img" src="images/menu-aloo-tikki-wrap.webp" alt="Aloo Tikki Wrap" loading="lazy"></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Cheese Corn Wrap</div><div class="menu-item-desc">Fresh veggie wrap, sweet corn, melted cheese sauce.</div><div class="badge-row"><span class="badge badge-veg">Veg</span></div></div><div class="menu-item-price">₹79 / 139<span class="price-note">Single / Meal</span></div><img class="menu-item-img" src="images/menu-cheese-corn-wrap.webp" alt="Cheese Corn Wrap" loading="lazy"></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Paneer Wrap</div><div class="menu-item-desc">Spiced paneer chunks, crunchy veggies.</div><div class="badge-row"><span class="badge badge-veg">Veg</span></div></div><div class="menu-item-price">₹110 / 169<span class="price-note">Single / Meal</span></div><img class="menu-item-img" src="images/menu-paneer-wrap.webp" alt="Paneer Wrap" loading="lazy"></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Paneer Tikki Wrap</div><div class="menu-item-desc">Spiced paneer chunks with hot spicy potato patty, crunchy veggies.</div><div class="badge-row"><span class="badge badge-veg">Veg</span></div></div><div class="menu-item-price">₹119 / 179<span class="price-note">Single / Meal</span></div><img class="menu-item-img" src="images/menu-paneer-tikki-wrap.webp" alt="Paneer Tikki Wrap" loading="lazy"></div></div></div><div class="menu-category" id="qb-sandwiches"><div class="menu-category-title">Sandwiches</div><div class="menu-grid"><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Grilled Sandwich</div><div class="menu-item-desc">Toasted bread, chopped veggies, house spreads.</div></div><div class="menu-item-price">₹69 / 129<span class="price-note">Single / Meal</span></div><img class="menu-item-img" src="images/menu-grilled-sandwich.webp" alt="Grilled Sandwich" loading="lazy"></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Paneer Potato Sandwich</div><div class="menu-item-desc">Spiced potato patty, fresh paneer.</div></div><div class="menu-item-price">₹99 / 159<span class="price-note">Single / Meal</span></div><img class="menu-item-img" src="images/menu-paneer-potato-sandwich.webp" alt="Paneer Potato Sandwich" loading="lazy"></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Sweet Corn Sandwich</div><div class="menu-item-desc">Veggie sandwich, sweet corn, creamy mayo.</div></div><div class="menu-item-price">₹89 / 149<span class="price-note">Single / Meal</span></div><img class="menu-item-img" src="images/menu-sweet-corn-sandwich.webp" alt="Sweet Corn Sandwich" loading="lazy"></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Cheese Sandwich</div><div class="menu-item-desc">Hot-pressed, processed cheese, herbs.</div></div><div class="menu-item-price">₹109 / 169<span class="price-note">Single / Meal</span></div><img class="menu-item-img" src="images/menu-cheese-sandwich.webp" alt="Cheese Sandwich" loading="lazy"></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Double Cheese Sandwich</div><div class="menu-item-desc">Grilled, double layers of melted cheese.</div></div><div class="menu-item-price">₹129 / 189<span class="price-note">Single / Meal</span></div><img class="menu-item-img" src="images/menu-double-cheese-sandwich.webp" alt="Double Cheese Sandwich" loading="lazy"></div></div></div></div>
-  <div class="menu-panel" id="tab-quickbites"><div class="menu-category" id="qb-fries"><div class="menu-category-title">Fries</div><div class="menu-grid"><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Salted Fries</div></div><div class="menu-item-price">₹69 / 99<span class="price-note">Regular / Large</span></div><img class="menu-item-img" src="images/menu-salted-fries.webp" alt="Salted Fries" loading="lazy"></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Masala Fries</div></div><div class="menu-item-price">₹89 / 119<span class="price-note">Regular / Large</span></div><img class="menu-item-img" src="images/menu-masala-fries.webp" alt="Masala Fries" loading="lazy"></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Peri-Peri Fries</div><div class="badge-row"><span class="badge badge-spicy">Spicy</span></div></div><div class="menu-item-price">₹89 / 119<span class="price-note">Regular / Large</span></div><img class="menu-item-img" src="images/menu-peri-peri-fries.webp" alt="Peri Peri Fries" loading="lazy"></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Cheese Fries</div></div><div class="menu-item-price">₹109 / 139<span class="price-note">Regular / Large</span></div><img class="menu-item-img" src="images/menu-cheese-fries.webp" alt="Cheese Fries" loading="lazy"></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Loaded Fries</div><div class="menu-item-desc">Melted mozzarella, house sauces, chopped veggies.</div><div class="badge-row"><span class="badge badge-best">Top Pick</span></div></div><div class="menu-item-price">₹109 / 149<span class="price-note">Regular / Large</span></div><img class="menu-item-img" src="images/menu-loaded-fries.webp" alt="Loaded Fries" loading="lazy"></div></div></div><div class="menu-category" id="qb-springrolls"><div class="menu-category-title">Spring Rolls</div><div class="menu-grid"><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Noodle Spring Roll</div></div><div class="menu-item-price">₹79</div><img class="menu-item-img" src="images/menu-noodle-spring-roll.webp" alt="Noodle Spring Roll" loading="lazy"></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Veg Spring Roll</div><div class="badge-row"><span class="badge badge-veg">Veg</span></div></div><div class="menu-item-price">₹89</div><img class="menu-item-img" src="images/menu-veg-spring-roll.webp" alt="Veg Spring Roll" loading="lazy"></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Tandoori Spring Roll</div><div class="badge-row"><span class="badge badge-spicy">Spicy</span></div></div><div class="menu-item-price">₹99</div><img class="menu-item-img" src="images/menu-tandoori-spring-roll.webp" alt="Tandoori Spring Roll" loading="lazy"></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Creamy Cheesy Spring Rolls</div></div><div class="menu-item-price">₹109</div><img class="menu-item-img" src="images/menu-creamy-spring-roll.webp" alt="Creamy Spring Roll" loading="lazy"></div></div></div></div>
-  <div class="menu-panel" id="tab-pasta"><div class="menu-category"><div class="menu-category-title">Pasta</div><div class="menu-grid"><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Napoli Pasta</div><div class="menu-item-desc">Red Sauce, Garlic, Coriander, Oregano, Tomatoes, Parmesan.</div></div><div class="menu-item-price">₹129</div><img class="menu-item-img" src="images/menu-napoli-pasta.webp" alt="Napoli Pasta" loading="lazy"></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Arrabiata Pasta</div><div class="menu-item-desc">Spicy Arrabiata Sauce, Red Chili, Garlic, Peppers, Black Olives.</div><div class="badge-row"><span class="badge badge-spicy">Spicy</span></div></div><div class="menu-item-price">₹129</div><img class="menu-item-img" src="images/menu-arrabiata-pasta.webp" alt="Arrabiata Pasta" loading="lazy"></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Tandoori Pasta</div><div class="menu-item-desc">Tandoori Creamy Sauce, Capsicum, Onions, Grilled Sweet Corn.</div><div class="badge-row"><span class="badge badge-best">Chef's Special</span></div></div><div class="menu-item-price">₹129</div><img class="menu-item-img" src="images/menu-tandoori-pasta.webp" alt="Tandoori Pasta" loading="lazy"></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Mix Sauce Pasta</div><div class="menu-item-desc">Red &amp; White blend, Mushrooms, Bell Peppers, Olives, Mozzarella.</div></div><div class="menu-item-price">₹139</div><img class="menu-item-img" src="images/menu-mix-sauce-pasta.webp" alt="Mix Sauce Pasta" loading="lazy"></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Alfredo Pasta</div><div class="menu-item-desc">White Cheesy Sauce, Butter, Garlic, Mushrooms, Sweet Corn, Parmesan.</div></div><div class="menu-item-price">₹149</div><img class="menu-item-img" src="images/menu-alfredo-pasta.webp" alt="Alfredo Pasta" loading="lazy"></div></div></div></div>
-  <div class="menu-panel" id="tab-garlicbread"><div class="menu-category"><div class="menu-category-title">Stuffed Garlic Bread</div><div class="menu-grid"><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Cheesy Garlic Bread</div><div class="menu-item-desc">Freshly baked garlic bread, melted mozzarella.</div><div class="badge-row"><span class="badge badge-veg">Veg</span></div></div><div class="menu-item-price">₹139 / 199<span class="price-note">Single / Meal</span></div><img class="menu-item-img" src="images/menu-cheesy-garlic-bread.webp" alt="Cheesy Garlic Bread" loading="lazy"></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Sweet Corn Garlic Bread</div><div class="menu-item-desc">Sweet corn, jalapeno, heavy layer of melted cheese.</div><div class="badge-row"><span class="badge badge-veg">Veg</span></div></div><div class="menu-item-price">₹159 / 219<span class="price-note">Single / Meal</span></div><img class="menu-item-img" src="images/menu-sweet-corn-garlic-bread.webp" alt="Sweet Corn Garlic Bread" loading="lazy"></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Veggie Garlic Bread</div><div class="menu-item-desc">Crunchy capsicum, mushrooms, red onions, sweet corn, mozzarella.</div><div class="badge-row"><span class="badge badge-veg">Veg</span></div></div><div class="menu-item-price">₹189 / 249<span class="price-note">Single / Meal</span></div><img class="menu-item-img" src="images/menu-veggie-garlic-bread.webp" alt="Veggie Garlic Bread" loading="lazy"></div><div class="menu-item" data-flavor-options="Paneer Tikka|Tandoori Paneer"><div class="menu-item-left"><div class="menu-item-name">Paneer Garlic Bread</div><div class="menu-item-desc">Smoky paneer tikka OR tandoori sauce with spicy paprika, jalapeno, mozzarella.</div><div class="badge-row"><span class="badge badge-veg">Veg</span><span class="badge badge-spicy">Spicy</span></div></div><div class="menu-item-price">₹209 / 269<span class="price-note">Single / Meal</span></div><img class="menu-item-img" src="images/menu-paneer-garlic-bread.webp" alt="Paneer Garlic Bread" loading="lazy"></div></div></div></div>
+  <div class="menu-panel active" id="tab-pizzas"><div class="menu-category"><div class="menu-category-title">The Crosta – Signature</div><div class="menu-grid"><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Crosta Garlic Butter Pizza</div><div class="menu-item-desc">Garlic butter base, herbs, mozzarella, light veggies</div><div class="badge-row"><span class="badge badge-veg">Veg</span><span class="badge badge-best">Best Seller</span></div></div><div class="menu-item-price">₹249 / 369 / 519<span class="price-note">8″ / 10″ / 12″</span></div><img class="menu-item-img" src="images/menu-garlic-butter-pizza.webp" alt="Garlic Butter Pizza" loading="lazy"></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Crosta Peri Peri Blast</div><div class="menu-item-desc">Paneer, onion, capsicum, peri peri sauce, mozzarella</div><div class="badge-row"><span class="badge badge-spicy">🌶 Spicy</span></div></div><div class="menu-item-price">₹249 / 369 / 519<span class="price-note">8″ / 10″ / 12″</span></div><img class="menu-item-img" src="images/menu-peri-peri-pizza.webp" alt="Peri Peri Pizza" loading="lazy"></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Crosta Special Pizza</div><div class="menu-item-desc">Paneer, onion, capsicum, corn, olives, special sauce, mozzarella</div><div class="badge-row"><span class="badge badge-veg">Veg</span><span class="badge badge-best">Most Popular</span></div></div><div class="menu-item-price">₹249 / 379 / 539<span class="price-note">8″ / 10″ / 12″</span></div><img class="menu-item-img" src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=160&amp;q=75&amp;fit=crop" alt="Crosta Special Pizza" loading="lazy"></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Crosta Fire Ring Pizza</div><div class="menu-item-desc">Spicy paneer, jalapeño, chilli flakes, lava spicy sauce, mozzarella</div><div class="badge-row"><span class="badge badge-spicy">🌶🌶 Very Spicy</span></div></div><div class="menu-item-price">₹259 / 389 / 559<span class="price-note">8″ / 10″ / 12″</span></div><img class="menu-item-img" src="images/menu-fire-ring-pizza.webp" alt="Fire Ring Pizza" loading="lazy"></div></div></div><div class="menu-category"><div class="menu-category-title">Basic Range Pizzas</div><div class="menu-grid"><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Margherita Pizza</div><div class="menu-item-desc">Classic tomato sauce, mozzarella cheese, herbs</div><div class="badge-row"><span class="badge badge-veg">Veg</span></div></div><div class="menu-item-price">₹89 / 179 / 299<span class="price-note">8″ / 10″ / 12″</span></div><img class="menu-item-img" src="https://images.unsplash.com/photo-1604068549290-dea0e4a305ca?w=160&amp;q=75&amp;fit=crop" alt="Margherita Pizza" loading="lazy"></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Corn Cheese Pizza</div><div class="menu-item-desc">Sweet corn, mozzarella cheese, herbs</div><div class="badge-row"><span class="badge badge-veg">Veg</span></div></div><div class="menu-item-price">₹99 / 189 / 319<span class="price-note">8″ / 10″ / 12″</span></div><img class="menu-item-img" src="images/menu-corn-cheese-pizza.webp" alt="Corn Cheese Pizza" loading="lazy"></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Veg Delight Lite</div><div class="menu-item-desc">Capsicum, mushroom, jalapeño, mozzarella, herbs</div><div class="badge-row"><span class="badge badge-veg">Veg</span></div></div><div class="menu-item-price">₹129 / 219 / 349<span class="price-note">8″ / 10″ / 12″</span></div><img class="menu-item-img" src="images/menu-veg-delight-pizza.webp" alt="Veg Delight Pizza" loading="lazy"></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Farm House Pizza</div><div class="menu-item-desc">Onion, capsicum, tomato, mushroom, mozzarella</div><div class="badge-row"><span class="badge badge-veg">Veg</span><span class="badge badge-best">Most Popular</span></div></div><div class="menu-item-price">₹139 / 229 / 369<span class="price-note">8″ / 10″ / 12″</span></div><img class="menu-item-img" src="images/menu-farm-house-pizza.webp" alt="Farm House Pizza" loading="lazy"></div></div></div><div class="menu-category"><div class="menu-category-title">Single Topping Pizzas</div><div class="menu-grid"><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Standard Single Topping</div><div class="menu-item-desc">Choice of any one classic topping: Onion, Capsicum, Sweet Corn, Tomato, Mushroom, or Jalapeños</div><div class="badge-row"><span class="badge badge-veg">Veg</span></div></div><div class="menu-item-price">₹99 / 179 / 309<span class="price-note">8″ / 10″ / 12″</span></div></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Premium Single Topping</div><div class="menu-item-desc">Choice of any one premium topping: Paneer</div><div class="badge-row"><span class="badge badge-veg">Veg</span></div></div><div class="menu-item-price">₹129 / 219 / 359<span class="price-note">8″ / 10″ / 12″</span></div></div></div></div><div class="menu-category"><div class="menu-category-title">Indian Flavour Pizzas</div><div class="menu-grid"><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Makhani Paneer Pizza</div><div class="menu-item-desc">Paneer, capsicum, creamy makhani sauce, mozzarella</div><div class="badge-row"><span class="badge badge-veg">Veg</span></div></div><div class="menu-item-price">₹189 / 289 / 419<span class="price-note">8″ / 10″ / 12″</span></div><img class="menu-item-img" src="images/menu-makhani-paneer-pizza.webp" alt="Makhani Paneer Pizza" loading="lazy"></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Tandoori Paneer Pizza</div><div class="menu-item-desc">Paneer, onion, red pepper, tandoori sauce, mozzarella</div><div class="badge-row"><span class="badge badge-veg">Veg</span><span class="badge badge-spicy">🌶 Spicy</span><span class="badge badge-best">Chef's Recommendation</span></div></div><div class="menu-item-price">₹199 / 299 / 439<span class="price-note">8″ / 10″ / 12″</span></div><img class="menu-item-img" src="images/menu-tandoori-paneer-pizza.webp" alt="Tandoori Paneer Pizza" loading="lazy"></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Paneer Tikka Pizza</div><div class="menu-item-desc">Smoky paneer tikka, onion, capsicum, mozzarella</div><div class="badge-row"><span class="badge badge-veg">Veg</span><span class="badge badge-best">Chef's Special</span></div></div><div class="menu-item-price">₹199 / 299 / 439<span class="price-note">8″ / 10″ / 12″</span></div><img class="menu-item-img" src="images/menu-paneer-tikka-pizza.webp" alt="Paneer Tikka Pizza" loading="lazy"></div></div></div><div class="menu-category"><div class="menu-category-title">Spicy Range</div><div class="menu-grid"><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Chilli Heat Pizza</div><div class="menu-item-desc">Capsicum, onion, jalapeño, chilli sauce, mozzarella</div><div class="badge-row"><span class="badge badge-spicy">🌶 Spicy</span><span class="badge badge-best">Most Popular</span></div></div><div class="menu-item-price">₹189 / 289 / 419<span class="price-note">8″ / 10″ / 12″</span></div><img class="menu-item-img" src="images/menu-chilli-heat-pizza.webp" alt="Chilli Heat Pizza" loading="lazy"></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Spicy Paneer Pizza</div><div class="menu-item-desc">Paneer, capsicum, spicy sauce, mozzarella</div><div class="badge-row"><span class="badge badge-spicy">🌶 Spicy</span></div></div><div class="menu-item-price">₹199 / 299 / 439<span class="price-note">8″ / 10″ / 12″</span></div><img class="menu-item-img" src="images/menu-spicy-paneer-pizza.webp" alt="Spicy Paneer Pizza" loading="lazy"></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Peri Peri Veg Pizza</div><div class="menu-item-desc">Capsicum, onion, corn, peri peri sauce, mozzarella</div><div class="badge-row"><span class="badge badge-veg">Veg</span><span class="badge badge-spicy">🌶 Spicy</span></div></div><div class="menu-item-price">₹199 / 299 / 439<span class="price-note">8″ / 10″ / 12″</span></div><img class="menu-item-img" src="images/menu-peri-peri-veg-pizza.webp" alt="Peri Peri Veg Pizza" loading="lazy"></div></div></div><div class="menu-category"><div class="menu-category-title">Premium / Loaded Pizzas – Top Pick</div><div class="menu-grid"><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Cheese Overload Pizza</div><div class="menu-item-desc">Double mozzarella cheese, cheese sauce</div><div class="badge-row"><span class="badge badge-veg">Veg</span><span class="badge badge-best">Top Pick</span></div></div><div class="menu-item-price">₹199 / 299 / 449<span class="price-note">8″ / 10″ / 12″</span></div><img class="menu-item-img" src="images/menu-cheese-overload-pizza.webp" alt="Cheese Overload Pizza" loading="lazy"></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Black &amp; White Pizza</div><div class="menu-item-desc">Black olives, corn, jalapeño, extra mozzarella</div></div><div class="menu-item-price">₹209 / 319 / 469<span class="price-note">8″ / 10″ / 12″</span></div><img class="menu-item-img" src="images/menu-black-and-white-pizza.webp" alt="Black and White Pizza" loading="lazy"></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Veggie Delight</div><div class="menu-item-desc">Onion, capsicum, mushroom, corn, paneer, mozzarella</div><div class="badge-row"><span class="badge badge-veg">Veg</span></div></div><div class="menu-item-price">₹219 / 329 / 479<span class="price-note">8″ / 10″ / 12″</span></div><img class="menu-item-img" src="images/menu-classic-veg-loaded-pizza.webp" alt="Classic Veg Loaded Pizza" loading="lazy"></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Veggie Supreme Pizza</div><div class="menu-item-desc">Onion, capsicum, mushroom, corn, paneer, olives, mozzarella</div><div class="badge-row"><span class="badge badge-veg">Veg</span><span class="badge badge-best">Chef's Recommendation</span></div></div><div class="menu-item-price">₹229 / 339 / 499<span class="price-note">8″ / 10″ / 12″</span></div><img class="menu-item-img" src="images/menu-classic-veg-loaded-pizza.webp" alt="Veggie Supreme Pizza" loading="lazy"></div></div></div></div>
+  <div class="menu-panel" id="tab-burgerswraps"><div class="menu-category" id="qb-burgers"><div class="menu-category-title">Burgers</div><div class="menu-grid"><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Veg Grilled Burger</div><div class="menu-item-desc">Classic veg patty, signature house spreads, fresh salad veggies.</div><div class="badge-row"><span class="badge badge-veg">Veg</span></div></div><div class="menu-item-price">₹49 / 109<span class="price-note">Single / Meal</span></div><img class="menu-item-img" src="images/menu-veg-grilled-burger.webp" alt="Veg Grilled Burger" loading="lazy"></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Chips Burger</div><div class="menu-item-desc">Classic veg burger with a crunchy layer of potato chips.</div><div class="badge-row"><span class="badge badge-veg">Veg</span></div></div><div class="menu-item-price">₹69 / 129<span class="price-note">Single / Meal</span></div><img class="menu-item-img" src="images/menu-chips-burger.webp" alt="Chips Burger" loading="lazy"></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Mint Burger</div><div class="menu-item-desc">Classic veg burger loaded with refreshing house mint sauce.</div><div class="badge-row"><span class="badge badge-veg">Veg</span></div></div><div class="menu-item-price">₹79 / 139<span class="price-note">Single / Meal</span></div><img class="menu-item-img" src="images/menu-mint-burger.webp" alt="Mint Burger" loading="lazy"></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Sweet Corn Burger</div><div class="menu-item-desc">Classic veg burger with sweet corn and creamy mayo.</div><div class="badge-row"><span class="badge badge-veg">Veg</span></div></div><div class="menu-item-price">₹89 / 149<span class="price-note">Single / Meal</span></div><img class="menu-item-img" src="images/menu-sweet-corn-burger.webp" alt="Sweet Corn Burger" loading="lazy"></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Cheeseburger</div><div class="menu-item-desc">Grilled veg burger topped with a melted cheese slice.</div><div class="badge-row"><span class="badge badge-veg">Veg</span></div></div><div class="menu-item-price">₹99 / 159<span class="price-note">Single / Meal</span></div><img class="menu-item-img" src="images/menu-cheese-burger.webp" alt="Cheese Burger" loading="lazy"></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Spicy Jalapeño Burger</div><div class="menu-item-desc">Grilled veg burger with extra spicy jalapeños and house sauce.</div><div class="badge-row"><span class="badge badge-veg">Veg</span><span class="badge badge-spicy">🌶 Spicy</span></div></div><div class="menu-item-price">₹109 / 169<span class="price-note">Single / Meal</span></div><img class="menu-item-img" src="images/menu-spicy-jalape-o-burger.webp" alt="Spicy Jalapeño Burger" loading="lazy"></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Paneer Burger</div><div class="menu-item-desc">Thick, golden-fried paneer block, signature sauces.</div><div class="badge-row"><span class="badge badge-veg">Veg</span></div></div><div class="menu-item-price">₹119 / 179<span class="price-note">Single / Meal</span></div><img class="menu-item-img" src="images/menu-paneer-burger.webp" alt="Paneer Burger" loading="lazy"></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Pizza Burger</div><div class="menu-item-desc">2 Veg Patties, 3 Layers of Cheese, wrapped in pizza dough.</div><div class="badge-row"><span class="badge badge-veg">Veg</span><span class="badge badge-best">Chef's Recommendation</span></div></div><div class="menu-item-price">₹129 / 189<span class="price-note">Single / Meal</span></div><img class="menu-item-img" src="images/menu-pizza-burger.webp" alt="Pizza Burger" loading="lazy"></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">The Crosta Burger</div><div class="menu-item-desc">Triple stack: 2 Veg Patties, 1 Grilled Paneer Patty, 3 Layers of Cheese.</div><div class="badge-row"><span class="badge badge-best">Most Popular</span></div></div><div class="menu-item-price">₹139 / 199<span class="price-note">Single / Meal</span></div><img class="menu-item-img" src="images/menu-the-crosta-burger.webp" alt="The Crosta Burger" loading="lazy"></div></div></div><div class="menu-category" id="qb-wraps"><div class="menu-category-title">Wraps</div><div class="menu-grid"><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Veg Wrap</div><div class="menu-item-desc">Grilled tortilla, chopped veggies, lettuce, house spreads.</div><div class="badge-row"><span class="badge badge-veg">Veg</span></div></div><div class="menu-item-price">₹69 / 129<span class="price-note">Single / Meal</span></div><img class="menu-item-img" src="images/menu-veg-wrap.webp" alt="Veg Wrap" loading="lazy"></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Aloo Tikki Wrap</div><div class="menu-item-desc">Classic veg wrap, hot spicy potato patty core.</div><div class="badge-row"><span class="badge badge-veg">Veg</span></div></div><div class="menu-item-price">₹79 / 139<span class="price-note">Single / Meal</span></div><img class="menu-item-img" src="images/menu-aloo-tikki-wrap.webp" alt="Aloo Tikki Wrap" loading="lazy"></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Cheese Corn Wrap</div><div class="menu-item-desc">Fresh veggie wrap, sweet corn, melted cheese sauce.</div><div class="badge-row"><span class="badge badge-veg">Veg</span></div></div><div class="menu-item-price">₹79 / 139<span class="price-note">Single / Meal</span></div><img class="menu-item-img" src="images/menu-cheese-corn-wrap.webp" alt="Cheese Corn Wrap" loading="lazy"></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Paneer Wrap</div><div class="menu-item-desc">Spiced paneer chunks, crunchy veggies.</div><div class="badge-row"><span class="badge badge-veg">Veg</span></div></div><div class="menu-item-price">₹110 / 169<span class="price-note">Single / Meal</span></div><img class="menu-item-img" src="images/menu-paneer-wrap.webp" alt="Paneer Wrap" loading="lazy"></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Paneer Tikki Wrap</div><div class="menu-item-desc">Spiced paneer chunks with hot spicy potato patty, crunchy veggies.</div><div class="badge-row"><span class="badge badge-veg">Veg</span></div></div><div class="menu-item-price">₹119 / 179<span class="price-note">Single / Meal</span></div><img class="menu-item-img" src="images/menu-paneer-tikki-wrap.webp" alt="Paneer Tikki Wrap" loading="lazy"></div></div></div><div class="menu-category" id="qb-sandwiches"><div class="menu-category-title">Sandwiches</div><div class="menu-grid"><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Grilled Sandwich</div><div class="menu-item-desc">Toasted bread, chopped veggies, house spreads.</div></div><div class="menu-item-price">₹69 / 129<span class="price-note">Single / Meal</span></div><img class="menu-item-img" src="images/menu-grilled-sandwich.webp" alt="Grilled Sandwich" loading="lazy"></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Paneer Potato Sandwich</div><div class="menu-item-desc">Spiced potato patty, fresh paneer.</div></div><div class="menu-item-price">₹99 / 159<span class="price-note">Single / Meal</span></div><img class="menu-item-img" src="images/menu-paneer-potato-sandwich.webp" alt="Paneer Potato Sandwich" loading="lazy"></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Sweet Corn Sandwich</div><div class="menu-item-desc">Veggie sandwich, sweet corn, creamy mayo.</div></div><div class="menu-item-price">₹89 / 149<span class="price-note">Single / Meal</span></div><img class="menu-item-img" src="images/menu-sweet-corn-sandwich.webp" alt="Sweet Corn Sandwich" loading="lazy"></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Cheese Sandwich</div><div class="menu-item-desc">Hot-pressed, processed cheese, herbs.</div></div><div class="menu-item-price">₹109 / 169<span class="price-note">Single / Meal</span></div><img class="menu-item-img" src="images/menu-cheese-sandwich.webp" alt="Cheese Sandwich" loading="lazy"></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Double Cheese Sandwich</div><div class="menu-item-desc">Grilled, double layers of melted cheese.</div></div><div class="menu-item-price">₹129 / 189<span class="price-note">Single / Meal</span></div><img class="menu-item-img" src="images/menu-double-cheese-sandwich.webp" alt="Double Cheese Sandwich" loading="lazy"></div></div></div></div>
+  <div class="menu-panel" id="tab-quickbites"><div class="menu-category" id="qb-fries"><div class="menu-category-title">Fries</div><div class="menu-grid"><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Salted Fries</div></div><div class="menu-item-price">₹69 / 99<span class="price-note">Regular / Large</span></div><img class="menu-item-img" src="images/menu-salted-fries.webp" alt="Salted Fries" loading="lazy"></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Masala Fries</div></div><div class="menu-item-price">₹89 / 119<span class="price-note">Regular / Large</span></div><img class="menu-item-img" src="images/menu-masala-fries.webp" alt="Masala Fries" loading="lazy"></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Peri-Peri Fries</div><div class="badge-row"><span class="badge badge-spicy">🌶 Spicy</span></div></div><div class="menu-item-price">₹89 / 119<span class="price-note">Regular / Large</span></div><img class="menu-item-img" src="images/menu-peri-peri-fries.webp" alt="Peri Peri Fries" loading="lazy"></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Cheese Fries</div></div><div class="menu-item-price">₹109 / 139<span class="price-note">Regular / Large</span></div><img class="menu-item-img" src="images/menu-cheese-fries.webp" alt="Cheese Fries" loading="lazy"></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Loaded Fries</div><div class="menu-item-desc">Melted mozzarella, house sauces, chopped veggies.</div><div class="badge-row"><span class="badge badge-best">Top Pick</span></div></div><div class="menu-item-price">₹109 / 149<span class="price-note">Regular / Large</span></div><img class="menu-item-img" src="images/menu-loaded-fries.webp" alt="Loaded Fries" loading="lazy"></div></div></div><div class="menu-category" id="qb-springrolls"><div class="menu-category-title">Spring Rolls</div><div class="menu-grid"><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Noodle Spring Roll</div></div><div class="menu-item-price">₹79</div><img class="menu-item-img" src="images/menu-noodle-spring-roll.webp" alt="Noodle Spring Roll" loading="lazy"></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Veg Spring Roll</div><div class="badge-row"><span class="badge badge-veg">Veg</span></div></div><div class="menu-item-price">₹89</div><img class="menu-item-img" src="images/menu-veg-spring-roll.webp" alt="Veg Spring Roll" loading="lazy"></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Tandoori Spring Roll</div><div class="badge-row"><span class="badge badge-spicy">🌶 Spicy</span></div></div><div class="menu-item-price">₹99</div><img class="menu-item-img" src="images/menu-tandoori-spring-roll.webp" alt="Tandoori Spring Roll" loading="lazy"></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Creamy Cheesy Spring Rolls</div></div><div class="menu-item-price">₹109</div><img class="menu-item-img" src="images/menu-creamy-spring-roll.webp" alt="Creamy Spring Roll" loading="lazy"></div></div></div></div>
+  <div class="menu-panel" id="tab-pasta"><div class="menu-category"><div class="menu-category-title">Pasta</div><div class="menu-grid"><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Napoli Pasta</div><div class="menu-item-desc">Red Sauce, Garlic, Coriander, Oregano, Tomatoes, Parmesan.</div></div><div class="menu-item-price">₹129</div><img class="menu-item-img" src="images/menu-napoli-pasta.webp" alt="Napoli Pasta" loading="lazy"></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Arrabiata Pasta</div><div class="menu-item-desc">Spicy Arrabiata Sauce, Red Chili, Garlic, Peppers, Black Olives.</div><div class="badge-row"><span class="badge badge-spicy">🌶 Spicy</span></div></div><div class="menu-item-price">₹129</div><img class="menu-item-img" src="images/menu-arrabiata-pasta.webp" alt="Arrabiata Pasta" loading="lazy"></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Tandoori Pasta</div><div class="menu-item-desc">Tandoori Creamy Sauce, Capsicum, Onions, Grilled Sweet Corn.</div><div class="badge-row"><span class="badge badge-best">Chef's Special</span></div></div><div class="menu-item-price">₹129</div><img class="menu-item-img" src="images/menu-tandoori-pasta.webp" alt="Tandoori Pasta" loading="lazy"></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Mix Sauce Pasta</div><div class="menu-item-desc">Red &amp; White blend, Mushrooms, Bell Peppers, Olives, Mozzarella.</div></div><div class="menu-item-price">₹139</div><img class="menu-item-img" src="images/menu-mix-sauce-pasta.webp" alt="Mix Sauce Pasta" loading="lazy"></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Alfredo Pasta</div><div class="menu-item-desc">White Cheesy Sauce, Butter, Garlic, Mushrooms, Sweet Corn, Parmesan.</div></div><div class="menu-item-price">₹149</div><img class="menu-item-img" src="images/menu-alfredo-pasta.webp" alt="Alfredo Pasta" loading="lazy"></div></div></div></div>
+  <div class="menu-panel" id="tab-garlicbread"><div class="menu-category"><div class="menu-category-title">Stuffed Garlic Bread</div><div class="menu-grid"><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Cheesy Garlic Bread</div><div class="menu-item-desc">Freshly baked garlic bread, melted mozzarella.</div><div class="badge-row"><span class="badge badge-veg">Veg</span></div></div><div class="menu-item-price">₹139 / 199<span class="price-note">Single / Meal</span></div><img class="menu-item-img" src="images/menu-cheesy-garlic-bread.webp" alt="Cheesy Garlic Bread" loading="lazy"></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Sweet Corn Garlic Bread</div><div class="menu-item-desc">Sweet corn, jalapeno, heavy layer of melted cheese.</div><div class="badge-row"><span class="badge badge-veg">Veg</span></div></div><div class="menu-item-price">₹159 / 219<span class="price-note">Single / Meal</span></div><img class="menu-item-img" src="images/menu-sweet-corn-garlic-bread.webp" alt="Sweet Corn Garlic Bread" loading="lazy"></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Veggie Garlic Bread</div><div class="menu-item-desc">Crunchy capsicum, mushrooms, red onions, sweet corn, mozzarella.</div><div class="badge-row"><span class="badge badge-veg">Veg</span></div></div><div class="menu-item-price">₹189 / 249<span class="price-note">Single / Meal</span></div><img class="menu-item-img" src="images/menu-veggie-garlic-bread.webp" alt="Veggie Garlic Bread" loading="lazy"></div><div class="menu-item" data-flavor-options="Paneer Tikka|Tandoori Paneer"><div class="menu-item-left"><div class="menu-item-name">Paneer Garlic Bread</div><div class="menu-item-desc">Smoky paneer tikka OR tandoori sauce with spicy paprika, jalapeno, mozzarella.</div><div class="badge-row"><span class="badge badge-veg">Veg</span><span class="badge badge-spicy">🌶 Spicy</span></div></div><div class="menu-item-price">₹209 / 269<span class="price-note">Single / Meal</span></div><img class="menu-item-img" src="images/menu-paneer-garlic-bread.webp" alt="Paneer Garlic Bread" loading="lazy"></div></div></div></div>
   <div class="menu-panel" id="tab-drinks"><div class="menu-category" id="dr-hot"><div class="menu-category-title">Hot Brews</div><div class="menu-grid"><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Masala Chai</div></div><div class="menu-item-price">₹20</div><img class="menu-item-img" src="images/menu-masala-chai.webp" alt="Masala Chai" loading="lazy"></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Elaichi Chai</div></div><div class="menu-item-price">₹20</div><img class="menu-item-img" src="images/menu-masala-chai.webp" alt="Elaichi Chai" loading="lazy"></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Adrak Chai</div></div><div class="menu-item-price">₹20</div><img class="menu-item-img" src="images/menu-masala-chai.webp" alt="Adrak Chai" loading="lazy"></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Hot Coffee (Frothy)</div></div><div class="menu-item-price">₹50</div><img class="menu-item-img" src="images/menu-hot-coffee.webp" alt="Hot Coffee" loading="lazy"></div></div></div><div class="menu-category" id="dr-chilled"><div class="menu-category-title">Chilled Classics</div><div class="menu-grid"><div class="menu-item" data-variant-item data-base-name="Mint Fresh Lime Soda" data-price="49" data-default-variant="Salted"><div class="menu-item-left"><div class="menu-item-name">Mint Fresh Lime Soda</div><div class="variant-pills-row"><button class="variant-pill active" data-variant="Salted">Salted</button><button class="variant-pill" data-variant="Sweet">Sweet</button><button class="variant-pill" data-variant="Mix">Mix</button></div></div><div class="menu-item-price">₹49</div><img class="menu-item-img" src="https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?w=160&amp;q=75&amp;fit=crop" alt="Mint Fresh Lime Soda" loading="lazy"></div><div class="menu-item" data-variant-item data-base-name="Lemon Cola" data-price="70" data-default-variant="Salted"><div class="menu-item-left"><div class="menu-item-name">Lemon Cola</div><div class="variant-pills-row"><button class="variant-pill active" data-variant="Salted">Salted</button><button class="variant-pill" data-variant="Sweet">Sweet</button><button class="variant-pill" data-variant="Mix">Mix</button><button class="variant-pill" data-variant="Plain">Plain</button></div></div><div class="menu-item-price">₹70</div><img class="menu-item-img" src="images/menu-lemon-cola.webp" alt="Lemon Cola" loading="lazy"></div><div class="menu-item" data-variant-item data-base-name="Virgin Mojito" data-price="89" data-default-variant="Salted"><div class="menu-item-left"><div class="menu-item-name">Virgin Mojito</div><div class="variant-pills-row"><button class="variant-pill active" data-variant="Salted">Salted</button><button class="variant-pill" data-variant="Sweet">Sweet</button><button class="variant-pill" data-variant="Mix">Mix</button></div></div><div class="menu-item-price">₹89</div><img class="menu-item-img" src="https://images.unsplash.com/photo-1551538827-9c037cb4f32a?w=160&amp;q=75&amp;fit=crop" alt="Virgin Mojito" loading="lazy"></div><div class="menu-item" data-variant-item data-base-name="Blue Lagoon" data-price="89" data-default-variant="Sweet"><div class="menu-item-left"><div class="menu-item-name">Blue Lagoon</div><div class="variant-pills-row"><button class="variant-pill" data-variant="Salted">Salted</button><button class="variant-pill active" data-variant="Sweet">Sweet</button><button class="variant-pill" data-variant="Mix">Mix</button></div></div><div class="menu-item-price">₹89</div><img class="menu-item-img" src="images/menu-blue-lagoon.webp" alt="Blue Lagoon" loading="lazy"></div></div></div><div class="menu-category" id="dr-shakes"><div class="menu-category-title">Thick Shakes &amp; Frappes</div><div class="menu-grid"><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Cold Coffee</div></div><div class="menu-item-price">₹89</div><img class="menu-item-img" src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=160&amp;q=75&amp;fit=crop" alt="Cold Coffee" loading="lazy"></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Strawberry Bliss</div></div><div class="menu-item-price">₹99</div><img class="menu-item-img" src="images/menu-strawberry-shake.webp" alt="Strawberry Shake" loading="lazy"></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Vanilla Shake</div></div><div class="menu-item-price">₹99</div><img class="menu-item-img" src="images/menu-vanilla-shake.webp" alt="Vanilla Shake" loading="lazy"></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Chocolate Shake</div></div><div class="menu-item-price">₹109</div><img class="menu-item-img" src="images/menu-chocolate-shake.webp" alt="Chocolate Shake" loading="lazy"></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Butterscotch Shake</div></div><div class="menu-item-price">₹109</div><img class="menu-item-img" src="images/menu-butterscotch-shake.webp" alt="Butterscotch Shake" loading="lazy"></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Oreo Crumble Shake</div><div class="badge-row"><span class="badge badge-best">Fan Favourite</span></div></div><div class="menu-item-price">₹119</div><img class="menu-item-img" src="images/menu-oreo-shake.webp" alt="Oreo Shake" loading="lazy"></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">KitKat Break Shake</div><div class="badge-row"><span class="badge badge-best">Fan Favourite</span></div></div><div class="menu-item-price">₹119</div><img class="menu-item-img" src="images/menu-kitkat-shake.webp" alt="KitKat Shake" loading="lazy"></div></div></div></div>
   <div class="menu-panel" id="tab-quickdrinks"><div class="menu-category"><div class="menu-category-title">Pops</div><div class="menu-grid"><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Coke</div></div><div class="menu-item-price">₹20 / 40 / 90<span class="price-note">250ml / 750ml / 2L</span></div><img class="menu-item-img" src="images/menu-coke.webp" alt="Coke" loading="lazy"></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Canned Coke</div></div><div class="menu-item-price">₹30 / 40<span class="price-note">200ml / 300ml</span></div><img class="menu-item-img" src="images/menu-canned-coke.webp" alt="Canned Coke" loading="lazy"></div></div></div><div class="menu-category"><div class="menu-category-title">Water</div><div class="menu-grid"><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Water 250ml</div></div><div class="menu-item-price">₹5</div><img class="menu-item-img" src="images/menu-water-250ml.webp" alt="Water 250ml" loading="lazy"></div><div class="menu-item"><div class="menu-item-left"><div class="menu-item-name">Water 1L</div></div><div class="menu-item-price">₹20</div><img class="menu-item-img" src="images/menu-water-1l.webp" alt="Water 1L" loading="lazy"></div></div></div></div>
   <!-- PRERENDER:MENU:END -->
@@ -241,96 +204,69 @@
 <!-- OFFERS -->
 <section class="offers-section" id="offers">
   <div class="offers-header">
-    <p class="section-label">Offers at a glance</p>
-    <h2>Offers &amp; combos</h2>
+    <p class="section-label">Offers</p>
+    <h2>On right now</h2>
+    <p class="onnow-sub" id="onNowSub"></p>
   </div>
-  <div class="offers-carousel">
-    <button class="offers-arrow prev" onclick="offersMove(-1)" aria-label="Previous offer">‹</button>
-    <button class="offers-arrow next" onclick="offersMove(1)" aria-label="Next offer">›</button>
-    <div class="offers-viewport">
-      <div class="offers-track" id="offersTrack">
-        <div class="offer-slide">
-          <picture>
-            <source media="(max-width:640px)" srcset="images/offer-1-mobile.webp">
-            <img src="images/offer-1-desktop.webp" alt="The Crosta Offer 1" loading="lazy">
-          </picture>
-        </div>
-        <div class="offer-slide">
-          <picture>
-            <source media="(max-width:640px)" srcset="images/offer-2-mobile.webp">
-            <img src="images/offer-2-desktop.webp" alt="The Crosta Offer 2" loading="lazy">
-          </picture>
-        </div>
-        <div class="offer-slide">
-          <picture>
-            <source media="(max-width:640px)" srcset="images/offer-3-mobile.webp">
-            <img src="images/offer-3-desktop.webp" alt="The Crosta Offer 3" loading="lazy">
-          </picture>
-        </div>
-        <div class="offer-slide">
-          <picture>
-            <source media="(max-width:640px)" srcset="images/offer-4-mobile.webp">
-            <img src="images/offer-4-desktop.webp" alt="The Crosta Offer 4" loading="lazy">
-          </picture>
-        </div>
-        <div class="offer-slide">
-          <picture>
-            <source media="(max-width:640px)" srcset="images/offer-5-mobile.webp">
-            <img src="images/offer-5-desktop.webp" alt="The Crosta Offer 5" loading="lazy">
-          </picture>
-        </div>
-        <div class="offer-slide">
-          <picture>
-            <source media="(max-width:640px)" srcset="images/offer-6-mobile.webp">
-            <img src="images/offer-6-desktop.webp" alt="Make it a Meal - Add just Rs.60 to any item for Crispy Fries and 250ml Cold Drink">
-          </picture>
-        </div>
+  <div class="onnow-grid">
+    <div id="onNowMain"></div>
+    <div class="onnow-list" id="onNowList"></div>
+  </div>
+  <p class="onnow-more"><a href="#clock" id="onNowWeek">See the full week →</a></p>
+  <details class="clock" id="clock">
+    <summary>
+      <h2>Offers by the clock</h2>
+      <span class="sum-r"><span class="rule-note" id="clockNote"></span>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span>
+    </summary>
+    <div class="clock-body">
+      <div class="clock-tools">
+        <div class="dchips" id="days" role="group" aria-label="Pick a day"></div>
+        <button class="btn-mini" id="clockNow" type="button" hidden>Back to now</button>
       </div>
+      <p class="clock-hint">Drag the marker along the bar to check any time, or tap a bar to use that offer.</p>
+      <div class="lanes" id="lanes"></div>
+      <p class="clock-sum" id="clockSum" aria-live="polite"></p>
     </div>
-    <div class="offers-dots" id="offersDots"></div>
-  </div>
+  </details>
 </section>
-
-<!-- SPIN THE WHEEL -->
+<!-- DAILY SPIN -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><symbol id="pi-fries" viewBox="-100 -100 200 200" fill="none" stroke="#1a1a18" stroke-width="9" stroke-linejoin="round" stroke-linecap="round"><rect x="-64" y="-78" width="24" height="90" rx="8" fill="#ffc83d"/><rect x="-34" y="-92" width="24" height="90" rx="8" fill="#ffc83d"/><rect x="-2" y="-84" width="24" height="90" rx="8" fill="#ffc83d"/><rect x="28" y="-76" width="24" height="90" rx="8" fill="#ffc83d"/><path d="M-70 -2 70 -2 52 96 -52 96Z" fill="#d35400"/><circle cx="0" cy="44" r="22" fill="#fdf8f2" stroke-width="6"/></symbol><symbol id="pi-garlic" viewBox="-100 -100 200 200" fill="none" stroke="#1a1a18" stroke-width="9" stroke-linejoin="round" stroke-linecap="round"><path d="M-62 94 -62 6C-100 6 -100 -80 -40 -80L40 -80C100 -80 100 6 62 6L62 94Z" fill="#efb327"/><path d="M-45 78 -45 -6C-77 -6 -77 -63 -33 -63L33 -63C77 -63 77 -6 45 -6L45 78Z" fill="#fdf8f2" stroke="none"/><rect x="-30" y="-38" width="60" height="52" rx="12" fill="#ffc83d" stroke-width="7"/><g fill="#1b7f3b" stroke="none"><circle cx="-14" cy="-24" r="6"/><circle cx="8" cy="-14" r="6"/><circle cx="-4" cy="0" r="6"/><circle cx="16" cy="-28" r="6"/></g></symbol><symbol id="pi-drink" viewBox="-100 -100 200 200" fill="none" stroke="#1a1a18" stroke-width="9" stroke-linejoin="round" stroke-linecap="round"><path d="M14 -100 40 -100 26 -44"/><path d="M-62 -44 62 -44 46 100 -46 100Z" fill="#fdf8f2"/><path d="M-56 8 56 8 50 64 -50 64Z" fill="#d35400" stroke="none"/><path d="M-62 -44 62 -44 46 100 -46 100Z"/><rect x="-72" y="-60" width="144" height="22" rx="10" fill="#1a1a18"/></symbol><symbol id="pi-pizza" viewBox="-100 -100 200 200" fill="none" stroke="#1a1a18" stroke-width="9" stroke-linejoin="round" stroke-linecap="round"><path d="M-82 -68 82 -68 0 100Z" fill="#ffc83d"/><path d="M-90 -86 90 -86 90 -62 -90 -62Z" fill="#efb327"/><circle cx="-26" cy="-22" r="15" fill="#d35400"/><circle cx="28" cy="-6" r="15" fill="#d35400"/><circle cx="-2" cy="40" r="15" fill="#d35400"/></symbol><symbol id="pi-tag" viewBox="-100 -100 200 200" fill="none" stroke="#1a1a18" stroke-width="9" stroke-linejoin="round" stroke-linecap="round"><path d="M-86 -10 -18 -78 76 -78 76 78 -18 78Z" fill="#ffc83d"/><circle cx="-34" cy="0" r="10" fill="#fdf8f2" stroke-width="6"/><text x="22" y="4" fill="#a84300" stroke="none" font-family="Arial Black,Impact,sans-serif" font-weight="800" font-size="92" text-anchor="middle" dominant-baseline="middle">%</text></symbol><symbol id="pi-retry" viewBox="-100 -100 200 200" fill="none" stroke="#1a1a18" stroke-width="9" stroke-linejoin="round" stroke-linecap="round"><g stroke="#d35400" stroke-width="20"><path d="M-53.1 -32 A62 62 0 0 1 54.4 29.7"/><path d="M53 32 A62 62 0 0 1 -54.4 -29.7"/></g><g fill="#d35400" stroke="none"><path transform="translate(54.4 29.7) rotate(118.6)" d="M-26 0 26 0 0 38Z"/><path transform="translate(-54.4 -29.7) rotate(298.5)" d="M-26 0 26 0 0 38Z"/></g></symbol></defs></svg>
 <section class="spin-section" id="spin">
-  <div class="spin-wave" aria-hidden="true"></div>
   <div class="spin-inner">
     <div class="spin-left">
-      <p class="section-label">🎡 Spin for a deal</p>
+      <p class="section-label">Free daily spin</p>
       <h2 class="spin-title">Feeling <em>lucky?</em></h2>
-      <p class="spin-sub">One spin, one surprise deal — yours to claim on your next order. No catch, just good pizza karma.</p>
-      <p class="spin-prizes">On the wheel: <b>free fries</b> · <b>garlic bread</b> · <b>cold drink</b> · <b>extra topping</b> · <b>double cheese</b> · <b>10% or 20% off</b>. Prizes apply to orders of ₹100 or more.</p>
+      <p class="spin-sub">One free spin a day. Line up three and it’s yours: a free side, a cold drink, or up to 20% off.</p>
+      <div class="pay">
+        <p class="pay-head">Line up three to win</p>
+        <ul class="pay-list">
+        <li><span class="pay-reel" aria-hidden="true"><svg class="pi"><use href="#pi-fries"/></svg><svg class="pi"><use href="#pi-fries"/></svg><svg class="pi"><use href="#pi-fries"/></svg></span><span>Free fries</span></li>
+        <li><span class="pay-reel" aria-hidden="true"><svg class="pi"><use href="#pi-garlic"/></svg><svg class="pi"><use href="#pi-garlic"/></svg><svg class="pi"><use href="#pi-garlic"/></svg></span><span>Free garlic bread</span></li>
+        <li><span class="pay-reel" aria-hidden="true"><svg class="pi"><use href="#pi-drink"/></svg><svg class="pi"><use href="#pi-drink"/></svg><svg class="pi"><use href="#pi-drink"/></svg></span><span>Free 250 ml drink</span></li>
+        <li><span class="pay-reel" aria-hidden="true"><svg class="pi"><use href="#pi-pizza"/></svg><svg class="pi"><use href="#pi-pizza"/></svg><svg class="pi"><use href="#pi-pizza"/></svg></span><span>Free topping or double cheese</span></li>
+        <li><span class="pay-reel" aria-hidden="true"><svg class="pi"><use href="#pi-tag"/></svg><svg class="pi"><use href="#pi-tag"/></svg><svg class="pi"><use href="#pi-tag"/></svg></span><span>10% or 20% off</span></li>
+        <li><span class="pay-reel" aria-hidden="true"><svg class="pi"><use href="#pi-retry"/></svg><svg class="pi"><use href="#pi-retry"/></svg><svg class="pi"><use href="#pi-retry"/></svg></span><span>A free re-spin</span></li>
+        </ul>
+      </div>
       <div class="spin-rules">
-        <span>🎯 One spin per visit</span>
-        <span>✅ All deals are real</span>
-        <span>📱 Claim via WhatsApp</span>
+        <span>One free spin a day</span>
       </div>
     </div>
     <div class="spin-right">
-      <div class="spin-wheel-wrap" id="spinWheelWrap">
-        <div class="spin-pointer">▼</div>
-        <img id="wheelImage" class="wheel-image" src="images/wheel.webp" alt="The Crosta spin wheel" width="340" height="340">
-        <button class="spin-btn" id="spinBtn" onclick="doSpin()">
-          <span class="spin-btn-text">SPIN!</span>
+      <div class="c3d-stage">
+        <div class="c3d-machine" id="machineWrap"><p class="c3d-loading">Loading the machine…</p></div>
+        <button class="c3d-spin" id="spinBtn" type="button">
+          <span class="c3d-spin-label">Spin</span>
+          <span class="c3d-spin-ico" aria-hidden="true">
+            <svg class="c3d-ico-go" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            <svg class="c3d-ico-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg>
+          </span>
         </button>
+        <button class="c3d-link" id="viewPrize" type="button" hidden>View my prize</button>
+        <p class="c3d-hint"><span class="c3d-hint-long">Tap the machine, or drag the lever down</span><span class="c3d-hint-short">Tap, or drag the lever down</span></p>
+        <p class="c3d-fine">One free spin every 24 hours · Prizes valid on orders of ₹100+</p>
       </div>
-    </div>
-  </div>
-  <!-- Result card -->
-  <div class="spin-result" id="spinResult">
-    <div class="spin-result-card">
-      <div class="spin-result-emoji" id="spinResultEmoji">🎉</div>
-      <div class="spin-result-label">You won!</div>
-      <div class="spin-result-prize" id="spinResultPrize">Free Coke</div>
-      <div class="spin-result-hint">Valid on orders of ₹100 or more. Show this on WhatsApp to claim your deal</div>
-      <a class="spin-wa-btn wa-shimmer" id="spinWaBtn" href="#" target="_blank" rel="noopener noreferrer">
-        <svg viewBox="0 0 24 24" fill="currentColor" style="width:18px;height:18px;flex-shrink:0"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        Claim on WhatsApp
-      </a>
-      <button class="spin-add-cart-btn" id="spinAddCartBtn" onclick="addSpinPrizeToCart()" style="display:none">
-        🛒 Add Free Item to Cart
-      </button>
-      <button class="spin-again-hint" onclick="resetSpin()">← Spin again next visit</button>
     </div>
   </div>
 </section>
@@ -475,71 +411,35 @@
   <div class="review-lightbox-counter" id="reviewLightboxCounter"></div>
 </div>
 
-<!-- HOURS & LOCATION -->
+<!-- FIND US: hours, address, contact and map in one panel -->
 <section class="info-section" id="hours">
-  <div class="info-grid">
-    <div class="info-block">
-      <p class="section-label">When to visit</p>
-      <h2 class="section-title">Hours</h2>
+  <div class="visit">
+    <div class="visit-tx">
       <p class="hours-open" id="hoursOpen"><span class="dot"></span><span id="hoursOpenText"></span></p>
+      <h2 class="section-title">Find us near Thapar</h2>
       <div class="hours-row"><span class="day">Every day</span><span class="time">11:00 AM – 10:30 PM</span></div>
-      <br>
-      <a href="tel:9888383010" class="location-phone">📞 9888383010</a>
-    </div>
-    <div class="info-block">
-      <p class="section-label">Find us</p>
-      <h2 class="section-title">Location</h2>
-      <div class="location-detail">
-        Shop No. 4, Prem Nagar<br>
-        Bhadson Road, Near Thapar University<br>
-        Adjoining Indian Oil Gas Station<br>
-        Patiala, Punjab – 147001
-      </div>
-      <div class="map-embed">
-        <iframe
-          src="https://maps.google.com/maps?q=Shop+No+4+Bhadson+Road+Near+Thapar+University+Patiala+Punjab+147001&output=embed"
-          allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
-          title="The Crosta location map">
-        </iframe>
-      </div>
-      <a href="https://maps.app.goo.gl/ed5fcPS7DioLcqyH7" target="_blank" rel="noopener noreferrer" style="display:inline-block;margin-top:0.8rem;font-size:0.82rem;font-weight:600;color:var(--red);letter-spacing:0.06em;text-decoration:none;">↗ Open in Google Maps</a>
-    </div>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section class="contact-section" id="contact">
-  <p class="section-label">Say hello</p>
-  <h2 class="section-title">Get in Touch</h2>
-  <div class="contact-grid">
-    <div>
-      <div class="contact-info-block">
-        <div>📞 <a href="tel:9888383010"><strong>9888383010</strong></a> <span style="color:var(--warm-gray);font-weight:400;">/ <a href="tel:9417245100">9417245100</a></span></div>
-        <div>✉️ <a href="mailto:thecrosta@gmail.com"><strong>thecrosta@gmail.com</strong></a></div>
-        <div>🌐 <a href="https://thecrosta.com"><strong>thecrosta.com</strong></a></div>
-        <div>📍 Shop No. 4, Prem Nagar, Bhadson Rd<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Near Thapar University, Patiala 147001</div>
-        <div>📸 <a href="https://instagram.com/thecrostapatiala" target="_blank" rel="noopener noreferrer"><strong>@thecrostapatiala</strong></a></div>
-      </div>
-      <div class="social-row">
-        <a href="https://instagram.com/thecrostapatiala" target="_blank" rel="noopener noreferrer" class="social-link">IG</a>
-        <a href="https://wa.me/919888383010" target="_blank" rel="noopener noreferrer" class="social-link">WA</a>
+      <address class="visit-addr">Shop No. 4, Prem Nagar, Bhadson Road<br>Near Thapar University, adjoining Indian Oil Gas Station<br>Patiala, Punjab – 147001</address>
+      <ul class="visit-links">
+        <li><a href="tel:9888383010">9888383010</a> · <a href="tel:9417245100">9417245100</a></li>
+        <li><a href="mailto:thecrosta@gmail.com">thecrosta@gmail.com</a></li>
+        <li><a href="https://instagram.com/thecrostapatiala" target="_blank" rel="noopener noreferrer">@thecrostapatiala</a></li>
+      </ul>
+      <div class="visit-cta">
+        <a class="btn fill visit-directions" href="https://maps.app.goo.gl/ed5fcPS7DioLcqyH7" target="_blank" rel="noopener noreferrer">Get directions</a>
+        <a class="btn" href="tel:9888383010">Call the shop</a>
+        <a class="btn wa" href="https://wa.me/919888383010" target="_blank" rel="noopener noreferrer">WhatsApp us</a>
       </div>
     </div>
-    <form class="contact-form" onsubmit="handleSubmit(event)">
-      <div class="form-row">
-        <input type="text" id="contactName" placeholder="Your name" autocomplete="name" required>
-        <input type="tel" id="contactPhone" placeholder="Phone number" autocomplete="tel">
-      </div>
-      <input type="email" id="contactEmail" placeholder="Your email address (optional)" autocomplete="email">
-      <textarea id="contactMessage" placeholder="Message — reservation, feedback, or just say hi!" required></textarea>
-      <button type="submit">Send via WhatsApp</button>
-    </form>
+    <div class="visit-map">
+      <iframe id="mapFrame" class="on" src="https://maps.google.com/maps?q=30.3587812,76.373227+(The+Crosta)&amp;z=17&amp;output=embed" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="The Crosta location map"></iframe>
+      <iframe id="svFrame" data-src="https://maps.google.com/maps?q=30.3587812,76.373227&amp;layer=c&amp;cbll=30.3587812,76.373227&amp;cbp=12,0,,-2,0&amp;output=svembed" allowfullscreen referrerpolicy="no-referrer-when-downgrade" title="Street view outside The Crosta"></iframe>
+      <div class="map-toggle" role="group" aria-label="Map view"><button type="button" class="on" data-map="mapFrame" aria-pressed="true">Map</button><button type="button" data-map="svFrame" aria-pressed="false">Street view</button></div>
+    </div>
   </div>
 </section>
 
 <footer>
-  <p>&copy; 2026 <span>The Crosta</span> · Shop No. 4, Bhadson Road, Patiala · <a href="tel:9888383010">9888383010</a> / <a href="tel:9417245100">9417245100</a> · <a href="https://thecrosta.com">thecrosta.com</a></p>
-  <div class="footer-links" role="navigation" aria-label="Page sections"><a href="#menu">Menu</a><a href="#spin">Daily spin</a><a href="#reviews">Reviews</a><a href="#hours">Hours &amp; location</a><a href="#contact">Contact</a></div>
+  <p>&copy; 2026 <span>The Crosta</span> · Shop No. 4, Bhadson Road, Patiala · <a href="tel:9888383010">9888383010</a> · <a href="privacy.html">Privacy</a></p>
 </footer>
 
 <!-- PHONES: FLOATING CART BAR -->
@@ -547,13 +447,32 @@
   <a href="#top" data-dock="home" class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 11 9-8 9 8"/><path d="M5 10v10h14V10"/></svg><span>Home</span></a>
   <a href="#menu" data-dock="menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h10"/></svg><span>Menu</span></a>
   <a href="#primary" data-dock="offers"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12v8H4v-8M2 7h20v5H2zM12 22V7M12 7H8a2.5 2.5 0 1 1 0-5c3 0 4 5 4 5zM12 7h4a2.5 2.5 0 1 0 0-5c-3 0-4 5-4 5z"/></svg><span>Offers</span></a>
-  <a href="#spin" data-dock="spin"><img class="dk-wheel" src="images/wheel.webp" alt="" width="28" height="28"><span>Spin</span></a>
+  <a href="#spin" data-dock="spin"><svg class="dk-slot" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="3.5" width="13.5" height="17" rx="2.5"/><rect x="6.2" y="7" width="8.1" height="5" rx="1"/><path d="M9 7v5M11.5 7v5"/><path d="M7.2 16.2h6.6"/><g class="dk-lever"><path d="M17 12.5h2.7V8.6"/><circle cx="19.7" cy="6.9" r="1.2" fill="currentColor"/></g></svg><span>Spin</span></a>
   <button type="button" data-dock="cart" class="dock-cart" onclick="openCart()" aria-label="Open cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2 3h3l2.6 12.4a2 2 0 0 0 2 1.6h7.7a2 2 0 0 0 2-1.5L21 7H6"/></svg><span class="dk-label">Cart</span><span class="dk-count cart-count">0</span><span class="dk-total cart-total"></span></button>
 </div>
 
 <div class="cartbar" id="cartbar">
   <button class="cartbar-btn" type="button" onclick="openCart()"><span class="cb-count cart-count">0</span><span class="cb-mid"><span><span class="cart-word">items</span> in your cart</span><small class="cb-save" id="cbSave"></small></span><span class="cb-total cart-total">₹0</span><span aria-hidden="true">→</span></button>
 </div>
+
+<!-- DAILY SPIN: prize dialog (filled in by js/spin-3d.js) -->
+<div class="c3d-modal" id="modal" hidden>
+  <div class="c3d-card" role="dialog" aria-modal="true" aria-labelledby="mTitle">
+    <div class="c3d-grab" aria-hidden="true"></div>
+    <button class="c3d-x" id="mClose" type="button" aria-label="Close">&times;</button>
+    <p class="c3d-eyebrow" id="mIcon"></p>
+    <h2 id="mTitle"></h2>
+    <div class="c3d-ticket" id="mTicket" hidden>
+      <div class="c3d-stub"><small>Daily spin</small><b id="mStub">Winner</b></div>
+      <div class="c3d-pz"><span class="c3d-prize" id="mPrize"></span></div>
+    </div>
+    <p class="c3d-body" id="mBody"></p>
+    <div class="c3d-actions" id="mActions"></div>
+    <p class="c3d-error" id="mError" hidden></p>
+    <p class="c3d-note" id="mNote"></p>
+  </div>
+</div>
+<div class="sr" id="srStatus" aria-live="polite" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap"></div>
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
@@ -580,18 +499,6 @@
 </div>
 
 <!-- CART OVERLAY + DRAWER -->
-<div class="spin-pop" id="spinPop" role="dialog" aria-modal="true" aria-labelledby="spinPopTitle" hidden>
-  <div class="spin-pop-card" id="spinPopCard" tabindex="-1">
-    <button class="sheet-close" type="button" data-spinpop-close aria-label="Close">✕</button>
-    <img class="sp-wheel" src="images/wheel.webp" alt="" width="132" height="132">
-    <p class="eyebrow">Free spin · once a day</p>
-    <h2 id="spinPopTitle">Feeling lucky? Spin for a deal</h2>
-    <p class="sp-sub">One spin, one surprise: a free drink, fries or garlic bread, or 10–20% off. Valid on orders of ₹100 or more. Claim it on WhatsApp.</p>
-    <button class="btn sp-go" id="spinPopGo" type="button">Spin now</button>
-    <button class="sp-later" type="button" data-spinpop-close>Maybe later</button>
-  </div>
-</div>
-
 <div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
 <div class="cart-drawer" id="cartDrawer">
   <div class="cart-header">
@@ -605,7 +512,7 @@
   <!-- Scrollable body: items first, then details form -->
   <div class="cart-body" id="cartBody">
     <div class="cart-empty" id="cartEmpty">
-      <div class="cart-empty-icon">🍕</div>
+      <div class="cart-empty-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="44" height="44" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h2l2.4 10.2a1 1 0 0 0 1 .8h8.8a1 1 0 0 0 1-.8L20 8H6.2"/><circle cx="9" cy="20" r="1.3"/><circle cx="17" cy="20" r="1.3"/></svg></div>
       <p>Your cart is empty.<br>Add items from the menu!</p>
     </div>
 
@@ -621,21 +528,15 @@
     <div class="cart-details" id="cartDetails" style="display:none">
       <div class="cart-extras">
       <div id="cartClosedRow" style="display:none;align-items:flex-start;gap:0.4rem;margin-bottom:0.6rem;padding:0.55rem 0.65rem;border-radius:8px;background:#FFF0C4;border:1px solid #FFC83D;font-size:0.76rem;line-height:1.4;font-weight:600;color:#1A1A18;">
-        <span style="font-size:1rem;">⏰</span>
-        <span id="cartClosedText"></span>
+                <span id="cartClosedText"></span>
       </div>
-      <div class="spin-lock" id="cartSpinLock" hidden>🔒 <span id="cartSpinLockText"></span></div>
-      <div class="spin-nudge" id="cartSpinNudge" hidden>
-        <img src="images/wheel.webp" alt="" width="38" height="38">
-        <span><b>Your free spin is ready</b><small>Win a free drink, fries or a discount before you order.</small></span>
-        <button type="button" id="cartSpinGo">Spin now</button>
-      </div>
+      <div class="spin-lock" id="cartSpinLock" hidden><span id="cartSpinLockText"></span></div>
       <label class="stu-toggle" id="cartStudent">
         <input type="checkbox" id="cartStudentCheck">
         <span class="stu-box" aria-hidden="true"></span>
-        <span><b>🎓 I’m a Thapar University student — 10% off</b><small id="cartStudentNote">On orders of ₹100 or more. Show your student ID card when you collect or we deliver. One offer per order.</small></span>
+        <span><b>I’m a Thapar University student — 10% off</b><small id="cartStudentNote">On orders of ₹100 or more. Show your student ID card when you collect or we deliver. One offer per order.</small></span>
       </label>
-      <div class="cart-eta">🛵 Usually ready in <strong>25–35 min</strong> · delivery or pickup</div>
+      <div class="cart-eta">Usually ready in <strong>25–35 min</strong> · delivery or pickup</div>
       </div>
       <div class="cart-details-title">Your Details</div>
       <input class="cart-input" id="custName" type="text" placeholder="Your name *" required oninput="filterNameInput(this)">
@@ -643,19 +544,19 @@
       <div class="cart-address-row">
         <input class="cart-input" id="custAddress" type="text" placeholder="Delivery address *">
         <button class="pickup-btn" id="pickupBtn" onclick="togglePickup()" type="button">
-          <span class="pickup-icon">🏃</span> Pickup
+          <span class="pickup-icon"></span> Pickup
         </button>
       </div>
       <div class="loc-row" id="locRow">
-        <button class="loc-btn" id="locBtn" type="button" onclick="shareLocation()">📍 Add my location pin</button>
+        <button class="loc-btn" id="locBtn" type="button" onclick="shareLocation()">Add my location pin</button>
         <span class="loc-note" id="locNote" role="status">Helps our rider find you faster. Shared only in your order message.</span>
       </div>
       <div class="cart-note-wrap">
-        <div class="cart-note-label">🍳 Cooking Requests <span>optional</span></div>
+        <div class="cart-note-label">Cooking requests <span>optional</span></div>
         <textarea class="cart-input cart-note-input" id="custNote" placeholder="e.g. extra spicy pasta, less cheese on burger, well done pizza…" rows="2"></textarea>
       </div>
       <div class="pay-wrap" id="payWrap">
-        <div class="cart-note-label">💳 How will you pay?</div>
+        <div class="cart-note-label">How will you pay?</div>
         <div class="pay-opts" role="radiogroup" aria-label="Payment method">
           <button type="button" class="pay-opt on" role="radio" aria-checked="true" data-pay="cash">Cash on delivery / pickup</button>
           <button type="button" class="pay-opt" role="radio" aria-checked="false" data-pay="upi">UPI — pay now</button>
@@ -692,23 +593,21 @@
 
   <div class="cart-footer" id="cartFooter" style="display:none">
     <div id="cartWeekendRow" style="display:none;align-items:center;gap:0.4rem;margin-bottom:0.5rem;padding:0.5rem 0.6rem;border-radius:8px;background:rgba(26,173,75,0.1);font-size:0.76rem;font-weight:700;color:#1aad4b;">
-      <span style="font-size:1rem;">🎉</span>
-      <span id="cartWeekendText">Weekend Special unlocked — Free pizza!</span>
+            <span id="cartWeekendText">Weekend Special unlocked — Free pizza!</span>
     </div>
     <div id="cartGroupPerkRow" style="display:none;align-items:center;gap:0.4rem;margin-bottom:0.5rem;padding:0.5rem 0.6rem;border-radius:8px;background:rgba(26,173,75,0.1);font-size:0.76rem;font-weight:700;color:#1aad4b;">
-      <span style="font-size:1rem;">🎁</span>
-      <span>Group Perk unlocked — Complete Meal Bundle FREE!</span>
+            <span>Group Perk unlocked — Complete Meal Bundle FREE!</span>
     </div>
     <div id="cartOfferRow" style="display:none;align-items:center;justify-content:space-between;margin-bottom:0.4rem;font-size:0.78rem;font-weight:700;color:#1aad4b;">
-      <span>🎉 Weekday Lunch Offer — 20% off pizzas</span>
+      <span>Weekday Lunch Offer — 20% off pizzas</span>
       <span>−₹<span id="cartDiscountAmount">0</span></span>
     </div>
     <div id="cartBoostRow" style="display:none;align-items:center;justify-content:space-between;margin-bottom:0.4rem;font-size:0.78rem;font-weight:700;color:#1aad4b;">
-      <span>🍔 The Crosta Boost — Meal upgrade for ₹30</span>
+      <span>The Crosta Boost — meal upgrade for ₹30</span>
       <span>−₹<span id="cartBoostAmount">0</span></span>
     </div>
     <div id="cartStudentRow" style="display:none;align-items:center;justify-content:space-between;margin-bottom:0.4rem;font-size:0.78rem;font-weight:700;color:#1aad4b;">
-      <span>🎓 Thapar student discount — 10% off</span>
+      <span>Thapar student discount — 10% off</span>
       <span>−₹<span id="cartStudentAmount">0</span></span>
     </div>
     <div class="cart-total-row">
@@ -727,7 +626,7 @@
   <div class="addon-popup">
     <div class="addon-popup-handle"></div>
     <div class="addon-popup-head">
-      <div class="addon-popup-label">✨ Customise your pizza</div>
+      <div class="addon-popup-label">Customise your pizza</div>
       <div class="addon-popup-pizza">Pizza added!</div>
       <div class="addon-popup-hint">Would you like to add any toppings?</div>
     </div>
@@ -803,33 +702,31 @@
   </div>
 </div>
 
-<script defer src="js/menu-data.js?v=61"></script>
-<script defer src="js/shop.js?v=61"></script>
-<script defer src="js/offers.js?v=61"></script>
-<script defer src="js/menu-render.js?v=61"></script>
-<script defer src="js/ui.js?v=61"></script>
-<script defer src="js/reviews.js?v=61"></script>
-<script defer src="js/menu-ui.js?v=61"></script>
-<script defer src="js/offers-carousel.js?v=61"></script>
-<script defer src="js/contact.js?v=61"></script>
-<script defer src="js/cart.js?v=61"></script>
-<script defer src="js/promos.js?v=61"></script>
-<script defer src="js/cart-render.js?v=61"></script>
-<script defer src="js/order.js?v=61"></script>
-<script defer src="js/payment.js?v=61"></script>
-<script defer src="js/menu-wiring.js?v=61"></script>
-<script defer src="js/persist.js?v=61"></script>
-<script defer src="js/spin.js?v=61"></script>
-<script defer src="js/home.js?v=61"></script>
-<script defer src="js/sheets.js?v=61"></script>
-<script defer src="js/student.js?v=61"></script>
-<script defer src="js/spin-pop.js?v=61"></script>
-<script defer src="js/spin-nudge.js?v=61"></script>
-<script defer src="js/dock.js?v=61"></script>
-<script defer src="js/deck.js?v=61"></script>
-<script defer src="js/tear.js?v=61"></script>
-<script defer src="js/page-ui.js?v=61"></script>
-<script defer src="js/track.js?v=61"></script>
+<script defer src="js/menu-data.js?v=137"></script>
+<script defer src="js/shop.js?v=137"></script>
+<script defer src="js/offers.js?v=137"></script>
+<script defer src="js/menu-render.js?v=137"></script>
+<script defer src="js/ui.js?v=137"></script>
+<script defer src="js/reviews.js?v=137"></script>
+<script defer src="js/menu-ui.js?v=137"></script>
+<script defer src="js/cart.js?v=137"></script>
+<script defer src="js/promos.js?v=137"></script>
+<script defer src="js/cart-render.js?v=137"></script>
+<script defer src="js/order.js?v=137"></script>
+<script defer src="js/payment.js?v=137"></script>
+<script defer src="js/menu-wiring.js?v=137"></script>
+<script defer src="js/persist.js?v=137"></script>
+<script defer src="js/spin-prize.js?v=137"></script>
+<script defer src="js/spin-3d-boot.js?v=137"></script>
+<script defer src="js/home.js?v=137"></script>
+<script defer src="js/sheets.js?v=137"></script>
+<script defer src="js/student.js?v=137"></script>
+<script defer src="js/spin-nudge.js?v=137"></script>
+<script defer src="js/dock.js?v=137"></script>
+<script defer src="js/deck.js?v=137"></script>
+<script defer src="js/tear.js?v=137"></script>
+<script defer src="js/page-ui.js?v=137"></script>
+<script defer src="js/track.js?v=137"></script>
 
 </body>
 </html>

@@ -86,7 +86,7 @@
   }
   wrap('addItem', (name, size) => track('add_item', { item: name, size: size && size !== 'std' ? size : '' }));
   wrap('openCart', () => { const t = totals(); track('cart_open', { items: t.items, total: t.total }); });
-  wrap('doSpin', () => track('spin'));
+  window.addEventListener('crosta:spin-start', e => { if (!(e.detail && e.detail.retry)) track('spin'); });
   wrap('setStudent', on => track('student_toggle', { on: !!on }));
 
   // the WhatsApp order: the moment the order message is handed to WhatsApp
@@ -114,7 +114,7 @@
     if ((m = t.closest('[data-offer]'))) { track('offer_tap', { id: m.dataset.offer }); return; }
     if ((m = t.closest('[data-cat]'))) { track('menu_cat', { cat: m.dataset.cat, from: m.classList.contains('chip') ? 'chip' : m.classList.contains('tile') ? 'tile' : 'link' }); return; }
     if ((m = t.closest('#mainnav a, #dock a, #dock button'))) { track('nav_tap', { to: m.dataset.nav || m.dataset.dock || '' }); return; }
-    if (t.closest('.find-card')) { track('directions_tap'); return; }
+    if (t.closest(".find-card, .visit-directions")) { track('directions_tap'); return; }
     if (t.closest('#waBtn')) { track('wa_header_tap'); return; }
     if (t.closest('a[href^="tel:"]')) { track('call_tap'); }
   }, true);

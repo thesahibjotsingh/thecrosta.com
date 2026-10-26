@@ -12,9 +12,10 @@ Deployed from this repo by Cloudflare. Orders go out as WhatsApp messages; there
 
 | Path | What it is |
 |---|---|
+| `privacy.html` | Plain-language privacy page (what is stored on the device, what the analytics count) |
 | `index.html` | Page markup (menu panels and structured data are baked in — see *Pre-render*) |
 | `css/styles.css` | Original structural styles (grids, cart/popup layout, spin wheel mechanics); visual styling is overridden by `home.css` and `sections.css`. `node`-free audit: `python tools/css_audit.py css/styles.css` lists rules nothing uses |
-| `css/sections.css` | The rest of the page in the same design language: menu cards, bands with wavy edges, reviews, hours, contact, footer, spin, cart drawer, add-on popup |
+| `css/sections.css` | The rest of the page in the same design language: menu rows, bands with wavy edges, reviews, find-us panel, footer, spin, cart drawer, add-on popup |
 | `css/home.css` | New layer: header, "what's on" tickets, clock strip, tools bar, bestsellers, cart bar, sheets, checkout extras |
 | `js/menu-data.js` | **The menu** — every item, price, badge and photo. Edit this to change the menu. |
 | `js/shop.js` | **Opening hours**, the shop clock (Patiala time), time formatting, and the **UPI ID** |
@@ -31,10 +32,10 @@ Deployed from this repo by Cloudflare. Orders go out as WhatsApp messages; there
 | `js/track.js` | Anonymous analytics (off until the Worker address is set); the Worker itself is in `worker/` |
 | `js/dock.js` | Phone bottom pill nav (Home / Menu / Offers / Cart); the cart count comes from `.cart-count` / `.cart-total` |
 | `js/student.js` | Thapar student 10% switch (page card + cart checkbox); the rule itself is in `js/promos.js` (`STUDENT_PERCENT`) |
-| `js/spin.js`, `spin-pop.js`, `reviews.js`, `offers-carousel.js`, `contact.js`, `page-ui.js` | Spin wheel, reviews lightbox, poster carousel, contact form, small page behaviours |
+| `js/spin.js`, `spin-nudge.js`, `reviews.js`, `page-ui.js` | Spin wheel (and its "free spin ready" dot / countdown), reviews lightbox, small page behaviours |
 | `tools/prerender.js` | Bakes the menu + structured data into `index.html` |
 | `images/` | Optimised WebP photos; `og-share.jpg` is the link-preview card; there is no UPI QR at the moment (the old one paid the previous account) |
-| `mockups/top-section.html` | The approved design mockup (not deployed logic; reference only) |
+| `mockups/` | Design mockups, kept locally only (git-ignored, not deployed) |
 
 Scripts are plain `<script defer>` files loaded in the order listed at the bottom of `index.html`; keep that order.
 
@@ -45,7 +46,6 @@ Scripts are plain `<script defer>` files loaded in the order listed at the botto
 - **Change an offer's time or wording** → `js/offers.js` (the header tickets, the clock strip *and* the cart discounts all read it).
 - **Thapar student discount** → `STUDENT_PERCENT` and `STUDENT_MIN` (minimum order, ₹100) in `js/promos.js`. It is opt-in, applies only when it saves more than the other offer in the cart (one offer per order), and the WhatsApp message tells the shop to check the ID card.
 - **Spin prize minimum** → `SPIN_MIN` in `js/promos.js` (₹100): a spin prize in the cart stays locked, and the order is blocked, until the paid items reach it.
-- **Spin popup** → `js/spin-pop.js` (`DELAY` = seconds before it shows; once a day, never after a spin).
 - **Change the UPI ID** → `UPI` in `js/shop.js`. If you add a QR picture, it must belong to that same ID (the page shows the ID and a Copy button; a QR is optional).
 
 ## Pre-render

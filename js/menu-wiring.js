@@ -206,7 +206,10 @@ function toggleAddonPopupCard(card) {
 
   if (isNowSelected) {
     if (!pizzaItem.addons.find(a => a.name === addonName)) {
-      pizzaItem.addons.push({ name: addonName, price });
+      // spin prize: the first veggie topping is ₹0 (spinGrantFreeAddon adds it, on a single-pizza line)
+      if (!(typeof spinGrantFreeAddon === 'function' && spinGrantFreeAddon(pizzaItem, addonName, price))) {
+        pizzaItem.addons.push({ name: addonName, price });
+      }
     }
   } else {
     pizzaItem.addons = pizzaItem.addons.filter(a => a.name !== addonName);

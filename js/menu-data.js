@@ -32,7 +32,7 @@ window.MENU_DATA = {
         {
           "title": "Indian Flavour Pizzas", "items": [
             {"name": "Makhani Paneer Pizza", "desc": "Paneer, capsicum, creamy makhani sauce, mozzarella", "badges": [{"type": "veg", "label": "Veg"}], "prices": [189, 289, 419], "priceNote": "8″ / 10″ / 12″", "img": "images/menu-makhani-paneer-pizza.webp", "alt": "Makhani Paneer Pizza"},
-            {"name": "Tandoori Paneer Pizza", "desc": "Paneer, onion, red pepper, tandoori sauce, mozzarella", "badges": [{"type": "veg", "label": "Veg"}, {"type": "spicy", "label": "Spicy"}, {"type": "best", "label": "Chef's Recommendation"}], "prices": [199, 299, 439], "priceNote": "8″ / 10″ / 12″", "img": "images/menu-tandoori-paneer-pizza.webp", "alt": "Tandoori Paneer Pizza"},
+            {"name": "Tandoori Paneer Pizza", "desc": "Paneer, onion, red pepper, tandoori sauce, mozzarella", "badges": [{"type": "veg", "label": "Veg"}, {"type": "spicy", "label": "🌶 Spicy"}, {"type": "best", "label": "Chef's Recommendation"}], "prices": [199, 299, 439], "priceNote": "8″ / 10″ / 12″", "img": "images/menu-tandoori-paneer-pizza.webp", "alt": "Tandoori Paneer Pizza"},
             {"name": "Paneer Tikka Pizza", "desc": "Smoky paneer tikka, onion, capsicum, mozzarella", "badges": [{"type": "veg", "label": "Veg"}, {"type": "best", "label": "Chef's Special"}], "prices": [199, 299, 439], "priceNote": "8″ / 10″ / 12″", "img": "images/menu-paneer-tikka-pizza.webp", "alt": "Paneer Tikka Pizza"}
           ]
         },
@@ -40,7 +40,7 @@ window.MENU_DATA = {
           "title": "Spicy Range", "items": [
             {"name": "Chilli Heat Pizza", "desc": "Capsicum, onion, jalapeño, chilli sauce, mozzarella", "badges": [{"type": "spicy", "label": "🌶 Spicy"}, {"type": "best", "label": "Most Popular"}], "prices": [189, 289, 419], "priceNote": "8″ / 10″ / 12″", "img": "images/menu-chilli-heat-pizza.webp", "alt": "Chilli Heat Pizza"},
             {"name": "Spicy Paneer Pizza", "desc": "Paneer, capsicum, spicy sauce, mozzarella", "badges": [{"type": "spicy", "label": "🌶 Spicy"}], "prices": [199, 299, 439], "priceNote": "8″ / 10″ / 12″", "img": "images/menu-spicy-paneer-pizza.webp", "alt": "Spicy Paneer Pizza"},
-            {"name": "Peri Peri Veg Pizza", "desc": "Capsicum, onion, corn, peri peri sauce, mozzarella", "badges": [{"type": "veg", "label": "Veg"}, {"type": "spicy", "label": "Spicy"}], "prices": [199, 299, 439], "priceNote": "8″ / 10″ / 12″", "img": "images/menu-peri-peri-veg-pizza.webp", "alt": "Peri Peri Veg Pizza"}
+            {"name": "Peri Peri Veg Pizza", "desc": "Capsicum, onion, corn, peri peri sauce, mozzarella", "badges": [{"type": "veg", "label": "Veg"}, {"type": "spicy", "label": "🌶 Spicy"}], "prices": [199, 299, 439], "priceNote": "8″ / 10″ / 12″", "img": "images/menu-peri-peri-veg-pizza.webp", "alt": "Peri Peri Veg Pizza"}
           ]
         },
         {
@@ -63,7 +63,7 @@ window.MENU_DATA = {
             {"name": "Mint Burger", "desc": "Classic veg burger loaded with refreshing house mint sauce.", "badges": [{"type": "veg", "label": "Veg"}], "prices": [79, 139], "priceNote": "Single / Meal", "img": "images/menu-mint-burger.webp", "alt": "Mint Burger"},
             {"name": "Sweet Corn Burger", "desc": "Classic veg burger with sweet corn and creamy mayo.", "badges": [{"type": "veg", "label": "Veg"}], "prices": [89, 149], "priceNote": "Single / Meal", "img": "images/menu-sweet-corn-burger.webp", "alt": "Sweet Corn Burger"},
             {"name": "Cheeseburger", "desc": "Grilled veg burger topped with a melted cheese slice.", "badges": [{"type": "veg", "label": "Veg"}], "prices": [99, 159], "priceNote": "Single / Meal", "img": "images/menu-cheese-burger.webp", "alt": "Cheese Burger"},
-            {"name": "Spicy Jalapeño Burger", "desc": "Grilled veg burger with extra spicy jalapeños and house sauce.", "badges": [{"type": "veg", "label": "Veg"}, {"type": "spicy", "label": "Spicy"}], "prices": [109, 169], "priceNote": "Single / Meal", "img": "images/menu-spicy-jalape-o-burger.webp", "alt": "Spicy Jalapeño Burger"},
+            {"name": "Spicy Jalapeño Burger", "desc": "Grilled veg burger with extra spicy jalapeños and house sauce.", "badges": [{"type": "veg", "label": "Veg"}, {"type": "spicy", "label": "🌶 Spicy"}], "prices": [109, 169], "priceNote": "Single / Meal", "img": "images/menu-spicy-jalape-o-burger.webp", "alt": "Spicy Jalapeño Burger"},
             {"name": "Paneer Burger", "desc": "Thick, golden-fried paneer block, signature sauces.", "badges": [{"type": "veg", "label": "Veg"}], "prices": [119, 179], "priceNote": "Single / Meal", "img": "images/menu-paneer-burger.webp", "alt": "Paneer Burger"},
             {"name": "Pizza Burger", "desc": "2 Veg Patties, 3 Layers of Cheese, wrapped in pizza dough.", "badges": [{"type": "veg", "label": "Veg"}, {"type": "best", "label": "Chef's Recommendation"}], "prices": [129, 189], "priceNote": "Single / Meal", "img": "images/menu-pizza-burger.webp", "alt": "Pizza Burger"},
             {"name": "The Crosta Burger", "desc": "Triple stack: 2 Veg Patties, 1 Grilled Paneer Patty, 3 Layers of Cheese.", "badges": [{"type": "best", "label": "Most Popular"}], "prices": [139, 199], "priceNote": "Single / Meal", "img": "images/menu-the-crosta-burger.webp", "alt": "The Crosta Burger"}
@@ -96,7 +96,7 @@ window.MENU_DATA = {
           "id": "qb-fries", "title": "Fries", "items": [
             {"name": "Salted Fries", "prices": [69, 99], "priceNote": "Regular / Large", "img": "images/menu-salted-fries.webp", "alt": "Salted Fries"},
             {"name": "Masala Fries", "prices": [89, 119], "priceNote": "Regular / Large", "img": "images/menu-masala-fries.webp", "alt": "Masala Fries"},
-            {"name": "Peri-Peri Fries", "badges": [{"type": "spicy", "label": "Spicy"}], "prices": [89, 119], "priceNote": "Regular / Large", "img": "images/menu-peri-peri-fries.webp", "alt": "Peri Peri Fries"},
+            {"name": "Peri-Peri Fries", "badges": [{"type": "spicy", "label": "🌶 Spicy"}], "prices": [89, 119], "priceNote": "Regular / Large", "img": "images/menu-peri-peri-fries.webp", "alt": "Peri Peri Fries"},
             {"name": "Cheese Fries", "prices": [109, 139], "priceNote": "Regular / Large", "img": "images/menu-cheese-fries.webp", "alt": "Cheese Fries"},
             {"name": "Loaded Fries", "desc": "Melted mozzarella, house sauces, chopped veggies.", "badges": [{"type": "best", "label": "Top Pick"}], "prices": [109, 149], "priceNote": "Regular / Large", "img": "images/menu-loaded-fries.webp", "alt": "Loaded Fries"}
           ]
@@ -105,7 +105,7 @@ window.MENU_DATA = {
           "id": "qb-springrolls", "title": "Spring Rolls", "items": [
             {"name": "Noodle Spring Roll", "prices": [79], "img": "images/menu-noodle-spring-roll.webp", "alt": "Noodle Spring Roll"},
             {"name": "Veg Spring Roll", "badges": [{"type": "veg", "label": "Veg"}], "prices": [89], "img": "images/menu-veg-spring-roll.webp", "alt": "Veg Spring Roll"},
-            {"name": "Tandoori Spring Roll", "badges": [{"type": "spicy", "label": "Spicy"}], "prices": [99], "img": "images/menu-tandoori-spring-roll.webp", "alt": "Tandoori Spring Roll"},
+            {"name": "Tandoori Spring Roll", "badges": [{"type": "spicy", "label": "🌶 Spicy"}], "prices": [99], "img": "images/menu-tandoori-spring-roll.webp", "alt": "Tandoori Spring Roll"},
             {"name": "Creamy Cheesy Spring Rolls", "prices": [109], "img": "images/menu-creamy-spring-roll.webp", "alt": "Creamy Spring Roll"}
           ]
         }
@@ -117,7 +117,7 @@ window.MENU_DATA = {
         {
           "title": "Pasta", "items": [
             {"name": "Napoli Pasta", "desc": "Red Sauce, Garlic, Coriander, Oregano, Tomatoes, Parmesan.", "prices": [129], "img": "images/menu-napoli-pasta.webp", "alt": "Napoli Pasta"},
-            {"name": "Arrabiata Pasta", "desc": "Spicy Arrabiata Sauce, Red Chili, Garlic, Peppers, Black Olives.", "badges": [{"type": "spicy", "label": "Spicy"}], "prices": [129], "img": "images/menu-arrabiata-pasta.webp", "alt": "Arrabiata Pasta"},
+            {"name": "Arrabiata Pasta", "desc": "Spicy Arrabiata Sauce, Red Chili, Garlic, Peppers, Black Olives.", "badges": [{"type": "spicy", "label": "🌶 Spicy"}], "prices": [129], "img": "images/menu-arrabiata-pasta.webp", "alt": "Arrabiata Pasta"},
             {"name": "Tandoori Pasta", "desc": "Tandoori Creamy Sauce, Capsicum, Onions, Grilled Sweet Corn.", "badges": [{"type": "best", "label": "Chef's Special"}], "prices": [129], "img": "images/menu-tandoori-pasta.webp", "alt": "Tandoori Pasta"},
             {"name": "Mix Sauce Pasta", "desc": "Red & White blend, Mushrooms, Bell Peppers, Olives, Mozzarella.", "prices": [139], "img": "images/menu-mix-sauce-pasta.webp", "alt": "Mix Sauce Pasta"},
             {"name": "Alfredo Pasta", "desc": "White Cheesy Sauce, Butter, Garlic, Mushrooms, Sweet Corn, Parmesan.", "prices": [149], "img": "images/menu-alfredo-pasta.webp", "alt": "Alfredo Pasta"}
@@ -133,7 +133,7 @@ window.MENU_DATA = {
             {"name": "Cheesy Garlic Bread", "desc": "Freshly baked garlic bread, melted mozzarella.", "badges": [{"type": "veg", "label": "Veg"}], "prices": [139, 199], "priceNote": "Single / Meal", "img": "images/menu-cheesy-garlic-bread.webp", "alt": "Cheesy Garlic Bread"},
             {"name": "Sweet Corn Garlic Bread", "desc": "Sweet corn, jalapeno, heavy layer of melted cheese.", "badges": [{"type": "veg", "label": "Veg"}], "prices": [159, 219], "priceNote": "Single / Meal", "img": "images/menu-sweet-corn-garlic-bread.webp", "alt": "Sweet Corn Garlic Bread"},
             {"name": "Veggie Garlic Bread", "desc": "Crunchy capsicum, mushrooms, red onions, sweet corn, mozzarella.", "badges": [{"type": "veg", "label": "Veg"}], "prices": [189, 249], "priceNote": "Single / Meal", "img": "images/menu-veggie-garlic-bread.webp", "alt": "Veggie Garlic Bread"},
-            {"name": "Paneer Garlic Bread", "desc": "Smoky paneer tikka OR tandoori sauce with spicy paprika, jalapeno, mozzarella.", "badges": [{"type": "veg", "label": "Veg"}, {"type": "spicy", "label": "Spicy"}], "prices": [209, 269], "priceNote": "Single / Meal", "img": "images/menu-paneer-garlic-bread.webp", "alt": "Paneer Garlic Bread", "flavorOptions": "Paneer Tikka|Tandoori Paneer"}
+            {"name": "Paneer Garlic Bread", "desc": "Smoky paneer tikka OR tandoori sauce with spicy paprika, jalapeno, mozzarella.", "badges": [{"type": "veg", "label": "Veg"}, {"type": "spicy", "label": "🌶 Spicy"}], "prices": [209, 269], "priceNote": "Single / Meal", "img": "images/menu-paneer-garlic-bread.webp", "alt": "Paneer Garlic Bread", "flavorOptions": "Paneer Tikka|Tandoori Paneer"}
           ]
         }
       ]

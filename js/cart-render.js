@@ -59,16 +59,18 @@ function renderCart() {
 
     const addonLines = item.isPizza ? (() => {
       const tags = (item.addons || []).map(a =>
-        `<span class="cart-addon-tag">＋ ${a.name} <em>₹${a.price}</em></span>`
+        `<span class="cart-addon-tag${a.free ? ' is-free' : ''}">＋ ${a.name} <em>${a.free ? (spinPrizeLocked(cart) ? 'FREE at ₹100' : 'FREE') : '₹' + a.price}</em></span>`
       ).join('');
-      const editBtn = `<button class="cart-addon-edit" onclick="editAddons('${item.id}', '${item.name.replace(/'/g,"\\'")}')">✏️ edit</button>`;
+      const editBtn = `<button class="cart-addon-edit" onclick="editAddons('${item.id}', '${item.name.replace(/'/g,"\\'")}')">Edit</button>`;
       const addBtn  = `<button class="cart-addon-add" onclick="editAddons('${item.id}', '${item.name.replace(/'/g,"\\'")}')">＋ add toppings</button>`;
       return (item.addons || []).length > 0
         ? `<div class="cart-item-addons">${tags}${editBtn}</div>`
         : `<div class="cart-item-addons">${addBtn}</div>`;
     })() : '';
 
-    const qtyRow = (item.isGroupPerk || item.isWeekendSpecial)
+    const qtyRow = item.isFreeSpinPrize
+      ? `<div class="cart-item-qty"><span style="font-size:0.72rem;color:var(--warm-gray);font-style:italic;">Spin prize · 1 free</span><button class="cart-addon-edit" onclick="removeSpinPrize('${item.id}')">Remove</button></div>`
+      : (item.isGroupPerk || item.isWeekendSpecial)
       ? `<div class="cart-item-qty"><span style="font-size:0.72rem;color:var(--warm-gray);font-style:italic;">Included free with your order</span></div>`
       : `<div class="cart-item-qty">
           <button class="qty-btn" onclick="changeQty('${item.id}', -1)">−</button>
@@ -83,7 +85,7 @@ function renderCart() {
         ${addonLines}
         ${qtyRow}
       </div>
-      <div class="cart-item-price">${(item.isFreeSpinPrize && spinPrizeLocked(cart)) ? '<span style="color:#A84300;font-size:0.76rem;font-weight:700;">🔒 FREE at ₹100</span>' : (item.isFreeSpinPrize || item.isGroupPerk || item.isWeekendSpecial) ? '<span style="color:#1aad4b;font-size:0.8rem;font-weight:700;">FREE 🎁</span>' : '₹' + itemTotal}</div>
+      <div class="cart-item-price">${(item.isFreeSpinPrize && spinPrizeLocked(cart)) ? '<span style="color:#A84300;font-size:0.76rem;font-weight:700;">FREE at ₹100</span>' : (item.isFreeSpinPrize || item.isGroupPerk || item.isWeekendSpecial) ? '<span style="color:#1aad4b;font-size:0.8rem;font-weight:700;">FREE</span>' : '₹' + itemTotal}</div>
     </div>`;
   }).join('');
 

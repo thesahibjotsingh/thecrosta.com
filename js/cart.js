@@ -207,7 +207,7 @@ function openAddonPopup(pizzaId, pizzaName) {
   currentPopupPizzaId = pizzaId;
   const popup = document.getElementById('addonPopup');
   if (!popup) return;
-  popup.querySelector('.addon-popup-pizza').textContent = '🍕 ' + pizzaName;
+  popup.querySelector('.addon-popup-pizza').textContent = pizzaName;
 
   const pizzaItem = cart.find(i => i.id === pizzaId);
   const size = pizzaItem ? pizzaItem.size : ADDON_SIZE_ORDER[0];
@@ -240,6 +240,7 @@ function openAddonPopup(pizzaId, pizzaName) {
   popup.classList.add('open');
   document.body.style.overflow = 'hidden';
   updateAddonPopupFooter();
+  if (typeof refreshPopupPrizeLabels === 'function') refreshPopupPrizeLabels();   // spin prize: one veggie topping is free
 
   // Animation 4 (reused): stagger-in topping rows, same as menu category items
   const staggerEls = popup.querySelectorAll('.addon-popup-group-title, .addon-popup-card');

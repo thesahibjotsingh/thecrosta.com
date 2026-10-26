@@ -9,14 +9,14 @@ function setLocNote(text) { const n = document.getElementById('locNote'); if (n)
 function shareLocation() {
   const btn = document.getElementById('locBtn');
   if (!navigator.geolocation) { setLocNote('This browser can’t share a location — just type your address.'); return; }
-  btn.disabled = true; btn.textContent = '📍 Finding you…';
+  btn.disabled = true; btn.textContent = 'Finding you…';
   navigator.geolocation.getCurrentPosition(pos => {
     deliveryPin = { lat: pos.coords.latitude, lng: pos.coords.longitude, acc: Math.round(pos.coords.accuracy) };
     btn.disabled = false; btn.textContent = '✓ Location added — tap to update'; btn.classList.add('done');
     setLocNote(`Pin added (within about ${deliveryPin.acc} m). We’ll send it with your order.`);
   }, err => {
     deliveryPin = null;
-    btn.disabled = false; btn.textContent = '📍 Add my location pin'; btn.classList.remove('done');
+    btn.disabled = false; btn.textContent = 'Add my location pin'; btn.classList.remove('done');
     setLocNote(err.code === 1 ? 'Location is blocked for this site — allow it in your browser, or just type your address.' : 'Couldn’t get your location — try again, or just type your address.');
   }, { enableHighAccuracy: true, timeout: 12000, maximumAge: 60000 });
 }

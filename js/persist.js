@@ -20,7 +20,7 @@ function persistCart() {
 
 // remember what was just ordered (for "Reorder") and the customer's details
 function saveLastOrder(name, phone, address) {
-  const items = cart.filter(i => !isPromoLine(i) && !i.isFreeSpinPrize).map(i => ({ name: i.name, size: i.size, qty: i.qty, addons: i.addons || [] }));
+  const items = cart.filter(i => !isPromoLine(i) && !i.isFreeSpinPrize).map(i => ({ name: i.name, size: i.size, qty: i.qty, addons: (i.addons || []).map(a => a.free ? { name: a.name, price: a.was || 0 } : a) }));   // a spin-prize topping is paid again on a reorder
   if (items.length) store.set(LAST_ORDER_KEY, { ts: Date.now(), items });
   store.set(DETAILS_KEY, { name, phone, address: isPickup ? ((store.get(DETAILS_KEY) || {}).address || '') : address });
   if (typeof renderReorder === 'function') renderReorder();

@@ -8,9 +8,9 @@ function isWeekdayLunchOfferActive() { return isOfferLive('lunch'); }
 const GROUP_PERK_SIZES = ['10″', '12″'];
 const GROUP_PERK_MIN_PIZZAS = 4;
 const GROUP_PERK_BUNDLE_ITEMS = [
-  { key: 'groupperk-garlicbread', name: '🥖 Cheesy Garlic Bread (Group Perk)' },
-  { key: 'groupperk-fries',       name: '🍟 Regular Fries (Group Perk)' },
-  { key: 'groupperk-colddrink',   name: '🥤 2L Cold Drink (Group Perk)' },
+  { key: 'groupperk-garlicbread', name: 'Cheesy Garlic Bread (Group Perk)' },
+  { key: 'groupperk-fries',       name: 'Regular Fries (Group Perk)' },
+  { key: 'groupperk-colddrink',   name: '2L Cold Drink (Group Perk)' },
 ];
 
 function qualifyingPizzaCount(cartArr) {
@@ -114,7 +114,7 @@ function setStudent(on) {
 }
 // Spin prizes (free items and the % off wins) can only be claimed on an order of at least SPIN_MIN rupees.
 const SPIN_MIN = 100;
-const spinPrizeLocked = cartArr => cartArr.some(i => i.isFreeSpinPrize) && paidTotal(cartArr) < SPIN_MIN;
+const spinPrizeLocked = cartArr => cartArr.some(i => i.isFreeSpinPrize || (i.addons || []).some(a => a.free)) && paidTotal(cartArr) < SPIN_MIN;
 const paidTotal = cartArr => cartArr.reduce((s, i) => s + (i.price + (i.addons || []).reduce((a, b) => a + b.price, 0)) * i.qty, 0);
 
 // the list price of the group-perk bundle (garlic bread + fries + 2 L drink), from the menu

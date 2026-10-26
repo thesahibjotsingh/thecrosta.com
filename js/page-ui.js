@@ -24,7 +24,7 @@
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
-  }, { threshold: 0.07 });
+  }, { threshold: 0, rootMargin: '0px 0px 18% 0px' });   // reveal as it nears the screen, so a jump to a section never lands on a blank one
 
   targets.forEach(el => observer.observe(el));
 })();
@@ -42,4 +42,18 @@
   }
   // first shimmer after 2.5s, then every 4s — not at all for people who prefer less motion
   if (!reducedMotion()) setTimeout(() => { shimmerAll(); setInterval(shimmerAll, 4000); }, 2500);
+})();
+
+// ── FIND US: Map / Street view toggle (street view loads on first tap) ──
+(function () {
+  const tg = document.querySelector('.map-toggle');
+  if (!tg) return;
+  tg.addEventListener('click', e => {
+    const b = e.target.closest('button[data-map]');
+    if (!b) return;
+    const f = document.getElementById(b.dataset.map);
+    if (f.dataset.src && !f.src) f.src = f.dataset.src;
+    tg.querySelectorAll('button').forEach(x => { const on = x === b; x.classList.toggle('on', on); x.setAttribute('aria-pressed', on); });
+    document.querySelectorAll('.visit-map iframe').forEach(x => x.classList.toggle('on', x === f));
+  });
 })();

@@ -15,7 +15,7 @@
     if (a.dataset.dock === 'home') window.scrollTo({ top: 0, behavior: smooth });
     else if (a.dataset.dock === 'menu' && typeof scrollToMenu === 'function') scrollToMenu();
     else if (a.dataset.dock === 'spin') {
-      const w = document.getElementById('spin'); if (w) w.scrollIntoView({ behavior: smooth, block: 'center' });
+      if (!(typeof window.scrollToSpin === 'function' && window.scrollToSpin())) { const w = document.getElementById('spin'); if (w) w.scrollIntoView({ behavior: smooth, block: 'center' }); }
     } else {
       const el = a.dataset.dock === 'offers' ? document.getElementById('primary') : null;
       if (el) window.scrollTo({ top: el.getBoundingClientRect().top + scrollY - (typeof stickyOffset === 'function' ? stickyOffset() : 70) - 12, behavior: smooth });
@@ -67,9 +67,18 @@
     const k = a.dataset.nav;
     if (k === 'home') return window.scrollTo({ top: 0, behavior: smooth() });
     if (k === 'menu' && typeof scrollToMenu === 'function') return scrollToMenu();
+    if (k === 'spin' && typeof window.scrollToSpin === 'function' && window.scrollToSpin()) return;   // the machine, whole, under the header
     const el = sec[k]; if (!el) return;
     const bar = document.getElementById('bar');
-    window.scrollTo({ top: el.getBoundingClientRect().top + scrollY - (bar ? bar.offsetHeight : 64) - 4, behavior: smooth() });
+    const barBottom = bar ? bar.getBoundingClientRect().bottom : 64;   // real bottom edge: the header sits a little below the viewport top
+    // Find us is a map panel: sit it flush under the header
+    if (k === 'hours') {
+      const v = el.querySelector('.visit') || el;
+      return window.scrollTo({ top: v.getBoundingClientRect().top + scrollY - barBottom, behavior: smooth() });
+    }
+    // land with the section's heading just under the header, not the section's empty top padding
+    const pad = parseFloat(getComputedStyle(el).paddingTop) || 0;
+    window.scrollTo({ top: el.getBoundingClientRect().top + scrollY - barBottom + Math.max(0, pad - 40), behavior: smooth() });
   });
 
   let queued = false;

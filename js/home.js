@@ -104,10 +104,67 @@ function renderLive() {
     return `<article class="ticket${cls}${enter(i + 1)}" data-offer="${x.o.id}"><div class="stub"><span class="d">${x.o.stub}</span>${tmHtml(x.o)}</div><div class="tbody"><div class="mtop"><span class="spill ${x.s.k}">${spillText(x)}</span><span class="swhen">${x.o.always || x.o.from == null ? x.o.stub : `${x.o.t1} – ${x.o.t2}`}</span></div>${chipHtml(x.o.t1, x.o.t2)}<p class="kicker">${x.o.name}</p><h3 class="thead">${x.o.head}</h3><p class="tmeta ${x.s.k === 'live' ? 'live' : ''}">${offerMeta(x)}</p><button class="tlink" type="button" data-offer="${x.o.id}">${x.s.k === 'live' ? 'Use this offer →' : 'See how it works →'}</button></div></article>`;
   }).join('');
 
+  renderOnNow(states, sorted, st, now);
+
   if (!clockView) buildClock(); else updateClockUI();
   if (typeof setupDeck === 'function') setupDeck();
   firstPaint = false;
 }
+
+// the Offers section's "On right now": the lead offer large, the others as a list (same states as the hero tickets)
+function renderOnNow(states, sorted, st, now) {
+  const main = $('onNowMain'); if (!main) return;
+  const live = states.filter(x => x.s.k === 'live');
+  $('onNowSub').textContent = !st.open
+    ? `We’re closed. We open ${st.today ? 'today' : DAY_NAMES[st.opensDay]} at ${fmtTime(st.opensAt)}.`
+    : `${DAY_NAMES[now.day]}, ${fmtTime(now.hour, now.minute)} · ${live.map(x => x.o.name).join(' and ')} ${live.length === 1 ? 'is' : 'are'} live.`;
+  // every offer takes a turn in the big card; the list on the right picks one and shows the timer
+  const closedNote = st.open ? '' : `<span class="onnow-note">Shop opens ${st.today ? 'today' : DAY_NAMES[st.opensDay]} at ${fmtTime(st.opensAt)}</span>`;
+  const slides = sorted.map((x, i) => {
+    const { o, s } = x, usable = st.open && s.k === 'live';
+    const badge = usable ? (o.always ? 'Always on' : (o.from == null ? 'Live · all day' : `Live until ${fmtTime(s.end)}`)) : spillText(x);
+    return `<article class="onnow-big onnow-slide${usable ? '' : ' off'}${i === onNowIdx ? ' on' : ''}" data-offer="${o.id}"${i === onNowIdx ? '' : ' aria-hidden="true"'}><img src="${o.pie}" alt="" loading="lazy"><span class="onnow-live">${badge}</span><h3>${o.head}</h3><p>${o.desc}</p><p class="onnow-meta">${offerMeta(x)}</p>${closedNote}<button class="btn fill" type="button" data-offer="${o.id}" tabindex="${i === onNowIdx ? 0 : -1}">${usable ? 'Use this offer →' : 'See how it works →'}</button></article>`;
+  }).join('');
+  const rows = sorted.map((x, i) => `<button class="onnow-row${i === onNowIdx ? ' on' : ''}" type="button" data-slide="${i}" aria-pressed="${i === onNowIdx}"><img src="${x.o.pie}" alt="" loading="lazy"><span class="onnow-tx"><b>${x.o.name}</b><small>${x.o.head}</small></span><span class="onnow-when"><i class="spill ${x.s.k}">${spillText(x)}</i><em>${x.o.always || x.o.from == null ? x.o.stub : `${x.o.t1} – ${x.o.t2}`}</em></span></button>`).join('');
+  const sig = slides + rows;
+  if (sig === onNowSig) return;               // nothing changed: leave the slideshow (and its progress bar) alone
+  onNowSig = sig; onNowCount = sorted.length;
+  main.innerHTML = slides;
+  $('onNowList').innerHTML = rows;
+}
+let onNowIdx = 0, onNowSig = '', onNowCount = 0;
+function onNowGo(i) {
+  if (!onNowCount) return;
+  onNowIdx = (i + onNowCount) % onNowCount;
+  document.querySelectorAll('#onNowMain .onnow-slide').forEach((el, k) => {
+    const on = k === onNowIdx;
+    el.classList.toggle('on', on);
+    if (on) el.removeAttribute('aria-hidden'); else el.setAttribute('aria-hidden', 'true');
+    const b = el.querySelector('button'); if (b) b.tabIndex = on ? 0 : -1;
+  });
+  const rows = document.querySelectorAll('#onNowList .onnow-row');
+  rows.forEach((el, k) => { el.classList.remove('on'); el.setAttribute('aria-pressed', 'false'); });
+  void document.getElementById('onNowList').offsetWidth;   // restart the progress bar on the new row
+  if (rows[onNowIdx]) { rows[onNowIdx].classList.add('on'); rows[onNowIdx].setAttribute('aria-pressed', 'true'); }
+}
+(function () {
+  const grid = document.querySelector('.onnow-grid'); if (!grid) return;
+  const pause = on => grid.classList.toggle('paused', on);
+  grid.addEventListener('mouseenter', () => pause(true));
+  grid.addEventListener('mouseleave', () => pause(false));
+  grid.addEventListener('focusin', () => pause(true));
+  grid.addEventListener('focusout', () => pause(false));
+  document.addEventListener('visibilitychange', () => pause(document.hidden));
+  $('onNowList').addEventListener('click', e => { const r = e.target.closest('.onnow-row'); if (r) onNowGo(+r.dataset.slide); });
+  // the progress bar on the active row drives the rotation, so pausing it pauses the show
+  $('onNowList').addEventListener('animationend', e => { if (e.animationName === 'onnow-prog') onNowGo(onNowIdx + 1); });
+})();
+$('onNowWeek')?.addEventListener('click', e => {
+  e.preventDefault();
+  const c = $('clock'); if (!c) return;
+  c.open = true; setClockNote();
+  c.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'center' });
+});
 
 /* ───────────── the interactive clock strip ───────────── */
 const VA = 10.5, VZ = 23, VSPAN = VZ - VA;     // the strip shows 10:30 AM → 11 PM
