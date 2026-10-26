@@ -1121,3 +1121,14 @@ footer::before { content: ""; position: absolute; left: 0; right: 0; bottom: 100
 
 /* Offers and Spin are the same dark: overlap by a pixel so a fractional page height can't show the cream behind as a hairline */
 .spin-section { margin-top: -1px; }
+
+/* phones: reviews are a swipe row (next card peeks in) instead of a long stack */
+@media (max-width: 760px) {
+  .reviews-list { display: flex; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; margin: 0 -16px; padding: 4px 16px 10px; scroll-padding-inline: 16px; scrollbar-width: none; align-items: stretch; overscroll-behavior-x: contain; }
+  .reviews-list::-webkit-scrollbar { display: none; }
+  .extra-reviews, .extra-reviews.open { display: contents; }
+  .reviews-toggle-btn { display: none; }
+  .reviews-list .review-card { flex: 0 0 84%; scroll-snap-align: start; margin: 0; }
+  .reviews-list .review-text { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 9; line-clamp: 9; overflow: hidden; }
+  .reviews-list .review-photos { flex-wrap: nowrap; }
+}

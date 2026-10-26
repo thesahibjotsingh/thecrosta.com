@@ -342,8 +342,8 @@ export function createSlotMachineEngine(container, opts) {
   add(machine, geo(new THREE.BoxGeometry(3.0, 1.35, 0.03)), M.voidMat, 0, 1.47, 1.335);      // dark recess behind the tray
 
   const labelTex = canvasTex(640, 100, (g, w, h) => {
-    g.textAlign = 'center'; g.textBaseline = 'middle'; g.font = '700 46px system-ui,sans-serif';
-    if ('letterSpacing' in g) g.letterSpacing = '10px'; g.fillStyle = T.css(T.gold); g.fillText('COLLECT YOUR PRIZE', w / 2, h / 2);
+    g.textAlign = 'center'; g.textBaseline = 'middle'; g.font = '700 36px system-ui,sans-serif';
+    if ('letterSpacing' in g) g.letterSpacing = '6px'; g.fillStyle = T.css(T.gold); g.fillText('COLLECT YOUR PRIZE', w / 2 + 3, h / 2);
   });
   const labelMat = new THREE.MeshBasicMaterial({ map: labelTex, transparent: true }); disposables.push(labelMat);
   const label = new THREE.Mesh(geo(new THREE.PlaneGeometry(2.2, 0.34)), labelMat);
