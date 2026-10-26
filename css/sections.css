@@ -1226,3 +1226,6 @@ footer::before { content: ""; position: absolute; left: 0; right: 0; bottom: 100
 .menu-sizes .qb-sub-btn { min-height: 36px; padding: 0 16px; }
 @media (max-width: 760px) { .menu-sizes { align-self: stretch; } .menu-sizes-text { padding: 0 14px; font-size: .82rem; } .menu-sizes-label, .menu-sizes .qb-sub-label { padding: 0 14px; } .size-badge { min-width: 0; flex: 1; padding: 0 8px; } }
 .menu-sizes .qb-subnav.visible { margin: 0 !important; position: static !important; }
+
+/* "Start your order" tiles: the phone strip carries every category; the desktop card keeps its six (the chip bar covers the rest) */
+@media (min-width: 761px) { .tile-x { display: none; } }

@@ -34,10 +34,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/styles.css?v=159">
-<link rel="stylesheet" href="css/home.css?v=159">
-<link rel="stylesheet" href="css/sections.css?v=159">
-<link rel="stylesheet" href="css/slot-machine.css?v=159">
+<link rel="stylesheet" href="css/styles.css?v=160">
+<link rel="stylesheet" href="css/home.css?v=160">
+<link rel="stylesheet" href="css/sections.css?v=160">
+<link rel="stylesheet" href="css/slot-machine.css?v=160">
 </head>
 <body>
 
@@ -100,9 +100,15 @@
               <a class="tile" href="#menu" data-cat="pizzas"><span class="th"><img src="images/menu-farm-house-pizza.webp" alt=""></span><div><b>Pizzas</b><span>from ₹89</span></div></a>
               <a class="tile" href="#menu" data-cat="burgerswraps" data-anchor="qb-burgers"><span class="th"><img src="images/menu-veg-grilled-burger.webp" alt=""></span><div><b>Burgers</b><span>from ₹49</span></div></a>
               <a class="tile" href="#menu" data-cat="burgerswraps" data-anchor="qb-wraps"><span class="th"><img src="images/menu-veg-wrap.webp" alt=""></span><div><b>Wraps</b><span>from ₹69</span></div></a>
+              <a class="tile tile-x" href="#menu" data-cat="burgerswraps" data-anchor="qb-sandwiches"><span class="th"><img src="images/menu-grilled-sandwich.webp" alt=""></span><div><b>Sandwiches</b><span>from ₹69</span></div></a>
               <a class="tile" href="#menu" data-cat="pasta"><span class="th"><img src="images/menu-napoli-pasta.webp" alt=""></span><div><b>Pasta</b><span>from ₹129</span></div></a>
+              <a class="tile tile-x" href="#menu" data-cat="garlicbread"><span class="th"><img src="images/menu-cheesy-garlic-bread.webp" alt=""></span><div><b>Garlic bread</b><span>from ₹139</span></div></a>
               <a class="tile" href="#menu" data-cat="quickbites" data-anchor="qb-fries"><span class="th"><img src="images/menu-salted-fries.webp" alt=""></span><div><b>Sides</b><span>from ₹69</span></div></a>
-              <a class="tile" href="#menu" data-cat="drinks" data-anchor="dr-shakes"><span class="th"><img src="images/menu-strawberry-shake.webp" alt=""></span><div><b>Shakes</b><span>from ₹99</span></div></a>
+              <a class="tile tile-x" href="#menu" data-cat="quickbites" data-anchor="qb-springrolls"><span class="th"><img src="images/menu-veg-spring-roll.webp" alt=""></span><div><b>Spring rolls</b><span>from ₹79</span></div></a>
+              <a class="tile" href="#menu" data-cat="drinks" data-anchor="dr-shakes"><span class="th"><img src="images/menu-strawberry-shake.webp" alt=""></span><div><b>Shakes</b><span>from ₹89</span></div></a>
+              <a class="tile tile-x" href="#menu" data-cat="drinks" data-anchor="dr-chilled"><span class="th"><img src="images/menu-blue-lagoon.webp" alt=""></span><div><b>Mocktails</b><span>from ₹49</span></div></a>
+              <a class="tile tile-x" href="#menu" data-cat="drinks" data-anchor="dr-hot"><span class="th"><img src="images/menu-masala-chai.webp" alt=""></span><div><b>Chai &amp; coffee</b><span>from ₹20</span></div></a>
+              <a class="tile tile-x" href="#menu" data-cat="quickdrinks"><span class="th"><img src="images/menu-coke.webp" alt=""></span><div><b>Cold drinks</b><span>from ₹20</span></div></a>
             </div>
           </div>
           <div class="student-card" id="studentCard">
@@ -126,7 +132,9 @@
         </label>
         <div class="chips" id="chips" role="group" aria-label="Menu categories">
           <button class="chip on" type="button" data-cat="pizzas" aria-pressed="true"><img src="images/menu-farm-house-pizza.webp" alt="" width="30" height="30" loading="lazy"><span>Pizzas</span></button>
-          <button class="chip" type="button" data-cat="burgerswraps" aria-pressed="false"><img src="images/menu-veg-grilled-burger.webp" alt="" width="30" height="30" loading="lazy"><span>Burgers, wraps &amp; sandwiches</span></button>
+          <button class="chip" type="button" data-cat="burgerswraps" aria-pressed="false"><img src="images/menu-veg-grilled-burger.webp" alt="" width="30" height="30" loading="lazy"><span>Burgers</span></button>
+          <button class="chip" type="button" data-cat="burgerswraps" data-anchor="qb-wraps" aria-pressed="false"><img src="images/menu-veg-wrap.webp" alt="" width="30" height="30" loading="lazy"><span>Wraps</span></button>
+          <button class="chip" type="button" data-cat="burgerswraps" data-anchor="qb-sandwiches" aria-pressed="false"><img src="images/menu-grilled-sandwich.webp" alt="" width="30" height="30" loading="lazy"><span>Sandwiches</span></button>
           <button class="chip" type="button" data-cat="pasta" aria-pressed="false"><img src="images/menu-napoli-pasta.webp" alt="" width="30" height="30" loading="lazy"><span>Pasta</span></button>
           <button class="chip" type="button" data-cat="garlicbread" aria-pressed="false"><img src="images/menu-cheesy-garlic-bread.webp" alt="" width="30" height="30" loading="lazy"><span>Garlic bread</span></button>
           <button class="chip" type="button" data-cat="quickbites" aria-pressed="false"><img src="images/menu-salted-fries.webp" alt="" width="30" height="30" loading="lazy"><span>Quick bites</span></button>
@@ -705,31 +713,31 @@
   </div>
 </div>
 
-<script defer src="js/menu-data.js?v=159"></script>
-<script defer src="js/shop.js?v=159"></script>
-<script defer src="js/offers.js?v=159"></script>
-<script defer src="js/menu-render.js?v=159"></script>
-<script defer src="js/ui.js?v=159"></script>
-<script defer src="js/reviews.js?v=159"></script>
-<script defer src="js/menu-ui.js?v=159"></script>
-<script defer src="js/cart.js?v=159"></script>
-<script defer src="js/promos.js?v=159"></script>
-<script defer src="js/cart-render.js?v=159"></script>
-<script defer src="js/order.js?v=159"></script>
-<script defer src="js/payment.js?v=159"></script>
-<script defer src="js/menu-wiring.js?v=159"></script>
-<script defer src="js/persist.js?v=159"></script>
-<script defer src="js/spin-prize.js?v=159"></script>
-<script defer src="js/spin-3d-boot.js?v=159"></script>
-<script defer src="js/home.js?v=159"></script>
-<script defer src="js/sheets.js?v=159"></script>
-<script defer src="js/student.js?v=159"></script>
-<script defer src="js/spin-nudge.js?v=159"></script>
-<script defer src="js/dock.js?v=159"></script>
-<script defer src="js/deck.js?v=159"></script>
-<script defer src="js/tear.js?v=159"></script>
-<script defer src="js/page-ui.js?v=159"></script>
-<script defer src="js/track.js?v=159"></script>
+<script defer src="js/menu-data.js?v=160"></script>
+<script defer src="js/shop.js?v=160"></script>
+<script defer src="js/offers.js?v=160"></script>
+<script defer src="js/menu-render.js?v=160"></script>
+<script defer src="js/ui.js?v=160"></script>
+<script defer src="js/reviews.js?v=160"></script>
+<script defer src="js/menu-ui.js?v=160"></script>
+<script defer src="js/cart.js?v=160"></script>
+<script defer src="js/promos.js?v=160"></script>
+<script defer src="js/cart-render.js?v=160"></script>
+<script defer src="js/order.js?v=160"></script>
+<script defer src="js/payment.js?v=160"></script>
+<script defer src="js/menu-wiring.js?v=160"></script>
+<script defer src="js/persist.js?v=160"></script>
+<script defer src="js/spin-prize.js?v=160"></script>
+<script defer src="js/spin-3d-boot.js?v=160"></script>
+<script defer src="js/home.js?v=160"></script>
+<script defer src="js/sheets.js?v=160"></script>
+<script defer src="js/student.js?v=160"></script>
+<script defer src="js/spin-nudge.js?v=160"></script>
+<script defer src="js/dock.js?v=160"></script>
+<script defer src="js/deck.js?v=160"></script>
+<script defer src="js/tear.js?v=160"></script>
+<script defer src="js/page-ui.js?v=160"></script>
+<script defer src="js/track.js?v=160"></script>
 
 </body>
 </html>

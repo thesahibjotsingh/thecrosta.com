@@ -29,13 +29,16 @@ function scrollToMenu(anchorId) {
 }
 
 // ── category switching ──
-function showTab(name) {
+function showTab(name, anchorId) {
   const panel = document.getElementById('tab-' + name);
   if (!panel) return;
   document.querySelectorAll('.menu-panel').forEach(p => p.classList.remove('active'));
   panel.classList.add('active');
+  // chips that share a category (Burgers / Wraps / Sandwiches) are told apart by their anchor; the one without an anchor is the default
+  const group = [...document.querySelectorAll('#chips .chip')].filter(c => c.dataset.cat === name);
+  const pick = group.find(c => c.dataset.anchor && c.dataset.anchor === anchorId) || group.find(c => !c.dataset.anchor) || group[0];
   document.querySelectorAll('#chips .chip').forEach(c => {
-    const on = c.dataset.cat === name && !searching;
+    const on = c === pick && !searching;
     c.classList.toggle('on', on);
     c.setAttribute('aria-pressed', on ? 'true' : 'false');
   });
@@ -68,7 +71,7 @@ function updateMenuSizesBox(name) {
 // jump straight to a category from anywhere on the page (tiles, offers)
 function goToCategory(name, anchorId) {
   clearSearch(false);
-  showTab(name);
+  showTab(name, anchorId);
   // wait a frame so the new panel is laid out before measuring
   requestAnimationFrame(() => scrollToMenu(anchorId));
 }
@@ -77,10 +80,10 @@ document.getElementById('chips').addEventListener('click', e => {
   const c = e.target.closest('.chip');
   if (!c) return;
   clearSearch(false);
-  showTab(c.dataset.cat);
+  showTab(c.dataset.cat, c.dataset.anchor);
   c.scrollIntoView({ behavior: reducedMotion() ? 'auto' : 'smooth', inline: 'start', block: 'nearest' });   // selected chip sits at the left edge: no half-hidden chip on that side
   // always start the new section at the top of the menu: a shorter section would otherwise leave you at its bottom
-  requestAnimationFrame(() => scrollToMenu());
+  requestAnimationFrame(() => scrollToMenu(c.dataset.anchor));
 });
 
 // ── search ──
