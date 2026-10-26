@@ -1,9 +1,13 @@
 // ── OFFERS ──
-// The four offers: when they run (used by the cart promos in promos.js, the
+// The five offers: when they run (used by the cart promos in promos.js, the
 // header tickets and the clock strip) and how they are presented.
 // days: Sun=0…Sat=6. from/to: shop-time hours; omit both for "whole opening
 // day"; `always` for an offer with no time window.
 const OFFERS = [
+  { id:'student', name:'Thapar students', head:'Students: 10% off, 20% on weekends',
+    desc:'10% off Monday to Friday, 20% off on Saturday and Sunday. Orders of ₹100 or more, with your student ID card.',
+    days:[0, 1, 2, 3, 4, 5, 6], always:true, stub:'Every day', t1:'Always on', lane:'Thapar students', laneSub:'Every day', band:'10% · 20% weekends',
+    pie:'images/hero-pizza-burger.webp' },
   { id:'weekend', name:'Weekend special', head:'Buy 2 Large, get 1 Medium free',
     desc:'Same flavour. Or buy 2 Medium, get 1 Small free.',
     days:[0, 6], stub:'Sat · Sun', t1:'All day', lane:'Weekend special', laneSub:'Sat & Sun', band:'Buy 2 get 1 free',

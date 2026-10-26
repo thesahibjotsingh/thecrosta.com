@@ -1107,12 +1107,11 @@ footer::before { content: ""; position: absolute; left: 0; right: 0; bottom: 100
   .hero .eyebrow { font-size: .62rem; }
   /* the category photo circles sit right under the hero, above the offer cards */
   .live-grid { display: flex; flex-direction: column; row-gap: 14px; }
-  .live-grid .reorder { order: -3; }
-  .live-grid .quick-tiles { order: -2; }
+  .live-grid .reorder { order: -3; width: 100%; box-sizing: border-box; align-self: stretch; }
+  .live-grid .quick-tiles { order: -2; width: 100%; min-width: 0; box-sizing: border-box; }
   .live-grid .student-card { order: 9; }
   .quick-tiles h2 { display: none; }
   .ticket.primary .tbody { padding: 14px 16px 16px; }
-  .ticket.primary .tbody p { display: none; }
   .quick .student-card { padding: 10px 12px; }
 }
 
@@ -1132,3 +1131,59 @@ footer::before { content: ""; position: absolute; left: 0; right: 0; bottom: 100
   .reviews-list .review-text { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 9; line-clamp: 9; overflow: hidden; }
   .reviews-list .review-photos { flex-wrap: nowrap; }
 }
+
+/* desktop: the live offers fit on one screen (header, big card and every row, no scrolling to see them) */
+@media (min-width: 901px) {
+  .offers-section { padding-top: 7.5rem; }
+  .offers-header { margin-bottom: 18px; }
+  .offers-header h2 { font-size: clamp(2rem, 3.4vw, 2.6rem); }
+  .onnow-sub { margin-top: 6px; }
+  .onnow-grid { gap: 14px; }
+  .onnow-big { min-height: 0; padding: 26px 28px; }
+  .onnow-big h3 { font-size: clamp(1.8rem, 2.8vw, 2.4rem); }
+  .onnow-list { gap: 10px; }
+  .onnow-row { min-height: 0; padding: 12px 16px; }
+  .onnow-row b { font-size: 1.02rem; }
+  .onnow-row small { font-size: .8rem; margin-top: 2px; }
+}
+
+.clock-section { position: relative; background: var(--char); padding: 0 var(--gutter) 3rem; }
+.clock-section .clock { margin: 0 auto; max-width: 1100px; color: var(--char); }
+@media (max-width: 760px) { .clock-section { padding: 0 16px 2.5rem; } }
+
+/* Offers on desktop: one tall lead card on the left, the four offers as rows on the right, and the week link as the last box */
+@media (min-width: 901px) {
+  .onnow-grid { grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); grid-template-rows: 1fr auto; }
+  #onNowMain { grid-row: 1 / span 2; display: grid; }
+  .onnow-big { min-height: 440px; }
+  .onnow-more { grid-column: 2; margin: 0; }
+  .onnow-more a { display: flex; align-items: center; justify-content: center; min-height: 52px; border: 1.5px solid rgba(255,200,61,.5); border-radius: 16px; border-bottom: 1.5px solid rgba(255,200,61,.5); }
+}
+
+/* ── Offers by the clock: hidden until "See the full week" is pressed; opens as a dark panel that matches the section ── */
+.clock-section { padding: 0 var(--gutter); }
+.clock-section:has(.clock[open]) { padding-bottom: 3.5rem; }
+.clock-section .clock:not([open]) > summary { display: none; }
+.clock-section .clock { margin: 0 auto; max-width: 1100px; background: #221F1B; color: #F6E9D5; border: 1px solid rgba(255,255,255,.1); border-radius: 24px; box-shadow: 0 30px 50px -30px rgba(0,0,0,.7); }
+.clock-section .clock > summary { padding: 20px 24px 8px; }
+.clock-section .clock > summary h2 { color: #fff; font-size: 1.35rem; }
+.clock-section .clock .rule-note { color: #C9B79F; }
+.clock-section .clock .chev { color: var(--sun); }
+.clock-section .clock-body { padding: 4px 24px 22px; }
+.clock-section .clock-hint { color: #C9B79F; }
+.clock-section .dchip { border-color: rgba(255,255,255,.22); color: #F6E9D5; }
+.clock-section .dchip[aria-pressed="true"] { background: var(--sun); border-color: var(--sun); color: var(--char); }
+.clock-section .dchip.today::after { background: var(--sun); }
+.clock-section .dchip[aria-pressed="true"].today::after { background: var(--ember-deep); }
+.clock-section .lane { border-top-color: rgba(255,255,255,.1); }
+.clock-section .lane-label span, .clock-section .tick { color: #C9B79F; }
+.clock-section .lane-btn, .clock-section .lane-label b { color: #fff; text-decoration-color: rgba(255,255,255,.3); }
+.clock-section .band.later { background: rgba(255,200,61,.14); border-color: var(--sun); color: var(--sun); }
+.clock-section .band.done { background: rgba(255,255,255,.1); color: #C9B79F; }
+.clock-section .band.off { border-color: rgba(255,255,255,.2); color: #C9B79F; }
+.clock-section .needle { background: var(--sun); }
+.clock-section .needle-tag { background: var(--sun); color: var(--char); }
+.clock-section .clock-sum { background: rgba(255,200,61,.12); color: #F6E9D5; }
+.clock-section .clock-sum.exploring { background: var(--sun); color: var(--char); border-color: var(--sun); }
+.clock-section .btn-mini { border-color: var(--sun); }
+@media (max-width: 760px) { .clock-section .clock > summary { padding: 16px 16px 6px; } .clock-section .clock-body { padding: 4px 16px 16px; } }

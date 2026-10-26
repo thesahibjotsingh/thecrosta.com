@@ -31,7 +31,7 @@ Deployed from this repo by Cloudflare. Orders go out as WhatsApp messages; there
 | `js/ui.js` | Toast, thumbnail-to-cart animation, count bump |
 | `js/track.js` | Anonymous analytics (off until the Worker address is set); the Worker itself is in `worker/` |
 | `js/dock.js` | Phone bottom pill nav (Home / Menu / Offers / Cart); the cart count comes from `.cart-count` / `.cart-total` |
-| `js/student.js` | Thapar student 10% switch (page card + cart checkbox); the rule itself is in `js/promos.js` (`STUDENT_PERCENT`) |
+| `js/student.js` | Thapar student switch (page card + cart checkbox + the Offers card); the rule itself is in `js/promos.js` (`STUDENT_WEEKDAY`, `STUDENT_WEEKEND`) |
 | `js/spin.js`, `spin-nudge.js`, `reviews.js`, `page-ui.js` | Spin wheel (and its "free spin ready" dot / countdown), reviews lightbox, small page behaviours |
 | `tools/prerender.js` | Bakes the menu + structured data into `index.html` |
 | `images/` | Optimised WebP photos; `og-share.jpg` is the link-preview card; there is no UPI QR at the moment (the old one paid the previous account) |
@@ -44,7 +44,7 @@ Scripts are plain `<script defer>` files loaded in the order listed at the botto
 - **Change the menu or prices** → edit `js/menu-data.js`, then run `node tools/prerender.js`.
 - **Change opening hours** → edit `SHOP_HOURS` in `js/shop.js` (decimals work: 22.5 = 10:30 PM), update the *Hours* row(s) in `index.html`, then run `node tools/prerender.js`.
 - **Change an offer's time or wording** → `js/offers.js` (the header tickets, the clock strip *and* the cart discounts all read it).
-- **Thapar student discount** → `STUDENT_PERCENT` and `STUDENT_MIN` (minimum order, ₹100) in `js/promos.js`. It is opt-in, applies only when it saves more than the other offer in the cart (one offer per order), and the WhatsApp message tells the shop to check the ID card.
+- **Thapar student discount** → `STUDENT_WEEKDAY` (10%), `STUDENT_WEEKEND` (20%, Sat and Sun, shop time) and `STUDENT_MIN` (minimum order, ₹100) in `js/promos.js`. It is opt-in, applies only when it saves more than the other offer in the cart (one offer per order), and the WhatsApp message tells the shop to check the ID card.
 - **Spin prize minimum** → `SPIN_MIN` in `js/promos.js` (₹100): a spin prize in the cart stays locked, and the order is blocked, until the paid items reach it.
 - **Change the UPI ID** → `UPI` in `js/shop.js`. If you add a QR picture, it must belong to that same ID (the page shows the ID and a Copy button; a QR is optional).
 

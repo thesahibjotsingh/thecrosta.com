@@ -165,14 +165,14 @@ function editAddons(pizzaId, pizzaName) {
 
 // ── UPDATE HEADER CART + PHONE CART BAR ──
 // What each promo is called in toasts and the cart bar.
-const PROMO_LABEL = { weekend: 'Weekend special', groupperk: 'Group perk', weekday: 'Weekday lunch', boost: 'The Crosta Boost', student: 'Thapar student 10%' };
+const PROMO_LABEL = { weekend: 'Weekend special', groupperk: 'Group perk', weekday: 'Weekday lunch', boost: 'The Crosta Boost', student: 'Thapar student discount' };
 function promoSummary(T) {
   switch (T.activePromo) {
     case 'weekend':   return 'Weekend special: free pizza added';
     case 'groupperk': return 'Group perk: free meal bundle';
     case 'weekday':   return `Weekday lunch: you save ${rupee(T.pizzaDiscount)}`;
     case 'boost':     return `The Crosta Boost: you save ${rupee(T.boostDiscount)}`;
-    case 'student':   return `Thapar student 10%: you save ${rupee(T.studentDiscount)} · show your ID`;
+    case 'student':   return `Thapar student ${studentPercent()}%: you save ${rupee(T.studentDiscount)} · show your ID`;
     default:          return '';
   }
 }

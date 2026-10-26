@@ -170,7 +170,7 @@ function placeOrder() {
     msg += `Subtotal: ₹${subtotal}\n`;
     if (pizzaDiscount > 0) msg += `🎉 Weekday Lunch Offer (20% off pizzas): −₹${pizzaDiscount}\n`;
     if (boostDiscount > 0) msg += `🍔 The Crosta Boost (Meal upgrade ₹30 instead of ₹60): −₹${boostDiscount}\n`;
-    if (studentDiscount > 0) msg += `🎓 Thapar student discount (10%): −₹${studentDiscount}\n   🪪 Student ID card to be checked on ${isPickup ? 'pickup' : 'delivery'}\n`;
+    if (studentDiscount > 0) msg += `🎓 Thapar student discount (${studentPercent()}%): −₹${studentDiscount}\n   🪪 Student ID card to be checked on ${isPickup ? 'pickup' : 'delivery'}\n`;
   }
   msg += `💰 *TOTAL: ₹${total}*\n`;
   msg += `━━━━━━━━━━━━━━━━━━━━\n\n`;

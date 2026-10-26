@@ -159,12 +159,18 @@ function onNowGo(i) {
   // the progress bar on the active row drives the rotation, so pausing it pauses the show
   $('onNowList').addEventListener('animationend', e => { if (e.animationName === 'onnow-prog') onNowGo(onNowIdx + 1); });
 })();
-$('onNowWeek')?.addEventListener('click', e => {
-  e.preventDefault();
-  const c = $('clock'); if (!c) return;
-  c.open = true; setClockNote();
-  c.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'center' });
-});
+// "See the full week" shows the clock (closed otherwise); the clock's own header closes it again
+(function () {
+  const link = $('onNowWeek'), c = $('clock'); if (!link || !c) return;
+  const label = () => { link.textContent = c.open ? 'Hide the full week ↑' : 'See the full week →'; link.setAttribute('aria-expanded', String(c.open)); };
+  link.addEventListener('click', e => {
+    e.preventDefault();
+    c.open = !c.open; setClockNote(); label();
+    if (c.open) c.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'center' });
+  });
+  c.addEventListener('toggle', label);
+  label();
+})();
 
 /* ───────────── the interactive clock strip ───────────── */
 const VA = 10.5, VZ = 23, VSPAN = VZ - VA;     // the strip shows 10:30 AM → 11 PM

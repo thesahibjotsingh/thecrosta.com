@@ -34,10 +34,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/styles.css?v=139">
-<link rel="stylesheet" href="css/home.css?v=139">
-<link rel="stylesheet" href="css/sections.css?v=139">
-<link rel="stylesheet" href="css/slot-machine.css?v=139">
+<link rel="stylesheet" href="css/styles.css?v=149">
+<link rel="stylesheet" href="css/home.css?v=149">
+<link rel="stylesheet" href="css/sections.css?v=149">
+<link rel="stylesheet" href="css/slot-machine.css?v=149">
 </head>
 <body>
 
@@ -107,7 +107,7 @@
           </div>
           <div class="student-card" id="studentCard">
             <span class="sc-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m2 9 10-5 10 5-10 5z"/><path d="M6 11v5c0 1.5 3 3 6 3s6-1.5 6-3v-5"/></svg></span>
-            <div><b>Thapar student? Get 10% off</b><span id="studentCardText">On orders of ₹100 or more. Bring your student ID card; we check it when you collect or we deliver.</span></div>
+            <div><b>Thapar student? 10% off, 20% at weekends</b><span id="studentCardText">10% off Monday to Friday, 20% off on Saturday and Sunday. On orders of ₹100 or more. Bring your student ID card; we check it when you collect or we deliver.</span></div>
             <button class="sc-btn" id="studentBtn" type="button" aria-pressed="false">Count me in</button>
           </div>
         </aside>
@@ -211,8 +211,11 @@
   <div class="onnow-grid">
     <div id="onNowMain"></div>
     <div class="onnow-list" id="onNowList"></div>
+    <p class="onnow-more"><a href="#clock" id="onNowWeek">See the full week →</a></p>
   </div>
-  <p class="onnow-more"><a href="#clock" id="onNowWeek">See the full week →</a></p>
+</section>
+<!-- OFFERS BY THE CLOCK -->
+<section class="clock-section" id="week">
   <details class="clock" id="clock">
     <summary>
       <h2>Offers by the clock</h2>
@@ -534,7 +537,7 @@
       <label class="stu-toggle" id="cartStudent">
         <input type="checkbox" id="cartStudentCheck">
         <span class="stu-box" aria-hidden="true"></span>
-        <span><b>I’m a Thapar University student — 10% off</b><small id="cartStudentNote">On orders of ₹100 or more. Show your student ID card when you collect or we deliver. One offer per order.</small></span>
+        <span><b>I’m a Thapar University student — 10% off (20% weekends)</b><small id="cartStudentNote">On orders of ₹100 or more. Show your student ID card when you collect or we deliver. One offer per order.</small></span>
       </label>
       <div class="cart-eta">Usually ready in <strong>25–35 min</strong> · delivery or pickup</div>
       </div>
@@ -607,7 +610,7 @@
       <span>−₹<span id="cartBoostAmount">0</span></span>
     </div>
     <div id="cartStudentRow" style="display:none;align-items:center;justify-content:space-between;margin-bottom:0.4rem;font-size:0.78rem;font-weight:700;color:#1aad4b;">
-      <span>Thapar student discount — 10% off</span>
+      <span>Thapar student discount</span>
       <span>−₹<span id="cartStudentAmount">0</span></span>
     </div>
     <div class="cart-total-row">
@@ -702,31 +705,31 @@
   </div>
 </div>
 
-<script defer src="js/menu-data.js?v=139"></script>
-<script defer src="js/shop.js?v=139"></script>
-<script defer src="js/offers.js?v=139"></script>
-<script defer src="js/menu-render.js?v=139"></script>
-<script defer src="js/ui.js?v=139"></script>
-<script defer src="js/reviews.js?v=139"></script>
-<script defer src="js/menu-ui.js?v=139"></script>
-<script defer src="js/cart.js?v=139"></script>
-<script defer src="js/promos.js?v=139"></script>
-<script defer src="js/cart-render.js?v=139"></script>
-<script defer src="js/order.js?v=139"></script>
-<script defer src="js/payment.js?v=139"></script>
-<script defer src="js/menu-wiring.js?v=139"></script>
-<script defer src="js/persist.js?v=139"></script>
-<script defer src="js/spin-prize.js?v=139"></script>
-<script defer src="js/spin-3d-boot.js?v=139"></script>
-<script defer src="js/home.js?v=139"></script>
-<script defer src="js/sheets.js?v=139"></script>
-<script defer src="js/student.js?v=139"></script>
-<script defer src="js/spin-nudge.js?v=139"></script>
-<script defer src="js/dock.js?v=139"></script>
-<script defer src="js/deck.js?v=139"></script>
-<script defer src="js/tear.js?v=139"></script>
-<script defer src="js/page-ui.js?v=139"></script>
-<script defer src="js/track.js?v=139"></script>
+<script defer src="js/menu-data.js?v=149"></script>
+<script defer src="js/shop.js?v=149"></script>
+<script defer src="js/offers.js?v=149"></script>
+<script defer src="js/menu-render.js?v=149"></script>
+<script defer src="js/ui.js?v=149"></script>
+<script defer src="js/reviews.js?v=149"></script>
+<script defer src="js/menu-ui.js?v=149"></script>
+<script defer src="js/cart.js?v=149"></script>
+<script defer src="js/promos.js?v=149"></script>
+<script defer src="js/cart-render.js?v=149"></script>
+<script defer src="js/order.js?v=149"></script>
+<script defer src="js/payment.js?v=149"></script>
+<script defer src="js/menu-wiring.js?v=149"></script>
+<script defer src="js/persist.js?v=149"></script>
+<script defer src="js/spin-prize.js?v=149"></script>
+<script defer src="js/spin-3d-boot.js?v=149"></script>
+<script defer src="js/home.js?v=149"></script>
+<script defer src="js/sheets.js?v=149"></script>
+<script defer src="js/student.js?v=149"></script>
+<script defer src="js/spin-nudge.js?v=149"></script>
+<script defer src="js/dock.js?v=149"></script>
+<script defer src="js/deck.js?v=149"></script>
+<script defer src="js/tear.js?v=149"></script>
+<script defer src="js/page-ui.js?v=149"></script>
+<script defer src="js/track.js?v=149"></script>
 
 </body>
 </html>

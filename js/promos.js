@@ -99,13 +99,14 @@ function syncWeekendSpecialBundle() {
 const CROSTA_BOOST_SAVING_PER_UNIT = 30;
 function isCrostaBoostActive() { return isOfferLive('boost'); }
 
-// ── THAPAR STUDENT DISCOUNT: a flat 10% off the order, with a student ID card ──
+// ── THAPAR STUDENT DISCOUNT: 10% off the order on weekdays, 20% on Sat and Sun, with a student ID card ──
 // Opt-in (the customer ticks it), and checked in person when the order is
 // collected or delivered. It is one offer like the others: it only applies
 // when it saves more than the other offer the cart qualifies for.
-const STUDENT_PERCENT = 10, STUDENT_MIN = 100, STUDENT_KEY = 'crosta_student';   // STUDENT_MIN: the order must come to at least this, before the discount
+const STUDENT_WEEKDAY = 10, STUDENT_WEEKEND = 20, STUDENT_MIN = 100, STUDENT_KEY = 'crosta_student';   // STUDENT_MIN: the order must come to at least this, before the discount
 let studentOn = (() => { try { return localStorage.getItem(STUDENT_KEY) === '1'; } catch (_) { return false; } })();
 const isStudentOn = () => studentOn;
+const studentPercent = (now = shopNow()) => (now.day === 0 || now.day === 6) ? STUDENT_WEEKEND : STUDENT_WEEKDAY;     // shop time, like every other offer
 function setStudent(on) {
   studentOn = !!on;
   try { if (studentOn) localStorage.setItem(STUDENT_KEY, '1'); else localStorage.removeItem(STUDENT_KEY); } catch (_) { /* works without storage */ }
@@ -148,7 +149,7 @@ function resolveActivePromo(cartArr) {
   else if (isWeekdayLunchOfferActive() && cartArr.some(i => i.isPizza)) base = 'weekday';
   else if (isCrostaBoostActive() && cartArr.some(i => i.isMealEligible && i.size === 'Meal')) base = 'boost';
   if (!studentOn || paidTotal(cartArr) < STUDENT_MIN) return base;
-  const student = Math.round(paidTotal(cartArr) * STUDENT_PERCENT / 100);
+  const student = Math.round(paidTotal(cartArr) * studentPercent() / 100);
   return student > promoSaving(cartArr, base) ? 'student' : base;
 }
 
@@ -173,7 +174,7 @@ function computeCartTotals(cartArr) {
     if (boostActive && i.isMealEligible && i.size === 'Meal') boostDiscount += CROSTA_BOOST_SAVING_PER_UNIT * i.qty;
   });
   pizzaDiscount = Math.round(pizzaDiscount);
-  const studentDiscount = studentActive ? Math.round(subtotal * STUDENT_PERCENT / 100) : 0;
+  const studentDiscount = studentActive ? Math.round(subtotal * studentPercent() / 100) : 0;
   const discount = pizzaDiscount + boostDiscount + studentDiscount;
   return { subtotal, pizzaDiscount, boostDiscount, studentDiscount, discount, total: subtotal - discount, offerActive, boostActive, groupPerkActive, weekendSpecialActive, studentActive, activePromo };
 }
