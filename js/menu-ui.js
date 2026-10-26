@@ -16,10 +16,15 @@ function stickyOffset() {
   const bar = document.getElementById('bar'), tools = document.getElementById('tools');
   return (bar ? bar.offsetHeight : 64) + (tools ? tools.offsetHeight : 0);
 }
+// where the bottom edge of the sticky header + search/chips bar sits while they are stuck; headings land 40px below it, past the soft fade under it
+function stuckBottom() {
+  const bar = document.getElementById('bar'), tools = document.getElementById('tools');
+  return (bar ? bar.getBoundingClientRect().bottom : 64) + (tools ? tools.offsetHeight : 0);
+}
 function scrollToMenu(anchorId) {
   const el = (anchorId && document.getElementById(anchorId)) || document.querySelector('#menu .menu-header') || document.getElementById('menu');
   if (!el) return;
-  const top = el.getBoundingClientRect().top + window.scrollY - stickyOffset() - 12;
+  const top = el.getBoundingClientRect().top + window.scrollY - stuckBottom() - 40;
   window.scrollTo({ top, behavior: 'smooth' });
 }
 
@@ -176,7 +181,7 @@ function scrollToQbCategory(id, btn) {
   btn.classList.add('active');
   const el = document.getElementById(id);
   if (!el) return;
-  const top = el.getBoundingClientRect().top + window.scrollY - stickyOffset() - 12;
+  const top = el.getBoundingClientRect().top + window.scrollY - stuckBottom() - 40;
   window.scrollTo({ top, behavior: 'smooth' });
 }
 

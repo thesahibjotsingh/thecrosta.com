@@ -1193,3 +1193,14 @@ footer::before { content: ""; position: absolute; left: 0; right: 0; bottom: 100
 .visit-map #mapFrame { left: -80px; width: calc(100% + 160px); }
 @media (min-width: 901px) { .visit-map #mapFrame { left: -80px; width: calc(100% + 680px); } }
 .visit-map { overflow: hidden; }
+
+/* arriving at the menu from the nav: the heading lands below the soft fade under the sticky search bar, so it reads sharp straight away */
+#menu { scroll-margin-top: 20px; }
+.tools::after { height: 28px; }
+
+/* "Jump to": a label and small pills, left aligned, instead of one stretched black bar */
+.qb-subnav { gap: 8px; padding: 0; background: none; border: 0; border-radius: 0; box-shadow: none; overflow: visible; align-items: center; justify-content: flex-start; margin: 0 0 1.4rem; }
+.qb-sub-label { padding: 0 6px 0 0; background: none; color: var(--ash); font: 500 .68rem/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; }
+.qb-sub-btn { flex: none; min-height: 38px; padding: 0 18px; border: 1.5px solid var(--crust); border-radius: 999px; background: var(--paper); color: var(--char); font: 700 .86rem/1 var(--display); }
+.qb-sub-btn:hover { background: #fff; border-color: var(--char); }
+.qb-sub-btn.active { background: var(--char); border-color: var(--char); color: #fff; }
