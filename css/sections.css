@@ -1187,3 +1187,9 @@ footer::before { content: ""; position: absolute; left: 0; right: 0; bottom: 100
 .clock-section .clock-sum.exploring { background: var(--sun); color: var(--char); border-color: var(--sun); }
 .clock-section .btn-mini { border-color: var(--sun); }
 @media (max-width: 760px) { .clock-section .clock > summary { padding: 16px 16px 6px; } .clock-section .clock-body { padding: 4px 16px 16px; } }
+
+/* Google's own "Satellite" thumbnail sits in the bottom-left corner of the embedded map and can't be moved:
+   slide the map 80px left inside its clipped frame (same centre) so the thumbnail falls outside the visible area */
+.visit-map #mapFrame { left: -80px; width: calc(100% + 160px); }
+@media (min-width: 901px) { .visit-map #mapFrame { left: -80px; width: calc(100% + 680px); } }
+.visit-map { overflow: hidden; }
