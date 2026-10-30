@@ -212,8 +212,9 @@
   }
   function syncPayLabel() {
     const upi = payMethod === 'upi';
-    $('payUsingTag').textContent = upi ? 'UPI' : 'CASH';
-    $('payUsingText').textContent = upi ? 'Pay now' : (isPickup ? 'At pickup' : 'On delivery');
+    $('payUsingTag').hidden = !upi;
+    $('payUsingTag').textContent = 'UPI';
+    $('payUsingText').textContent = upi ? 'Pay now' : (isPickup ? 'Pay at pickup' : 'Pay on delivery');
   }
   window.renderCartExtras = function () {
     const T = computeCartTotals(cart), n = cart.reduce((s, i) => s + i.qty, 0);
@@ -256,13 +257,25 @@
     if (!box.hidden) $('custNote').focus();
   });
 
-  $('dsConfirm').addEventListener('click', () => {
-    const name = $('custName'), phone = $('custPhone'), addr = $('custAddress');
+  // Confirm: name, a real phone number and (for delivery) an address and the location pin are all needed.
+  // If the pin is missing it is asked for right here, so most people just tap Allow once.
+  let confirming = false;
+  $('dsConfirm').addEventListener('click', async () => {
+    if (confirming) return;
+    const name = $('custName'), phone = $('custPhone'), addr = $('custAddress'), btn = $('dsConfirm');
+    $('deliverySheet').querySelectorAll('.input-error-msg').forEach(m => m.remove());          // start clean: only what is still wrong gets a message
+    $('deliverySheet').querySelectorAll('.input-error').forEach(i => i.classList.remove('input-error'));
     let first = null;
-    if (!name.value.trim())  { showFieldError(name, 'Please enter your name'); first = first || name; }
-    if (!phone.value.trim()) { showFieldError(phone, 'Please enter your phone number'); first = first || phone; }
+    if (!name.value.trim()) { showFieldError(name, 'Please enter your name'); first = first || name; }
+    if (phone.value.replace(/\D/g, '').length < 10) { showFieldError(phone, phone.value.trim() ? 'Please enter your 10-digit phone number' : 'Please enter your phone number'); first = first || phone; }
     if (!isPickup && !addr.value.trim()) { showFieldError(addr, 'Enter a delivery address or choose Pickup'); first = first || addr; }
     if (first) { first.focus(); return; }
+    if (REQUIRE_PIN && !isPickup && !deliveryPin) {
+      confirming = true; btn.disabled = true; const html = btn.innerHTML; btn.textContent = 'Getting your location…';
+      const ok = await shareLocation();
+      confirming = false; btn.disabled = false; btn.innerHTML = html;
+      if (!ok) { $('locBtn').scrollIntoView({ block: 'center', behavior: reducedMotion() ? 'auto' : 'smooth' }); return; }   // shareLocation() has put the reason in the note under the button
+    }
     confirmed = true; closeD(); renderCartExtras();
   });
   // placeOrder() sends people here when something is missing (it used to scroll to the form)

@@ -3,22 +3,33 @@
 /* ───────────── location pin ───────────── */
 // Shared only inside this order's WhatsApp message; never stored.
 let deliveryPin = null;                              // { lat, lng, acc }
+// Delivery orders need the pin, so the rider can find the customer (pickup orders never do). Set to false to make it optional again.
+const REQUIRE_PIN = true;
 
-function setLocNote(text) { const n = document.getElementById('locNote'); if (n) n.textContent = text; }
+function setLocNote(text, isError) {
+  const n = document.getElementById('locNote');
+  if (!n) return;
+  n.textContent = text; n.classList.toggle('err', !!isError);
+}
 
+// resolves true once a pin is added, false if it could not be (blocked, no signal, unsupported)
 function shareLocation() {
-  const btn = document.getElementById('locBtn');
-  if (!navigator.geolocation) { setLocNote('This browser can’t share a location — just type your address.'); return; }
-  btn.disabled = true; btn.textContent = 'Finding you…';
-  navigator.geolocation.getCurrentPosition(pos => {
-    deliveryPin = { lat: pos.coords.latitude, lng: pos.coords.longitude, acc: Math.round(pos.coords.accuracy) };
-    btn.disabled = false; btn.textContent = '✓ Location added — tap to update'; btn.classList.add('done');
-    setLocNote(`Pin added (within about ${deliveryPin.acc} m). We’ll send it with your order.`);
-  }, err => {
-    deliveryPin = null;
-    btn.disabled = false; btn.textContent = 'Add my location pin'; btn.classList.remove('done');
-    setLocNote(err.code === 1 ? 'Location is blocked for this site — allow it in your browser, or just type your address.' : 'Couldn’t get your location — try again, or just type your address.');
-  }, { enableHighAccuracy: true, timeout: 12000, maximumAge: 60000 });
+  return new Promise(resolve => {
+    const btn = document.getElementById('locBtn'), label = btn.querySelector('span');
+    if (!navigator.geolocation) { setLocNote('This browser can’t share a location. Please choose Pickup, or order from your phone.', REQUIRE_PIN); resolve(false); return; }
+    btn.disabled = true; label.textContent = 'Finding you…';
+    navigator.geolocation.getCurrentPosition(pos => {
+      deliveryPin = { lat: pos.coords.latitude, lng: pos.coords.longitude, acc: Math.round(pos.coords.accuracy) };
+      btn.disabled = false; label.textContent = '✓ Location added — tap to update'; btn.classList.add('done');
+      setLocNote(`Pin added (within about ${deliveryPin.acc} m). We’ll send it with your order.`);
+      resolve(true);
+    }, err => {
+      deliveryPin = null;
+      btn.disabled = false; label.textContent = 'Add my location pin'; btn.classList.remove('done');
+      setLocNote(err.code === 1 ? 'Location is blocked for this site. Allow it in your browser settings and tap again, or choose Pickup.' : 'Couldn’t get your location. Check that location is on and tap again, or choose Pickup.', REQUIRE_PIN);
+      resolve(false);
+    }, { enableHighAccuracy: true, timeout: 12000, maximumAge: 60000 });
+  });
 }
 // the pin only makes sense for delivery
 function updateLocationRow() { const r = document.getElementById('locRow'); if (r) r.style.display = isPickup ? 'none' : ''; }
@@ -65,7 +76,7 @@ function setPayMethod(m) {
 function paymentLine(total) {
   return payMethod === 'upi'
     ? `\n💳 Payment: UPI ${rupee(total)} to ${UPI.id}\n📎 I’ll send the payment screenshot here — please check your UPI app\n`
-    : `\n💳 Payment: Cash / UPI on delivery\n`;
+    : `\n💳 Payment: Pay on delivery (cash or UPI)\n`;
 }
 
 document.addEventListener('DOMContentLoaded', () => {

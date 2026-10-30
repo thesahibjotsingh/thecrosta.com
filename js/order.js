@@ -113,12 +113,13 @@ function placeOrder() {
     setTimeout(() => { showFieldError(nameEl, 'Please enter your name'); nameEl.focus(); }, 300);
     hasError = true;
   }
-  if (!phone) {
+  if (phone.replace(/\D/g, '').length < 10) {                  // the shop rings this number: a real one, 10 digits or more
+    const msg = phone ? 'Please enter your 10-digit phone number' : 'Please enter your phone number';
     if (!hasError) {
       scrollToDetails();
-      setTimeout(() => { showFieldError(phoneEl, 'Please enter your phone number'); phoneEl.focus(); }, 300);
+      setTimeout(() => { showFieldError(phoneEl, msg); phoneEl.focus(); }, 300);
     } else {
-      setTimeout(() => showFieldError(phoneEl, 'Please enter your phone number'), 300);
+      setTimeout(() => showFieldError(phoneEl, msg), 300);
     }
     hasError = true;
   }
@@ -129,6 +130,13 @@ function placeOrder() {
     } else {
       setTimeout(() => showFieldError(addressEl, 'Enter a delivery address or tap Pickup'), 300);
     }
+    hasError = true;
+  }
+  // delivery needs the location pin (payment.js REQUIRE_PIN). The cart's Confirm step asks for it; this is the safety net.
+  // It cannot be fetched here: the order must open WhatsApp inside this tap, and asking for a location first would lose that.
+  if (!hasError && REQUIRE_PIN && !isPickup && !deliveryPin) {
+    scrollToDetails();
+    setTimeout(() => setLocNote('Please add your location pin so our rider can find you, or choose Pickup.', true), 300);
     hasError = true;
   }
   if (hasError) return;
