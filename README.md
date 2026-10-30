@@ -17,15 +17,17 @@ Deployed from this repo by Cloudflare. Orders go out as WhatsApp messages; there
 | `css/styles.css` | Original structural styles (grids, cart/popup layout, spin wheel mechanics); visual styling is overridden by `home.css` and `sections.css`. `node`-free audit: `python tools/css_audit.py css/styles.css` lists rules nothing uses |
 | `css/sections.css` | The rest of the page in the same design language: menu rows, bands with wavy edges, reviews, find-us panel, footer, spin, cart drawer, add-on popup |
 | `css/home.css` | New layer: header, "what's on" tickets, clock strip, tools bar, bestsellers, cart bar, sheets, checkout extras |
+| `css/app.css` | The app-style ordering look, loaded last so it wins over the layers above: menu rows (big photo, ADD on its edge), filter chips, size/index sheets, the phone Menu button, the offer-progress bar and cart bar, the cart drawer, and the delivery/payment/"offer unlocked" sheets. Its tokens come in three layers (primitive → `--ui-*` semantic → component), so a theme is one block. Mockups: `mockups/app-ordering.html` |
 | `js/menu-data.js` | **The menu** — every item, price, badge and photo. Edit this to change the menu. |
 | `js/shop.js` | **Opening hours**, the shop clock (Patiala time), time formatting, and the **UPI ID** |
 | `js/offers.js` | The four offers: windows, wording, and the state functions the tickets/clock/cart share |
 | `js/promos.js` | Cart promo rules (one offer per order: weekend > group perk > weekday lunch > boost) |
 | `js/menu-render.js` | Turns `menu-data.js` into the menu panels |
-| `js/menu-ui.js` | Category chips, menu search, jumping to categories |
+| `js/menu-ui.js` | Category chips, menu search, the filter chips (Bestsellers, Spicy, Under ₹100), jumping to categories |
 | `js/home.js` | Header status, offer tickets, interactive clock strip, bestsellers, reorder card |
-| `js/sheets.js` | Size picker and "use this offer" sheets |
-| `js/cart.js`, `cart-render.js`, `order.js`, `menu-wiring.js` | Cart, add-ons popup, checkout and the WhatsApp message |
+| `js/sheets.js` | Size picker (with quantity) and "use this offer" sheets; every body-level `.sheet` opens and closes here |
+| `js/app-ui.js` | The Menu button and index sheet, the phone offer-progress bar and cart-bar thumbnails, and the cart drawer's extras: applied-offer card, "make it a meal" ideas, the offers list (why an offer is or isn't used), the bill, and the delivery, payment and "offer unlocked" sheets. The cart has two steps: review → Next → delivery sheet → Confirm → Pay using + Order on WhatsApp |
+| `js/cart.js`, `cart-render.js`, `order.js`, `menu-wiring.js` | Cart, add-ons popup, checkout and the WhatsApp message (`menu-wiring.js` also adds each row's share button, "3 sizes" caption and `data-min` price) |
 | `js/persist.js` | Saved cart, last order (for Reorder), pre-filled details — device only |
 | `js/payment.js` | Delivery location pin and UPI payment |
 | `js/ui.js` | Toast, thumbnail-to-cart animation, count bump |
@@ -68,7 +70,7 @@ Outside opening hours the cart can still be built, but it cannot be sent: the ca
 
 ## Cache busting
 
-Cloudflare tells browsers to keep CSS/JS for 4 hours. The `?v=52` on each stylesheet and script link in `index.html` forces a fresh download after a deploy. When you change any file in `css/` or `js/`, bump that number (find/replace `?v=52` → `?v=53`) in the same commit.
+Cloudflare tells browsers to keep CSS/JS for 4 hours. The `?v=162` on each stylesheet and script link in `index.html` forces a fresh download after a deploy. When you change any file in `css/` or `js/`, bump that number (find/replace `?v=162` → `?v=163`) in the same commit.
 
 ## For whoever delivers or hands over orders
 

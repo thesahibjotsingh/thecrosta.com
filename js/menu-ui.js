@@ -107,13 +107,24 @@ function buildSearchIndex() {
   });
 }
 
+// filter chips above the menu (Bestsellers, Spicy, Under ₹100): they narrow the whole menu, together with anything typed in the search box
+const MENU_FILTERS = {
+  best:  item => !!item.querySelector('.badge-best'),
+  spicy: item => !!item.querySelector('.badge-spicy'),
+  u100:  item => (+item.dataset.min || Infinity) < 100       // data-min: the starting price, set in menu-wiring.js
+};
+const activeFilters = new Set();
+function syncFilterChips() {
+  document.querySelectorAll('#menuFilters [data-filter]').forEach(b => b.setAttribute('aria-pressed', activeFilters.has(b.dataset.filter) ? 'true' : 'false'));
+}
+
 function applySearch() {
   const q = norm(searchInput.value);
   searchClearBtn.hidden = !searchInput.value;
   const menu = document.getElementById('menu');
-  if (!q) { clearSearch(false); return; }
+  if (!q && !activeFilters.size) { clearSearch(false); return; }
   if (!searchIndex.size) buildSearchIndex();
-  const tokens = q.split(' ');
+  const tokens = q ? q.split(' ') : [];
   searching = true;
   menu.classList.add('searching');
   document.body.classList.add('is-searching');          // results only: the bestsellers strip steps aside
@@ -126,7 +137,7 @@ function applySearch() {
     panel.querySelectorAll('.menu-category').forEach(cat => {
       let hits = 0;
       cat.querySelectorAll('.menu-item').forEach(item => {
-        const ok = tokens.every(t => (searchIndex.get(item) || '').includes(t));
+        const ok = tokens.every(t => (searchIndex.get(item) || '').includes(t)) && [...activeFilters].every(f => MENU_FILTERS[f](item));
         item.classList.toggle('is-hidden', !ok);
         if (ok) hits++;
       });
@@ -145,6 +156,7 @@ function clearSearch(clearBox = true) {
   searchClearBtn.hidden = !searchInput.value;
   if (!searching) return;
   searching = false;
+  activeFilters.clear(); syncFilterChips();
   document.body.classList.remove('is-searching');
   document.getElementById('menu').classList.remove('searching');
   document.querySelectorAll('.menu-panel').forEach(p => p.classList.remove('is-searching', 'is-hidden'));
@@ -163,6 +175,14 @@ searchInput.addEventListener('input', () => {
     // first keystroke: bring the results into view
     if (!wasSearching && searching) scrollToMenu();
   }, 90);
+});
+document.getElementById('menuFilters').addEventListener('click', e => {
+  const b = e.target.closest('[data-filter]'); if (!b) return;
+  const f = b.dataset.filter, wasSearching = searching;
+  if (activeFilters.has(f)) activeFilters.delete(f); else activeFilters.add(f);
+  syncFilterChips();
+  applySearch();
+  if (!wasSearching && searching) scrollToMenu();
 });
 searchInput.addEventListener('keydown', e => { if (e.key === 'Escape') { clearSearch(true); } });
 searchClearBtn.addEventListener('click', () => { clearSearch(true); searchInput.focus(); });

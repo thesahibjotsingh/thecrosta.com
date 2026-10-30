@@ -64,7 +64,7 @@ function renderLive() {
   if (orderBtn) {
     orderBtn.disabled = !st.open;
     orderBtn.classList.toggle('is-closed', !st.open);
-    $('orderBtnLabel').textContent = st.open ? 'Order via WhatsApp' : `Closed · opens ${st.today ? 'today' : DAY_NAMES[st.opensDay]} ${fmtTime(st.opensAt)}`;
+    $('orderBtnLabel').textContent = st.open ? 'Order on WhatsApp' : `Closed · opens ${st.today ? 'today' : DAY_NAMES[st.opensDay]} ${fmtTime(st.opensAt)}`;
   }
   const payWrap = $('payWrap');
   if (payWrap) payWrap.hidden = !st.open;

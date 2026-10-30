@@ -9,6 +9,36 @@ document.addEventListener('DOMContentLoaded', function() {
     if (activeBtn) { activeBtn.classList.remove('active'); activeBtn = null; }
   }
 
+  // The app-style row (css/app.css): the starting price and a share button on one line, and a caption under ADD.
+  // data-min feeds the "Under ₹100" filter in menu-ui.js.
+  const SHARE_ICON = '<svg class="ui-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7M16 6l-4-4-4 4M12 2v13"/></svg>';
+  function decorateRow(item, name, minPrice, caption) {
+    if (minPrice != null) item.dataset.min = minPrice;
+    const line = document.createElement('div');
+    line.className = 'menu-price-line';
+    const priceEl = item.querySelector(':scope > .menu-from') || item.querySelector(':scope > .menu-item-price');
+    if (priceEl) line.appendChild(priceEl);
+    const share = document.createElement('button');
+    share.type = 'button'; share.className = 'share-btn'; share.innerHTML = SHARE_ICON;
+    share.setAttribute('aria-label', 'Share ' + name);
+    share.addEventListener('click', (e) => {
+      e.stopPropagation();
+      // the phone's own share sheet (WhatsApp is in it); a plain link to WhatsApp elsewhere. Not window.open: track.js counts wa.me opens as shop messages.
+      const url = 'https://thecrosta.com/#menu', text = name + ' at The Crosta: pure veg pizza, burgers and more, near Thapar University, Patiala.';
+      if (navigator.share) { navigator.share({ title: name + ' · The Crosta', text, url }).catch(() => {}); return; }
+      const a = document.createElement('a');
+      a.href = 'https://wa.me/?text=' + encodeURIComponent(text + ' ' + url); a.target = '_blank'; a.rel = 'noopener';
+      document.body.appendChild(a); a.click(); a.remove();
+    });
+    line.appendChild(share);
+    item.appendChild(line);
+    if (caption) {
+      const cap = document.createElement('span');
+      cap.className = 'menu-opts'; cap.textContent = caption;
+      item.appendChild(cap);
+    }
+  }
+
   document.addEventListener('click', function(e) {
     if (activePills && !activePills.contains(e.target) && e.target !== activeBtn && !activeBtn?.contains(e.target)) {
       closeSizePills();
@@ -57,6 +87,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     row.appendChild(btn);
     left.appendChild(row);
+    decorateRow(item, baseName, price, '');
   });
 
   // ── 2. REGULAR items (size-based or flat price) ──
@@ -75,6 +106,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const left = item.querySelector('.menu-item-left');
     const row = document.createElement('div');
     row.className = 'add-row';
+    let minPrice = null, caption = '';
 
     const btn = document.createElement('button');
     btn.className = 'add-btn';
@@ -157,6 +189,8 @@ document.addEventListener('DOMContentLoaded', function() {
       from.className = 'menu-from';
       from.innerHTML = '<small>from</small> ₹' + Math.min.apply(null, prices);
       item.appendChild(from);
+      minPrice = Math.min.apply(null, prices);
+      caption = /meal/i.test(priceNote.textContent) ? 'Single or meal' : sizeLabels.length + ' sizes';
 
     } else {
       const price = parseInt(priceText.replace(/[₹,\s]/g, ''));
@@ -165,9 +199,11 @@ document.addEventListener('DOMContentLoaded', function() {
       row.dataset.itemKey = key;
       row._proto = { name, size: 'std', price, isPizza, isMealEligible };
       btn.addEventListener('click', (e) => { e.stopPropagation(); addItem(name, 'std', price, isPizza, isMealEligible); });
+      minPrice = price;
     }
 
     left.appendChild(row);
+    decorateRow(item, name, minPrice, caption);
   });
 
   // Animation 6: pulse the first Add button once on load

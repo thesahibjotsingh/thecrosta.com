@@ -68,24 +68,28 @@ function renderCart() {
         : `<div class="cart-item-addons">${addBtn}</div>`;
     })() : '';
 
-    const qtyRow = item.isFreeSpinPrize
-      ? `<div class="cart-item-qty"><span style="font-size:0.72rem;color:var(--warm-gray);font-style:italic;">Spin prize · 1 free</span><button class="cart-addon-edit" onclick="removeSpinPrize('${item.id}')">Remove</button></div>`
-      : (item.isGroupPerk || item.isWeekendSpecial)
-      ? `<div class="cart-item-qty"><span style="font-size:0.72rem;color:var(--warm-gray);font-style:italic;">Included free with your order</span></div>`
-      : `<div class="cart-item-qty">
-          <button class="qty-btn" onclick="changeQty('${item.id}', -1)">−</button>
+    // free lines (spin prize, group perk, weekend special) have no stepper: a short note under the name instead
+    const noteLine = item.isFreeSpinPrize
+      ? `<div class="cart-item-note">Spin prize · 1 free <button class="cart-addon-edit" onclick="removeSpinPrize('${item.id}')">Remove</button></div>`
+      : (item.isGroupPerk || item.isWeekendSpecial) ? `<div class="cart-item-note">Included free with your order</div>` : '';
+    const qtyRow = (item.isFreeSpinPrize || item.isGroupPerk || item.isWeekendSpecial) ? '' : `<div class="cart-item-qty">
+          <button class="qty-btn" onclick="changeQty('${item.id}', -1)" aria-label="One less">−</button>
           <span class="qty-num">${item.qty}</span>
-          <button class="qty-btn" onclick="changeQty('${item.id}', 1)">+</button>
+          <button class="qty-btn" onclick="changeQty('${item.id}', 1)" aria-label="One more">+</button>
         </div>`;
 
     return `
     <div class="cart-item">
+      <i class="ui-veg" aria-hidden="true"></i>
       <div class="cart-item-info">
         <div class="cart-item-name">${item.name} ${sizeLabel}</div>
         ${addonLines}
-        ${qtyRow}
+        ${noteLine}
       </div>
-      <div class="cart-item-price">${(item.isFreeSpinPrize && spinPrizeLocked(cart)) ? '<span style="color:#A84300;font-size:0.76rem;font-weight:700;">FREE at ₹100</span>' : (item.isFreeSpinPrize || item.isGroupPerk || item.isWeekendSpecial) ? '<span style="color:#1aad4b;font-size:0.8rem;font-weight:700;">FREE</span>' : '₹' + itemTotal}</div>
+      <div class="cart-item-side">
+        ${qtyRow}
+        <div class="cart-item-price">${(item.isFreeSpinPrize && spinPrizeLocked(cart)) ? '<span class="free-at">FREE at ₹100</span>' : (item.isFreeSpinPrize || item.isGroupPerk || item.isWeekendSpecial) ? '<span class="free">FREE</span>' : '₹' + itemTotal}</div>
+      </div>
     </div>`;
   }).join('');
 
@@ -130,21 +134,9 @@ function renderCart() {
     document.getElementById('cartStudentAmount').textContent = studentDiscount;
   }
 
-  // Animation 7: flash the total price on change
-  const totalEl = document.getElementById('cartTotal');
-  const prevTotal = totalEl.textContent;
-  totalEl.textContent = total;
-  if (prevTotal !== String(total) && prevTotal !== '0') {
-    const amountEl = totalEl.closest('.cart-total-amount');
-    if (amountEl) {
-      amountEl.classList.remove('flashing');
-      void amountEl.offsetWidth;
-      amountEl.classList.add('flashing');
-      amountEl.addEventListener('animationend', () => amountEl.classList.remove('flashing'), { once: true });
-    }
-  } else {
-    totalEl.textContent = total;
-  }
+  // the total itself is shown by the .cart-total elements (updateFab); #cartTotal is only kept in step for older code
+  document.getElementById('cartTotal').textContent = total;
+  if (typeof renderCartExtras === 'function') renderCartExtras();   // js/app-ui.js: offer card, meal ideas, offers, bill
 }
 
 // ── TOGGLE CART ITEMS VISIBILITY ──

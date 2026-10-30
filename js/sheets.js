@@ -4,16 +4,17 @@
 
 const SZ_LABEL = { '8″': 'Regular 8″', '10″': 'Medium 10″', '12″': 'Large 12″' };
 const scrimEl = $('scrim'), sizeSheet = $('sheet'), offerSheet = $('offerSheet');
-let sheetTrigger = null, sizeEntry = null, sizePick = 0, offerId = null;
+let sheetTrigger = null, sizeEntry = null, sizePick = 0, sizeQty = 1, offerId = null;
 
+// any body-level .sheet (size, offer, menu index) opens and closes here; the cart's own sheets live in js/app-ui.js
 function openSheetEl(el, trigger) {
   sheetTrigger = trigger || null;
-  sizeSheet.classList.remove('open'); offerSheet.classList.remove('open');
+  document.querySelectorAll('.sheet.open').forEach(s => s.classList.remove('open'));
   scrimEl.classList.add('open'); el.classList.add('open'); document.body.classList.add('locked');
   el.focus({ preventScroll: true });
 }
 function closeSheets() {
-  scrimEl.classList.remove('open'); sizeSheet.classList.remove('open'); offerSheet.classList.remove('open');
+  scrimEl.classList.remove('open'); document.querySelectorAll('.sheet.open').forEach(s => s.classList.remove('open'));
   document.body.classList.remove('locked');
   if (sheetTrigger && document.contains(sheetTrigger)) sheetTrigger.focus({ preventScroll: true });
   sheetTrigger = null;
@@ -36,21 +37,33 @@ function sizeEntryFor(name, hit, img) {
   const multi = it.prices.length > 1;
   const opts = it.prices.map((price, i) => ({ size: multi ? labels[i] : 'std', label: multi ? (SZ_LABEL[labels[i]] || labels[i]) : '', price }));
   const isPizza = hit.panelId === 'pizzas', isMealEligible = hit.panelId === 'burgerswraps';
+  const best = (it.badges || []).find(b => b.type === 'best');
   return {
     name, img, opts, isPizza, isMealEligible,
+    desc: it.desc || '', tag: best ? best.label : '',
     def: opts.length === 3 ? 1 : 0,
     note: isPizza ? 'Next you can add extra cheese or toppings.' : (opts.some(o => o.size === 'Meal') ? 'Meal adds crispy fries and a 250 ml cold drink.' : '')
   };
 }
+// Medium and Large pizzas count toward the group perk, so the sheet says so
+const countsForGroup = (e, o) => e.isPizza && GROUP_PERK_SIZES.includes(o.size);
 function renderSizeSheet() {
   const e = sizeEntry;
-  $('sheetOpts').innerHTML = e.opts.map((o, i) => `<button class="opt" type="button" role="radio" aria-checked="${i === sizePick}" data-i="${i}"><span>${o.label}</span><span class="p">${rupee(o.price)}</span></button>`).join('');
-  $('sheetAdd').textContent = `Add to cart · ${rupee(e.opts[sizePick].price)}`;
+  $('sheetOpts').innerHTML = e.opts.map((o, i) => {
+    const label = o.label || o.size;
+    const hint = countsForGroup(e, o) ? '<small>Counts toward the group perk</small>' : '';
+    return `<button class="opt" type="button" role="radio" aria-checked="${i === sizePick}" data-i="${i}"><span class="radio" aria-hidden="true"></span><span class="ot"><b>${label}</b>${hint}</span><span class="p">${rupee(o.price)}</span></button>`;
+  }).join('');
+  $('sheetQty').textContent = sizeQty;
+  $('sheetMinus').disabled = sizeQty <= 1;
+  $('sheetAddPrice').textContent = rupee(e.opts[sizePick].price * sizeQty);
 }
 function openSizeSheet(entry, trigger) {
-  sizeEntry = entry; sizePick = entry.def;
+  sizeEntry = entry; sizePick = entry.def; sizeQty = 1;
   $('sheetTitle').textContent = entry.name;
   $('sheetImg').src = entry.img; $('sheetImg').alt = '';
+  $('sheetDesc').textContent = entry.desc; $('sheetDesc').hidden = !entry.desc;
+  $('sheetTag').textContent = entry.tag; $('sheetTag').hidden = !entry.tag;
   $('sheetNote').textContent = entry.note;
   renderSizeSheet();
   openSheetEl(sizeSheet, trigger);
@@ -60,9 +73,11 @@ $('sheetOpts').addEventListener('click', e => {
   sizePick = +b.dataset.i; renderSizeSheet();
   document.querySelector('#sheetOpts .opt[aria-checked="true"]').focus();
 });
+$('sheetMinus').addEventListener('click', () => { if (sizeQty > 1) { sizeQty--; renderSizeSheet(); } });
+$('sheetPlus').addEventListener('click', () => { if (sizeQty < 20) { sizeQty++; renderSizeSheet(); } });
 $('sheetAdd').addEventListener('click', () => {
   const e = sizeEntry, o = e.opts[sizePick];
-  addItem(e.name, o.size, o.price, e.isPizza, e.isMealEligible, { fromEl: $('sheetImg'), img: e.img });   // pizzas then offer add-ons, as on the menu
+  addItem(e.name, o.size, o.price, e.isPizza, e.isMealEligible, { qty: sizeQty, fromEl: $('sheetImg'), img: e.img });   // pizzas then offer add-ons, as on the menu
   closeSheets();
 });
 
@@ -147,6 +162,7 @@ function openOffer(id, trigger) {
 function onCartChanged() {
   if (offerSheet.classList.contains('open')) renderOffer();
   if (typeof syncStudentUi === 'function') syncStudentUi();
+  if (typeof appCartChanged === 'function') appCartChanged();       // js/app-ui.js: offer bar, cart bar thumbnails, cart extras
 }
 
 offerSheet.addEventListener('click', e => {
