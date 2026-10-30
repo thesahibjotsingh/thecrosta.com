@@ -16,9 +16,13 @@
     else if (a.dataset.dock === 'menu' && typeof scrollToMenu === 'function') scrollToMenu();
     else if (a.dataset.dock === 'spin') {
       if (!(typeof window.scrollToSpin === 'function' && window.scrollToSpin())) { const w = document.getElementById('spin'); if (w) w.scrollIntoView({ behavior: smooth, block: 'center' }); }
-    } else {
-      const el = a.dataset.dock === 'offers' ? document.getElementById('primary') : null;
-      if (el) window.scrollTo({ top: el.getBoundingClientRect().top + scrollY - (typeof stickyOffset === 'function' ? stickyOffset() : 70) - 12, behavior: smooth });
+    } else if (a.dataset.dock === 'offers') {
+      // The Offers section, landed the way the desktop nav lands it: heading just under the header.
+      // (This used to scroll to #primary, but on phones that is display:contents inside the offer stack, so it has no position.)
+      const el = document.getElementById('offers'); if (!el) return;
+      const bar = document.getElementById('bar'), barBottom = bar ? bar.getBoundingClientRect().bottom : 64;
+      const pad = parseFloat(getComputedStyle(el).paddingTop) || 0;
+      window.scrollTo({ top: el.getBoundingClientRect().top + scrollY - barBottom + Math.max(0, pad - 40), behavior: smooth });
     }
   });
 
